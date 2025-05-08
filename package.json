@@ -1,6 +1,6 @@
 {
   "name": "kernel",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-alpha.1",
   "description": "The official TypeScript library for the Kernel API",
   "author": "Kernel <>",
   "types": "dist/index.d.ts",
