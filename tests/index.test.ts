@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'kernel/core/api-promise';
+import { APIPromise } from '@onkernel/sdk/core/api-promise';
 
 import util from 'node:util';
-import Kernel from 'kernel';
-import { APIUserAbortError } from 'kernel';
+import Kernel from '@onkernel/sdk';
+import { APIUserAbortError } from '@onkernel/sdk';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {
