@@ -1,5 +1,5 @@
 {
-  "name": "@kernel/sdk",
+  "name": "@onkernel/sdk",
   "version": "0.0.1-alpha.0",
   "description": "The official TypeScript library for the Kernel API",
   "author": "Kernel <>",
@@ -50,8 +50,8 @@
     "synckit": "0.8.8"
   },
   "imports": {
-    "@kernel/sdk": ".",
-    "@kernel/sdk/*": "./src/*"
+    "@onkernel/sdk": ".",
+    "@onkernel/sdk/*": "./src/*"
   },
   "exports": {
     ".": {
