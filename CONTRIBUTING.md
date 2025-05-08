@@ -55,12 +55,12 @@ $ cd kernel-node-sdk
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link kernel
+$ yarn link @kernel/sdk
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global kernel
+$ pnpm link -—global @kernel/sdk
 ```
 
 ## Running tests
@@ -91,3 +91,17 @@ To format and fix all lint issues automatically:
 ```sh
 $ yarn fix
 ```
+
+## Publishing and releases
+
+Changes made to this repository via the automated release PR pipeline should publish to npm automatically. If
+the changes aren't made through the automated pipeline, you may want to make releases manually.
+
+### Publish with a GitHub workflow
+
+You can release to package managers by using [the `Publish NPM` GitHub action](https://www.github.com/onkernel/kernel-node-sdk/actions/workflows/publish-npm.yml). This requires a setup organization or repository secret to be set up.
+
+### Publish manually
+
+If you need to manually release a package, you can run the `bin/publish-npm` script with an `NPM_TOKEN` set on
+the environment.
