@@ -32,6 +32,7 @@ import { Browser, BrowserCreateSessionResponse } from './resources/browser';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
+import { KernelApp, appRegistry, browsers as appBrowsers } from './core/app-framework';
 
 export interface ClientOptions {
   /**
@@ -480,7 +481,7 @@ export class Kernel {
 
     const isReadableBody =
       ((globalThis as any).ReadableStream && options.body instanceof (globalThis as any).ReadableStream) ||
-      (typeof options.body === 'object' && options.body !== null && Symbol.asyncIterator in options.body);
+      (typeof options.body === 'object' && options.body !== null && Symbol.asyncIterator in options.body));
 
     const fetchOptions: RequestInit = {
       signal: controller.signal as any,
@@ -680,6 +681,14 @@ export class Kernel {
     }
   }
 
+  public app(name: string): KernelApp {
+    return new KernelApp(name);
+  }
+
+  public static exportRegistry(entrypointRelpath: string): string {
+    return appRegistry.exportJSON(entrypointRelpath);
+  }
+
   static Kernel = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
@@ -701,9 +710,11 @@ export class Kernel {
 
   apps: API.Apps = new API.Apps(this);
   browser: API.Browser = new API.Browser(this);
+  appFrameworkBrowsers = appBrowsers;
 }
 Kernel.Apps = Apps;
 Kernel.Browser = Browser;
+Kernel.exportRegistry = (entrypointRelpath: string) => appRegistry.exportJSON(entrypointRelpath);
 export declare namespace Kernel {
   export type RequestOptions = Opts.RequestOptions;
 
