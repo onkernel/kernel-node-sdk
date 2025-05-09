@@ -32,6 +32,8 @@ import { Browser, BrowserCreateSessionResponse } from './resources/browser';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
+import { KernelApp, appRegistry, KernelAction, KernelContext, KernelJson } from './core/app-framework';
+export type { KernelAction, KernelContext, KernelJson };
 
 export interface ClientOptions {
   /**
@@ -680,6 +682,14 @@ export class Kernel {
     }
   }
 
+  public app(name: string): KernelApp {
+    return new KernelApp(name);
+  }
+
+  public static exportRegistry(entrypointRelpath: string): string {
+    return appRegistry.exportJSON(entrypointRelpath);
+  }
+
   static Kernel = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
@@ -704,6 +714,7 @@ export class Kernel {
 }
 Kernel.Apps = Apps;
 Kernel.Browser = Browser;
+Kernel.exportRegistry = (entrypointRelpath: string) => appRegistry.exportJSON(entrypointRelpath);
 export declare namespace Kernel {
   export type RequestOptions = Opts.RequestOptions;
 
