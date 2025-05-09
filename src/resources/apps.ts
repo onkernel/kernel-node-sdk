@@ -30,6 +30,7 @@ export class Apps extends APIResource {
    * @example
    * ```ts
    * const response = await client.apps.invoke({
+   *   actionName: 'analyze',
    *   appName: 'my-awesome-app',
    *   payload: '{ "data": "example input" }',
    *   version: '1.0.0',
@@ -81,7 +82,12 @@ export interface AppInvokeResponse {
   /**
    * Status of the invocation
    */
-  status: string;
+  status: 'QUEUED' | 'RUNNING' | 'SUCCEEDED' | 'FAILED';
+
+  /**
+   * Output from the invocation (if available)
+   */
+  output?: string;
 }
 
 export interface AppRetrieveInvocationResponse {
@@ -123,6 +129,11 @@ export interface AppDeployParams {
 }
 
 export interface AppInvokeParams {
+  /**
+   * Name of the action to invoke
+   */
+  actionName: string;
+
   /**
    * Name of the application
    */
