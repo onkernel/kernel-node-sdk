@@ -37,6 +37,7 @@ describe('resource apps', () => {
   // skipped: tests are disabled for the time being
   test.skip('invoke: only required params', async () => {
     const responsePromise = client.apps.invoke({
+      actionName: 'analyze',
       appName: 'my-awesome-app',
       payload: '{ "data": "example input" }',
       version: '1.0.0',
@@ -53,6 +54,7 @@ describe('resource apps', () => {
   // skipped: tests are disabled for the time being
   test.skip('invoke: required and optional params', async () => {
     const response = await client.apps.invoke({
+      actionName: 'analyze',
       appName: 'my-awesome-app',
       payload: '{ "data": "example input" }',
       version: '1.0.0',
