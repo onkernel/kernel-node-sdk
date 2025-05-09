@@ -20,3 +20,5 @@ export {
   PermissionDeniedError,
   UnprocessableEntityError,
 } from './core/error';
+
+export { KernelAction, KernelContext, KernelJson } from './core/app-framework';
