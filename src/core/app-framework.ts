@@ -43,10 +43,7 @@ export class KernelApp {
    * Define an action
    */
   action<T, R>(
-    nameOrHandler:
-      | string
-      | ((input: T) => Promise<R>)
-      | ((context: KernelContext, input: T) => Promise<R>),
+    nameOrHandler: string | ((input: T) => Promise<R>) | ((context: KernelContext, input: T) => Promise<R>),
     handler?: ((input: T) => Promise<R>) | ((context: KernelContext, input: T) => Promise<R>),
   ) {
     let actionName: string;
@@ -145,16 +142,3 @@ class KernelAppRegistry {
 
 // Create a singleton registry for apps
 export const appRegistry = new KernelAppRegistry();
-
-// Browser management module
-export const browsers = {
-  /**
-   * Create a new browser instance
-   */
-  create: async ({ invocationId }: { invocationId: string }): Promise<Browser> => {
-    return {
-      cdp_ws_url:
-        'wss://floral-morning-3s0r8t7x.iad-prod-apiukp-0.onkernel.app:9222/devtools/browser/4dc1cbf6-be0e-4612-bba3-8e399d9638c7',
-    };
-  },
-};

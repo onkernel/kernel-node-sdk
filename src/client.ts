@@ -32,7 +32,8 @@ import { Browser, BrowserCreateSessionResponse } from './resources/browser';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
-import { KernelApp, appRegistry, browsers as appBrowsers } from './core/app-framework';
+import { KernelApp, appRegistry, KernelAction, KernelContext, KernelJson } from './core/app-framework';
+export type { KernelAction, KernelContext, KernelJson };
 
 export interface ClientOptions {
   /**
@@ -710,7 +711,6 @@ export class Kernel {
 
   apps: API.Apps = new API.Apps(this);
   browser: API.Browser = new API.Browser(this);
-  appFrameworkBrowsers = appBrowsers;
 }
 Kernel.Apps = Apps;
 Kernel.Browser = Browser;

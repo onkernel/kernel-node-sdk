@@ -1,9 +1,9 @@
-import type { KernelJson } from '@onkernel/sdk';
 import fs from 'fs';
 import fsExtra from 'fs-extra';
 import os from 'os';
 import path from 'path';
 import { parse as parseToml, stringify as stringifyToml } from 'smol-toml';
+import type { KernelJson } from '../../core/app-framework';
 import { NODE_PACKAGE_NAME, PYTHON_PACKAGE_NAME } from './constants';
 import { runInDirectory } from './util';
 
@@ -74,10 +74,7 @@ export async function packageApp(config: PackageConfig): Promise<string> {
     // 1. Update kernel SDK dependency if override is provided
     if (sdkOverrides.python) {
       if (fs.existsSync(path.join(kernelAppDir, 'pyproject.toml'))) {
-        overwriteKernelDependencyInPyproject(
-          path.join(kernelAppDir, 'pyproject.toml'),
-          sdkOverrides.python,
-        );
+        overwriteKernelDependencyInPyproject(path.join(kernelAppDir, 'pyproject.toml'), sdkOverrides.python);
       }
       if (fs.existsSync(path.join(kernelAppDir, 'requirements.txt'))) {
         overwriteKernelDependencyInRequirementsTxt(
@@ -196,32 +193,18 @@ export async function packageApp(config: PackageConfig): Promise<string> {
 /**
  * Copy all files from source directory to target directory
  */
-export function copyDirectoryContents(
-  sourceDir: string,
-  targetDir: string,
-  excludeDirs: string[] = [],
-) {
+export function copyDirectoryContents(sourceDir: string, targetDir: string, excludeDirs: string[] = []) {
   fsExtra.copySync(sourceDir, targetDir, {
     filter: (src: string) => {
       const basename = path.basename(src);
-      const standardExcludes = [
-        '.build',
-        'node_modules',
-        '.git',
-        '.mypy_cache',
-        '.venv',
-        '__pycache__',
-      ];
+      const standardExcludes = ['.build', 'node_modules', '.git', '.mypy_cache', '.venv', '__pycache__'];
       return ![...standardExcludes, ...excludeDirs].includes(basename);
     },
     overwrite: true,
   });
 }
 
-function overwriteKernelDependencyInPyproject(
-  pyprojectPath: string,
-  kernelDependencyOverride: string,
-) {
+function overwriteKernelDependencyInPyproject(pyprojectPath: string, kernelDependencyOverride: string) {
   const pyproject = parseToml(fs.readFileSync(pyprojectPath, 'utf8')) as any;
   if (!pyproject.project) {
     pyproject.project = { dependencies: [] };

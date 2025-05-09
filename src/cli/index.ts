@@ -1,9 +1,9 @@
-import type { KernelJson } from '@onkernel/sdk';
 import { Command } from 'commander';
 import fs from 'fs';
 import getPort from 'get-port';
 import os from 'os';
 import path from 'path';
+import type { KernelJson } from '../core/app-framework';
 import { packageApp } from './lib/package';
 import { getPackageVersion, isPnpmInstalled, isUvInstalled } from './lib/util';
 
@@ -13,29 +13,23 @@ const program = new Command();
 // This is useful for local dev.
 // KERNEL_NODE_SDK_OVERRIDE=/Users/rafaelgarcia/code/onkernel/kernel/packages/sdk-node
 // KERNEL_NODE_SDK_OVERRIDE_VERSION=0.0.1alpha.1
-const KERNEL_NODE_SDK_OVERRIDE = process.env.KERNEL_NODE_SDK_OVERRIDE || undefined;
+const KERNEL_NODE_SDK_OVERRIDE = process.env['KERNEL_NODE_SDK_OVERRIDE'] || undefined;
 // Same for python...
 // KERNEL_PYTHON_SDK_OVERRIDE=/Users/rafaelgarcia/code/onkernel/kernel/packages/sdk-python
 // KERNEL_PYTHON_SDK_OVERRIDE_VERSION=0.0.1alpha.1
-const KERNEL_PYTHON_SDK_OVERRIDE = process.env.KERNEL_PYTHON_SDK_OVERRIDE || undefined;
+const KERNEL_PYTHON_SDK_OVERRIDE = process.env['KERNEL_PYTHON_SDK_OVERRIDE'] || undefined;
 
 // Point to a local version of the boot loader or a specific version
-const KERNEL_NODE_BOOT_LOADER_OVERRIDE = process.env.KERNEL_NODE_BOOT_LOADER_OVERRIDE;
-const KERNEL_PYTHON_BOOT_LOADER_OVERRIDE = process.env.KERNEL_PYTHON_BOOT_LOADER_OVERRIDE;
+const KERNEL_NODE_BOOT_LOADER_OVERRIDE = process.env['KERNEL_NODE_BOOT_LOADER_OVERRIDE'] || undefined;
+const KERNEL_PYTHON_BOOT_LOADER_OVERRIDE = process.env['KERNEL_PYTHON_BOOT_LOADER_OVERRIDE'] || undefined;
 
-program
-  .name('kernel')
-  .description('CLI for Kernel deployment and invocation')
-  .version(getPackageVersion());
+program.name('kernel').description('CLI for Kernel deployment and invocation').version(getPackageVersion());
 
 program
   .command('deploy')
   .description('Deploy a Kernel application')
   .argument('<entrypoint>', 'Path to entrypoint file (TypeScript or Python)')
-  .option(
-    '--local',
-    'Does not publish the app to Kernel, but installs it on disk for invoking locally',
-  )
+  .option('--local', 'Does not publish the app to Kernel, but installs it on disk for invoking locally')
   .action(async (entrypoint, options) => {
     const resolvedEntrypoint = path.resolve(entrypoint);
     if (!fs.existsSync(resolvedEntrypoint)) {
@@ -48,12 +42,12 @@ program
       sourceDir: path.dirname(resolvedEntrypoint), // TODO: handle nested entrypoint, i.e. ./src/entrypoint.ts
       entrypoint: resolvedEntrypoint,
       sdkOverrides: {
-        node: KERNEL_NODE_SDK_OVERRIDE,
-        python: KERNEL_PYTHON_SDK_OVERRIDE,
+        ...(KERNEL_NODE_SDK_OVERRIDE && { node: KERNEL_NODE_SDK_OVERRIDE }),
+        ...(KERNEL_PYTHON_SDK_OVERRIDE && { python: KERNEL_PYTHON_SDK_OVERRIDE }),
       },
       bootLoaderOverrides: {
-        node: KERNEL_NODE_BOOT_LOADER_OVERRIDE,
-        python: KERNEL_PYTHON_BOOT_LOADER_OVERRIDE,
+        ...(KERNEL_NODE_BOOT_LOADER_OVERRIDE && { node: KERNEL_NODE_BOOT_LOADER_OVERRIDE }),
+        ...(KERNEL_PYTHON_BOOT_LOADER_OVERRIDE && { python: KERNEL_PYTHON_BOOT_LOADER_OVERRIDE }),
       },
     });
 
@@ -109,15 +103,7 @@ program
     console.log(JSON.stringify(parsedPayload, null, 2));
 
     // Get the app directory
-    const cacheFile = path.join(
-      os.homedir(),
-      '.local',
-      'state',
-      'kernel',
-      'deploy',
-      'local',
-      appName,
-    );
+    const cacheFile = path.join(os.homedir(), '.local', 'state', 'kernel', 'deploy', 'local', appName);
     if (!fs.existsSync(cacheFile)) {
       console.error(`Error: App "${appName}" local deployment not found. `);
       console.error('Did you `kernel deploy --local <entrypoint>`?');
@@ -125,9 +111,7 @@ program
     }
     const kernelLocalDir = fs.readFileSync(cacheFile, 'utf8').trim();
     if (!fs.existsSync(kernelLocalDir)) {
-      console.error(
-        `Error: App "${appName}" local deployment has been corrupted, please re-deploy.`,
-      );
+      console.error(`Error: App "${appName}" local deployment has been corrupted, please re-deploy.`);
       process.exit(1);
     }
 
@@ -176,10 +160,7 @@ async function waitForStartupMessage(
         const text = decoder.decode(value);
         process.stderr.write(text);
 
-        if (
-          text.includes('Application startup complete.') ||
-          text.includes('Kernel application running')
-        ) {
+        if (text.includes('Application startup complete.') || text.includes('Kernel application running')) {
           clearTimeout(timeout);
           resolve();
           break;
@@ -201,12 +182,7 @@ type InvokeLocalOptions = {
 /**
  * Invokes a locally deployed Python app action
  */
-async function invokeLocalPython({
-  kernelLocalDir,
-  appName,
-  actionName,
-  parsedPayload,
-}: InvokeLocalOptions) {
+async function invokeLocalPython({ kernelLocalDir, appName, actionName, parsedPayload }: InvokeLocalOptions) {
   const uvInstalled = await isUvInstalled();
   if (!uvInstalled) {
     console.error('Error: uv is not installed. Please install it with:');
@@ -254,12 +230,7 @@ async function invokeLocalPython({
 /**
  * Invokes a locally deployed TypeScript app action
  */
-async function invokeLocalNode({
-  kernelLocalDir,
-  appName,
-  actionName,
-  parsedPayload,
-}: InvokeLocalOptions) {
+async function invokeLocalNode({ kernelLocalDir, appName, actionName, parsedPayload }: InvokeLocalOptions) {
   const pnpmInstalled = await isPnpmInstalled();
   if (!pnpmInstalled) {
     console.error('Error: pnpm is not installed. Please install it with:');
@@ -279,15 +250,7 @@ async function invokeLocalNode({
   // Find an available port and start the boot loader
   const port = await getPort();
   const tsProcess = Bun.spawn(
-    [
-      'pnpm',
-      'exec',
-      'tsx',
-      'index.ts',
-      '--port',
-      port.toString(),
-      path.join(kernelLocalDir, 'app'),
-    ],
+    ['pnpm', 'exec', 'tsx', 'index.ts', '--port', port.toString(), path.join(kernelLocalDir, 'app')],
     {
       cwd: kernelLocalDir,
       stdio: ['inherit', 'inherit', 'pipe'],

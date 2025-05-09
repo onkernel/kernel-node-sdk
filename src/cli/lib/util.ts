@@ -11,10 +11,7 @@ import { fileURLToPath } from 'url';
  * @param options Optional options including working directory
  * @returns Promise resolving to just the exit code
  */
-export async function runForExitCode(
-  command: string,
-  options: { cwd?: string } = {},
-): Promise<number> {
+export async function runForExitCode(command: string, options: { cwd?: string } = {}): Promise<number> {
   try {
     const cwd = options.cwd ? path.resolve(options.cwd) : process.cwd();
 
