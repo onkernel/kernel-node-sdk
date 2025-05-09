@@ -1,11 +1,15 @@
+#!/usr/bin/env bun
+import chalk from 'chalk';
 import { Command } from 'commander';
-import fs from 'fs';
+import fs, { createReadStream } from 'fs';
 import getPort from 'get-port';
 import os from 'os';
 import path from 'path';
+import * as tmp from 'tmp';
 import type { KernelJson } from '../core/app-framework';
+import { Kernel } from '../index';
 import { packageApp } from './lib/package';
-import { getPackageVersion, isPnpmInstalled, isUvInstalled } from './lib/util';
+import { getPackageVersion, isPnpmInstalled, isUvInstalled, zipDirectory } from './lib/util';
 
 const program = new Command();
 
@@ -23,13 +27,19 @@ const KERNEL_PYTHON_SDK_OVERRIDE = process.env['KERNEL_PYTHON_SDK_OVERRIDE'] || 
 const KERNEL_NODE_BOOT_LOADER_OVERRIDE = process.env['KERNEL_NODE_BOOT_LOADER_OVERRIDE'] || undefined;
 const KERNEL_PYTHON_BOOT_LOADER_OVERRIDE = process.env['KERNEL_PYTHON_BOOT_LOADER_OVERRIDE'] || undefined;
 
-program.name('kernel').description('CLI for Kernel deployment and invocation').version(getPackageVersion());
+if (process.argv.length === 3 && ['-v', '--version'].includes(process.argv[2]!)) {
+  console.log(getPackageVersion());
+  process.exit(0);
+}
+
+program.name('kernel').description('CLI for Kernel deployment and invocation');
 
 program
   .command('deploy')
   .description('Deploy a Kernel application')
   .argument('<entrypoint>', 'Path to entrypoint file (TypeScript or Python)')
   .option('--local', 'Does not publish the app to Kernel, but installs it on disk for invoking locally')
+  .option('--version <version>', 'Specify a version for the app (defaults to current timestamp)')
   .action(async (entrypoint, options) => {
     const resolvedEntrypoint = path.resolve(entrypoint);
     if (!fs.existsSync(resolvedEntrypoint)) {
@@ -65,9 +75,64 @@ program
         );
       }
     } else {
-      console.log(`Deploying ${resolvedEntrypoint} as "${options.name}"...`);
-      console.error('TODO: implement cloud :-p');
-      process.exit(1);
+      if (!process.env['KERNEL_API_KEY']) {
+        console.error('Error: KERNEL_API_KEY environment variable is not set');
+        console.error('Please set your Kernel API key using: export KERNEL_API_KEY=your_api_key');
+        process.exit(1);
+      }
+
+      // Read kernel.json to get app info
+      const kernelJson = JSON.parse(
+        fs.readFileSync(path.join(dotKernelDir, 'app', 'kernel.json'), 'utf8'),
+      ) as KernelJson;
+
+      if (!kernelJson.apps || kernelJson.apps.length === 0) {
+        console.error('Error: No apps found in kernel.json');
+        process.exit(1);
+      }
+
+      const appName = kernelJson.apps[0]?.name;
+      if (!appName) {
+        console.error('Error: App name not found in kernel.json');
+        process.exit(1);
+      }
+
+      // Create a Kernel client
+      const client = new Kernel({
+        apiKey: process.env['KERNEL_API_KEY'],
+        baseURL: process.env['KERNEL_BASE_URL'] || 'http://localhost:3001',
+      });
+
+      // Set version (use provided version or generate from timestamp)
+      const version = options.version || Date.now().toString();
+
+      console.log(chalk.green(`Compressing files...`));
+      const tmpZipFile = tmp.fileSync({ postfix: '.zip' });
+
+      try {
+        // Zip the packaged app
+        await zipDirectory(path.join(dotKernelDir, 'app'), tmpZipFile.name);
+
+        console.log(chalk.green(`Uploading app "${appName}" (version: ${version})...`));
+
+        // Deploy to Kernel
+        const response = await client.apps.deploy({
+          appName: appName,
+          file: createReadStream(tmpZipFile.name),
+          version: version,
+        });
+
+        console.log(chalk.green(`App "${appName}" successfully deployed to Kernel`));
+        console.log(
+          `You can invoke it with: kernel invoke --version ${version} ${quoteIfNeeded(appName)} ${quoteIfNeeded(kernelJson.apps[0]!.actions[0]!.name)} PAYLOAD`,
+        );
+      } catch (error) {
+        console.error('Error deploying to Kernel:', error);
+        process.exit(1);
+      } finally {
+        // Clean up temp file
+        tmpZipFile.removeCallback();
+      }
     }
   });
 
@@ -82,6 +147,7 @@ program
   .command('invoke')
   .description('Invoke a deployed Kernel application')
   .option('--local', 'Invoke a locally deployed application')
+  .option('--version <version>', 'Specify a version of the app to invoke')
   .argument('<app_name>', 'Name of the application to invoke')
   .argument('<action_name>', 'Name of the action to invoke')
   .argument('<payload>', 'JSON payload to send to the application')
@@ -95,8 +161,36 @@ program
     }
 
     if (!options.local) {
-      console.log(`Invoking "${options.name}" in the cloud is not implemented yet`);
-      process.exit(1);
+      if (!process.env['KERNEL_API_KEY']) {
+        console.error('Error: KERNEL_API_KEY environment variable is not set');
+        console.error('Please set your Kernel API key using: export KERNEL_API_KEY=your_api_key');
+        process.exit(1);
+      }
+
+      // Create a Kernel client
+      const client = new Kernel({
+        apiKey: process.env['KERNEL_API_KEY'],
+        baseURL: process.env['KERNEL_BASE_URL'] || 'http://localhost:3001',
+      });
+
+      console.log(`Invoking "${appName}" with action "${actionName}" and payload:`);
+      console.log(JSON.stringify(parsedPayload, null, 2));
+
+      try {
+        const response = await client.apps.invoke({
+          appName,
+          actionName,
+          payload,
+          ...(options.version && { version: options.version }),
+        });
+
+        console.log('Result:');
+        console.log(JSON.stringify(JSON.parse(response.output || '{}'), null, 2));
+      } catch (error) {
+        console.error('Error invoking application:', error);
+        process.exit(1);
+      }
+      return;
     }
 
     console.log(`Invoking "${appName}" with action "${actionName}" and payload:`);

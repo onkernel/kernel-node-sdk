@@ -1,8 +1,10 @@
+import archiver from 'archiver';
 import { execa } from 'execa';
+import fs from 'fs';
 import fsExtra from 'fs-extra';
-import path, { dirname } from 'path';
+import walk from 'ignore-walk';
+import path from 'path';
 import type { PackageJson } from 'type-fest';
-import { fileURLToPath } from 'url';
 
 /**
  * Run a command and return only the exit code
@@ -54,9 +56,7 @@ export async function runInDirectory(command: string, cwd: string): Promise<void
  * @returns Promise resolving to the package version string
  */
 export function getPackageVersion(): string {
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = dirname(__filename);
-  const pkgJsonPath = path.join(__dirname, '..', 'package.json');
+  const pkgJsonPath = path.join(__dirname, '..', '..', '..', 'package.json');
   const content = fsExtra.readJSONSync(pkgJsonPath) as PackageJson;
   if (!content.version) {
     throw new Error('package.json does not contain a version');
@@ -78,4 +78,45 @@ export async function isUvInstalled(): Promise<boolean> {
 export async function isPnpmInstalled(): Promise<boolean> {
   const exitCode = await runForExitCode('pnpm --version');
   return exitCode === 0;
+}
+
+/**
+ * Zips a directory into a file
+ *
+ * @param sourceDir Directory to zip
+ * @param outPath Path to output zip file
+ * @returns Promise that resolves when zip is complete
+ */
+export async function zipDirectory(inputDir: string, outputZip: string): Promise<void> {
+  const entries = await walk({
+    path: inputDir,
+    ignoreFiles: ['.gitignore', '.dockerignore'],
+    includeEmpty: true,
+    follow: false,
+  });
+
+  const output = fs.createWriteStream(outputZip);
+  const archive = archiver('zip', { zlib: { level: 9 } });
+
+  const finalizePromise = new Promise<void>((resolve, reject) => {
+    output.on('close', resolve);
+    archive.on('error', reject);
+  });
+
+  archive.pipe(output);
+
+  for (const entry of entries) {
+    const fullPath = path.join(inputDir, entry);
+    const stat = fs.statSync(fullPath);
+    const archivePath = entry.split(path.sep).join('/'); // Normalize to Unix slashes
+
+    if (stat.isFile()) {
+      archive.file(fullPath, { name: archivePath });
+    } else if (stat.isDirectory()) {
+      archive.append('', { name: archivePath.endsWith('/') ? archivePath : archivePath + '/' });
+    }
+  }
+
+  await archive.finalize();
+  await finalizePromise;
 }
