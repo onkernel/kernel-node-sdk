@@ -32,7 +32,7 @@ import { Browser, BrowserCreateSessionResponse } from './resources/browser';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
-import { KernelApp, appRegistry} from './core/app-framework';
+import { KernelApp, appRegistry } from './core/app-framework';
 
 export interface ClientOptions {
   /**
