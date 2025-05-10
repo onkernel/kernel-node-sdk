@@ -20,7 +20,6 @@ export interface KernelActionJson {
   name: string;
 }
 
-// App definition
 export class KernelApp {
   name: string;
   actions: Map<string, KernelAction> = new Map();

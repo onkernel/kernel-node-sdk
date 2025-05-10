@@ -685,7 +685,7 @@ export class Kernel {
     return new KernelApp(name);
   }
 
-  public static exportRegistry(entrypointRelpath: string): string {
+  public static exportRegistry(): string {
     return appRegistry.exportJSON();
   }
 
