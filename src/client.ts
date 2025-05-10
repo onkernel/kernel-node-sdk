@@ -32,7 +32,7 @@ import { Browser, BrowserCreateSessionResponse } from './resources/browser';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
-import { KernelApp, appRegistry} from './core/app-framework';
+import { KernelApp, appRegistry } from './core/app-framework';
 
 export interface ClientOptions {
   /**
@@ -685,8 +685,8 @@ export class Kernel {
     return new KernelApp(name);
   }
 
-  public static exportRegistry(entrypointRelpath: string): string {
-    return appRegistry.exportJSON(entrypointRelpath);
+  public static exportRegistry(): string {
+    return appRegistry.exportJSON();
   }
 
   static Kernel = this;
@@ -713,7 +713,7 @@ export class Kernel {
 }
 Kernel.Apps = Apps;
 Kernel.Browser = Browser;
-Kernel.exportRegistry = (entrypointRelpath: string) => appRegistry.exportJSON(entrypointRelpath);
+Kernel.exportRegistry = () => appRegistry.exportJSON();
 export declare namespace Kernel {
   export type RequestOptions = Opts.RequestOptions;
 
