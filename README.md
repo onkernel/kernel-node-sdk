@@ -24,6 +24,7 @@ import Kernel from '@onkernel/sdk';
 
 const client = new Kernel({
   apiKey: process.env['KERNEL_API_KEY'], // This is the default and can be omitted
+  environment: 'development', // defaults to 'production'
 });
 
 async function main() {
@@ -49,6 +50,7 @@ import Kernel from '@onkernel/sdk';
 
 const client = new Kernel({
   apiKey: process.env['KERNEL_API_KEY'], // This is the default and can be omitted
+  environment: 'development', // defaults to 'production'
 });
 
 async function main() {

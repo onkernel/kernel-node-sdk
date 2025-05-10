@@ -33,11 +33,26 @@ import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
 
+const environments = {
+  production: 'https://api.onkernel.com/',
+  development: 'https://localhost:3001/',
+};
+type Environment = keyof typeof environments;
+
 export interface ClientOptions {
   /**
    * Defaults to process.env['KERNEL_API_KEY'].
    */
   apiKey?: string | undefined;
+
+  /**
+   * Specifies the environment to use for the API.
+   *
+   * Each environment maps to a different base URL:
+   * - `production` corresponds to `https://api.onkernel.com/`
+   * - `development` corresponds to `https://localhost:3001/`
+   */
+  environment?: Environment | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -128,7 +143,8 @@ export class Kernel {
    * API Client for interfacing with the Kernel API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['KERNEL_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['KERNEL_BASE_URL'] ?? http://localhost:3001] - Override the default base URL for the API.
+   * @param {Environment} [opts.environment=production] - Specifies the environment URL to use for the API.
+   * @param {string} [opts.baseURL=process.env['KERNEL_BASE_URL'] ?? https://api.onkernel.com/] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -150,10 +166,17 @@ export class Kernel {
     const options: ClientOptions = {
       apiKey,
       ...opts,
-      baseURL: baseURL || `http://localhost:3001`,
+      baseURL,
+      environment: opts.environment ?? 'production',
     };
 
-    this.baseURL = options.baseURL!;
+    if (baseURL && opts.environment) {
+      throw new Errors.KernelError(
+        'Ambiguous URL; The `baseURL` option (or KERNEL_BASE_URL env var) and the `environment` option are given. If you want to use the environment you must pass baseURL: null',
+      );
+    }
+
+    this.baseURL = options.baseURL || environments[options.environment || 'production'];
     this.timeout = options.timeout ?? Kernel.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
@@ -179,7 +202,8 @@ export class Kernel {
   withOptions(options: Partial<ClientOptions>): this {
     return new (this.constructor as any as new (props: ClientOptions) => typeof this)({
       ...this._options,
-      baseURL: this.baseURL,
+      environment: options.environment ? options.environment : undefined,
+      baseURL: options.environment ? undefined : this.baseURL,
       maxRetries: this.maxRetries,
       timeout: this.timeout,
       logger: this.logger,
