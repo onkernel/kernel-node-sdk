@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.1.0-alpha.5 (2025-05-10)
+
+Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/onkernel/kernel-node-sdk/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)
+
+### Features
+
+* **api:** update via SDK Studio ([f5be580](https://github.com/onkernel/kernel-node-sdk/commit/f5be580d5f0023b57c9b1a63bb7b6dedc57deca9))
+* **api:** update via SDK Studio ([7d31661](https://github.com/onkernel/kernel-node-sdk/commit/7d316613cf880a22e2a17946089c78eb878bcbc6))
+* **api:** update via SDK Studio ([68f457e](https://github.com/onkernel/kernel-node-sdk/commit/68f457eb0f66b5b243e682677b0fa34eee685853))
+
+
+### Bug Fixes
+
+* **client:** always overwrite when merging headers ([69f15d8](https://github.com/onkernel/kernel-node-sdk/commit/69f15d855463e7dfecc009eb67273371bdd5efff))
+
+
+### Chores
+
+* configure new SDK language ([bc19eee](https://github.com/onkernel/kernel-node-sdk/commit/bc19eeeb0eea066f8ad69fd1f03038f839108a31))
+* **internal:** codegen related update ([82bfbe8](https://github.com/onkernel/kernel-node-sdk/commit/82bfbe8710fec8dd7a834e1cd4a0495195ae4840))
+* update SDK settings ([c9c482c](https://github.com/onkernel/kernel-node-sdk/commit/c9c482c8ae564005abe75f46300cebea44c26f8f))
+* update SDK settings ([25c177f](https://github.com/onkernel/kernel-node-sdk/commit/25c177ff56b479a6389c79a72d696b4b0bef8f69))
+
 ## 0.1.0-alpha.2 (2025-05-09)
 
 Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/onkernel/kernel-node-sdk/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
