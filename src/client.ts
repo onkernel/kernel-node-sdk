@@ -686,7 +686,7 @@ export class Kernel {
   }
 
   public static exportRegistry(entrypointRelpath: string): string {
-    return appRegistry.exportJSON(entrypointRelpath);
+    return appRegistry.exportJSON();
   }
 
   static Kernel = this;
@@ -713,7 +713,7 @@ export class Kernel {
 }
 Kernel.Apps = Apps;
 Kernel.Browser = Browser;
-Kernel.exportRegistry = (entrypointRelpath: string) => appRegistry.exportJSON(entrypointRelpath);
+Kernel.exportRegistry = () => appRegistry.exportJSON();
 export declare namespace Kernel {
   export type RequestOptions = Opts.RequestOptions;
 
