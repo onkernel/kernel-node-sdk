@@ -15,7 +15,6 @@ export interface KernelAction {
 }
 
 export interface KernelJson {
-  entrypoint: string;
   apps: KernelAppJson[];
 }
 
@@ -134,9 +133,9 @@ class KernelAppRegistry {
   /**
    * Export the registry as JSON
    */
-  exportJSON(entrypointRelpath: string): string {
+  exportJSON(): string {
     const apps = this.getApps().map((app) => app.toJSON());
-    return JSON.stringify({ apps, entrypoint: entrypointRelpath } as KernelJson, null, 2);
+    return JSON.stringify({ apps } as KernelJson, null, 2);
   }
 }
 
