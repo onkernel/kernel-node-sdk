@@ -1,14 +1,7 @@
-// Type definitions for browser
-export interface Browser {
-  cdp_ws_url: string;
-}
-
-// Context definition
 export interface KernelContext {
   invocationId: string;
 }
 
-// Action definition
 export interface KernelAction {
   name: string;
   handler: (context: KernelContext, input: any) => Promise<any>;
@@ -130,12 +123,14 @@ class KernelAppRegistry {
     return this.apps.get(name);
   }
 
-  /**
-   * Export the registry as JSON
-   */
+  export(): KernelJson {
+    return {
+      apps: this.getApps().map((app) => app.toJSON()),
+    };
+  }
+
   exportJSON(): string {
-    const apps = this.getApps().map((app) => app.toJSON());
-    return JSON.stringify({ apps } as KernelJson, null, 2);
+    return JSON.stringify(this.export(), null, 2);
   }
 }
 
