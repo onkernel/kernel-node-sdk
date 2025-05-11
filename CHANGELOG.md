@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.7 (2025-05-11)
+
+Full Changelog: [v0.1.0-alpha.6...v0.1.0-alpha.7](https://github.com/onkernel/kernel-node-sdk/compare/v0.1.0-alpha.6...v0.1.0-alpha.7)
+
+### Features
+
+* **api:** update via SDK Studio ([aef2da7](https://github.com/onkernel/kernel-node-sdk/commit/aef2da7440950671557470da84955d0293fbbace))
+
 ## 0.1.0-alpha.6 (2025-05-10)
 
 Full Changelog: [v0.1.0-alpha.5...v0.1.0-alpha.6](https://github.com/onkernel/kernel-node-sdk/compare/v0.1.0-alpha.5...v0.1.0-alpha.6)
