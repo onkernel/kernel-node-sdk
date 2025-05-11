@@ -4,6 +4,7 @@ export {
   Apps,
   type AppDeployResponse,
   type AppInvokeResponse,
+  type AppRetrieveInvocationResponse,
   type AppDeployParams,
   type AppInvokeParams,
 } from './apps';

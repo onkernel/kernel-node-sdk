@@ -60,4 +60,16 @@ describe('resource apps', () => {
       version: '1.0.0',
     });
   });
+
+  // skipped: tests are disabled for the time being
+  test.skip('retrieveInvocation', async () => {
+    const responsePromise = client.apps.retrieveInvocation('ckqwer3o20000jb9s7abcdef');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
 });
