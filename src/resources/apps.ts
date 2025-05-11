@@ -5,6 +5,7 @@ import { APIPromise } from '../core/api-promise';
 import { type Uploadable } from '../core/uploads';
 import { RequestOptions } from '../internal/request-options';
 import { multipartFormRequestOptions } from '../internal/uploads';
+import { path } from '../internal/utils/path';
 
 export class Apps extends APIResource {
   /**
@@ -38,6 +39,20 @@ export class Apps extends APIResource {
    */
   invoke(body: AppInvokeParams, options?: RequestOptions): APIPromise<AppInvokeResponse> {
     return this._client.post('/apps/invoke', { body, ...options });
+  }
+
+  /**
+   * Get an app invocation by id
+   *
+   * @example
+   * ```ts
+   * const response = await client.apps.retrieveInvocation(
+   *   'ckqwer3o20000jb9s7abcdef',
+   * );
+   * ```
+   */
+  retrieveInvocation(id: string, options?: RequestOptions): APIPromise<AppRetrieveInvocationResponse> {
+    return this._client.get(path`/apps/invocations/${id}`, options);
   }
 }
 
@@ -73,6 +88,22 @@ export interface AppInvokeResponse {
    * Output from the invocation (if available)
    */
   output?: string;
+}
+
+export interface AppRetrieveInvocationResponse {
+  id: string;
+
+  appName: string;
+
+  finishedAt: string | null;
+
+  input: string;
+
+  output: string;
+
+  startedAt: string;
+
+  status: string;
 }
 
 export interface AppDeployParams {
@@ -123,6 +154,7 @@ export declare namespace Apps {
   export {
     type AppDeployResponse as AppDeployResponse,
     type AppInvokeResponse as AppInvokeResponse,
+    type AppRetrieveInvocationResponse as AppRetrieveInvocationResponse,
     type AppDeployParams as AppDeployParams,
     type AppInvokeParams as AppInvokeParams,
   };
