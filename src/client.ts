@@ -25,7 +25,6 @@ import {
   AppDeployResponse,
   AppInvokeParams,
   AppInvokeResponse,
-  AppRetrieveInvocationResponse,
   Apps,
 } from './resources/apps';
 import { Browser, BrowserCreateSessionResponse } from './resources/browser';
@@ -735,7 +734,6 @@ export declare namespace Kernel {
     Apps as Apps,
     type AppDeployResponse as AppDeployResponse,
     type AppInvokeResponse as AppInvokeResponse,
-    type AppRetrieveInvocationResponse as AppRetrieveInvocationResponse,
     type AppDeployParams as AppDeployParams,
     type AppInvokeParams as AppInvokeParams,
   };
