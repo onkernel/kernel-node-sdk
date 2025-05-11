@@ -32,7 +32,7 @@ import { Browser, BrowserCreateSessionResponse } from './resources/browser';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
-import { KernelApp, appRegistry } from './core/app-framework';
+import { KernelApp } from './core/app-framework';
 
 const environments = {
   production: 'https://api.onkernel.com/',
@@ -705,12 +705,14 @@ export class Kernel {
     }
   }
 
+  /**
+   * Create a new KernelApp instance.
+   *
+   * @param name - The name of the app to create.
+   * @returns A new KernelApp instance you can attach actions to.
+   */
   public app(name: string): KernelApp {
     return new KernelApp(name);
-  }
-
-  public static exportRegistry(): string {
-    return appRegistry.exportJSON();
   }
 
   static Kernel = this;
@@ -737,7 +739,6 @@ export class Kernel {
 }
 Kernel.Apps = Apps;
 Kernel.Browser = Browser;
-Kernel.exportRegistry = () => appRegistry.exportJSON();
 export declare namespace Kernel {
   export type RequestOptions = Opts.RequestOptions;
 

@@ -21,4 +21,4 @@ export {
   UnprocessableEntityError,
 } from './core/error';
 
-export { KernelAction, KernelContext, KernelJson } from './core/app-framework';
+export { KernelAction, KernelContext, KernelJson, appRegistry } from './core/app-framework';
