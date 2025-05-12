@@ -28,7 +28,7 @@ import {
   AppRetrieveInvocationResponse,
   Apps,
 } from './resources/apps';
-import { Browser, BrowserCreateSessionResponse } from './resources/browser';
+import { Browser, BrowserCreateSessionParams, BrowserCreateSessionResponse } from './resources/browser';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
@@ -740,5 +740,9 @@ export declare namespace Kernel {
     type AppInvokeParams as AppInvokeParams,
   };
 
-  export { Browser as Browser, type BrowserCreateSessionResponse as BrowserCreateSessionResponse };
+  export {
+    Browser as Browser,
+    type BrowserCreateSessionResponse as BrowserCreateSessionResponse,
+    type BrowserCreateSessionParams as BrowserCreateSessionParams,
+  };
 }
