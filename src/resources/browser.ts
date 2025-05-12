@@ -8,8 +8,11 @@ export class Browser extends APIResource {
   /**
    * Create Browser Session
    */
-  createSession(options?: RequestOptions): APIPromise<BrowserCreateSessionResponse> {
-    return this._client.post('/browser', options);
+  createSession(
+    body: BrowserCreateSessionParams,
+    options?: RequestOptions,
+  ): APIPromise<BrowserCreateSessionResponse> {
+    return this._client.post('/browser', { body, ...options });
   }
 }
 
@@ -30,6 +33,16 @@ export interface BrowserCreateSessionResponse {
   sessionId: string;
 }
 
+export interface BrowserCreateSessionParams {
+  /**
+   * Kernel App invocation ID
+   */
+  invocationId: string;
+}
+
 export declare namespace Browser {
-  export { type BrowserCreateSessionResponse as BrowserCreateSessionResponse };
+  export {
+    type BrowserCreateSessionResponse as BrowserCreateSessionResponse,
+    type BrowserCreateSessionParams as BrowserCreateSessionParams,
+  };
 }

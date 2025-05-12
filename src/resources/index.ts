@@ -8,4 +8,4 @@ export {
   type AppDeployParams,
   type AppInvokeParams,
 } from './apps';
-export { Browser, type BrowserCreateSessionResponse } from './browser';
+export { Browser, type BrowserCreateSessionResponse, type BrowserCreateSessionParams } from './browser';

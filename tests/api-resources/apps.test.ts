@@ -11,9 +11,7 @@ describe('resource apps', () => {
   // skipped: tests are disabled for the time being
   test.skip('deploy: only required params', async () => {
     const responsePromise = client.apps.deploy({
-      appName: 'my-awesome-app',
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
-      version: '1.0.0',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,10 +25,11 @@ describe('resource apps', () => {
   // skipped: tests are disabled for the time being
   test.skip('deploy: required and optional params', async () => {
     const response = await client.apps.deploy({
-      appName: 'my-awesome-app',
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
-      version: '1.0.0',
+      entrypointRelPath: 'app.py',
+      force: 'false',
       region: 'aws.us-east-1a',
+      version: '1.0.0',
     });
   });
 
@@ -39,7 +38,7 @@ describe('resource apps', () => {
     const responsePromise = client.apps.invoke({
       actionName: 'analyze',
       appName: 'my-awesome-app',
-      payload: '{ "data": "example input" }',
+      payload: { data: 'example input' },
       version: '1.0.0',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -56,7 +55,7 @@ describe('resource apps', () => {
     const response = await client.apps.invoke({
       actionName: 'analyze',
       appName: 'my-awesome-app',
-      payload: '{ "data": "example input" }',
+      payload: { data: 'example input' },
       version: '1.0.0',
     });
   });

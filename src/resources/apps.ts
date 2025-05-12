@@ -14,9 +14,7 @@ export class Apps extends APIResource {
    * @example
    * ```ts
    * const response = await client.apps.deploy({
-   *   appName: 'my-awesome-app',
    *   file: fs.createReadStream('path/to/file'),
-   *   version: '1.0.0',
    * });
    * ```
    */
@@ -32,7 +30,7 @@ export class Apps extends APIResource {
    * const response = await client.apps.invoke({
    *   actionName: 'analyze',
    *   appName: 'my-awesome-app',
-   *   payload: '{ "data": "example input" }',
+   *   payload: { data: 'example input' },
    *   version: '1.0.0',
    * });
    * ```
@@ -57,10 +55,7 @@ export class Apps extends APIResource {
 }
 
 export interface AppDeployResponse {
-  /**
-   * ID of the deployed app version
-   */
-  id: string;
+  apps: Array<AppDeployResponse.App>;
 
   /**
    * Success message
@@ -71,6 +66,31 @@ export interface AppDeployResponse {
    * Status of the deployment
    */
   success: boolean;
+}
+
+export namespace AppDeployResponse {
+  export interface App {
+    /**
+     * ID for the app version deployed
+     */
+    id: string;
+
+    actions: Array<App.Action>;
+
+    /**
+     * Name of the app
+     */
+    name: string;
+  }
+
+  export namespace App {
+    export interface Action {
+      /**
+       * Name of the action
+       */
+      name: string;
+    }
+  }
 }
 
 export interface AppInvokeResponse {
@@ -108,24 +128,29 @@ export interface AppRetrieveInvocationResponse {
 
 export interface AppDeployParams {
   /**
-   * Name of the application
-   */
-  appName: string;
-
-  /**
-   * ZIP file containing the application
+   * ZIP file containing the application source directory
    */
   file: Uploadable;
 
   /**
-   * Version of the application
+   * Relative path to the entrypoint of the application
    */
-  version: string;
+  entrypointRelPath?: string;
 
   /**
-   * AWS region for deployment (e.g. "aws.us-east-1a")
+   * Allow overwriting an existing app version
    */
-  region?: string;
+  force?: 'true' | 'false';
+
+  /**
+   * Region for deployment. Currently we only support "aws.us-east-1a"
+   */
+  region?: 'aws.us-east-1a';
+
+  /**
+   * Version of the application. Can be any string.
+   */
+  version?: string;
 }
 
 export interface AppInvokeParams {

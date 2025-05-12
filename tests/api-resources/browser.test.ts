@@ -9,8 +9,8 @@ const client = new Kernel({
 
 describe('resource browser', () => {
   // skipped: tests are disabled for the time being
-  test.skip('createSession', async () => {
-    const responsePromise = client.browser.createSession();
+  test.skip('createSession: only required params', async () => {
+    const responsePromise = client.browser.createSession({ invocationId: 'invocationId' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -18,5 +18,10 @@ describe('resource browser', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('createSession: required and optional params', async () => {
+    const response = await client.browser.createSession({ invocationId: 'invocationId' });
   });
 });
