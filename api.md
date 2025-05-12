@@ -20,4 +20,4 @@ Types:
 
 Methods:
 
-- <code title="post /browser">client.browser.<a href="./src/resources/browser.ts">createSession</a>() -> BrowserCreateSessionResponse</code>
+- <code title="post /browser">client.browser.<a href="./src/resources/browser.ts">createSession</a>({ ...params }) -> BrowserCreateSessionResponse</code>
