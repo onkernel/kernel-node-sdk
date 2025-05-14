@@ -14,6 +14,7 @@ export class Apps extends APIResource {
    * @example
    * ```ts
    * const response = await client.apps.deploy({
+   *   entrypointRelPath: 'app.py',
    *   file: fs.createReadStream('path/to/file'),
    * });
    * ```
@@ -128,14 +129,14 @@ export interface AppRetrieveInvocationResponse {
 
 export interface AppDeployParams {
   /**
+   * Relative path to the entrypoint of the application
+   */
+  entrypointRelPath: string;
+
+  /**
    * ZIP file containing the application source directory
    */
   file: Uploadable;
-
-  /**
-   * Relative path to the entrypoint of the application
-   */
-  entrypointRelPath?: string;
 
   /**
    * Allow overwriting an existing app version

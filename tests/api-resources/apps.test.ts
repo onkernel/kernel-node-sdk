@@ -11,6 +11,7 @@ describe('resource apps', () => {
   // skipped: tests are disabled for the time being
   test.skip('deploy: only required params', async () => {
     const responsePromise = client.apps.deploy({
+      entrypointRelPath: 'app.py',
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
@@ -25,8 +26,8 @@ describe('resource apps', () => {
   // skipped: tests are disabled for the time being
   test.skip('deploy: required and optional params', async () => {
     const response = await client.apps.deploy({
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
       entrypointRelPath: 'app.py',
+      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
       force: 'false',
       region: 'aws.us-east-1a',
       version: '1.0.0',

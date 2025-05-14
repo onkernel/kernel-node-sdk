@@ -29,6 +29,7 @@ const client = new Kernel({
 
 async function main() {
   const response = await client.apps.deploy({
+    entrypointRelPath: 'app.py',
     file: fs.createReadStream('path/to/file'),
     version: 'REPLACE_ME',
   });
@@ -53,7 +54,11 @@ const client = new Kernel({
 });
 
 async function main() {
-  const params: Kernel.AppDeployParams = { file: fs.createReadStream('path/to/file'), version: 'REPLACE_ME' };
+  const params: Kernel.AppDeployParams = {
+    entrypointRelPath: 'app.py',
+    file: fs.createReadStream('path/to/file'),
+    version: 'REPLACE_ME',
+  };
   const response: Kernel.AppDeployResponse = await client.apps.deploy(params);
 }
 
@@ -78,17 +83,23 @@ import Kernel, { toFile } from '@onkernel/sdk';
 const client = new Kernel();
 
 // If you have access to Node `fs` we recommend using `fs.createReadStream()`:
-await client.apps.deploy({ file: fs.createReadStream('/path/to/file') });
+await client.apps.deploy({ entrypointRelPath: 'app.py', file: fs.createReadStream('/path/to/file') });
 
 // Or if you have the web `File` API you can pass a `File` instance:
-await client.apps.deploy({ file: new File(['my bytes'], 'file') });
+await client.apps.deploy({ entrypointRelPath: 'app.py', file: new File(['my bytes'], 'file') });
 
 // You can also pass a `fetch` `Response`:
-await client.apps.deploy({ file: await fetch('https://somesite/file') });
+await client.apps.deploy({ entrypointRelPath: 'app.py', file: await fetch('https://somesite/file') });
 
 // Finally, if none of the above are convenient, you can use our `toFile` helper:
-await client.apps.deploy({ file: await toFile(Buffer.from('my bytes'), 'file') });
-await client.apps.deploy({ file: await toFile(new Uint8Array([0, 1, 2]), 'file') });
+await client.apps.deploy({
+  entrypointRelPath: 'app.py',
+  file: await toFile(Buffer.from('my bytes'), 'file'),
+});
+await client.apps.deploy({
+  entrypointRelPath: 'app.py',
+  file: await toFile(new Uint8Array([0, 1, 2]), 'file'),
+});
 ```
 
 ## Handling errors
@@ -101,7 +112,7 @@ a subclass of `APIError` will be thrown:
 ```ts
 async function main() {
   const response = await client.apps
-    .deploy({ file: fs.createReadStream('path/to/file'), version: 'REPLACE_ME' })
+    .deploy({ entrypointRelPath: 'app.py', file: fs.createReadStream('path/to/file'), version: 'REPLACE_ME' })
     .catch(async (err) => {
       if (err instanceof Kernel.APIError) {
         console.log(err.status); // 400
@@ -145,7 +156,7 @@ const client = new Kernel({
 });
 
 // Or, configure per-request:
-await client.apps.deploy({ file: fs.createReadStream('path/to/file'), version: 'REPLACE_ME' }, {
+await client.apps.deploy({ entrypointRelPath: 'app.py', file: fs.createReadStream('path/to/file'), version: 'REPLACE_ME' }, {
   maxRetries: 5,
 });
 ```
@@ -162,7 +173,7 @@ const client = new Kernel({
 });
 
 // Override per-request:
-await client.apps.deploy({ file: fs.createReadStream('path/to/file'), version: 'REPLACE_ME' }, {
+await client.apps.deploy({ entrypointRelPath: 'app.py', file: fs.createReadStream('path/to/file'), version: 'REPLACE_ME' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -186,13 +197,13 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 const client = new Kernel();
 
 const response = await client.apps
-  .deploy({ file: fs.createReadStream('path/to/file'), version: 'REPLACE_ME' })
+  .deploy({ entrypointRelPath: 'app.py', file: fs.createReadStream('path/to/file'), version: 'REPLACE_ME' })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: response, response: raw } = await client.apps
-  .deploy({ file: fs.createReadStream('path/to/file'), version: 'REPLACE_ME' })
+  .deploy({ entrypointRelPath: 'app.py', file: fs.createReadStream('path/to/file'), version: 'REPLACE_ME' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(response.apps);
