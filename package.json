@@ -1,6 +1,6 @@
 {
   "name": "@onkernel/sdk",
-  "version": "0.1.0-alpha.9",
+  "version": "0.1.0-alpha.10",
   "description": "The official TypeScript library for the Kernel API",
   "author": "Kernel <>",
   "types": "dist/index.d.ts",
@@ -68,8 +68,5 @@
       "import": "./dist/*.mjs",
       "require": "./dist/*.js"
     }
-  },
-  "engines": {
-    "node": ">= 20"
   }
 }
