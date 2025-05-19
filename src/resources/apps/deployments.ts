@@ -2,9 +2,12 @@
 
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
+import { Stream } from '../../core/streaming';
 import { type Uploadable } from '../../core/uploads';
+import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { multipartFormRequestOptions } from '../../internal/uploads';
+import { path } from '../../internal/utils/path';
 
 export class Deployments extends APIResource {
   /**
@@ -20,6 +23,24 @@ export class Deployments extends APIResource {
    */
   create(body: DeploymentCreateParams, options?: RequestOptions): APIPromise<DeploymentCreateResponse> {
     return this._client.post('/deploy', multipartFormRequestOptions({ body, ...options }, this._client));
+  }
+
+  /**
+   * Establishes a Server-Sent Events (SSE) stream that delivers real-time logs and
+   * status updates for a deployed application. The stream terminates automatically
+   * once the application reaches a terminal state.
+   *
+   * @example
+   * ```ts
+   * const response = await client.apps.deployments.follow('id');
+   * ```
+   */
+  follow(id: string, options?: RequestOptions): APIPromise<Stream<DeploymentFollowResponse>> {
+    return this._client.get(path`/apps/${id}/events`, {
+      ...options,
+      headers: buildHeaders([{ Accept: 'text/event-stream' }, options?.headers]),
+      stream: true,
+    }) as APIPromise<Stream<DeploymentFollowResponse>>;
   }
 }
 
@@ -68,6 +89,77 @@ export namespace DeploymentCreateResponse {
   }
 }
 
+/**
+ * A stream of application events (state updates and logs) in SSE format.
+ */
+export type DeploymentFollowResponse = Array<
+  | DeploymentFollowResponse.StateEvent
+  | DeploymentFollowResponse.StateUpdateEvent
+  | DeploymentFollowResponse.LogEvent
+>;
+
+export namespace DeploymentFollowResponse {
+  /**
+   * Initial state of the application, emitted once when subscribing.
+   */
+  export interface StateEvent {
+    /**
+     * Event type identifier (always "state").
+     */
+    event: 'state';
+
+    /**
+     * Current application state (e.g., "deploying", "running", "succeeded", "failed").
+     */
+    state: string;
+
+    /**
+     * Time the state was reported.
+     */
+    timestamp?: string;
+  }
+
+  /**
+   * An update emitted when the application's state changes.
+   */
+  export interface StateUpdateEvent {
+    /**
+     * Event type identifier (always "state_update").
+     */
+    event: 'state_update';
+
+    /**
+     * New application state (e.g., "running", "succeeded", "failed").
+     */
+    state: string;
+
+    /**
+     * Time the state change occurred.
+     */
+    timestamp?: string;
+  }
+
+  /**
+   * A log entry from the application.
+   */
+  export interface LogEvent {
+    /**
+     * Event type identifier (always "log").
+     */
+    event: 'log';
+
+    /**
+     * Log message text.
+     */
+    message: string;
+
+    /**
+     * Time the log entry was produced.
+     */
+    timestamp?: string;
+  }
+}
+
 export interface DeploymentCreateParams {
   /**
    * Relative path to the entrypoint of the application
@@ -104,6 +196,7 @@ export interface DeploymentCreateParams {
 export declare namespace Deployments {
   export {
     type DeploymentCreateResponse as DeploymentCreateResponse,
+    type DeploymentFollowResponse as DeploymentFollowResponse,
     type DeploymentCreateParams as DeploymentCreateParams,
   };
 }

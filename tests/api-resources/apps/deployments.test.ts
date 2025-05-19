@@ -34,4 +34,16 @@ describe('resource deployments', () => {
       version: '1.0.0',
     });
   });
+
+  // skipped: currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail
+  test.skip('follow', async () => {
+    const responsePromise = client.apps.deployments.follow('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
 });

@@ -1,5 +1,5 @@
 export interface KernelContext {
-  invocationId: string;
+  invocation_id: string;
 }
 
 export interface KernelAction {
