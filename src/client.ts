@@ -21,17 +21,15 @@ import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
 import {
-  AppDeployParams,
-  AppDeployResponse,
-  AppInvokeParams,
-  AppInvokeResponse,
-  AppRetrieveInvocationResponse,
-  Apps,
-} from './resources/apps';
-import { Browser, BrowserCreateSessionParams, BrowserCreateSessionResponse } from './resources/browser';
+  BrowserCreateParams,
+  BrowserCreateResponse,
+  BrowserRetrieveResponse,
+  Browsers,
+} from './resources/browsers';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
+import { Apps } from './resources/apps/apps';
 
 const environments = {
   production: 'https://api.onkernel.com/',
@@ -724,25 +722,19 @@ export class Kernel {
   static toFile = Uploads.toFile;
 
   apps: API.Apps = new API.Apps(this);
-  browser: API.Browser = new API.Browser(this);
+  browsers: API.Browsers = new API.Browsers(this);
 }
 Kernel.Apps = Apps;
-Kernel.Browser = Browser;
+Kernel.Browsers = Browsers;
 export declare namespace Kernel {
   export type RequestOptions = Opts.RequestOptions;
 
-  export {
-    Apps as Apps,
-    type AppDeployResponse as AppDeployResponse,
-    type AppInvokeResponse as AppInvokeResponse,
-    type AppRetrieveInvocationResponse as AppRetrieveInvocationResponse,
-    type AppDeployParams as AppDeployParams,
-    type AppInvokeParams as AppInvokeParams,
-  };
+  export { Apps as Apps };
 
   export {
-    Browser as Browser,
-    type BrowserCreateSessionResponse as BrowserCreateSessionResponse,
-    type BrowserCreateSessionParams as BrowserCreateSessionParams,
+    Browsers as Browsers,
+    type BrowserCreateResponse as BrowserCreateResponse,
+    type BrowserRetrieveResponse as BrowserRetrieveResponse,
+    type BrowserCreateParams as BrowserCreateParams,
   };
 }
