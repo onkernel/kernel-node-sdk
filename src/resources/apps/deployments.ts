@@ -80,6 +80,12 @@ export interface DeploymentCreateParams {
   file: Uploadable;
 
   /**
+   * Map of environment variables to set for the deployed application. Each key-value
+   * pair represents an environment variable.
+   */
+  env_vars?: Record<string, string>;
+
+  /**
    * Allow overwriting an existing app version
    */
   force?: boolean;

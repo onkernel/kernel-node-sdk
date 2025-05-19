@@ -28,6 +28,7 @@ describe('resource deployments', () => {
     const response = await client.apps.deployments.create({
       entrypoint_rel_path: 'src/app.py',
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      env_vars: { foo: 'string' },
       force: false,
       region: 'aws.us-east-1a',
       version: '1.0.0',
