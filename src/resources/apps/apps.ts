@@ -2,7 +2,12 @@
 
 import { APIResource } from '../../core/resource';
 import * as DeploymentsAPI from './deployments';
-import { DeploymentCreateParams, DeploymentCreateResponse, Deployments } from './deployments';
+import {
+  DeploymentCreateParams,
+  DeploymentCreateResponse,
+  DeploymentFollowResponse,
+  Deployments,
+} from './deployments';
 import * as InvocationsAPI from './invocations';
 import {
   InvocationCreateParams,
@@ -23,6 +28,7 @@ export declare namespace Apps {
   export {
     Deployments as Deployments,
     type DeploymentCreateResponse as DeploymentCreateResponse,
+    type DeploymentFollowResponse as DeploymentFollowResponse,
     type DeploymentCreateParams as DeploymentCreateParams,
   };
 
