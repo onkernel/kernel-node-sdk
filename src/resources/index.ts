@@ -1,11 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { Apps } from './apps/apps';
 export {
-  Apps,
-  type AppDeployResponse,
-  type AppInvokeResponse,
-  type AppRetrieveInvocationResponse,
-  type AppDeployParams,
-  type AppInvokeParams,
-} from './apps';
-export { Browser, type BrowserCreateSessionResponse, type BrowserCreateSessionParams } from './browser';
+  Browsers,
+  type BrowserCreateResponse,
+  type BrowserRetrieveResponse,
+  type BrowserCreateParams,
+} from './browsers';

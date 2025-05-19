@@ -28,13 +28,13 @@ const client = new Kernel({
 });
 
 async function main() {
-  const response = await client.apps.deploy({
-    entrypointRelPath: 'app.py',
+  const deployment = await client.apps.deployments.create({
+    entrypoint_rel_path: 'main.ts',
     file: fs.createReadStream('path/to/file'),
-    version: 'REPLACE_ME',
+    version: '1.0.0',
   });
 
-  console.log(response.apps);
+  console.log(deployment.apps);
 }
 
 main();
@@ -54,12 +54,8 @@ const client = new Kernel({
 });
 
 async function main() {
-  const params: Kernel.AppDeployParams = {
-    entrypointRelPath: 'app.py',
-    file: fs.createReadStream('path/to/file'),
-    version: 'REPLACE_ME',
-  };
-  const response: Kernel.AppDeployResponse = await client.apps.deploy(params);
+  const params: Kernel.BrowserCreateParams = { invocation_id: 'REPLACE_ME' };
+  const browser: Kernel.BrowserCreateResponse = await client.browsers.create(params);
 }
 
 main();
@@ -83,21 +79,30 @@ import Kernel, { toFile } from '@onkernel/sdk';
 const client = new Kernel();
 
 // If you have access to Node `fs` we recommend using `fs.createReadStream()`:
-await client.apps.deploy({ entrypointRelPath: 'app.py', file: fs.createReadStream('/path/to/file') });
+await client.apps.deployments.create({
+  entrypoint_rel_path: 'src/app.py',
+  file: fs.createReadStream('/path/to/file'),
+});
 
 // Or if you have the web `File` API you can pass a `File` instance:
-await client.apps.deploy({ entrypointRelPath: 'app.py', file: new File(['my bytes'], 'file') });
+await client.apps.deployments.create({
+  entrypoint_rel_path: 'src/app.py',
+  file: new File(['my bytes'], 'file'),
+});
 
 // You can also pass a `fetch` `Response`:
-await client.apps.deploy({ entrypointRelPath: 'app.py', file: await fetch('https://somesite/file') });
+await client.apps.deployments.create({
+  entrypoint_rel_path: 'src/app.py',
+  file: await fetch('https://somesite/file'),
+});
 
 // Finally, if none of the above are convenient, you can use our `toFile` helper:
-await client.apps.deploy({
-  entrypointRelPath: 'app.py',
+await client.apps.deployments.create({
+  entrypoint_rel_path: 'src/app.py',
   file: await toFile(Buffer.from('my bytes'), 'file'),
 });
-await client.apps.deploy({
-  entrypointRelPath: 'app.py',
+await client.apps.deployments.create({
+  entrypoint_rel_path: 'src/app.py',
   file: await toFile(new Uint8Array([0, 1, 2]), 'file'),
 });
 ```
@@ -111,17 +116,15 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const response = await client.apps
-    .deploy({ entrypointRelPath: 'app.py', file: fs.createReadStream('path/to/file'), version: 'REPLACE_ME' })
-    .catch(async (err) => {
-      if (err instanceof Kernel.APIError) {
-        console.log(err.status); // 400
-        console.log(err.name); // BadRequestError
-        console.log(err.headers); // {server: 'nginx', ...}
-      } else {
-        throw err;
-      }
-    });
+  const browser = await client.browsers.create({ invocation_id: 'REPLACE_ME' }).catch(async (err) => {
+    if (err instanceof Kernel.APIError) {
+      console.log(err.status); // 400
+      console.log(err.name); // BadRequestError
+      console.log(err.headers); // {server: 'nginx', ...}
+    } else {
+      throw err;
+    }
+  });
 }
 
 main();
@@ -156,7 +159,7 @@ const client = new Kernel({
 });
 
 // Or, configure per-request:
-await client.apps.deploy({ entrypointRelPath: 'app.py', file: fs.createReadStream('path/to/file'), version: 'REPLACE_ME' }, {
+await client.browsers.create({ invocation_id: 'REPLACE_ME' }, {
   maxRetries: 5,
 });
 ```
@@ -173,7 +176,7 @@ const client = new Kernel({
 });
 
 // Override per-request:
-await client.apps.deploy({ entrypointRelPath: 'app.py', file: fs.createReadStream('path/to/file'), version: 'REPLACE_ME' }, {
+await client.browsers.create({ invocation_id: 'REPLACE_ME' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -196,17 +199,15 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Kernel();
 
-const response = await client.apps
-  .deploy({ entrypointRelPath: 'app.py', file: fs.createReadStream('path/to/file'), version: 'REPLACE_ME' })
-  .asResponse();
+const response = await client.browsers.create({ invocation_id: 'REPLACE_ME' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.apps
-  .deploy({ entrypointRelPath: 'app.py', file: fs.createReadStream('path/to/file'), version: 'REPLACE_ME' })
+const { data: browser, response: raw } = await client.browsers
+  .create({ invocation_id: 'REPLACE_ME' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(response.apps);
+console.log(browser.session_id);
 ```
 
 ### Logging
