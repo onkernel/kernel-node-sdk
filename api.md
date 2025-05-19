@@ -5,10 +5,12 @@
 Types:
 
 - <code><a href="./src/resources/apps/deployments.ts">DeploymentCreateResponse</a></code>
+- <code><a href="./src/resources/apps/deployments.ts">DeploymentFollowResponse</a></code>
 
 Methods:
 
 - <code title="post /deploy">client.apps.deployments.<a href="./src/resources/apps/deployments.ts">create</a>({ ...params }) -> DeploymentCreateResponse</code>
+- <code title="get /apps/{id}/events">client.apps.deployments.<a href="./src/resources/apps/deployments.ts">follow</a>(id) -> DeploymentFollowResponse</code>
 
 ## Invocations
 
