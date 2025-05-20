@@ -30,7 +30,7 @@ import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
 import { KernelApp } from './core/app-framework';
-import { AppListParams, AppListResponse, Apps } from './resources/apps/apps';
+import { Apps } from './resources/apps/apps';
 
 const environments = {
   production: 'https://api.onkernel.com/',
@@ -740,7 +740,7 @@ Kernel.Browsers = Browsers;
 export declare namespace Kernel {
   export type RequestOptions = Opts.RequestOptions;
 
-  export { Apps as Apps, type AppListResponse as AppListResponse, type AppListParams as AppListParams };
+  export { Apps as Apps };
 
   export {
     Browsers as Browsers,
