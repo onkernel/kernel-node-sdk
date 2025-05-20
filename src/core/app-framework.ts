@@ -4,7 +4,7 @@ export interface KernelContext {
 
 export interface KernelAction {
   name: string;
-  handler: (context: KernelContext, input: any) => Promise<any>;
+  handler: (context: KernelContext, payload?: any) => Promise<any>;
 }
 
 export interface KernelJson {
@@ -34,45 +34,28 @@ export class KernelApp {
    * Define an action
    */
   action<T, R>(
-    nameOrHandler: string | ((input: T) => Promise<R>) | ((context: KernelContext, input: T) => Promise<R>),
-    handler?: ((input: T) => Promise<R>) | ((context: KernelContext, input: T) => Promise<R>),
+    name: string,
+    handler: ((context: KernelContext) => Promise<R>) | ((context: KernelContext, payload?: T) => Promise<R>),
   ) {
-    let actionName: string;
-    let actionHandler: (context: KernelContext, input: T) => Promise<R>;
+    let actionHandler: (context: KernelContext, payload?: T) => Promise<R>;
 
-    if (typeof nameOrHandler === 'string' && handler) {
-      // Case: app.action("name", handler)
-      actionName = nameOrHandler;
-
-      // Create a handler that accepts context and input, adapting if needed
-      if (handler.length === 1) {
-        // Original handler only takes input, so we adapt it to the new signature
-        const singleArgHandler = handler as (input: T) => Promise<R>;
-        actionHandler = async (context: KernelContext, input: T) => singleArgHandler(input);
-      } else {
-        // Handler takes both context and input
-        actionHandler = handler as (context: KernelContext, input: T) => Promise<R>;
-      }
-    } else if (typeof nameOrHandler === 'function') {
-      // Case: app.action(handler)
-      actionName = nameOrHandler.name || 'default';
-
-      // Create a handler that accepts context and input, adapting if needed
-      if (nameOrHandler.length === 1) {
-        // Original handler only takes input, so we adapt it to the new signature
-        const singleArgHandler = nameOrHandler as (input: T) => Promise<R>;
-        actionHandler = async (context: KernelContext, input: T) => singleArgHandler(input);
-      } else {
-        // Handler takes both context and input
-        actionHandler = nameOrHandler as (context: KernelContext, input: T) => Promise<R>;
-      }
+    // Create a handler that accepts context and payload, adapting if needed
+    if (handler.length === 0) {
+      // Handlers with no arguments are not supported
+      throw new Error('Action handlers must accept at least the context parameter');
+    } else if (handler.length === 1) {
+      // Handler takes context only
+      const contextOnlyHandler = handler as (context: KernelContext) => Promise<R>;
+      actionHandler = async (context: KernelContext, _payload?: T) => contextOnlyHandler(context);
     } else {
-      throw new Error('Invalid action definition');
+      // Handler takes both context and payload
+      const twoArgHandler = handler as (context: KernelContext, payload?: T) => Promise<R>;
+      actionHandler = twoArgHandler;
     }
 
     // Register the action
-    this.actions.set(actionName, {
-      name: actionName,
+    this.actions.set(name, {
+      name,
       handler: actionHandler,
     });
 
