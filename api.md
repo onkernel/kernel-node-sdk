@@ -1,5 +1,13 @@
 # Apps
 
+Types:
+
+- <code><a href="./src/resources/apps/apps.ts">AppListResponse</a></code>
+
+Methods:
+
+- <code title="get /apps">client.apps.<a href="./src/resources/apps/apps.ts">list</a>({ ...params }) -> AppListResponse</code>
+
 ## Deployments
 
 Types:
