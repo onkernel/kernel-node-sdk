@@ -90,13 +90,13 @@ export namespace DeploymentCreateResponse {
 }
 
 /**
- * A stream of application events (state updates and logs) in SSE format.
+ * Union type representing any application event. Actual schema is determined by
+ * the 'event' field.
  */
-export type DeploymentFollowResponse = Array<
+export type DeploymentFollowResponse =
   | DeploymentFollowResponse.StateEvent
   | DeploymentFollowResponse.StateUpdateEvent
-  | DeploymentFollowResponse.LogEvent
->;
+  | DeploymentFollowResponse.LogEvent;
 
 export namespace DeploymentFollowResponse {
   /**
