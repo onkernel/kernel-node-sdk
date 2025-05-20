@@ -18,7 +18,7 @@ Types:
 Methods:
 
 - <code title="post /deploy">client.apps.deployments.<a href="./src/resources/apps/deployments.ts">create</a>({ ...params }) -> DeploymentCreateResponse</code>
-- <code title="get /apps/{id}/events">client.apps.deployments.<a href="./src/resources/apps/deployments.ts">follow</a>(id) -> unknown</code>
+- <code title="get /apps/{id}/events">client.apps.deployments.<a href="./src/resources/apps/deployments.ts">follow</a>(id) -> DeploymentFollowResponse</code>
 
 ## Invocations
 
