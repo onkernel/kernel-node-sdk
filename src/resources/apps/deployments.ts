@@ -92,73 +92,7 @@ export namespace DeploymentCreateResponse {
 /**
  * A stream of application events (state updates and logs) in SSE format.
  */
-export type DeploymentFollowResponse = Array<
-  | DeploymentFollowResponse.StateEvent
-  | DeploymentFollowResponse.StateUpdateEvent
-  | DeploymentFollowResponse.LogEvent
->;
-
-export namespace DeploymentFollowResponse {
-  /**
-   * Initial state of the application, emitted once when subscribing.
-   */
-  export interface StateEvent {
-    /**
-     * Event type identifier (always "state").
-     */
-    event: 'state';
-
-    /**
-     * Current application state (e.g., "deploying", "running", "succeeded", "failed").
-     */
-    state: string;
-
-    /**
-     * Time the state was reported.
-     */
-    timestamp?: string;
-  }
-
-  /**
-   * An update emitted when the application's state changes.
-   */
-  export interface StateUpdateEvent {
-    /**
-     * Event type identifier (always "state_update").
-     */
-    event: 'state_update';
-
-    /**
-     * New application state (e.g., "running", "succeeded", "failed").
-     */
-    state: string;
-
-    /**
-     * Time the state change occurred.
-     */
-    timestamp?: string;
-  }
-
-  /**
-   * A log entry from the application.
-   */
-  export interface LogEvent {
-    /**
-     * Event type identifier (always "log").
-     */
-    event: 'log';
-
-    /**
-     * Log message text.
-     */
-    message: string;
-
-    /**
-     * Time the log entry was produced.
-     */
-    timestamp?: string;
-  }
-}
+export type DeploymentFollowResponse = unknown;
 
 export interface DeploymentCreateParams {
   /**
