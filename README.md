@@ -31,7 +31,7 @@ async function main() {
   const deployment = await client.apps.deployments.create({
     entrypoint_rel_path: 'main.ts',
     file: fs.createReadStream('path/to/file'),
-    env_vars: { OPENAI_API_KEY: 'x' },
+    env_vars: { OPENAI_API_KEY: 'x', LOG_LEVEL: 'debug' },
     version: '1.0.0',
   });
 
