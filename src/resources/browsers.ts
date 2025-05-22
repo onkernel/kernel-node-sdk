@@ -14,7 +14,7 @@ export class Browsers extends APIResource {
    * @example
    * ```ts
    * const browser = await client.browsers.create({
-   *   invocation_id: 'ckqwer3o20000jb9s7abcdef',
+   *   invocation_id: 'rr33xuugxj9h0bkf1rdt2bet',
    * });
    * ```
    */
@@ -28,7 +28,7 @@ export class Browsers extends APIResource {
    * @example
    * ```ts
    * const browser = await client.browsers.retrieve(
-   *   'e5bf36fe-9247-4e2b-8b5a-2f594cc1c073',
+   *   'htzv5orfit78e1m2biiifpbv',
    * );
    * ```
    */
@@ -73,7 +73,7 @@ export class Browsers extends APIResource {
    * @example
    * ```ts
    * await client.browsers.deleteByID(
-   *   'e5bf36fe-9247-4e2b-8b5a-2f594cc1c073',
+   *   'htzv5orfit78e1m2biiifpbv',
    * );
    * ```
    */
