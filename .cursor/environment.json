@@ -1,0 +1,5 @@
+{
+  "snapshot": "snapshot-20250522-bd1c3d88-262b-44dc-bd01-cb8e8b262337",
+  "install": "export GOPRIVATE=github.com/onkernel/kernel-go-sdk;\n\n/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"\n",
+  "terminals": []
+}
