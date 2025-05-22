@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.3.0 (2025-05-22)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **api:** update via SDK Studio ([4203ce6](https://github.com/onkernel/kernel-node-sdk/commit/4203ce6729274b73b8cfec048b149405098a0295))
+* **api:** update via SDK Studio ([17ea405](https://github.com/onkernel/kernel-node-sdk/commit/17ea40587b26c15bf6d2fb8ac7521d6a635bad9c))
+* **api:** update via SDK Studio ([f8bf6c3](https://github.com/onkernel/kernel-node-sdk/commit/f8bf6c3b395a702ecdfe6f1517416bdeadf0b726))
+* **api:** update via SDK Studio ([4164908](https://github.com/onkernel/kernel-node-sdk/commit/416490808559874428ef93270296235a8eaeb046))
+
+
+### Chores
+
+* **docs:** grammar improvements ([b07afdd](https://github.com/onkernel/kernel-node-sdk/commit/b07afdd965c35a2eafc2c3604cec0c0bd76d8abd))
+
 ## 0.2.0 (2025-05-21)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.1.0...v0.2.0)
