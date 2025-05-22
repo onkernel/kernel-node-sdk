@@ -50,6 +50,23 @@ export interface BrowserCreateResponse {
    * Unique identifier for the browser session
    */
   session_id: string;
+
+  /**
+   * Optional persistence configuration for the browser session.
+   */
+  persistence?: BrowserCreateResponse.Persistence;
+}
+
+export namespace BrowserCreateResponse {
+  /**
+   * Optional persistence configuration for the browser session.
+   */
+  export interface Persistence {
+    /**
+     * Unique identifier for the persistent browser session.
+     */
+    id: string;
+  }
 }
 
 export interface BrowserRetrieveResponse {
@@ -67,6 +84,23 @@ export interface BrowserRetrieveResponse {
    * Unique identifier for the browser session
    */
   session_id: string;
+
+  /**
+   * Optional persistence configuration for the browser session.
+   */
+  persistence?: BrowserRetrieveResponse.Persistence;
+}
+
+export namespace BrowserRetrieveResponse {
+  /**
+   * Optional persistence configuration for the browser session.
+   */
+  export interface Persistence {
+    /**
+     * Unique identifier for the persistent browser session.
+     */
+    id: string;
+  }
 }
 
 export interface BrowserCreateParams {
@@ -74,6 +108,23 @@ export interface BrowserCreateParams {
    * action invocation ID
    */
   invocation_id: string;
+
+  /**
+   * Optional persistence configuration for the browser session.
+   */
+  persistence?: BrowserCreateParams.Persistence;
+}
+
+export namespace BrowserCreateParams {
+  /**
+   * Optional persistence configuration for the browser session.
+   */
+  export interface Persistence {
+    /**
+     * Unique identifier for the persistent browser session.
+     */
+    id: string;
+  }
 }
 
 export declare namespace Browsers {
