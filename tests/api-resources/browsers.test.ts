@@ -10,7 +10,7 @@ const client = new Kernel({
 describe('resource browsers', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: only required params', async () => {
-    const responsePromise = client.browsers.create({ invocation_id: 'ckqwer3o20000jb9s7abcdef' });
+    const responsePromise = client.browsers.create({ invocation_id: 'rr33xuugxj9h0bkf1rdt2bet' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,14 +23,14 @@ describe('resource browsers', () => {
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
     const response = await client.browsers.create({
-      invocation_id: 'ckqwer3o20000jb9s7abcdef',
-      persistence: { id: 'my-shared-browser' },
+      invocation_id: 'rr33xuugxj9h0bkf1rdt2bet',
+      persistence: { id: 'my-awesome-browser-for-user-1234' },
     });
   });
 
   // skipped: tests are disabled for the time being
   test.skip('retrieve', async () => {
-    const responsePromise = client.browsers.retrieve('e5bf36fe-9247-4e2b-8b5a-2f594cc1c073');
+    const responsePromise = client.browsers.retrieve('htzv5orfit78e1m2biiifpbv');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -71,7 +71,7 @@ describe('resource browsers', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('deleteByID', async () => {
-    const responsePromise = client.browsers.deleteByID('e5bf36fe-9247-4e2b-8b5a-2f594cc1c073');
+    const responsePromise = client.browsers.deleteByID('htzv5orfit78e1m2biiifpbv');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
