@@ -36,10 +36,15 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/browsers.ts">BrowserPersistence</a></code>
 - <code><a href="./src/resources/browsers.ts">BrowserCreateResponse</a></code>
 - <code><a href="./src/resources/browsers.ts">BrowserRetrieveResponse</a></code>
+- <code><a href="./src/resources/browsers.ts">BrowserListResponse</a></code>
 
 Methods:
 
 - <code title="post /browsers">client.browsers.<a href="./src/resources/browsers.ts">create</a>({ ...params }) -> BrowserCreateResponse</code>
 - <code title="get /browsers/{id}">client.browsers.<a href="./src/resources/browsers.ts">retrieve</a>(id) -> BrowserRetrieveResponse</code>
+- <code title="get /browsers">client.browsers.<a href="./src/resources/browsers.ts">list</a>() -> BrowserListResponse</code>
+- <code title="delete /browsers">client.browsers.<a href="./src/resources/browsers.ts">delete</a>({ ...params }) -> void</code>
+- <code title="delete /browsers/{id}">client.browsers.<a href="./src/resources/browsers.ts">deleteByID</a>(id) -> void</code>

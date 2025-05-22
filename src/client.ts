@@ -23,6 +23,9 @@ import { FinalRequestOptions, RequestOptions } from './internal/request-options'
 import {
   BrowserCreateParams,
   BrowserCreateResponse,
+  BrowserDeleteParams,
+  BrowserListResponse,
+  BrowserPersistence,
   BrowserRetrieveResponse,
   Browsers,
 } from './resources/browsers';
@@ -733,8 +736,11 @@ export declare namespace Kernel {
 
   export {
     Browsers as Browsers,
+    type BrowserPersistence as BrowserPersistence,
     type BrowserCreateResponse as BrowserCreateResponse,
     type BrowserRetrieveResponse as BrowserRetrieveResponse,
+    type BrowserListResponse as BrowserListResponse,
     type BrowserCreateParams as BrowserCreateParams,
+    type BrowserDeleteParams as BrowserDeleteParams,
   };
 }
