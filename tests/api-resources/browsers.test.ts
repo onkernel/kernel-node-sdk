@@ -22,7 +22,10 @@ describe('resource browsers', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('create: required and optional params', async () => {
-    const response = await client.browsers.create({ invocation_id: 'ckqwer3o20000jb9s7abcdef' });
+    const response = await client.browsers.create({
+      invocation_id: 'ckqwer3o20000jb9s7abcdef',
+      persistence: { id: 'my-shared-browser' },
+    });
   });
 
   // skipped: tests are disabled for the time being
