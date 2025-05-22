@@ -28,7 +28,7 @@ export class Invocations extends APIResource {
    * @example
    * ```ts
    * const invocation = await client.apps.invocations.retrieve(
-   *   'ckqwer3o20000jb9s7abcdef',
+   *   'rr33xuugxj9h0bkf1rdt2bet',
    * );
    * ```
    */

@@ -1,7 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as BrowsersAPI from './browsers';
 import { APIPromise } from '../core/api-promise';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -12,7 +14,7 @@ export class Browsers extends APIResource {
    * @example
    * ```ts
    * const browser = await client.browsers.create({
-   *   invocation_id: 'ckqwer3o20000jb9s7abcdef',
+   *   invocation_id: 'rr33xuugxj9h0bkf1rdt2bet',
    * });
    * ```
    */
@@ -26,13 +28,71 @@ export class Browsers extends APIResource {
    * @example
    * ```ts
    * const browser = await client.browsers.retrieve(
-   *   'e5bf36fe-9247-4e2b-8b5a-2f594cc1c073',
+   *   'htzv5orfit78e1m2biiifpbv',
    * );
    * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<BrowserRetrieveResponse> {
     return this._client.get(path`/browsers/${id}`, options);
   }
+
+  /**
+   * List active browser sessions for the authenticated user
+   *
+   * @example
+   * ```ts
+   * const browsers = await client.browsers.list();
+   * ```
+   */
+  list(options?: RequestOptions): APIPromise<BrowserListResponse> {
+    return this._client.get('/browsers', options);
+  }
+
+  /**
+   * Delete a persistent browser session by persistent_id query parameter.
+   *
+   * @example
+   * ```ts
+   * await client.browsers.delete({
+   *   persistent_id: 'persistent_id',
+   * });
+   * ```
+   */
+  delete(params: BrowserDeleteParams, options?: RequestOptions): APIPromise<void> {
+    const { persistent_id } = params;
+    return this._client.delete('/browsers', {
+      query: { persistent_id },
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Delete Browser Session by ID
+   *
+   * @example
+   * ```ts
+   * await client.browsers.deleteByID(
+   *   'htzv5orfit78e1m2biiifpbv',
+   * );
+   * ```
+   */
+  deleteByID(id: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/browsers/${id}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+}
+
+/**
+ * Optional persistence configuration for the browser session.
+ */
+export interface BrowserPersistence {
+  /**
+   * Unique identifier for the persistent browser session.
+   */
+  id: string;
 }
 
 export interface BrowserCreateResponse {
@@ -50,6 +110,11 @@ export interface BrowserCreateResponse {
    * Unique identifier for the browser session
    */
   session_id: string;
+
+  /**
+   * Optional persistence configuration for the browser session.
+   */
+  persistence?: BrowserPersistence;
 }
 
 export interface BrowserRetrieveResponse {
@@ -67,6 +132,37 @@ export interface BrowserRetrieveResponse {
    * Unique identifier for the browser session
    */
   session_id: string;
+
+  /**
+   * Optional persistence configuration for the browser session.
+   */
+  persistence?: BrowserPersistence;
+}
+
+export type BrowserListResponse = Array<BrowserListResponse.BrowserListResponseItem>;
+
+export namespace BrowserListResponse {
+  export interface BrowserListResponseItem {
+    /**
+     * Remote URL for live viewing the browser session
+     */
+    browser_live_view_url: string;
+
+    /**
+     * Websocket URL for Chrome DevTools Protocol connections to the browser session
+     */
+    cdp_ws_url: string;
+
+    /**
+     * Unique identifier for the browser session
+     */
+    session_id: string;
+
+    /**
+     * Optional persistence configuration for the browser session.
+     */
+    persistence?: BrowsersAPI.BrowserPersistence;
+  }
 }
 
 export interface BrowserCreateParams {
@@ -74,12 +170,27 @@ export interface BrowserCreateParams {
    * action invocation ID
    */
   invocation_id: string;
+
+  /**
+   * Optional persistence configuration for the browser session.
+   */
+  persistence?: BrowserPersistence;
+}
+
+export interface BrowserDeleteParams {
+  /**
+   * Persistent browser identifier
+   */
+  persistent_id: string;
 }
 
 export declare namespace Browsers {
   export {
+    type BrowserPersistence as BrowserPersistence,
     type BrowserCreateResponse as BrowserCreateResponse,
     type BrowserRetrieveResponse as BrowserRetrieveResponse,
+    type BrowserListResponse as BrowserListResponse,
     type BrowserCreateParams as BrowserCreateParams,
+    type BrowserDeleteParams as BrowserDeleteParams,
   };
 }

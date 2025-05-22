@@ -55,7 +55,10 @@ const client = new Kernel({
 });
 
 async function main() {
-  const params: Kernel.BrowserCreateParams = { invocation_id: 'REPLACE_ME' };
+  const params: Kernel.BrowserCreateParams = {
+    invocation_id: 'REPLACE_ME',
+    persistence: { id: 'browser-for-user-1234' },
+  };
   const browser: Kernel.BrowserCreateResponse = await client.browsers.create(params);
 }
 
@@ -117,15 +120,17 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const browser = await client.browsers.create({ invocation_id: 'REPLACE_ME' }).catch(async (err) => {
-    if (err instanceof Kernel.APIError) {
-      console.log(err.status); // 400
-      console.log(err.name); // BadRequestError
-      console.log(err.headers); // {server: 'nginx', ...}
-    } else {
-      throw err;
-    }
-  });
+  const browser = await client.browsers
+    .create({ invocation_id: 'REPLACE_ME', persistence: { id: 'browser-for-user-1234' } })
+    .catch(async (err) => {
+      if (err instanceof Kernel.APIError) {
+        console.log(err.status); // 400
+        console.log(err.name); // BadRequestError
+        console.log(err.headers); // {server: 'nginx', ...}
+      } else {
+        throw err;
+      }
+    });
 }
 
 main();
@@ -160,7 +165,7 @@ const client = new Kernel({
 });
 
 // Or, configure per-request:
-await client.browsers.create({ invocation_id: 'REPLACE_ME' }, {
+await client.browsers.create({ invocation_id: 'REPLACE_ME', persistence: { id: 'browser-for-user-1234' } }, {
   maxRetries: 5,
 });
 ```
@@ -177,7 +182,7 @@ const client = new Kernel({
 });
 
 // Override per-request:
-await client.browsers.create({ invocation_id: 'REPLACE_ME' }, {
+await client.browsers.create({ invocation_id: 'REPLACE_ME', persistence: { id: 'browser-for-user-1234' } }, {
   timeout: 5 * 1000,
 });
 ```
@@ -200,12 +205,14 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Kernel();
 
-const response = await client.browsers.create({ invocation_id: 'REPLACE_ME' }).asResponse();
+const response = await client.browsers
+  .create({ invocation_id: 'REPLACE_ME', persistence: { id: 'browser-for-user-1234' } })
+  .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: browser, response: raw } = await client.browsers
-  .create({ invocation_id: 'REPLACE_ME' })
+  .create({ invocation_id: 'REPLACE_ME', persistence: { id: 'browser-for-user-1234' } })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(browser.session_id);

@@ -36,7 +36,7 @@ describe('resource invocations', () => {
 
   // skipped: tests are disabled for the time being
   test.skip('retrieve', async () => {
-    const responsePromise = client.apps.invocations.retrieve('ckqwer3o20000jb9s7abcdef');
+    const responsePromise = client.apps.invocations.retrieve('rr33xuugxj9h0bkf1rdt2bet');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
