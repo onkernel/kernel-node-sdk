@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.0 (2025-05-28)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **api:** update via SDK Studio ([4c5b6b6](https://github.com/onkernel/kernel-node-sdk/commit/4c5b6b6ecf8e34ced647b42dca75c5a2b5deaf87))
+
+
+### Chores
+
+* improve publish-npm script --latest tag logic ([ac1ab4f](https://github.com/onkernel/kernel-node-sdk/commit/ac1ab4f2c79dc4df0b405007e9d64999ce8ed362))
+
 ## 0.3.0 (2025-05-22)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.2.0...v0.3.0)
