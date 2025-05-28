@@ -35,6 +35,25 @@ export class Invocations extends APIResource {
   retrieve(id: string, options?: RequestOptions): APIPromise<InvocationRetrieveResponse> {
     return this._client.get(path`/invocations/${id}`, options);
   }
+
+  /**
+   * Update invocation status or output
+   *
+   * @example
+   * ```ts
+   * const invocation = await client.apps.invocations.update(
+   *   'id',
+   *   { status: 'succeeded' },
+   * );
+   * ```
+   */
+  update(
+    id: string,
+    body: InvocationUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<InvocationUpdateResponse> {
+    return this._client.patch(path`/invocations/${id}`, { body, ...options });
+  }
 }
 
 export interface InvocationCreateResponse {
@@ -109,6 +128,55 @@ export interface InvocationRetrieveResponse {
   status_reason?: string;
 }
 
+export interface InvocationUpdateResponse {
+  /**
+   * ID of the invocation
+   */
+  id: string;
+
+  /**
+   * Name of the action invoked
+   */
+  action_name: string;
+
+  /**
+   * Name of the application
+   */
+  app_name: string;
+
+  /**
+   * RFC 3339 Nanoseconds timestamp when the invocation started
+   */
+  started_at: string;
+
+  /**
+   * Status of the invocation
+   */
+  status: 'queued' | 'running' | 'succeeded' | 'failed';
+
+  /**
+   * RFC 3339 Nanoseconds timestamp when the invocation finished (null if still
+   * running)
+   */
+  finished_at?: string | null;
+
+  /**
+   * Output produced by the action, rendered as a JSON string. This could be: string,
+   * number, boolean, array, object, or null.
+   */
+  output?: string;
+
+  /**
+   * Payload provided to the invocation. This is a string that can be parsed as JSON.
+   */
+  payload?: string;
+
+  /**
+   * Status reason
+   */
+  status_reason?: string;
+}
+
 export interface InvocationCreateParams {
   /**
    * Name of the action to invoke
@@ -126,15 +194,35 @@ export interface InvocationCreateParams {
   version: string;
 
   /**
+   * If true, invoke asynchronously. When set, the API responds 202 Accepted with
+   * status "queued".
+   */
+  async?: boolean;
+
+  /**
    * Input data for the action, sent as a JSON string.
    */
   payload?: string;
+}
+
+export interface InvocationUpdateParams {
+  /**
+   * New status for the invocation.
+   */
+  status: 'succeeded' | 'failed';
+
+  /**
+   * Updated output of the invocation rendered as JSON string.
+   */
+  output?: string;
 }
 
 export declare namespace Invocations {
   export {
     type InvocationCreateResponse as InvocationCreateResponse,
     type InvocationRetrieveResponse as InvocationRetrieveResponse,
+    type InvocationUpdateResponse as InvocationUpdateResponse,
     type InvocationCreateParams as InvocationCreateParams,
+    type InvocationUpdateParams as InvocationUpdateParams,
   };
 }

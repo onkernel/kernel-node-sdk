@@ -11,5 +11,7 @@ export {
   Invocations,
   type InvocationCreateResponse,
   type InvocationRetrieveResponse,
+  type InvocationUpdateResponse,
   type InvocationCreateParams,
+  type InvocationUpdateParams,
 } from './invocations';

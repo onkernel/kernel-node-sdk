@@ -26,11 +26,13 @@ Types:
 
 - <code><a href="./src/resources/apps/invocations.ts">InvocationCreateResponse</a></code>
 - <code><a href="./src/resources/apps/invocations.ts">InvocationRetrieveResponse</a></code>
+- <code><a href="./src/resources/apps/invocations.ts">InvocationUpdateResponse</a></code>
 
 Methods:
 
 - <code title="post /invocations">client.apps.invocations.<a href="./src/resources/apps/invocations.ts">create</a>({ ...params }) -> InvocationCreateResponse</code>
 - <code title="get /invocations/{id}">client.apps.invocations.<a href="./src/resources/apps/invocations.ts">retrieve</a>(id) -> InvocationRetrieveResponse</code>
+- <code title="patch /invocations/{id}">client.apps.invocations.<a href="./src/resources/apps/invocations.ts">update</a>(id, { ...params }) -> InvocationUpdateResponse</code>
 
 # Browsers
 
