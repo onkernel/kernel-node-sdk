@@ -30,6 +30,7 @@ describe('resource invocations', () => {
       action_name: 'analyze',
       app_name: 'my-app',
       version: '1.0.0',
+      async: true,
       payload: '{"data":"example input"}',
     });
   });
@@ -44,5 +45,22 @@ describe('resource invocations', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
+    const responsePromise = client.apps.invocations.update('id', { status: 'succeeded' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
+    const response = await client.apps.invocations.update('id', { status: 'succeeded', output: 'output' });
   });
 });

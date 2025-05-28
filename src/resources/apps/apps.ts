@@ -13,6 +13,8 @@ import {
   InvocationCreateParams,
   InvocationCreateResponse,
   InvocationRetrieveResponse,
+  InvocationUpdateParams,
+  InvocationUpdateResponse,
   Invocations,
 } from './invocations';
 import { APIPromise } from '../../core/api-promise';
@@ -99,6 +101,8 @@ export declare namespace Apps {
     Invocations as Invocations,
     type InvocationCreateResponse as InvocationCreateResponse,
     type InvocationRetrieveResponse as InvocationRetrieveResponse,
+    type InvocationUpdateResponse as InvocationUpdateResponse,
     type InvocationCreateParams as InvocationCreateParams,
+    type InvocationUpdateParams as InvocationUpdateParams,
   };
 }
