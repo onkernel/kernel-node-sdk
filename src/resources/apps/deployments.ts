@@ -11,7 +11,7 @@ import { path } from '../../internal/utils/path';
 
 export class Deployments extends APIResource {
   /**
-   * Deploy a new application
+   * Deploy a new application and associated actions to Kernel.
    *
    * @example
    * ```ts
