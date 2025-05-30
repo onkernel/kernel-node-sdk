@@ -25,8 +25,7 @@ export class Apps extends APIResource {
   invocations: InvocationsAPI.Invocations = new InvocationsAPI.Invocations(this._client);
 
   /**
-   * List application versions for the authenticated user. Optionally filter by app
-   * name and/or version label.
+   * List applications. Optionally filter by app name and/or version label.
    *
    * @example
    * ```ts

@@ -9,7 +9,7 @@ import { path } from '../internal/utils/path';
 
 export class Browsers extends APIResource {
   /**
-   * Create Browser Session
+   * Create a new browser session from within an action.
    *
    * @example
    * ```ts
@@ -23,7 +23,7 @@ export class Browsers extends APIResource {
   }
 
   /**
-   * Get Browser Session by ID
+   * Get information about a browser session.
    *
    * @example
    * ```ts
@@ -37,7 +37,7 @@ export class Browsers extends APIResource {
   }
 
   /**
-   * List active browser sessions for the authenticated user
+   * List active browser sessions
    *
    * @example
    * ```ts
@@ -49,7 +49,7 @@ export class Browsers extends APIResource {
   }
 
   /**
-   * Delete a persistent browser session by persistent_id query parameter.
+   * Delete a persistent browser session by its persistent_id.
    *
    * @example
    * ```ts
@@ -68,7 +68,7 @@ export class Browsers extends APIResource {
   }
 
   /**
-   * Delete Browser Session by ID
+   * Delete a browser session by ID
    *
    * @example
    * ```ts

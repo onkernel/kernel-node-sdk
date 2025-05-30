@@ -7,7 +7,7 @@ import { path } from '../../internal/utils/path';
 
 export class Invocations extends APIResource {
   /**
-   * Invoke an application
+   * Invoke an action.
    *
    * @example
    * ```ts
@@ -23,7 +23,7 @@ export class Invocations extends APIResource {
   }
 
   /**
-   * Get an app invocation by id
+   * Get details about an invocation's status and output.
    *
    * @example
    * ```ts
@@ -37,7 +37,7 @@ export class Invocations extends APIResource {
   }
 
   /**
-   * Update invocation status or output
+   * Update an invocation's status or output.
    *
    * @example
    * ```ts
