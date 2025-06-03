@@ -175,6 +175,12 @@ export interface BrowserCreateParams {
    * Optional persistence configuration for the browser session.
    */
   persistence?: BrowserPersistence;
+
+  /**
+   * If true, launches the browser in stealth mode to reduce detection by anti-bot
+   * mechanisms.
+   */
+  stealth?: boolean;
 }
 
 export interface BrowserDeleteParams {
