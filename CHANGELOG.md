@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.5.0 (2025-06-04)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** update via SDK Studio ([8622a14](https://github.com/onkernel/kernel-node-sdk/commit/8622a147a7919f2edd3aa41dfa3ab0a89a7146c8))
+* **api:** update via SDK Studio ([285e2b1](https://github.com/onkernel/kernel-node-sdk/commit/285e2b18ef1458eee08daa75e26ac65884cbac92))
+
+
+### Bug Fixes
+
+* compat with more runtimes ([9862639](https://github.com/onkernel/kernel-node-sdk/commit/98626394921ac1b3ec0b91d4800d0070e90373aa))
+
+
+### Chores
+
+* adjust eslint.config.mjs ignore pattern ([8e7e28a](https://github.com/onkernel/kernel-node-sdk/commit/8e7e28aac90753040d3eb24320c6a758266d4391))
+* **deps:** bump eslint-plugin-prettier ([d3c4417](https://github.com/onkernel/kernel-node-sdk/commit/d3c4417538150b91be13854d837938113ce6a09f))
+* **docs:** use top-level-await in example snippets ([ac334e0](https://github.com/onkernel/kernel-node-sdk/commit/ac334e0fb49f98a15e1318c6754838ae17b036d9))
+* **internal:** codegen related update ([1d16505](https://github.com/onkernel/kernel-node-sdk/commit/1d16505b24c6ee4236cf982ac710bb351006b955))
+* **internal:** fix readablestream types in node 20 ([77cdbc2](https://github.com/onkernel/kernel-node-sdk/commit/77cdbc227d624567aa460e3659bdb30678548a26))
+* **internal:** update jest config ([3248860](https://github.com/onkernel/kernel-node-sdk/commit/3248860f264c1a24c3721eeb5a79c59f6f53dd7f))
+* **internal:** version bump ([870e534](https://github.com/onkernel/kernel-node-sdk/commit/870e534210b2ccdebdbeee4f1346d32bb321c756))
+
 ## 0.4.0 (2025-05-28)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.3.0...v0.4.0)
