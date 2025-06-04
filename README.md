@@ -27,18 +27,14 @@ const client = new Kernel({
   environment: 'development', // defaults to 'production'
 });
 
-async function main() {
-  const deployment = await client.apps.deployments.create({
-    entrypoint_rel_path: 'main.ts',
-    file: fs.createReadStream('path/to/file'),
-    env_vars: { OPENAI_API_KEY: 'x' },
-    version: '1.0.0',
-  });
+const deployment = await client.apps.deployments.create({
+  entrypoint_rel_path: 'main.ts',
+  file: fs.createReadStream('path/to/file'),
+  env_vars: { OPENAI_API_KEY: 'x' },
+  version: '1.0.0',
+});
 
-  console.log(deployment.apps);
-}
-
-main();
+console.log(deployment.apps);
 ```
 
 ### Request & Response types
@@ -54,15 +50,11 @@ const client = new Kernel({
   environment: 'development', // defaults to 'production'
 });
 
-async function main() {
-  const params: Kernel.BrowserCreateParams = {
-    invocation_id: 'REPLACE_ME',
-    persistence: { id: 'browser-for-user-1234' },
-  };
-  const browser: Kernel.BrowserCreateResponse = await client.browsers.create(params);
-}
-
-main();
+const params: Kernel.BrowserCreateParams = {
+  invocation_id: 'REPLACE_ME',
+  persistence: { id: 'browser-for-user-1234' },
+};
+const browser: Kernel.BrowserCreateResponse = await client.browsers.create(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -119,21 +111,17 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-async function main() {
-  const browser = await client.browsers
-    .create({ invocation_id: 'REPLACE_ME', persistence: { id: 'browser-for-user-1234' } })
-    .catch(async (err) => {
-      if (err instanceof Kernel.APIError) {
-        console.log(err.status); // 400
-        console.log(err.name); // BadRequestError
-        console.log(err.headers); // {server: 'nginx', ...}
-      } else {
-        throw err;
-      }
-    });
-}
-
-main();
+const browser = await client.browsers
+  .create({ invocation_id: 'REPLACE_ME', persistence: { id: 'browser-for-user-1234' } })
+  .catch(async (err) => {
+    if (err instanceof Kernel.APIError) {
+      console.log(err.status); // 400
+      console.log(err.name); // BadRequestError
+      console.log(err.headers); // {server: 'nginx', ...}
+    } else {
+      throw err;
+    }
+  });
 ```
 
 Error codes are as follows:
