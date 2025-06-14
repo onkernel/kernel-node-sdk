@@ -296,7 +296,7 @@ export namespace DeploymentFollowResponse {
       /**
        * Name of the action
        */
-      name?: string;
+      name: string;
     }
   }
 
