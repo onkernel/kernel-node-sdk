@@ -57,7 +57,7 @@ export namespace AppListResponse {
     /**
      * Deployment region code
      */
-    region: string;
+    region: 'aws.us-east-1a';
 
     /**
      * Version label for the application
