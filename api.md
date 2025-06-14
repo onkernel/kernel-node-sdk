@@ -1,3 +1,17 @@
+# Deployments
+
+Types:
+
+- <code><a href="./src/resources/deployments.ts">DeploymentCreateResponse</a></code>
+- <code><a href="./src/resources/deployments.ts">DeploymentRetrieveResponse</a></code>
+- <code><a href="./src/resources/deployments.ts">DeploymentFollowResponse</a></code>
+
+Methods:
+
+- <code title="post /deployments">client.deployments.<a href="./src/resources/deployments.ts">create</a>({ ...params }) -> DeploymentCreateResponse</code>
+- <code title="get /deployments/{id}">client.deployments.<a href="./src/resources/deployments.ts">retrieve</a>(id) -> DeploymentRetrieveResponse</code>
+- <code title="get /deployments/{id}/events">client.deployments.<a href="./src/resources/deployments.ts">follow</a>(id) -> DeploymentFollowResponse</code>
+
 # Apps
 
 Types:
