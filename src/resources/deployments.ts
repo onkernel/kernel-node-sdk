@@ -73,7 +73,7 @@ export interface DeploymentCreateResponse {
   /**
    * Deployment region code
    */
-  region: string;
+  region: 'aws.us-east-1a';
 
   /**
    * Current status of the deployment
@@ -118,7 +118,7 @@ export interface DeploymentRetrieveResponse {
   /**
    * Deployment region code
    */
-  region: string;
+  region: 'aws.us-east-1a';
 
   /**
    * Current status of the deployment
@@ -214,7 +214,7 @@ export namespace DeploymentFollowResponse {
       /**
        * Deployment region code
        */
-      region: string;
+      region: 'aws.us-east-1a';
 
       /**
        * Current status of the deployment
@@ -265,7 +265,7 @@ export namespace DeploymentFollowResponse {
     /**
      * Deployment region code
      */
-    region: string;
+    region: 'aws.us-east-1a';
 
     /**
      * Time the state was reported.
