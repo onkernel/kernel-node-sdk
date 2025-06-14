@@ -29,6 +29,13 @@ import {
   BrowserRetrieveResponse,
   Browsers,
 } from './resources/browsers';
+import {
+  DeploymentCreateParams,
+  DeploymentCreateResponse,
+  DeploymentFollowResponse,
+  DeploymentRetrieveResponse,
+  Deployments,
+} from './resources/deployments';
 import { readEnv } from './internal/utils/env';
 import { formatRequestDetails, loggerFor } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
@@ -735,13 +742,23 @@ export class Kernel {
 
   static toFile = Uploads.toFile;
 
+  deployments: API.Deployments = new API.Deployments(this);
   apps: API.Apps = new API.Apps(this);
   browsers: API.Browsers = new API.Browsers(this);
 }
+Kernel.Deployments = Deployments;
 Kernel.Apps = Apps;
 Kernel.Browsers = Browsers;
 export declare namespace Kernel {
   export type RequestOptions = Opts.RequestOptions;
+
+  export {
+    Deployments as Deployments,
+    type DeploymentCreateResponse as DeploymentCreateResponse,
+    type DeploymentRetrieveResponse as DeploymentRetrieveResponse,
+    type DeploymentFollowResponse as DeploymentFollowResponse,
+    type DeploymentCreateParams as DeploymentCreateParams,
+  };
 
   export { Apps as Apps, type AppListResponse as AppListResponse, type AppListParams as AppListParams };
 

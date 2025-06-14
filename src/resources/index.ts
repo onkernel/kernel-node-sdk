@@ -10,3 +10,10 @@ export {
   type BrowserCreateParams,
   type BrowserDeleteParams,
 } from './browsers';
+export {
+  Deployments,
+  type DeploymentCreateResponse,
+  type DeploymentRetrieveResponse,
+  type DeploymentFollowResponse,
+  type DeploymentCreateParams,
+} from './deployments';
