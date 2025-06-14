@@ -289,11 +289,14 @@ export namespace DeploymentFollowResponse {
   }
 
   export namespace AppVersionSummaryEvent {
+    /**
+     * An action available on the app
+     */
     export interface Action {
       /**
        * Name of the action
        */
-      name: string;
+      name?: string;
     }
   }
 
