@@ -173,7 +173,7 @@ export namespace DeploymentFollowResponse {
     /**
      * Time the log entry was produced.
      */
-    timestamp?: string;
+    timestamp: string;
   }
 
   /**
@@ -193,7 +193,7 @@ export namespace DeploymentFollowResponse {
     /**
      * Time the state was reported.
      */
-    timestamp?: string;
+    timestamp: string;
   }
 
   export namespace DeploymentStateEvent {
@@ -250,44 +250,54 @@ export namespace DeploymentFollowResponse {
     /**
      * Unique identifier for the app version
      */
-    id?: string;
+    id: string;
 
     /**
      * Name of the application
      */
-    app_name?: string;
+    app_name: string;
+
+    /**
+     * Event type identifier (always "app_version_summary").
+     */
+    event: 'app_version_summary';
+
+    /**
+     * Deployment region code
+     */
+    region: string;
+
+    /**
+     * Time the state was reported.
+     */
+    timestamp: string;
+
+    /**
+     * Version label for the application
+     */
+    version: string;
 
     /**
      * Environment variables configured for this app version
      */
     env_vars?: Record<string, string>;
-
-    /**
-     * Event type identifier (always "app_version_summary").
-     */
-    event?: 'app_version_summary';
-
-    /**
-     * Deployment region code
-     */
-    region?: string;
-
-    /**
-     * Version label for the application
-     */
-    version?: string;
   }
 
   /**
    * An error event from the application.
    */
   export interface ErrorEvent {
-    error?: ErrorEvent.Error;
+    error: ErrorEvent.Error;
 
     /**
      * Event type identifier (always "error").
      */
-    event?: 'error';
+    event: 'error';
+
+    /**
+     * Time the error occurred.
+     */
+    timestamp: string;
   }
 
   export namespace ErrorEvent {

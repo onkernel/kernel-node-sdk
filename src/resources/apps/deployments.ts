@@ -156,7 +156,7 @@ export namespace DeploymentFollowResponse {
     /**
      * Time the log entry was produced.
      */
-    timestamp?: string;
+    timestamp: string;
   }
 }
 
