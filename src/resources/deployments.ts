@@ -278,6 +278,11 @@ export namespace DeploymentFollowResponse {
     version: string;
 
     /**
+     * List of actions available on the app
+     */
+    actions?: Array<string>;
+
+    /**
      * Environment variables configured for this app version
      */
     env_vars?: Record<string, string>;
