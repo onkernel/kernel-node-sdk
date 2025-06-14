@@ -253,6 +253,11 @@ export namespace DeploymentFollowResponse {
     id: string;
 
     /**
+     * List of actions available on the app
+     */
+    actions: Array<string>;
+
+    /**
      * Name of the application
      */
     app_name: string;
@@ -276,11 +281,6 @@ export namespace DeploymentFollowResponse {
      * Version label for the application
      */
     version: string;
-
-    /**
-     * List of actions available on the app
-     */
-    actions?: Array<string>;
 
     /**
      * Environment variables configured for this app version
