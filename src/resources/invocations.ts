@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as DeploymentsAPI from './deployments';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { Stream } from '../core/streaming';
@@ -270,48 +271,9 @@ export interface InvocationUpdateResponse {
  */
 export type InvocationFollowResponse =
   | Shared.LogEvent
+  | DeploymentsAPI.DeploymentStateEvent
   | InvocationStateEvent
-  | InvocationFollowResponse.ErrorEvent;
-
-export namespace InvocationFollowResponse {
-  /**
-   * An error event from the application.
-   */
-  export interface ErrorEvent {
-    error: ErrorEvent.Error;
-
-    /**
-     * Event type identifier (always "error").
-     */
-    event: 'error';
-
-    /**
-     * Time the error occurred.
-     */
-    timestamp: string;
-  }
-
-  export namespace ErrorEvent {
-    export interface Error {
-      /**
-       * Application-specific error code (machine-readable)
-       */
-      code: string;
-
-      /**
-       * Human-readable error description for debugging
-       */
-      message: string;
-
-      /**
-       * Additional error details (for multiple errors)
-       */
-      details?: Array<Shared.ErrorDetail>;
-
-      inner_error?: Shared.ErrorDetail;
-    }
-  }
-}
+  | Shared.ErrorEvent;
 
 export interface InvocationCreateParams {
   /**
