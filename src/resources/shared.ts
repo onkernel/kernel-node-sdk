@@ -1,7 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Shared from './shared';
-
 export interface ErrorDetail {
   /**
    * Lower-level error code providing more specific detail
@@ -18,7 +16,7 @@ export interface ErrorDetail {
  * An error event from the application.
  */
 export interface ErrorEvent {
-  error: ErrorEvent.Error;
+  error: ErrorModel;
 
   /**
    * Event type identifier (always "error").
@@ -31,25 +29,23 @@ export interface ErrorEvent {
   timestamp: string;
 }
 
-export namespace ErrorEvent {
-  export interface Error {
-    /**
-     * Application-specific error code (machine-readable)
-     */
-    code: string;
+export interface ErrorModel {
+  /**
+   * Application-specific error code (machine-readable)
+   */
+  code: string;
 
-    /**
-     * Human-readable error description for debugging
-     */
-    message: string;
+  /**
+   * Human-readable error description for debugging
+   */
+  message: string;
 
-    /**
-     * Additional error details (for multiple errors)
-     */
-    details?: Array<Shared.ErrorDetail>;
+  /**
+   * Additional error details (for multiple errors)
+   */
+  details?: Array<ErrorDetail>;
 
-    inner_error?: Shared.ErrorDetail;
-  }
+  inner_error?: ErrorDetail;
 }
 
 /**

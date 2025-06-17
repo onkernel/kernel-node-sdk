@@ -805,5 +805,6 @@ export declare namespace Kernel {
 
   export type ErrorDetail = API.ErrorDetail;
   export type ErrorEvent = API.ErrorEvent;
+  export type ErrorModel = API.ErrorModel;
   export type LogEvent = API.LogEvent;
 }
