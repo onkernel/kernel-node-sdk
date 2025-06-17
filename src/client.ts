@@ -30,9 +30,20 @@ import {
   DeploymentCreateResponse,
   DeploymentFollowResponse,
   DeploymentRetrieveResponse,
+  DeploymentStateEvent,
   Deployments,
 } from './resources/deployments';
 import { KernelApp } from './core/app-framework';
+import {
+  InvocationCreateParams,
+  InvocationCreateResponse,
+  InvocationFollowResponse,
+  InvocationRetrieveResponse,
+  InvocationStateEvent,
+  InvocationUpdateParams,
+  InvocationUpdateResponse,
+  Invocations,
+} from './resources/invocations';
 import { AppListParams, AppListResponse, Apps } from './resources/apps/apps';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
@@ -761,16 +772,19 @@ export class Kernel {
 
   deployments: API.Deployments = new API.Deployments(this);
   apps: API.Apps = new API.Apps(this);
+  invocations: API.Invocations = new API.Invocations(this);
   browsers: API.Browsers = new API.Browsers(this);
 }
 Kernel.Deployments = Deployments;
 Kernel.Apps = Apps;
+Kernel.Invocations = Invocations;
 Kernel.Browsers = Browsers;
 export declare namespace Kernel {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
     Deployments as Deployments,
+    type DeploymentStateEvent as DeploymentStateEvent,
     type DeploymentCreateResponse as DeploymentCreateResponse,
     type DeploymentRetrieveResponse as DeploymentRetrieveResponse,
     type DeploymentFollowResponse as DeploymentFollowResponse,
@@ -778,6 +792,17 @@ export declare namespace Kernel {
   };
 
   export { Apps as Apps, type AppListResponse as AppListResponse, type AppListParams as AppListParams };
+
+  export {
+    Invocations as Invocations,
+    type InvocationStateEvent as InvocationStateEvent,
+    type InvocationCreateResponse as InvocationCreateResponse,
+    type InvocationRetrieveResponse as InvocationRetrieveResponse,
+    type InvocationUpdateResponse as InvocationUpdateResponse,
+    type InvocationFollowResponse as InvocationFollowResponse,
+    type InvocationCreateParams as InvocationCreateParams,
+    type InvocationUpdateParams as InvocationUpdateParams,
+  };
 
   export {
     Browsers as Browsers,
@@ -788,4 +813,7 @@ export declare namespace Kernel {
     type BrowserCreateParams as BrowserCreateParams,
     type BrowserDeleteParams as BrowserDeleteParams,
   };
+
+  export type ErrorDetail = API.ErrorDetail;
+  export type LogEvent = API.LogEvent;
 }

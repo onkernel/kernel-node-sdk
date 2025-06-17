@@ -1,7 +1,15 @@
+# Shared
+
+Types:
+
+- <code><a href="./src/resources/shared.ts">ErrorDetail</a></code>
+- <code><a href="./src/resources/shared.ts">LogEvent</a></code>
+
 # Deployments
 
 Types:
 
+- <code><a href="./src/resources/deployments.ts">DeploymentStateEvent</a></code>
 - <code><a href="./src/resources/deployments.ts">DeploymentCreateResponse</a></code>
 - <code><a href="./src/resources/deployments.ts">DeploymentRetrieveResponse</a></code>
 - <code><a href="./src/resources/deployments.ts">DeploymentFollowResponse</a></code>
@@ -34,19 +42,22 @@ Methods:
 - <code title="post /deploy">client.apps.deployments.<a href="./src/resources/apps/deployments.ts">create</a>({ ...params }) -> DeploymentCreateResponse</code>
 - <code title="get /apps/{id}/events">client.apps.deployments.<a href="./src/resources/apps/deployments.ts">follow</a>(id) -> DeploymentFollowResponse</code>
 
-## Invocations
+# Invocations
 
 Types:
 
-- <code><a href="./src/resources/apps/invocations.ts">InvocationCreateResponse</a></code>
-- <code><a href="./src/resources/apps/invocations.ts">InvocationRetrieveResponse</a></code>
-- <code><a href="./src/resources/apps/invocations.ts">InvocationUpdateResponse</a></code>
+- <code><a href="./src/resources/invocations.ts">InvocationStateEvent</a></code>
+- <code><a href="./src/resources/invocations.ts">InvocationCreateResponse</a></code>
+- <code><a href="./src/resources/invocations.ts">InvocationRetrieveResponse</a></code>
+- <code><a href="./src/resources/invocations.ts">InvocationUpdateResponse</a></code>
+- <code><a href="./src/resources/invocations.ts">InvocationFollowResponse</a></code>
 
 Methods:
 
-- <code title="post /invocations">client.apps.invocations.<a href="./src/resources/apps/invocations.ts">create</a>({ ...params }) -> InvocationCreateResponse</code>
-- <code title="get /invocations/{id}">client.apps.invocations.<a href="./src/resources/apps/invocations.ts">retrieve</a>(id) -> InvocationRetrieveResponse</code>
-- <code title="patch /invocations/{id}">client.apps.invocations.<a href="./src/resources/apps/invocations.ts">update</a>(id, { ...params }) -> InvocationUpdateResponse</code>
+- <code title="post /invocations">client.invocations.<a href="./src/resources/invocations.ts">create</a>({ ...params }) -> InvocationCreateResponse</code>
+- <code title="get /invocations/{id}">client.invocations.<a href="./src/resources/invocations.ts">retrieve</a>(id) -> InvocationRetrieveResponse</code>
+- <code title="patch /invocations/{id}">client.invocations.<a href="./src/resources/invocations.ts">update</a>(id, { ...params }) -> InvocationUpdateResponse</code>
+- <code title="get /invocations/{id}/events">client.invocations.<a href="./src/resources/invocations.ts">follow</a>(id) -> InvocationFollowResponse</code>
 
 # Browsers
 
