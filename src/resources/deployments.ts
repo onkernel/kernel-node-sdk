@@ -221,7 +221,7 @@ export type DeploymentFollowResponse =
   | Shared.LogEvent
   | DeploymentStateEvent
   | DeploymentFollowResponse.AppVersionSummaryEvent
-  | DeploymentFollowResponse.ErrorEvent;
+  | Shared.ErrorEvent;
 
 export namespace DeploymentFollowResponse {
   /**
@@ -278,44 +278,6 @@ export namespace DeploymentFollowResponse {
        * Name of the action
        */
       name: string;
-    }
-  }
-
-  /**
-   * An error event from the application.
-   */
-  export interface ErrorEvent {
-    error: ErrorEvent.Error;
-
-    /**
-     * Event type identifier (always "error").
-     */
-    event: 'error';
-
-    /**
-     * Time the error occurred.
-     */
-    timestamp: string;
-  }
-
-  export namespace ErrorEvent {
-    export interface Error {
-      /**
-       * Application-specific error code (machine-readable)
-       */
-      code: string;
-
-      /**
-       * Human-readable error description for debugging
-       */
-      message: string;
-
-      /**
-       * Additional error details (for multiple errors)
-       */
-      details?: Array<Shared.ErrorDetail>;
-
-      inner_error?: Shared.ErrorDetail;
     }
   }
 }
