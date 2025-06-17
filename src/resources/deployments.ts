@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { Stream } from '../core/streaming';
 import { type Uploadable } from '../core/uploads';
@@ -53,6 +54,73 @@ export class Deployments extends APIResource {
       headers: buildHeaders([{ Accept: 'text/event-stream' }, options?.headers]),
       stream: true,
     }) as APIPromise<Stream<DeploymentFollowResponse>>;
+  }
+}
+
+/**
+ * An event representing the current state of a deployment.
+ */
+export interface DeploymentStateEvent {
+  /**
+   * Deployment record information.
+   */
+  deployment: DeploymentStateEvent.Deployment;
+
+  /**
+   * Event type identifier (always "deployment_state").
+   */
+  event: 'deployment_state';
+
+  /**
+   * Time the state was reported.
+   */
+  timestamp: string;
+}
+
+export namespace DeploymentStateEvent {
+  /**
+   * Deployment record information.
+   */
+  export interface Deployment {
+    /**
+     * Unique identifier for the deployment
+     */
+    id: string;
+
+    /**
+     * Timestamp when the deployment was created
+     */
+    created_at: string;
+
+    /**
+     * Deployment region code
+     */
+    region: 'aws.us-east-1a';
+
+    /**
+     * Current status of the deployment
+     */
+    status: 'queued' | 'in_progress' | 'running' | 'failed' | 'stopped';
+
+    /**
+     * Relative path to the application entrypoint
+     */
+    entrypoint_rel_path?: string;
+
+    /**
+     * Environment variables configured for this deployment
+     */
+    env_vars?: Record<string, string>;
+
+    /**
+     * Status reason
+     */
+    status_reason?: string;
+
+    /**
+     * Timestamp when the deployment was last updated
+     */
+    updated_at?: string | null;
   }
 }
 
@@ -150,99 +218,12 @@ export interface DeploymentRetrieveResponse {
  * Union type representing any deployment event.
  */
 export type DeploymentFollowResponse =
-  | DeploymentFollowResponse.LogEvent
-  | DeploymentFollowResponse.DeploymentStateEvent
+  | Shared.LogEvent
+  | DeploymentStateEvent
   | DeploymentFollowResponse.AppVersionSummaryEvent
   | DeploymentFollowResponse.ErrorEvent;
 
 export namespace DeploymentFollowResponse {
-  /**
-   * A log entry from the application.
-   */
-  export interface LogEvent {
-    /**
-     * Event type identifier (always "log").
-     */
-    event: 'log';
-
-    /**
-     * Log message text.
-     */
-    message: string;
-
-    /**
-     * Time the log entry was produced.
-     */
-    timestamp: string;
-  }
-
-  /**
-   * An event representing the current state of a deployment.
-   */
-  export interface DeploymentStateEvent {
-    /**
-     * Deployment record information.
-     */
-    deployment: DeploymentStateEvent.Deployment;
-
-    /**
-     * Event type identifier (always "deployment_state").
-     */
-    event: 'deployment_state';
-
-    /**
-     * Time the state was reported.
-     */
-    timestamp: string;
-  }
-
-  export namespace DeploymentStateEvent {
-    /**
-     * Deployment record information.
-     */
-    export interface Deployment {
-      /**
-       * Unique identifier for the deployment
-       */
-      id: string;
-
-      /**
-       * Timestamp when the deployment was created
-       */
-      created_at: string;
-
-      /**
-       * Deployment region code
-       */
-      region: 'aws.us-east-1a';
-
-      /**
-       * Current status of the deployment
-       */
-      status: 'queued' | 'in_progress' | 'running' | 'failed' | 'stopped';
-
-      /**
-       * Relative path to the application entrypoint
-       */
-      entrypoint_rel_path?: string;
-
-      /**
-       * Environment variables configured for this deployment
-       */
-      env_vars?: Record<string, string>;
-
-      /**
-       * Status reason
-       */
-      status_reason?: string;
-
-      /**
-       * Timestamp when the deployment was last updated
-       */
-      updated_at?: string | null;
-    }
-  }
-
   /**
    * Summary of an application version.
    */
@@ -332,35 +313,9 @@ export namespace DeploymentFollowResponse {
       /**
        * Additional error details (for multiple errors)
        */
-      details?: Array<Error.Detail>;
+      details?: Array<Shared.ErrorDetail>;
 
-      inner_error?: Error.InnerError;
-    }
-
-    export namespace Error {
-      export interface Detail {
-        /**
-         * Lower-level error code providing more specific detail
-         */
-        code?: string;
-
-        /**
-         * Further detail about the error
-         */
-        message?: string;
-      }
-
-      export interface InnerError {
-        /**
-         * Lower-level error code providing more specific detail
-         */
-        code?: string;
-
-        /**
-         * Further detail about the error
-         */
-        message?: string;
-      }
+      inner_error?: Shared.ErrorDetail;
     }
   }
 }
@@ -400,6 +355,7 @@ export interface DeploymentCreateParams {
 
 export declare namespace Deployments {
   export {
+    type DeploymentStateEvent as DeploymentStateEvent,
     type DeploymentCreateResponse as DeploymentCreateResponse,
     type DeploymentRetrieveResponse as DeploymentRetrieveResponse,
     type DeploymentFollowResponse as DeploymentFollowResponse,
