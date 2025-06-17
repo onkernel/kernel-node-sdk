@@ -323,6 +323,28 @@ describe('instantiate client', () => {
       const client = new Kernel({ apiKey: 'My API Key', baseURL: null, environment: 'production' });
       expect(client.baseURL).toEqual('https://api.onkernel.com/');
     });
+
+    test('in request options', () => {
+      const client = new Kernel({ apiKey: 'My API Key' });
+      expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
+        'http://localhost:5000/option/foo',
+      );
+    });
+
+    test('in request options overridden by client options', () => {
+      const client = new Kernel({ apiKey: 'My API Key', baseURL: 'http://localhost:5000/client' });
+      expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
+        'http://localhost:5000/client/foo',
+      );
+    });
+
+    test('in request options overridden by env variable', () => {
+      process.env['KERNEL_BASE_URL'] = 'http://localhost:5000/env';
+      const client = new Kernel({ apiKey: 'My API Key' });
+      expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
+        'http://localhost:5000/env/foo',
+      );
+    });
   });
 
   test('maxRetries option is correctly set', () => {
