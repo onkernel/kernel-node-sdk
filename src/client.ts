@@ -803,7 +803,6 @@ export declare namespace Kernel {
     type BrowserDeleteParams as BrowserDeleteParams,
   };
 
-  export type Error = API.Error;
   export type ErrorDetail = API.ErrorDetail;
   export type ErrorEvent = API.ErrorEvent;
   export type LogEvent = API.LogEvent;
