@@ -4,6 +4,7 @@ Types:
 
 - <code><a href="./src/resources/shared.ts">ErrorDetail</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorEvent</a></code>
+- <code><a href="./src/resources/shared.ts">ErrorModel</a></code>
 - <code><a href="./src/resources/shared.ts">LogEvent</a></code>
 
 # Deployments
