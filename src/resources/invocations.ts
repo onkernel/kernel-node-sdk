@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as DeploymentsAPI from './deployments';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { Stream } from '../core/streaming';
@@ -269,11 +268,7 @@ export interface InvocationUpdateResponse {
 /**
  * Union type representing any invocation event.
  */
-export type InvocationFollowResponse =
-  | Shared.LogEvent
-  | DeploymentsAPI.DeploymentStateEvent
-  | InvocationStateEvent
-  | Shared.ErrorEvent;
+export type InvocationFollowResponse = Shared.LogEvent | InvocationStateEvent | Shared.ErrorEvent;
 
 export interface InvocationCreateParams {
   /**
