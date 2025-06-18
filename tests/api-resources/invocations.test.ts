@@ -64,6 +64,18 @@ describe('resource invocations', () => {
     const response = await client.invocations.update('id', { status: 'succeeded', output: 'output' });
   });
 
+  // skipped: tests are disabled for the time being
+  test.skip('deleteBrowsers', async () => {
+    const responsePromise = client.invocations.deleteBrowsers('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
   // skipped: currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail
   test.skip('follow', async () => {
     const responsePromise = client.invocations.follow('id');
