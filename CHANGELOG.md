@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.1 (2025-06-18)
+
+Full Changelog: [v0.6.0...v0.6.1](https://github.com/onkernel/kernel-node-sdk/compare/v0.6.0...v0.6.1)
+
+### Features
+
+* **api:** add delete_browsers endpoint ([1f1c4d8](https://github.com/onkernel/kernel-node-sdk/commit/1f1c4d8e8dbe85048bfe91081603538ccc716417))
+
 ## 0.6.0 (2025-06-18)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.5.0...v0.6.0)
