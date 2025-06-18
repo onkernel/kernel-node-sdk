@@ -1,9 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../core/resource';
-import { APIPromise } from '../../core/api-promise';
-import { RequestOptions } from '../../internal/request-options';
-import { path } from '../../internal/utils/path';
+import { APIResource } from '../core/resource';
+import * as Shared from './shared';
+import { APIPromise } from '../core/api-promise';
+import { Stream } from '../core/streaming';
+import { buildHeaders } from '../internal/headers';
+import { RequestOptions } from '../internal/request-options';
+import { path } from '../internal/utils/path';
 
 export class Invocations extends APIResource {
   /**
@@ -11,7 +14,7 @@ export class Invocations extends APIResource {
    *
    * @example
    * ```ts
-   * const invocation = await client.apps.invocations.create({
+   * const invocation = await client.invocations.create({
    *   action_name: 'analyze',
    *   app_name: 'my-app',
    *   version: '1.0.0',
@@ -27,7 +30,7 @@ export class Invocations extends APIResource {
    *
    * @example
    * ```ts
-   * const invocation = await client.apps.invocations.retrieve(
+   * const invocation = await client.invocations.retrieve(
    *   'rr33xuugxj9h0bkf1rdt2bet',
    * );
    * ```
@@ -41,10 +44,9 @@ export class Invocations extends APIResource {
    *
    * @example
    * ```ts
-   * const invocation = await client.apps.invocations.update(
-   *   'id',
-   *   { status: 'succeeded' },
-   * );
+   * const invocation = await client.invocations.update('id', {
+   *   status: 'succeeded',
+   * });
    * ```
    */
   update(
@@ -53,6 +55,92 @@ export class Invocations extends APIResource {
     options?: RequestOptions,
   ): APIPromise<InvocationUpdateResponse> {
     return this._client.patch(path`/invocations/${id}`, { body, ...options });
+  }
+
+  /**
+   * Establishes a Server-Sent Events (SSE) stream that delivers real-time logs and
+   * status updates for an invocation. The stream terminates automatically once the
+   * invocation reaches a terminal state.
+   *
+   * @example
+   * ```ts
+   * const response = await client.invocations.follow('id');
+   * ```
+   */
+  follow(id: string, options?: RequestOptions): APIPromise<Stream<InvocationFollowResponse>> {
+    return this._client.get(path`/invocations/${id}/events`, {
+      ...options,
+      headers: buildHeaders([{ Accept: 'text/event-stream' }, options?.headers]),
+      stream: true,
+    }) as APIPromise<Stream<InvocationFollowResponse>>;
+  }
+}
+
+/**
+ * An event representing the current state of an invocation.
+ */
+export interface InvocationStateEvent {
+  /**
+   * Event type identifier (always "invocation_state").
+   */
+  event: 'invocation_state';
+
+  invocation: InvocationStateEvent.Invocation;
+
+  /**
+   * Time the state was reported.
+   */
+  timestamp: string;
+}
+
+export namespace InvocationStateEvent {
+  export interface Invocation {
+    /**
+     * ID of the invocation
+     */
+    id: string;
+
+    /**
+     * Name of the action invoked
+     */
+    action_name: string;
+
+    /**
+     * Name of the application
+     */
+    app_name: string;
+
+    /**
+     * RFC 3339 Nanoseconds timestamp when the invocation started
+     */
+    started_at: string;
+
+    /**
+     * Status of the invocation
+     */
+    status: 'queued' | 'running' | 'succeeded' | 'failed';
+
+    /**
+     * RFC 3339 Nanoseconds timestamp when the invocation finished (null if still
+     * running)
+     */
+    finished_at?: string | null;
+
+    /**
+     * Output produced by the action, rendered as a JSON string. This could be: string,
+     * number, boolean, array, object, or null.
+     */
+    output?: string;
+
+    /**
+     * Payload provided to the invocation. This is a string that can be parsed as JSON.
+     */
+    payload?: string;
+
+    /**
+     * Status reason
+     */
+    status_reason?: string;
   }
 }
 
@@ -177,6 +265,11 @@ export interface InvocationUpdateResponse {
   status_reason?: string;
 }
 
+/**
+ * Union type representing any invocation event.
+ */
+export type InvocationFollowResponse = Shared.LogEvent | InvocationStateEvent | Shared.ErrorEvent;
+
 export interface InvocationCreateParams {
   /**
    * Name of the action to invoke
@@ -219,9 +312,11 @@ export interface InvocationUpdateParams {
 
 export declare namespace Invocations {
   export {
+    type InvocationStateEvent as InvocationStateEvent,
     type InvocationCreateResponse as InvocationCreateResponse,
     type InvocationRetrieveResponse as InvocationRetrieveResponse,
     type InvocationUpdateResponse as InvocationUpdateResponse,
+    type InvocationFollowResponse as InvocationFollowResponse,
     type InvocationCreateParams as InvocationCreateParams,
     type InvocationUpdateParams as InvocationUpdateParams,
   };

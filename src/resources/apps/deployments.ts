@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { Stream } from '../../core/streaming';
 import { type Uploadable } from '../../core/uploads';
@@ -96,7 +97,7 @@ export namespace DeploymentCreateResponse {
 export type DeploymentFollowResponse =
   | DeploymentFollowResponse.StateEvent
   | DeploymentFollowResponse.StateUpdateEvent
-  | DeploymentFollowResponse.LogEvent;
+  | Shared.LogEvent;
 
 export namespace DeploymentFollowResponse {
   /**
@@ -135,26 +136,6 @@ export namespace DeploymentFollowResponse {
 
     /**
      * Time the state change occurred.
-     */
-    timestamp?: string;
-  }
-
-  /**
-   * A log entry from the application.
-   */
-  export interface LogEvent {
-    /**
-     * Event type identifier (always "log").
-     */
-    event: 'log';
-
-    /**
-     * Log message text.
-     */
-    message: string;
-
-    /**
-     * Time the log entry was produced.
      */
     timestamp?: string;
   }

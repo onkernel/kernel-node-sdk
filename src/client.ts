@@ -5,7 +5,6 @@ import type { HTTPMethod, PromiseOrValue, MergedRequestInit, FinalizedRequestIni
 import { uuid4 } from './internal/utils/uuid';
 import { validatePositiveInteger, isAbsoluteURL, safeJSON } from './internal/utils/values';
 import { sleep } from './internal/utils/sleep';
-import { type Logger, type LogLevel, parseLogLevel } from './internal/utils/log';
 export type { Logger, LogLevel } from './internal/utils/log';
 import { castToError, isAbortError } from './internal/errors';
 import type { APIResponseProps } from './internal/parse';
@@ -17,9 +16,6 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { type Fetch } from './internal/builtin-types';
-import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
-import { FinalRequestOptions, RequestOptions } from './internal/request-options';
 import {
   BrowserCreateParams,
   BrowserCreateResponse,
@@ -29,11 +25,38 @@ import {
   BrowserRetrieveResponse,
   Browsers,
 } from './resources/browsers';
-import { readEnv } from './internal/utils/env';
-import { formatRequestDetails, loggerFor } from './internal/utils/log';
-import { isEmptyObj } from './internal/utils/values';
+import {
+  DeploymentCreateParams,
+  DeploymentCreateResponse,
+  DeploymentFollowResponse,
+  DeploymentRetrieveResponse,
+  DeploymentStateEvent,
+  Deployments,
+} from './resources/deployments';
 import { KernelApp } from './core/app-framework';
+import {
+  InvocationCreateParams,
+  InvocationCreateResponse,
+  InvocationFollowResponse,
+  InvocationRetrieveResponse,
+  InvocationStateEvent,
+  InvocationUpdateParams,
+  InvocationUpdateResponse,
+  Invocations,
+} from './resources/invocations';
 import { AppListParams, AppListResponse, Apps } from './resources/apps/apps';
+import { type Fetch } from './internal/builtin-types';
+import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
+import { FinalRequestOptions, RequestOptions } from './internal/request-options';
+import { readEnv } from './internal/utils/env';
+import {
+  type LogLevel,
+  type Logger,
+  formatRequestDetails,
+  loggerFor,
+  parseLogLevel,
+} from './internal/utils/log';
+import { isEmptyObj } from './internal/utils/values';
 
 const environments = {
   production: 'https://api.onkernel.com/',
@@ -216,6 +239,13 @@ export class Kernel {
     });
   }
 
+  /**
+   * Check whether the base URL is set to its default.
+   */
+  #baseURLOverridden(): boolean {
+    return this.baseURL !== environments[this._options.environment || 'production'];
+  }
+
   protected defaultQuery(): Record<string, string | undefined> | undefined {
     return this._options.defaultQuery;
   }
@@ -265,11 +295,16 @@ export class Kernel {
     return Errors.APIError.generate(status, error, message, headers);
   }
 
-  buildURL(path: string, query: Record<string, unknown> | null | undefined): string {
+  buildURL(
+    path: string,
+    query: Record<string, unknown> | null | undefined,
+    defaultBaseURL?: string | undefined,
+  ): string {
+    const baseURL = (!this.#baseURLOverridden() && defaultBaseURL) || this.baseURL;
     const url =
       isAbsoluteURL(path) ?
         new URL(path)
-      : new URL(this.baseURL + (this.baseURL.endsWith('/') && path.startsWith('/') ? path.slice(1) : path));
+      : new URL(baseURL + (baseURL.endsWith('/') && path.startsWith('/') ? path.slice(1) : path));
 
     const defaultQuery = this.defaultQuery();
     if (!isEmptyObj(defaultQuery)) {
@@ -610,9 +645,9 @@ export class Kernel {
     { retryCount = 0 }: { retryCount?: number } = {},
   ): { req: FinalizedRequestInit; url: string; timeout: number } {
     const options = { ...inputOptions };
-    const { method, path, query } = options;
+    const { method, path, query, defaultBaseURL } = options;
 
-    const url = this.buildURL(path!, query as Record<string, unknown>);
+    const url = this.buildURL(path!, query as Record<string, unknown>, defaultBaseURL);
     if ('timeout' in options) validatePositiveInteger('timeout', options.timeout);
     options.timeout = options.timeout ?? this.timeout;
     const { bodyHeaders, body } = this.buildBody({ options });
@@ -735,15 +770,39 @@ export class Kernel {
 
   static toFile = Uploads.toFile;
 
+  deployments: API.Deployments = new API.Deployments(this);
   apps: API.Apps = new API.Apps(this);
+  invocations: API.Invocations = new API.Invocations(this);
   browsers: API.Browsers = new API.Browsers(this);
 }
+Kernel.Deployments = Deployments;
 Kernel.Apps = Apps;
+Kernel.Invocations = Invocations;
 Kernel.Browsers = Browsers;
 export declare namespace Kernel {
   export type RequestOptions = Opts.RequestOptions;
 
+  export {
+    Deployments as Deployments,
+    type DeploymentStateEvent as DeploymentStateEvent,
+    type DeploymentCreateResponse as DeploymentCreateResponse,
+    type DeploymentRetrieveResponse as DeploymentRetrieveResponse,
+    type DeploymentFollowResponse as DeploymentFollowResponse,
+    type DeploymentCreateParams as DeploymentCreateParams,
+  };
+
   export { Apps as Apps, type AppListResponse as AppListResponse, type AppListParams as AppListParams };
+
+  export {
+    Invocations as Invocations,
+    type InvocationStateEvent as InvocationStateEvent,
+    type InvocationCreateResponse as InvocationCreateResponse,
+    type InvocationRetrieveResponse as InvocationRetrieveResponse,
+    type InvocationUpdateResponse as InvocationUpdateResponse,
+    type InvocationFollowResponse as InvocationFollowResponse,
+    type InvocationCreateParams as InvocationCreateParams,
+    type InvocationUpdateParams as InvocationUpdateParams,
+  };
 
   export {
     Browsers as Browsers,
@@ -754,4 +813,9 @@ export declare namespace Kernel {
     type BrowserCreateParams as BrowserCreateParams,
     type BrowserDeleteParams as BrowserDeleteParams,
   };
+
+  export type ErrorDetail = API.ErrorDetail;
+  export type ErrorEvent = API.ErrorEvent;
+  export type ErrorModel = API.ErrorModel;
+  export type LogEvent = API.LogEvent;
 }
