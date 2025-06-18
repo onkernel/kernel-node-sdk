@@ -58,6 +58,21 @@ export class Invocations extends APIResource {
   }
 
   /**
+   * Delete all browser sessions created within the specified invocation.
+   *
+   * @example
+   * ```ts
+   * await client.invocations.deleteBrowsers('id');
+   * ```
+   */
+  deleteBrowsers(id: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/invocations/${id}/browsers`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
    * Establishes a Server-Sent Events (SSE) stream that delivers real-time logs and
    * status updates for an invocation. The stream terminates automatically once the
    * invocation reaches a terminal state.
