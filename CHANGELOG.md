@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.6.0 (2025-06-18)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** update via SDK Studio ([ce675af](https://github.com/onkernel/kernel-node-sdk/commit/ce675afa43f72708fd26bd0ab9d37b43f2e4b645))
+* **api:** update via SDK Studio ([b4fbd8c](https://github.com/onkernel/kernel-node-sdk/commit/b4fbd8cd5287894a1e31c3369e6268676b5cfb93))
+* **api:** update via SDK Studio ([c6890ba](https://github.com/onkernel/kernel-node-sdk/commit/c6890ba4c2ccebc4be3388107de407ef833555d6))
+* **api:** update via SDK Studio ([842ec55](https://github.com/onkernel/kernel-node-sdk/commit/842ec5503a95b8a7bd43405cb0af36411610d14a))
+* **api:** update via SDK Studio ([b0652c7](https://github.com/onkernel/kernel-node-sdk/commit/b0652c76a0d9b8ff39c8d97d0087a305ed1bb0b7))
+* **api:** update via SDK Studio ([76a1ea8](https://github.com/onkernel/kernel-node-sdk/commit/76a1ea8d2d978b7872ff122f6b4457f361695e22))
+* **api:** update via SDK Studio ([371e317](https://github.com/onkernel/kernel-node-sdk/commit/371e3178a73439915a459dc0b7e968aeaf9f7e8f))
+* **api:** update via SDK Studio ([6e4f782](https://github.com/onkernel/kernel-node-sdk/commit/6e4f782824e8ec1956d31ddaff7073a0015a3014))
+* **api:** update via SDK Studio ([121219a](https://github.com/onkernel/kernel-node-sdk/commit/121219a8e7dab92398d7373afb84be06a9d15217))
+* **api:** update via SDK Studio ([567602f](https://github.com/onkernel/kernel-node-sdk/commit/567602fb83e9135938abd7cd080f864fc787f288))
+* **api:** update via SDK Studio ([ef99764](https://github.com/onkernel/kernel-node-sdk/commit/ef99764a42bc6243b028162eb1fcc88ae36eed41))
+* **api:** update via SDK Studio ([e4ad78d](https://github.com/onkernel/kernel-node-sdk/commit/e4ad78d21af5a7d009f55cea09da358780ca8d2d))
+* **api:** update via SDK Studio ([171423f](https://github.com/onkernel/kernel-node-sdk/commit/171423fb6af8fde206a1e32a1e8611f4b1d325be))
+* **client:** add support for endpoint-specific base URLs ([7b4d7a2](https://github.com/onkernel/kernel-node-sdk/commit/7b4d7a2da7ba44fa0e0648545eccb5e175cf8255))
+
+
+### Bug Fixes
+
+* publish script — handle NPM errors correctly ([16c70f4](https://github.com/onkernel/kernel-node-sdk/commit/16c70f444b06763b186c7138e16476d03b9638fe))
+
+
+### Chores
+
+* avoid type error in certain environments ([ec7be8d](https://github.com/onkernel/kernel-node-sdk/commit/ec7be8d0c90029c4fb5911afee057dcd73f6caa1))
+* **ci:** enable for pull requests ([0dc0e13](https://github.com/onkernel/kernel-node-sdk/commit/0dc0e130a319209e0debcb41df6a7e4e473a013b))
+* **client:** refactor imports ([801fb38](https://github.com/onkernel/kernel-node-sdk/commit/801fb38b66af7598d9bbc12d6964031f44f7a6ea))
+* **internal:** add pure annotations, make base APIResource abstract ([71cd518](https://github.com/onkernel/kernel-node-sdk/commit/71cd5185af173938e8bf933045de56dec7c04802))
+* **readme:** update badges ([48f24e9](https://github.com/onkernel/kernel-node-sdk/commit/48f24e9591eeb869dfeb38b6f52f28d6edfcd10e))
+
 ## 0.5.0 (2025-06-04)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.4.0...v0.5.0)
