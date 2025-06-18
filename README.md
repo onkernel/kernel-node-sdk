@@ -1,6 +1,6 @@
 # Kernel TypeScript API Library
 
-[![NPM version](https://img.shields.io/npm/v/@onkernel/sdk.svg)](https://npmjs.org/package/@onkernel/sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@onkernel/sdk)
+[![NPM version](<https://img.shields.io/npm/v/@onkernel/sdk.svg?label=npm%20(stable)>)](https://npmjs.org/package/@onkernel/sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@onkernel/sdk)
 
 This library provides convenient access to the Kernel REST API from server-side TypeScript or JavaScript.
 
