@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.6.2 (2025-06-21)
+
+Full Changelog: [v0.6.1...v0.6.2](https://github.com/onkernel/kernel-node-sdk/compare/v0.6.1...v0.6.2)
+
+### Bug Fixes
+
+* **client:** explicitly copy fetch in withOptions ([9859602](https://github.com/onkernel/kernel-node-sdk/commit/98596028a28e39d7b5bf7253f0a950aba5144e57))
+
+
+### Chores
+
+* **readme:** use better example snippet for undocumented params ([e8633e0](https://github.com/onkernel/kernel-node-sdk/commit/e8633e0ef4dbeb73d964ce86e74bc75288c04594))
+
 ## 0.6.1 (2025-06-18)
 
 Full Changelog: [v0.6.0...v0.6.1](https://github.com/onkernel/kernel-node-sdk/compare/v0.6.0...v0.6.1)
