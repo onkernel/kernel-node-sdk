@@ -45,6 +45,11 @@ export namespace AppListResponse {
     app_name: string;
 
     /**
+     * Deployment ID
+     */
+    deployment: string;
+
+    /**
      * Deployment region code
      */
     region: 'aws.us-east-1a';
