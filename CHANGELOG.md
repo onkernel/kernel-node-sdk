@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.6.2 (2025-06-24)
+
+Full Changelog: [v0.6.1...v0.6.2](https://github.com/onkernel/kernel-node-sdk/compare/v0.6.1...v0.6.2)
+
+### Features
+
+* **api:** add `since` parameter to deployment logs endpoint ([178712c](https://github.com/onkernel/kernel-node-sdk/commit/178712ccb7c7f326df11c6c63e3ca02697a793b4))
+
+
+### Bug Fixes
+
+* **client:** explicitly copy fetch in withOptions ([9859602](https://github.com/onkernel/kernel-node-sdk/commit/98596028a28e39d7b5bf7253f0a950aba5144e57))
+
+
+### Chores
+
+* **readme:** use better example snippet for undocumented params ([e8633e0](https://github.com/onkernel/kernel-node-sdk/commit/e8633e0ef4dbeb73d964ce86e74bc75288c04594))
+
+
+### Refactors
+
+* **types:** replace Record with mapped types ([73ff4fa](https://github.com/onkernel/kernel-node-sdk/commit/73ff4fa307465ad81a01070d9eb4e1ff1f7e5bd8))
+
 ## 0.6.1 (2025-06-18)
 
 Full Changelog: [v0.6.0...v0.6.1](https://github.com/onkernel/kernel-node-sdk/compare/v0.6.0...v0.6.1)
