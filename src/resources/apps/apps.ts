@@ -57,7 +57,7 @@ export namespace AppListResponse {
     /**
      * Environment variables configured for this app version
      */
-    env_vars?: Record<string, string>;
+    env_vars?: { [key: string]: string };
   }
 }
 
