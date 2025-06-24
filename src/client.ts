@@ -28,6 +28,7 @@ import {
 import {
   DeploymentCreateParams,
   DeploymentCreateResponse,
+  DeploymentFollowParams,
   DeploymentFollowResponse,
   DeploymentRetrieveResponse,
   DeploymentStateEvent,
@@ -779,6 +780,7 @@ export declare namespace Kernel {
     type DeploymentRetrieveResponse as DeploymentRetrieveResponse,
     type DeploymentFollowResponse as DeploymentFollowResponse,
     type DeploymentCreateParams as DeploymentCreateParams,
+    type DeploymentFollowParams as DeploymentFollowParams,
   };
 
   export { Apps as Apps, type AppListResponse as AppListResponse, type AppListParams as AppListParams };
@@ -807,5 +809,6 @@ export declare namespace Kernel {
   export type ErrorDetail = API.ErrorDetail;
   export type ErrorEvent = API.ErrorEvent;
   export type ErrorModel = API.ErrorModel;
+  export type HeartbeatEvent = API.HeartbeatEvent;
   export type LogEvent = API.LogEvent;
 }

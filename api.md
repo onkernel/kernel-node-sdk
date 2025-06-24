@@ -5,6 +5,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">ErrorDetail</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorEvent</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorModel</a></code>
+- <code><a href="./src/resources/shared.ts">HeartbeatEvent</a></code>
 - <code><a href="./src/resources/shared.ts">LogEvent</a></code>
 
 # Deployments
@@ -20,7 +21,7 @@ Methods:
 
 - <code title="post /deployments">client.deployments.<a href="./src/resources/deployments.ts">create</a>({ ...params }) -> DeploymentCreateResponse</code>
 - <code title="get /deployments/{id}">client.deployments.<a href="./src/resources/deployments.ts">retrieve</a>(id) -> DeploymentRetrieveResponse</code>
-- <code title="get /deployments/{id}/events">client.deployments.<a href="./src/resources/deployments.ts">follow</a>(id) -> DeploymentFollowResponse</code>
+- <code title="get /deployments/{id}/events">client.deployments.<a href="./src/resources/deployments.ts">follow</a>(id, { ...params }) -> DeploymentFollowResponse</code>
 
 # Apps
 

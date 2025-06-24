@@ -97,7 +97,8 @@ export namespace DeploymentCreateResponse {
 export type DeploymentFollowResponse =
   | DeploymentFollowResponse.StateEvent
   | DeploymentFollowResponse.StateUpdateEvent
-  | Shared.LogEvent;
+  | Shared.LogEvent
+  | Shared.HeartbeatEvent;
 
 export namespace DeploymentFollowResponse {
   /**

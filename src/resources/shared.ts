@@ -49,6 +49,21 @@ export interface ErrorModel {
 }
 
 /**
+ * Heartbeat event sent periodically to keep SSE connection alive.
+ */
+export interface HeartbeatEvent {
+  /**
+   * Event type identifier (always "sse_heartbeat").
+   */
+  event: 'sse_heartbeat';
+
+  /**
+   * Time the heartbeat was sent.
+   */
+  timestamp: string;
+}
+
+/**
  * A log entry from the application.
  */
 export interface LogEvent {
