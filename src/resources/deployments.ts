@@ -110,7 +110,7 @@ export namespace DeploymentStateEvent {
     /**
      * Environment variables configured for this deployment
      */
-    env_vars?: Record<string, string>;
+    env_vars?: { [key: string]: string };
 
     /**
      * Status reason
@@ -156,7 +156,7 @@ export interface DeploymentCreateResponse {
   /**
    * Environment variables configured for this deployment
    */
-  env_vars?: Record<string, string>;
+  env_vars?: { [key: string]: string };
 
   /**
    * Status reason
@@ -201,7 +201,7 @@ export interface DeploymentRetrieveResponse {
   /**
    * Environment variables configured for this deployment
    */
-  env_vars?: Record<string, string>;
+  env_vars?: { [key: string]: string };
 
   /**
    * Status reason
@@ -266,7 +266,7 @@ export namespace DeploymentFollowResponse {
     /**
      * Environment variables configured for this app version
      */
-    env_vars?: Record<string, string>;
+    env_vars?: { [key: string]: string };
   }
 
   export namespace AppVersionSummaryEvent {
@@ -297,7 +297,7 @@ export interface DeploymentCreateParams {
    * Map of environment variables to set for the deployed application. Each key-value
    * pair represents an environment variable.
    */
-  env_vars?: Record<string, string>;
+  env_vars?: { [key: string]: string };
 
   /**
    * Allow overwriting an existing app version

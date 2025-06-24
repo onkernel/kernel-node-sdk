@@ -156,7 +156,7 @@ export interface DeploymentCreateParams {
    * Map of environment variables to set for the deployed application. Each key-value
    * pair represents an environment variable.
    */
-  env_vars?: Record<string, string>;
+  env_vars?: { [key: string]: string };
 
   /**
    * Allow overwriting an existing app version
