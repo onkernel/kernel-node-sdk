@@ -283,7 +283,11 @@ export interface InvocationUpdateResponse {
 /**
  * Union type representing any invocation event.
  */
-export type InvocationFollowResponse = Shared.LogEvent | InvocationStateEvent | Shared.ErrorEvent;
+export type InvocationFollowResponse =
+  | Shared.LogEvent
+  | InvocationStateEvent
+  | Shared.ErrorEvent
+  | Shared.HeartbeatEvent;
 
 export interface InvocationCreateParams {
   /**

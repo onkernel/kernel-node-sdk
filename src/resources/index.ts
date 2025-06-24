@@ -18,6 +18,7 @@ export {
   type DeploymentRetrieveResponse,
   type DeploymentFollowResponse,
   type DeploymentCreateParams,
+  type DeploymentFollowParams,
 } from './deployments';
 export {
   Invocations,

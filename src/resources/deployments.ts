@@ -48,8 +48,13 @@ export class Deployments extends APIResource {
    * const response = await client.deployments.follow('id');
    * ```
    */
-  follow(id: string, options?: RequestOptions): APIPromise<Stream<DeploymentFollowResponse>> {
+  follow(
+    id: string,
+    query: DeploymentFollowParams | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Stream<DeploymentFollowResponse>> {
     return this._client.get(path`/deployments/${id}/events`, {
+      query,
       ...options,
       headers: buildHeaders([{ Accept: 'text/event-stream' }, options?.headers]),
       stream: true,
@@ -221,7 +226,8 @@ export type DeploymentFollowResponse =
   | Shared.LogEvent
   | DeploymentStateEvent
   | DeploymentFollowResponse.AppVersionSummaryEvent
-  | Shared.ErrorEvent;
+  | Shared.ErrorEvent
+  | Shared.HeartbeatEvent;
 
 export namespace DeploymentFollowResponse {
   /**
@@ -315,6 +321,13 @@ export interface DeploymentCreateParams {
   version?: string;
 }
 
+export interface DeploymentFollowParams {
+  /**
+   * Show logs since the given time (RFC timestamps or durations like 5m).
+   */
+  since?: string;
+}
+
 export declare namespace Deployments {
   export {
     type DeploymentStateEvent as DeploymentStateEvent,
@@ -322,5 +335,6 @@ export declare namespace Deployments {
     type DeploymentRetrieveResponse as DeploymentRetrieveResponse,
     type DeploymentFollowResponse as DeploymentFollowResponse,
     type DeploymentCreateParams as DeploymentCreateParams,
+    type DeploymentFollowParams as DeploymentFollowParams,
   };
 }
