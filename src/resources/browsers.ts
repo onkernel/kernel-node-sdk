@@ -13,12 +13,13 @@ export class Browsers extends APIResource {
    *
    * @example
    * ```ts
-   * const browser = await client.browsers.create({
-   *   invocation_id: 'rr33xuugxj9h0bkf1rdt2bet',
-   * });
+   * const browser = await client.browsers.create();
    * ```
    */
-  create(body: BrowserCreateParams, options?: RequestOptions): APIPromise<BrowserCreateResponse> {
+  create(
+    body: BrowserCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<BrowserCreateResponse> {
     return this._client.post('/browsers', { body, ...options });
   }
 
@@ -169,7 +170,7 @@ export interface BrowserCreateParams {
   /**
    * action invocation ID
    */
-  invocation_id: string;
+  invocation_id?: string;
 
   /**
    * Optional persistence configuration for the browser session.
