@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.3 (2025-06-25)
+
+Full Changelog: [v0.6.2...v0.6.3](https://github.com/onkernel/kernel-node-sdk/compare/v0.6.2...v0.6.3)
+
+### Features
+
+* **api:** /browsers no longer requires invocation id ([8875d65](https://github.com/onkernel/kernel-node-sdk/commit/8875d65b89f6a1d8d79bf8b1463b0900247e89b3))
+
 ## 0.6.2 (2025-06-24)
 
 Full Changelog: [v0.6.1...v0.6.2](https://github.com/onkernel/kernel-node-sdk/compare/v0.6.1...v0.6.2)
