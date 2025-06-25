@@ -9,8 +9,8 @@ const client = new Kernel({
 
 describe('resource browsers', () => {
   // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.browsers.create({ invocation_id: 'rr33xuugxj9h0bkf1rdt2bet' });
+  test.skip('create', async () => {
+    const responsePromise = client.browsers.create();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,12 +21,18 @@ describe('resource browsers', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
-    const response = await client.browsers.create({
-      invocation_id: 'rr33xuugxj9h0bkf1rdt2bet',
-      persistence: { id: 'my-awesome-browser-for-user-1234' },
-      stealth: true,
-    });
+  test.skip('create: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.browsers.create(
+        {
+          invocation_id: 'rr33xuugxj9h0bkf1rdt2bet',
+          persistence: { id: 'my-awesome-browser-for-user-1234' },
+          stealth: true,
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Kernel.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being
