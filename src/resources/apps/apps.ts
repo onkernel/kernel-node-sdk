@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as Shared from '../shared';
 import * as DeploymentsAPI from './deployments';
 import {
   DeploymentCreateParams,
@@ -40,6 +41,11 @@ export namespace AppListResponse {
     id: string;
 
     /**
+     * List of actions available on the app
+     */
+    actions: Array<Shared.AppAction>;
+
+    /**
      * Name of the application
      */
     app_name: string;
@@ -50,6 +56,11 @@ export namespace AppListResponse {
     deployment: string;
 
     /**
+     * Environment variables configured for this app version
+     */
+    env_vars: { [key: string]: string };
+
+    /**
      * Deployment region code
      */
     region: 'aws.us-east-1a';
@@ -58,11 +69,6 @@ export namespace AppListResponse {
      * Version label for the application
      */
     version: string;
-
-    /**
-     * Environment variables configured for this app version
-     */
-    env_vars?: { [key: string]: string };
   }
 }
 

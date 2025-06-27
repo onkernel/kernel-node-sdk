@@ -72,21 +72,12 @@ export namespace DeploymentCreateResponse {
     /**
      * List of actions available on the app
      */
-    actions: Array<App.Action>;
+    actions: Array<Shared.AppAction>;
 
     /**
      * Name of the app
      */
     name: string;
-  }
-
-  export namespace App {
-    export interface Action {
-      /**
-       * Name of the action
-       */
-      name: string;
-    }
   }
 }
 
