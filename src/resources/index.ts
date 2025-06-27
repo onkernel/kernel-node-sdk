@@ -16,8 +16,10 @@ export {
   type DeploymentStateEvent,
   type DeploymentCreateResponse,
   type DeploymentRetrieveResponse,
+  type DeploymentListResponse,
   type DeploymentFollowResponse,
   type DeploymentCreateParams,
+  type DeploymentListParams,
   type DeploymentFollowParams,
 } from './deployments';
 export {

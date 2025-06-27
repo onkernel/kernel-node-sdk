@@ -47,6 +47,26 @@ describe('resource deployments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
+    const responsePromise = client.deployments.list();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.deployments.list({ app_name: 'app_name' }, { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Kernel.NotFoundError);
+  });
+
   // skipped: currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail
   test.skip('follow', async () => {
     const responsePromise = client.deployments.follow('id');
