@@ -2,6 +2,7 @@
 
 Types:
 
+- <code><a href="./src/resources/shared.ts">AppAction</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorDetail</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorEvent</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorModel</a></code>
@@ -15,12 +16,14 @@ Types:
 - <code><a href="./src/resources/deployments.ts">DeploymentStateEvent</a></code>
 - <code><a href="./src/resources/deployments.ts">DeploymentCreateResponse</a></code>
 - <code><a href="./src/resources/deployments.ts">DeploymentRetrieveResponse</a></code>
+- <code><a href="./src/resources/deployments.ts">DeploymentListResponse</a></code>
 - <code><a href="./src/resources/deployments.ts">DeploymentFollowResponse</a></code>
 
 Methods:
 
 - <code title="post /deployments">client.deployments.<a href="./src/resources/deployments.ts">create</a>({ ...params }) -> DeploymentCreateResponse</code>
 - <code title="get /deployments/{id}">client.deployments.<a href="./src/resources/deployments.ts">retrieve</a>(id) -> DeploymentRetrieveResponse</code>
+- <code title="get /deployments">client.deployments.<a href="./src/resources/deployments.ts">list</a>({ ...params }) -> DeploymentListResponse</code>
 - <code title="get /deployments/{id}/events">client.deployments.<a href="./src/resources/deployments.ts">follow</a>(id, { ...params }) -> DeploymentFollowResponse</code>
 
 # Apps
