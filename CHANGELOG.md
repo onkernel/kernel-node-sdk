@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.6.4 (2025-06-27)
+
+Full Changelog: [v0.6.3...v0.6.4](https://github.com/onkernel/kernel-node-sdk/compare/v0.6.3...v0.6.4)
+
+### Features
+
+* **api:** add GET deployments endpoint ([89b755a](https://github.com/onkernel/kernel-node-sdk/commit/89b755ab2e178f4b0dc5c62931a1fd45ff1021b7))
+* **api:** deployments ([94db12e](https://github.com/onkernel/kernel-node-sdk/commit/94db12ed7156c1c1288f37d27d3e29318317ca77))
+* **api:** manual updates ([042d683](https://github.com/onkernel/kernel-node-sdk/commit/042d6833991c6252b104d2a590ecc7d6c98dcf99))
+
+
+### Bug Fixes
+
+* **ci:** release-doctor — report correct token name ([c9e22fd](https://github.com/onkernel/kernel-node-sdk/commit/c9e22fdadb192a655859db322fd174321001040d))
+* **client:** get fetchOptions type more reliably ([5f60c0f](https://github.com/onkernel/kernel-node-sdk/commit/5f60c0f4c555ae86fc5e6c43c09a465adca163f0))
+
 ## 0.6.3 (2025-06-25)
 
 Full Changelog: [v0.6.2...v0.6.3](https://github.com/onkernel/kernel-node-sdk/compare/v0.6.2...v0.6.3)
