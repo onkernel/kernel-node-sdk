@@ -30,6 +30,8 @@ import {
   DeploymentCreateResponse,
   DeploymentFollowParams,
   DeploymentFollowResponse,
+  DeploymentListParams,
+  DeploymentListResponse,
   DeploymentRetrieveResponse,
   DeploymentStateEvent,
   Deployments,
@@ -778,8 +780,10 @@ export declare namespace Kernel {
     type DeploymentStateEvent as DeploymentStateEvent,
     type DeploymentCreateResponse as DeploymentCreateResponse,
     type DeploymentRetrieveResponse as DeploymentRetrieveResponse,
+    type DeploymentListResponse as DeploymentListResponse,
     type DeploymentFollowResponse as DeploymentFollowResponse,
     type DeploymentCreateParams as DeploymentCreateParams,
+    type DeploymentListParams as DeploymentListParams,
     type DeploymentFollowParams as DeploymentFollowParams,
   };
 
