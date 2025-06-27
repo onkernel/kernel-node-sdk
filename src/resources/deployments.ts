@@ -39,6 +39,21 @@ export class Deployments extends APIResource {
   }
 
   /**
+   * List deployments. Optionally filter by application name.
+   *
+   * @example
+   * ```ts
+   * const deployments = await client.deployments.list();
+   * ```
+   */
+  list(
+    query: DeploymentListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DeploymentListResponse> {
+    return this._client.get('/deployments', { query, ...options });
+  }
+
+  /**
    * Establishes a Server-Sent Events (SSE) stream that delivers real-time logs and
    * status updates for a deployment. The stream terminates automatically once the
    * deployment reaches a terminal state.
@@ -219,6 +234,55 @@ export interface DeploymentRetrieveResponse {
   updated_at?: string | null;
 }
 
+export type DeploymentListResponse = Array<DeploymentListResponse.DeploymentListResponseItem>;
+
+export namespace DeploymentListResponse {
+  /**
+   * Deployment record information.
+   */
+  export interface DeploymentListResponseItem {
+    /**
+     * Unique identifier for the deployment
+     */
+    id: string;
+
+    /**
+     * Timestamp when the deployment was created
+     */
+    created_at: string;
+
+    /**
+     * Deployment region code
+     */
+    region: 'aws.us-east-1a';
+
+    /**
+     * Current status of the deployment
+     */
+    status: 'queued' | 'in_progress' | 'running' | 'failed' | 'stopped';
+
+    /**
+     * Relative path to the application entrypoint
+     */
+    entrypoint_rel_path?: string;
+
+    /**
+     * Environment variables configured for this deployment
+     */
+    env_vars?: { [key: string]: string };
+
+    /**
+     * Status reason
+     */
+    status_reason?: string;
+
+    /**
+     * Timestamp when the deployment was last updated
+     */
+    updated_at?: string | null;
+  }
+}
+
 /**
  * Union type representing any deployment event.
  */
@@ -242,7 +306,7 @@ export namespace DeploymentFollowResponse {
     /**
      * List of actions available on the app
      */
-    actions: Array<AppVersionSummaryEvent.Action>;
+    actions: Array<Shared.AppAction>;
 
     /**
      * Name of the application
@@ -273,18 +337,6 @@ export namespace DeploymentFollowResponse {
      * Environment variables configured for this app version
      */
     env_vars?: { [key: string]: string };
-  }
-
-  export namespace AppVersionSummaryEvent {
-    /**
-     * An action available on the app
-     */
-    export interface Action {
-      /**
-       * Name of the action
-       */
-      name: string;
-    }
   }
 }
 
@@ -321,6 +373,13 @@ export interface DeploymentCreateParams {
   version?: string;
 }
 
+export interface DeploymentListParams {
+  /**
+   * Filter results by application name.
+   */
+  app_name?: string;
+}
+
 export interface DeploymentFollowParams {
   /**
    * Show logs since the given time (RFC timestamps or durations like 5m).
@@ -333,8 +392,10 @@ export declare namespace Deployments {
     type DeploymentStateEvent as DeploymentStateEvent,
     type DeploymentCreateResponse as DeploymentCreateResponse,
     type DeploymentRetrieveResponse as DeploymentRetrieveResponse,
+    type DeploymentListResponse as DeploymentListResponse,
     type DeploymentFollowResponse as DeploymentFollowResponse,
     type DeploymentCreateParams as DeploymentCreateParams,
+    type DeploymentListParams as DeploymentListParams,
     type DeploymentFollowParams as DeploymentFollowParams,
   };
 }

@@ -1,5 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+/**
+ * An action available on the app
+ */
+export interface AppAction {
+  /**
+   * Name of the action
+   */
+  name: string;
+}
+
 export interface ErrorDetail {
   /**
    * Lower-level error code providing more specific detail
