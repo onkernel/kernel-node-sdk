@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.5 (2025-06-28)
+
+Full Changelog: [v0.6.4...v0.6.5](https://github.com/onkernel/kernel-node-sdk/compare/v0.6.4...v0.6.5)
+
+### Chores
+
+* **ci:** only run for pushes and fork pull requests ([4b2836c](https://github.com/onkernel/kernel-node-sdk/commit/4b2836ccf9a7e66e43633b9f92b1c24c6fc25ab7))
+
 ## 0.6.4 (2025-06-27)
 
 Full Changelog: [v0.6.3...v0.6.4](https://github.com/onkernel/kernel-node-sdk/compare/v0.6.3...v0.6.4)
