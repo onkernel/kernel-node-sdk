@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.5 (2025-07-02)
+
+Full Changelog: [v0.6.4...v0.6.5](https://github.com/onkernel/kernel-node-sdk/compare/v0.6.4...v0.6.5)
+
+### Chores
+
+* **ci:** only run for pushes and fork pull requests ([4b2836c](https://github.com/onkernel/kernel-node-sdk/commit/4b2836ccf9a7e66e43633b9f92b1c24c6fc25ab7))
+* **client:** improve path param validation ([0105321](https://github.com/onkernel/kernel-node-sdk/commit/010532116b7a1ad3bf631e6f7760825ed8142996))
+
 ## 0.6.4 (2025-06-27)
 
 Full Changelog: [v0.6.3...v0.6.4](https://github.com/onkernel/kernel-node-sdk/compare/v0.6.3...v0.6.4)
