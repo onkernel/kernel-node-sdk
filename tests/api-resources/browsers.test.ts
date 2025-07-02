@@ -26,6 +26,7 @@ describe('resource browsers', () => {
     await expect(
       client.browsers.create(
         {
+          headless: false,
           invocation_id: 'rr33xuugxj9h0bkf1rdt2bet',
           persistence: { id: 'my-awesome-browser-for-user-1234' },
           stealth: true,
