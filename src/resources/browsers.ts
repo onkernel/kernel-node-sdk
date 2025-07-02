@@ -98,11 +98,6 @@ export interface BrowserPersistence {
 
 export interface BrowserCreateResponse {
   /**
-   * Remote URL for live viewing the browser session
-   */
-  browser_live_view_url: string;
-
-  /**
    * Websocket URL for Chrome DevTools Protocol connections to the browser session
    */
   cdp_ws_url: string;
@@ -111,6 +106,12 @@ export interface BrowserCreateResponse {
    * Unique identifier for the browser session
    */
   session_id: string;
+
+  /**
+   * Remote URL for live viewing the browser session. Only available for non-headless
+   * browsers.
+   */
+  browser_live_view_url?: string;
 
   /**
    * Optional persistence configuration for the browser session.
@@ -120,11 +121,6 @@ export interface BrowserCreateResponse {
 
 export interface BrowserRetrieveResponse {
   /**
-   * Remote URL for live viewing the browser session
-   */
-  browser_live_view_url: string;
-
-  /**
    * Websocket URL for Chrome DevTools Protocol connections to the browser session
    */
   cdp_ws_url: string;
@@ -133,6 +129,12 @@ export interface BrowserRetrieveResponse {
    * Unique identifier for the browser session
    */
   session_id: string;
+
+  /**
+   * Remote URL for live viewing the browser session. Only available for non-headless
+   * browsers.
+   */
+  browser_live_view_url?: string;
 
   /**
    * Optional persistence configuration for the browser session.
@@ -145,11 +147,6 @@ export type BrowserListResponse = Array<BrowserListResponse.BrowserListResponseI
 export namespace BrowserListResponse {
   export interface BrowserListResponseItem {
     /**
-     * Remote URL for live viewing the browser session
-     */
-    browser_live_view_url: string;
-
-    /**
      * Websocket URL for Chrome DevTools Protocol connections to the browser session
      */
     cdp_ws_url: string;
@@ -160,6 +157,12 @@ export namespace BrowserListResponse {
     session_id: string;
 
     /**
+     * Remote URL for live viewing the browser session. Only available for non-headless
+     * browsers.
+     */
+    browser_live_view_url?: string;
+
+    /**
      * Optional persistence configuration for the browser session.
      */
     persistence?: BrowsersAPI.BrowserPersistence;
@@ -167,6 +170,12 @@ export namespace BrowserListResponse {
 }
 
 export interface BrowserCreateParams {
+  /**
+   * If true, launches the browser using a headless image (no VNC/GUI). Defaults to
+   * false.
+   */
+  headless?: boolean;
+
   /**
    * action invocation ID
    */
