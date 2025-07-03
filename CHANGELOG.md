@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.7.1 (2025-07-03)
+
+Full Changelog: [v0.7.0...v0.7.1](https://github.com/onkernel/kernel-node-sdk/compare/v0.7.0...v0.7.1)
+
+### Bug Fixes
+
+* avoid console usage ([f37b356](https://github.com/onkernel/kernel-node-sdk/commit/f37b3560b92abc5a85416b9b69f03a70b3ff71cf))
+
+
+### Chores
+
+* add docs to RequestOptions type ([fcb82ff](https://github.com/onkernel/kernel-node-sdk/commit/fcb82ff3d5c14af006bba0e441d57baf318a19cf))
+
 ## 0.7.0 (2025-07-02)
 
 Full Changelog: [v0.6.5...v0.7.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.6.5...v0.7.0)
