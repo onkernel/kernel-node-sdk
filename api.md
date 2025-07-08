@@ -82,3 +82,4 @@ Methods:
 - <code title="get /browsers">client.browsers.<a href="./src/resources/browsers.ts">list</a>() -> BrowserListResponse</code>
 - <code title="delete /browsers">client.browsers.<a href="./src/resources/browsers.ts">delete</a>({ ...params }) -> void</code>
 - <code title="delete /browsers/{id}">client.browsers.<a href="./src/resources/browsers.ts">deleteByID</a>(id) -> void</code>
+- <code title="get /browsers/{id}/replay">client.browsers.<a href="./src/resources/browsers.ts">retrieveReplay</a>(id) -> Response</code>
