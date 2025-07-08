@@ -84,6 +84,27 @@ export class Browsers extends APIResource {
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
+
+  /**
+   * Get browser session replay.
+   *
+   * @example
+   * ```ts
+   * const response = await client.browsers.retrieveReplay(
+   *   'htzv5orfit78e1m2biiifpbv',
+   * );
+   *
+   * const content = await response.blob();
+   * console.log(content);
+   * ```
+   */
+  retrieveReplay(id: string, options?: RequestOptions): APIPromise<Response> {
+    return this._client.get(path`/browsers/${id}/replay`, {
+      ...options,
+      headers: buildHeaders([{ Accept: 'video/mp4' }, options?.headers]),
+      __binaryResponse: true,
+    });
+  }
 }
 
 /**
@@ -117,6 +138,11 @@ export interface BrowserCreateResponse {
    * Optional persistence configuration for the browser session.
    */
   persistence?: BrowserPersistence;
+
+  /**
+   * Remote URL for viewing the browser session replay if enabled
+   */
+  replay_view_url?: string;
 }
 
 export interface BrowserRetrieveResponse {
@@ -140,6 +166,11 @@ export interface BrowserRetrieveResponse {
    * Optional persistence configuration for the browser session.
    */
   persistence?: BrowserPersistence;
+
+  /**
+   * Remote URL for viewing the browser session replay if enabled
+   */
+  replay_view_url?: string;
 }
 
 export type BrowserListResponse = Array<BrowserListResponse.BrowserListResponseItem>;
@@ -166,6 +197,11 @@ export namespace BrowserListResponse {
      * Optional persistence configuration for the browser session.
      */
     persistence?: BrowsersAPI.BrowserPersistence;
+
+    /**
+     * Remote URL for viewing the browser session replay if enabled
+     */
+    replay_view_url?: string;
   }
 }
 
@@ -185,6 +221,11 @@ export interface BrowserCreateParams {
    * Optional persistence configuration for the browser session.
    */
   persistence?: BrowserPersistence;
+
+  /**
+   * If true, enables replay recording of the browser session. Defaults to false.
+   */
+  replay?: boolean;
 
   /**
    * If true, launches the browser in stealth mode to reduce detection by anti-bot
