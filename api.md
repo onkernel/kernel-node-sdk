@@ -70,16 +70,29 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/browsers.ts">BrowserPersistence</a></code>
-- <code><a href="./src/resources/browsers.ts">BrowserCreateResponse</a></code>
-- <code><a href="./src/resources/browsers.ts">BrowserRetrieveResponse</a></code>
-- <code><a href="./src/resources/browsers.ts">BrowserListResponse</a></code>
+- <code><a href="./src/resources/browsers/browsers.ts">BrowserPersistence</a></code>
+- <code><a href="./src/resources/browsers/browsers.ts">BrowserCreateResponse</a></code>
+- <code><a href="./src/resources/browsers/browsers.ts">BrowserRetrieveResponse</a></code>
+- <code><a href="./src/resources/browsers/browsers.ts">BrowserListResponse</a></code>
 
 Methods:
 
-- <code title="post /browsers">client.browsers.<a href="./src/resources/browsers.ts">create</a>({ ...params }) -> BrowserCreateResponse</code>
-- <code title="get /browsers/{id}">client.browsers.<a href="./src/resources/browsers.ts">retrieve</a>(id) -> BrowserRetrieveResponse</code>
-- <code title="get /browsers">client.browsers.<a href="./src/resources/browsers.ts">list</a>() -> BrowserListResponse</code>
-- <code title="delete /browsers">client.browsers.<a href="./src/resources/browsers.ts">delete</a>({ ...params }) -> void</code>
-- <code title="delete /browsers/{id}">client.browsers.<a href="./src/resources/browsers.ts">deleteByID</a>(id) -> void</code>
-- <code title="get /browsers/{id}/replay">client.browsers.<a href="./src/resources/browsers.ts">retrieveReplay</a>(id) -> Response</code>
+- <code title="post /browsers">client.browsers.<a href="./src/resources/browsers/browsers.ts">create</a>({ ...params }) -> BrowserCreateResponse</code>
+- <code title="get /browsers/{id}">client.browsers.<a href="./src/resources/browsers/browsers.ts">retrieve</a>(id) -> BrowserRetrieveResponse</code>
+- <code title="get /browsers">client.browsers.<a href="./src/resources/browsers/browsers.ts">list</a>() -> BrowserListResponse</code>
+- <code title="delete /browsers">client.browsers.<a href="./src/resources/browsers/browsers.ts">delete</a>({ ...params }) -> void</code>
+- <code title="delete /browsers/{id}">client.browsers.<a href="./src/resources/browsers/browsers.ts">deleteByID</a>(id) -> void</code>
+
+## Replays
+
+Types:
+
+- <code><a href="./src/resources/browsers/replays.ts">ReplayListResponse</a></code>
+- <code><a href="./src/resources/browsers/replays.ts">ReplayStartResponse</a></code>
+
+Methods:
+
+- <code title="get /browsers/{id}/replays">client.browsers.replays.<a href="./src/resources/browsers/replays.ts">list</a>(id) -> ReplayListResponse</code>
+- <code title="get /browsers/{id}/replays/{replay_id}">client.browsers.replays.<a href="./src/resources/browsers/replays.ts">download</a>(replayID, { ...params }) -> Response</code>
+- <code title="post /browsers/{id}/replays">client.browsers.replays.<a href="./src/resources/browsers/replays.ts">start</a>(id, { ...params }) -> ReplayStartResponse</code>
+- <code title="post /browsers/{id}/replays/{replay_id}/stop">client.browsers.replays.<a href="./src/resources/browsers/replays.ts">stop</a>(replayID, { ...params }) -> void</code>
