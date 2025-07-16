@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.8.0 (2025-07-16)
+
+Full Changelog: [v0.7.1...v0.8.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.7.1...v0.8.0)
+
+### Features
+
+* **api:** manual updates ([d073427](https://github.com/onkernel/kernel-node-sdk/commit/d0734275dd0014d8710a08eaa3a732d4530abe4f))
+
+
+### Chores
+
+* make some internal functions async ([b5d654f](https://github.com/onkernel/kernel-node-sdk/commit/b5d654f72557c9f5949e2067f6e61a5dcd514b03))
+
 ## 0.7.1 (2025-07-08)
 
 Full Changelog: [v0.7.0...v0.7.1](https://github.com/onkernel/kernel-node-sdk/compare/v0.7.0...v0.7.1)
