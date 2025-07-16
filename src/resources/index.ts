@@ -10,7 +10,7 @@ export {
   type BrowserListResponse,
   type BrowserCreateParams,
   type BrowserDeleteParams,
-} from './browsers';
+} from './browsers/browsers';
 export {
   Deployments,
   type DeploymentStateEvent,

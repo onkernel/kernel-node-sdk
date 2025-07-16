@@ -29,7 +29,6 @@ describe('resource browsers', () => {
           headless: false,
           invocation_id: 'rr33xuugxj9h0bkf1rdt2bet',
           persistence: { id: 'my-awesome-browser-for-user-1234' },
-          replay: true,
           stealth: true,
         },
         { path: '/_stainless_unknown_path' },
