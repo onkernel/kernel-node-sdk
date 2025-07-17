@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.1 (2025-07-17)
+
+Full Changelog: [v0.8.0...v0.8.1](https://github.com/onkernel/kernel-node-sdk/compare/v0.8.0...v0.8.1)
+
+### Chores
+
+* **ts:** reorder package.json imports ([e260997](https://github.com/onkernel/kernel-node-sdk/commit/e260997238b81c3183bbd7ba7f178cd2c4e3a1ac))
+
 ## 0.8.0 (2025-07-16)
 
 Full Changelog: [v0.7.1...v0.8.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.7.1...v0.8.0)
