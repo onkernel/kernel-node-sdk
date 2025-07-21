@@ -30,23 +30,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/apps/apps.ts">AppListResponse</a></code>
+- <code><a href="./src/resources/apps.ts">AppListResponse</a></code>
 
 Methods:
 
-- <code title="get /apps">client.apps.<a href="./src/resources/apps/apps.ts">list</a>({ ...params }) -> AppListResponse</code>
-
-## Deployments
-
-Types:
-
-- <code><a href="./src/resources/apps/deployments.ts">DeploymentCreateResponse</a></code>
-- <code><a href="./src/resources/apps/deployments.ts">DeploymentFollowResponse</a></code>
-
-Methods:
-
-- <code title="post /deploy">client.apps.deployments.<a href="./src/resources/apps/deployments.ts">create</a>({ ...params }) -> DeploymentCreateResponse</code>
-- <code title="get /apps/{id}/events">client.apps.deployments.<a href="./src/resources/apps/deployments.ts">follow</a>(id) -> DeploymentFollowResponse</code>
+- <code title="get /apps">client.apps.<a href="./src/resources/apps.ts">list</a>({ ...params }) -> AppListResponse</code>
 
 # Invocations
 

@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export * from './shared';
-export { Apps, type AppListResponse, type AppListParams } from './apps/apps';
+export { Apps, type AppListResponse, type AppListParams } from './apps';
 export {
   Browsers,
   type BrowserPersistence,

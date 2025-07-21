@@ -16,6 +16,7 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
+import { AppListParams, AppListResponse, Apps } from './resources/apps';
 import {
   DeploymentCreateParams,
   DeploymentCreateResponse,
@@ -37,7 +38,6 @@ import {
   InvocationUpdateResponse,
   Invocations,
 } from './resources/invocations';
-import { AppListParams, AppListResponse, Apps } from './resources/apps/apps';
 import {
   BrowserCreateParams,
   BrowserCreateResponse,
