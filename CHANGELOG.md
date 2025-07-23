@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.8.2 (2025-07-23)
+
+Full Changelog: [v0.8.0...v0.8.2](https://github.com/onkernel/kernel-node-sdk/compare/v0.8.0...v0.8.2)
+
+### Features
+
+* **api:** add action name to the response to invoke ([02097a8](https://github.com/onkernel/kernel-node-sdk/commit/02097a886f25ce632ac2ba166b510901fc6693ae))
+
+
+### Chores
+
+* **api:** remove deprecated endpoints ([904ea56](https://github.com/onkernel/kernel-node-sdk/commit/904ea5662e465a5238402427341550c6e7421614))
+* **ts:** reorder package.json imports ([e260997](https://github.com/onkernel/kernel-node-sdk/commit/e260997238b81c3183bbd7ba7f178cd2c4e3a1ac))
+
 ## 0.8.0 (2025-07-16)
 
 Full Changelog: [v0.7.1...v0.8.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.7.1...v0.8.0)
