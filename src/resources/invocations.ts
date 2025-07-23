@@ -166,6 +166,11 @@ export interface InvocationCreateResponse {
   id: string;
 
   /**
+   * Name of the action invoked
+   */
+  action_name: string;
+
+  /**
    * Status of the invocation
    */
   status: 'queued' | 'running' | 'succeeded' | 'failed';
