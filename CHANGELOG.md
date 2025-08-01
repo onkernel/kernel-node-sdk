@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.8.3 (2025-08-01)
+
+Full Changelog: [v0.8.2...v0.8.3](https://github.com/onkernel/kernel-node-sdk/compare/v0.8.2...v0.8.3)
+
+### Features
+
+* **api:** lower default timeout to 5s ([743b241](https://github.com/onkernel/kernel-node-sdk/commit/743b24161f294e289a6fe17537d02b8fe35f7b06))
+* **api:** manual updates ([d341269](https://github.com/onkernel/kernel-node-sdk/commit/d3412699e03073534c66912c0ccd607248655202))
+
+
+### Chores
+
+* **internal:** remove redundant imports config ([9da9247](https://github.com/onkernel/kernel-node-sdk/commit/9da92475e2a744e9f3714a83887ffba5c24559ee))
+
 ## 0.8.2 (2025-07-23)
 
 Full Changelog: [v0.8.0...v0.8.2](https://github.com/onkernel/kernel-node-sdk/compare/v0.8.0...v0.8.2)
