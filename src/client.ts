@@ -175,7 +175,7 @@ export class Kernel {
    * @param {string | undefined} [opts.apiKey=process.env['KERNEL_API_KEY'] ?? undefined]
    * @param {Environment} [opts.environment=production] - Specifies the environment URL to use for the API.
    * @param {string} [opts.baseURL=process.env['KERNEL_BASE_URL'] ?? https://api.onkernel.com/] - Override the default base URL for the API.
-   * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
+   * @param {number} [opts.timeout=5 seconds] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
    * @param {number} [opts.maxRetries=2] - The maximum number of times the client will retry a request.
@@ -207,7 +207,7 @@ export class Kernel {
     }
 
     this.baseURL = options.baseURL || environments[options.environment || 'production'];
-    this.timeout = options.timeout ?? Kernel.DEFAULT_TIMEOUT /* 1 minute */;
+    this.timeout = options.timeout ?? Kernel.DEFAULT_TIMEOUT /* 5 seconds */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
     // Set default logLevel early so that we can log a warning in parseLogLevel.
@@ -761,7 +761,7 @@ export class Kernel {
   }
 
   static Kernel = this;
-  static DEFAULT_TIMEOUT = 60000; // 1 minute
+  static DEFAULT_TIMEOUT = 5000; // 5 seconds
 
   static KernelError = Errors.KernelError;
   static APIError = Errors.APIError;

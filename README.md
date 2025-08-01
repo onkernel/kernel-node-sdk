@@ -149,13 +149,13 @@ await client.browsers.create({ persistence: { id: 'browser-for-user-1234' } }, {
 
 ### Timeouts
 
-Requests time out after 1 minute by default. You can configure this with a `timeout` option:
+Requests time out after 5 seconds by default. You can configure this with a `timeout` option:
 
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
 const client = new Kernel({
-  timeout: 20 * 1000, // 20 seconds (default is 1 minute)
+  timeout: 20 * 1000, // 20 seconds (default is 5 seconds)
 });
 
 // Override per-request:
