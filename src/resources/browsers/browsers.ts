@@ -11,6 +11,20 @@ import {
   ReplayStopParams,
   Replays,
 } from './replays';
+import * as FsAPI from './fs/fs';
+import {
+  FCreateDirectoryParams,
+  FDeleteDirectoryParams,
+  FDeleteFileParams,
+  FFileInfoParams,
+  FFileInfoResponse,
+  FListFilesParams,
+  FListFilesResponse,
+  FMoveParams,
+  FReadFileParams,
+  FSetFilePermissionsParams,
+  Fs,
+} from './fs/fs';
 import { APIPromise } from '../../core/api-promise';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
@@ -18,6 +32,7 @@ import { path } from '../../internal/utils/path';
 
 export class Browsers extends APIResource {
   replays: ReplaysAPI.Replays = new ReplaysAPI.Replays(this._client);
+  fs: FsAPI.Fs = new FsAPI.Fs(this._client);
 
   /**
    * Create a new browser session from within an action.
@@ -212,6 +227,7 @@ export interface BrowserDeleteParams {
 }
 
 Browsers.Replays = Replays;
+Browsers.Fs = Fs;
 
 export declare namespace Browsers {
   export {
@@ -230,5 +246,19 @@ export declare namespace Browsers {
     type ReplayDownloadParams as ReplayDownloadParams,
     type ReplayStartParams as ReplayStartParams,
     type ReplayStopParams as ReplayStopParams,
+  };
+
+  export {
+    Fs as Fs,
+    type FFileInfoResponse as FFileInfoResponse,
+    type FListFilesResponse as FListFilesResponse,
+    type FCreateDirectoryParams as FCreateDirectoryParams,
+    type FDeleteDirectoryParams as FDeleteDirectoryParams,
+    type FDeleteFileParams as FDeleteFileParams,
+    type FFileInfoParams as FFileInfoParams,
+    type FListFilesParams as FListFilesParams,
+    type FMoveParams as FMoveParams,
+    type FReadFileParams as FReadFileParams,
+    type FSetFilePermissionsParams as FSetFilePermissionsParams,
   };
 }
