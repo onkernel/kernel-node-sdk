@@ -10,6 +10,19 @@ export {
   type BrowserDeleteParams,
 } from './browsers';
 export {
+  Fs,
+  type FFileInfoResponse,
+  type FListFilesResponse,
+  type FCreateDirectoryParams,
+  type FDeleteDirectoryParams,
+  type FDeleteFileParams,
+  type FFileInfoParams,
+  type FListFilesParams,
+  type FMoveParams,
+  type FReadFileParams,
+  type FSetFilePermissionsParams,
+} from './fs/index';
+export {
   Replays,
   type ReplayListResponse,
   type ReplayStartResponse,
