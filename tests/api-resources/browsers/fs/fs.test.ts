@@ -142,6 +142,7 @@ describe('resource fs', () => {
     const responsePromise = client.browsers.fs.writeFile(
       'id',
       await toFile(Buffer.from('# my file contents'), 'README.md'),
+      { path: '/J!' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

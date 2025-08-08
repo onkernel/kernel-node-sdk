@@ -23,6 +23,7 @@ import {
   FMoveParams,
   FReadFileParams,
   FSetFilePermissionsParams,
+  FWriteFileParams,
   Fs,
 } from './fs/fs';
 import { APIPromise } from '../../core/api-promise';
@@ -260,5 +261,6 @@ export declare namespace Browsers {
     type FMoveParams as FMoveParams,
     type FReadFileParams as FReadFileParams,
     type FSetFilePermissionsParams as FSetFilePermissionsParams,
+    type FWriteFileParams as FWriteFileParams,
   };
 }
