@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.9.0 (2025-08-08)
+
+Full Changelog: [v0.8.3...v0.9.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.8.3...v0.9.0)
+
+### Features
+
+* **api:** browser instance file i/o ([cc7f07f](https://github.com/onkernel/kernel-node-sdk/commit/cc7f07fedf78492e092dd1e982634a6e142f0dfa))
+
+
+### Bug Fixes
+
+* **methods:** define methods with parameters and binary body correctly ([6c70c14](https://github.com/onkernel/kernel-node-sdk/commit/6c70c147bfca8429aec6c114e42741d405c552b2))
+
+
+### Chores
+
+* **internal:** move publish config ([7662fc0](https://github.com/onkernel/kernel-node-sdk/commit/7662fc06f49f4816b9ff6328bae5aa70964a4143))
+
 ## 0.8.3 (2025-08-01)
 
 Full Changelog: [v0.8.2...v0.8.3](https://github.com/onkernel/kernel-node-sdk/compare/v0.8.2...v0.8.3)
