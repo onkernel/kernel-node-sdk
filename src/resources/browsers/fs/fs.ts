@@ -177,11 +177,13 @@ export class Fs extends APIResource {
   writeFile(
     id: string,
     contents: string | ArrayBuffer | ArrayBufferView | Blob | DataView,
+    params: FWriteFileParams,
     options?: RequestOptions,
   ): APIPromise<void> {
-    const { path, mode } = params;
+    const { path: path_, mode } = params;
     return this._client.put(path`/browsers/${id}/fs/write_file`, {
       body: contents,
+      query: { path: path_, mode },
       ...options,
       headers: buildHeaders([
         { 'Content-Type': 'application/octet-stream', Accept: '*/*' },
@@ -343,6 +345,18 @@ export interface FSetFilePermissionsParams {
   owner?: string;
 }
 
+export interface FWriteFileParams {
+  /**
+   * Query param: Destination absolute file path.
+   */
+  path: string;
+
+  /**
+   * Query param: Optional file mode (octal string, e.g. 644). Defaults to 644.
+   */
+  mode?: string;
+}
+
 Fs.Watch = Watch;
 
 export declare namespace Fs {
@@ -357,6 +371,7 @@ export declare namespace Fs {
     type FMoveParams as FMoveParams,
     type FReadFileParams as FReadFileParams,
     type FSetFilePermissionsParams as FSetFilePermissionsParams,
+    type FWriteFileParams as FWriteFileParams,
   };
 
   export {

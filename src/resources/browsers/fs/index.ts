@@ -12,6 +12,7 @@ export {
   type FMoveParams,
   type FReadFileParams,
   type FSetFilePermissionsParams,
+  type FWriteFileParams,
 } from './fs';
 export {
   Watch,
