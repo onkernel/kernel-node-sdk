@@ -130,9 +130,24 @@ export interface BrowserCreateResponse {
   cdp_ws_url: string;
 
   /**
+   * Indicates whether the browser session is headless.
+   */
+  headless: boolean;
+
+  /**
    * Unique identifier for the browser session
    */
   session_id: string;
+
+  /**
+   * Indicates whether the browser session is stealth.
+   */
+  stealth: boolean;
+
+  /**
+   * The number of seconds of inactivity before the browser session is terminated.
+   */
+  timeout_seconds: number;
 
   /**
    * Remote URL for live viewing the browser session. Only available for non-headless
@@ -153,9 +168,24 @@ export interface BrowserRetrieveResponse {
   cdp_ws_url: string;
 
   /**
+   * Indicates whether the browser session is headless.
+   */
+  headless: boolean;
+
+  /**
    * Unique identifier for the browser session
    */
   session_id: string;
+
+  /**
+   * Indicates whether the browser session is stealth.
+   */
+  stealth: boolean;
+
+  /**
+   * The number of seconds of inactivity before the browser session is terminated.
+   */
+  timeout_seconds: number;
 
   /**
    * Remote URL for live viewing the browser session. Only available for non-headless
@@ -179,9 +209,24 @@ export namespace BrowserListResponse {
     cdp_ws_url: string;
 
     /**
+     * Indicates whether the browser session is headless.
+     */
+    headless: boolean;
+
+    /**
      * Unique identifier for the browser session
      */
     session_id: string;
+
+    /**
+     * Indicates whether the browser session is stealth.
+     */
+    stealth: boolean;
+
+    /**
+     * The number of seconds of inactivity before the browser session is terminated.
+     */
+    timeout_seconds: number;
 
     /**
      * Remote URL for live viewing the browser session. Only available for non-headless
@@ -218,6 +263,13 @@ export interface BrowserCreateParams {
    * mechanisms.
    */
   stealth?: boolean;
+
+  /**
+   * The number of seconds of inactivity before the browser session is terminated.
+   * Only applicable to non-persistent browsers. Activity includes CDP connections
+   * and live view connections. Defaults to 60 seconds.
+   */
+  timeout_seconds?: number;
 }
 
 export interface BrowserDeleteParams {

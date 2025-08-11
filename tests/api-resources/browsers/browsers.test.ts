@@ -30,6 +30,7 @@ describe('resource browsers', () => {
           invocation_id: 'rr33xuugxj9h0bkf1rdt2bet',
           persistence: { id: 'my-awesome-browser-for-user-1234' },
           stealth: true,
+          timeout_seconds: 0,
         },
         { path: '/_stainless_unknown_path' },
       ),
