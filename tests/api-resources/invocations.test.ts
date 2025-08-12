@@ -8,7 +8,7 @@ const client = new Kernel({
 });
 
 describe('resource invocations', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.invocations.create({
       action_name: 'analyze',
@@ -24,7 +24,7 @@ describe('resource invocations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.invocations.create({
       action_name: 'analyze',
@@ -35,7 +35,7 @@ describe('resource invocations', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.invocations.retrieve('rr33xuugxj9h0bkf1rdt2bet');
     const rawResponse = await responsePromise.asResponse();
@@ -47,7 +47,7 @@ describe('resource invocations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.invocations.update('id', { status: 'succeeded' });
     const rawResponse = await responsePromise.asResponse();
@@ -59,12 +59,12 @@ describe('resource invocations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.invocations.update('id', { status: 'succeeded', output: 'output' });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('deleteBrowsers', async () => {
     const responsePromise = client.invocations.deleteBrowsers('id');
     const rawResponse = await responsePromise.asResponse();
@@ -76,7 +76,7 @@ describe('resource invocations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: currently no good way to test endpoints with content type text/event-stream, Prism mock server will fail
+  // Prism doesn't support text/event-stream responses
   test.skip('follow', async () => {
     const responsePromise = client.invocations.follow('id');
     const rawResponse = await responsePromise.asResponse();
