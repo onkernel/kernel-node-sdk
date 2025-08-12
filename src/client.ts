@@ -190,7 +190,7 @@ export class Kernel {
     // Check for Bun runtime in a way that avoids type errors if Bun is not defined
     if (typeof globalThis !== 'undefined' && typeof (globalThis as any).Bun !== 'undefined' && (globalThis as any).Bun.version) {
       throw new Errors.KernelError(
-        'The Bun runtime is not supported. Please use a different runtime.',
+        "The Bun runtime is not supported. Please use a different runtime.",
       );
     }
 
