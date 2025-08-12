@@ -191,9 +191,12 @@ export class Kernel {
     if (
       typeof globalThis !== 'undefined' &&
       typeof (globalThis as any).Bun !== 'undefined' &&
-      (globalThis as any).Bun.version
+      (globalThis as any).Bun.version &&
+      !readEnv('KERNEL_SUPPRESS_BUN_WARNING')
     ) {
-      throw new Errors.KernelError('The Bun runtime is not supported. Please use a different runtime.');
+      loggerFor(this).warn(
+        'The Bun runtime was detected. Playwright may have CDP connection issues, proceed with caution. Suppress this warning by setting the KERNEL_SUPPRESS_BUN_WARNING environment variable to true',
+      );
     }
 
     if (apiKey === undefined) {
