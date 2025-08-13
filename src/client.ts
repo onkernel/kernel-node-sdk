@@ -187,6 +187,18 @@ export class Kernel {
     apiKey = readEnv('KERNEL_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
+    // Check for Bun runtime in a way that avoids type errors if Bun is not defined
+    if (
+      typeof globalThis !== 'undefined' &&
+      typeof (globalThis as any).Bun !== 'undefined' &&
+      (globalThis as any).Bun.version &&
+      !readEnv('KERNEL_SUPPRESS_BUN_WARNING')
+    ) {
+      loggerFor(this).warn(
+        'The Bun runtime was detected. Playwright may have CDP connection issues, proceed with caution. Suppress this warning by setting the KERNEL_SUPPRESS_BUN_WARNING environment variable to true',
+      );
+    }
+
     if (apiKey === undefined) {
       throw new Errors.KernelError(
         "The KERNEL_API_KEY environment variable is missing or empty; either provide it, or instantiate the Kernel client with an apiKey option, like new Kernel({ apiKey: 'My API Key' }).",
