@@ -130,7 +130,12 @@ export interface BrowserCreateResponse {
   cdp_ws_url: string;
 
   /**
-   * Indicates whether the browser session is headless.
+   * When the browser session was created.
+   */
+  created_at: string;
+
+  /**
+   * Whether the browser session is running in headless mode.
    */
   headless: boolean;
 
@@ -140,7 +145,7 @@ export interface BrowserCreateResponse {
   session_id: string;
 
   /**
-   * Indicates whether the browser session is stealth.
+   * Whether the browser session is running in stealth mode.
    */
   stealth: boolean;
 
@@ -168,7 +173,12 @@ export interface BrowserRetrieveResponse {
   cdp_ws_url: string;
 
   /**
-   * Indicates whether the browser session is headless.
+   * When the browser session was created.
+   */
+  created_at: string;
+
+  /**
+   * Whether the browser session is running in headless mode.
    */
   headless: boolean;
 
@@ -178,7 +188,7 @@ export interface BrowserRetrieveResponse {
   session_id: string;
 
   /**
-   * Indicates whether the browser session is stealth.
+   * Whether the browser session is running in stealth mode.
    */
   stealth: boolean;
 
@@ -209,7 +219,12 @@ export namespace BrowserListResponse {
     cdp_ws_url: string;
 
     /**
-     * Indicates whether the browser session is headless.
+     * When the browser session was created.
+     */
+    created_at: string;
+
+    /**
+     * Whether the browser session is running in headless mode.
      */
     headless: boolean;
 
@@ -219,7 +234,7 @@ export namespace BrowserListResponse {
     session_id: string;
 
     /**
-     * Indicates whether the browser session is stealth.
+     * Whether the browser session is running in stealth mode.
      */
     stealth: boolean;
 
