@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.9.1 (2025-08-15)
+
+Full Changelog: [v0.9.0...v0.9.1](https://github.com/onkernel/kernel-node-sdk/compare/v0.9.0...v0.9.1)
+
+### Features
+
+* **api:** add browser timeouts ([a7cf6cd](https://github.com/onkernel/kernel-node-sdk/commit/a7cf6cdc4b35728bbdf85469d4212e90e5241b78))
+* **api:** add browser ttls ([4175a82](https://github.com/onkernel/kernel-node-sdk/commit/4175a829a2c6b00f01840b448282a730562d8c5e))
+
+
+### Chores
+
+* **internal:** codegen related update ([0665717](https://github.com/onkernel/kernel-node-sdk/commit/0665717e9f8831133ccec9cb24e29a0db800c86f))
+* **internal:** update comment in script ([c435fb5](https://github.com/onkernel/kernel-node-sdk/commit/c435fb5125da065d4a5d36777506a8924c7fb02e))
+* update @stainless-api/prism-cli to v5.15.0 ([391384a](https://github.com/onkernel/kernel-node-sdk/commit/391384a0c5cc64b4bc4f4e8f717e11ae4cf7bce5))
+
 ## 0.9.0 (2025-08-08)
 
 Full Changelog: [v0.8.3...v0.9.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.8.3...v0.9.0)
