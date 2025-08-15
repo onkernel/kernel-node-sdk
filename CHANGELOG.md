@@ -7,8 +7,6 @@ Full Changelog: [v0.9.0...v0.9.1](https://github.com/onkernel/kernel-node-sdk/co
 ### Features
 
 * **api:** add browser timeouts ([a7cf6cd](https://github.com/onkernel/kernel-node-sdk/commit/a7cf6cdc4b35728bbdf85469d4212e90e5241b78))
-* **api:** add browser ttls ([4175a82](https://github.com/onkernel/kernel-node-sdk/commit/4175a829a2c6b00f01840b448282a730562d8c5e))
-
 
 ### Chores
 
