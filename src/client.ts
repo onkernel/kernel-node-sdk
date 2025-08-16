@@ -796,10 +796,12 @@ export class Kernel {
   invocations: API.Invocations = new API.Invocations(this);
   browsers: API.Browsers = new API.Browsers(this);
 }
+
 Kernel.Deployments = Deployments;
 Kernel.Apps = Apps;
 Kernel.Invocations = Invocations;
 Kernel.Browsers = Browsers;
+
 export declare namespace Kernel {
   export type RequestOptions = Opts.RequestOptions;
 
