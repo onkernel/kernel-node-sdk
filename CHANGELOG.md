@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.2 (2025-08-16)
+
+Full Changelog: [v0.9.1...v0.9.2](https://github.com/onkernel/kernel-node-sdk/compare/v0.9.1...v0.9.2)
+
+### Chores
+
+* **deps:** update dependency @types/node to v20.17.58 ([797f96b](https://github.com/onkernel/kernel-node-sdk/commit/797f96bd96877114412860f63f47e8ac16a7ab6c))
+* **internal:** formatting change ([8a4b4cf](https://github.com/onkernel/kernel-node-sdk/commit/8a4b4cf31f313b0cbe2c8de9eed168519b702dd7))
+
 ## 0.9.1 (2025-08-15)
 
 Full Changelog: [v0.9.0...v0.9.1](https://github.com/onkernel/kernel-node-sdk/compare/v0.9.0...v0.9.1)
