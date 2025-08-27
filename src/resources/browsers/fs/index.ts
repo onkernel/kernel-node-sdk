@@ -7,11 +7,14 @@ export {
   type FCreateDirectoryParams,
   type FDeleteDirectoryParams,
   type FDeleteFileParams,
+  type FDownloadDirZipParams,
   type FFileInfoParams,
   type FListFilesParams,
   type FMoveParams,
   type FReadFileParams,
   type FSetFilePermissionsParams,
+  type FUploadParams,
+  type FUploadZipParams,
   type FWriteFileParams,
 } from './fs';
 export {
