@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.10.0 (2025-08-27)
+
+Full Changelog: [v0.9.1...v0.10.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.9.1...v0.10.0)
+
+### Features
+
+* **api:** new process, fs, and log endpoints ([0cceb4e](https://github.com/onkernel/kernel-node-sdk/commit/0cceb4e3be5b8e6d267f075f6d9f696f24b1d7f3))
+* **mcp:** add code execution tool ([d3a08a9](https://github.com/onkernel/kernel-node-sdk/commit/d3a08a9e8bccbdf15e2404c9131f0969dc95be24))
+
+
+### Chores
+
+* add package to package.json ([294b1d8](https://github.com/onkernel/kernel-node-sdk/commit/294b1d85cbbe33ce1fd68f4fd879e95922b651c5))
+* **client:** qualify global Blob ([7ac9358](https://github.com/onkernel/kernel-node-sdk/commit/7ac9358a1f9d8d2b12ea1f91cd54c1cb169abab9))
+* **deps:** update dependency @types/node to v20.17.58 ([797f96b](https://github.com/onkernel/kernel-node-sdk/commit/797f96bd96877114412860f63f47e8ac16a7ab6c))
+* **internal:** formatting change ([8a4b4cf](https://github.com/onkernel/kernel-node-sdk/commit/8a4b4cf31f313b0cbe2c8de9eed168519b702dd7))
+* update CI script ([b0aabec](https://github.com/onkernel/kernel-node-sdk/commit/b0aabec18bf5b0f50264e42fd460b80a347db4a1))
+
 ## 0.9.1 (2025-08-15)
 
 Full Changelog: [v0.9.0...v0.9.1](https://github.com/onkernel/kernel-node-sdk/compare/v0.9.0...v0.9.1)
