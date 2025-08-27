@@ -11,8 +11,10 @@ import {
   WatchStopParams,
 } from './watch';
 import { APIPromise } from '../../../core/api-promise';
+import { type Uploadable } from '../../../core/uploads';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
+import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
 
 export class Fs extends APIResource {
@@ -67,6 +69,29 @@ export class Fs extends APIResource {
       body,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Returns a ZIP file containing the contents of the specified directory.
+   *
+   * @example
+   * ```ts
+   * const response = await client.browsers.fs.downloadDirZip(
+   *   'id',
+   *   { path: '/J!' },
+   * );
+   *
+   * const content = await response.blob();
+   * console.log(content);
+   * ```
+   */
+  downloadDirZip(id: string, query: FDownloadDirZipParams, options?: RequestOptions): APIPromise<Response> {
+    return this._client.get(path`/browsers/${id}/fs/download_dir_zip`, {
+      query,
+      ...options,
+      headers: buildHeaders([{ Accept: 'application/zip' }, options?.headers]),
+      __binaryResponse: true,
     });
   }
 
@@ -160,6 +185,52 @@ export class Fs extends APIResource {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
+  }
+
+  /**
+   * Allows uploading single or multiple files to the remote filesystem.
+   *
+   * @example
+   * ```ts
+   * await client.browsers.fs.upload('id', {
+   *   files: [
+   *     {
+   *       dest_path: '/J!',
+   *       file: fs.createReadStream('path/to/file'),
+   *     },
+   *   ],
+   * });
+   * ```
+   */
+  upload(id: string, body: FUploadParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(
+      path`/browsers/${id}/fs/upload`,
+      multipartFormRequestOptions(
+        { body, ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
+        this._client,
+      ),
+    );
+  }
+
+  /**
+   * Upload a zip file and extract its contents to the specified destination path.
+   *
+   * @example
+   * ```ts
+   * await client.browsers.fs.uploadZip('id', {
+   *   dest_path: '/J!',
+   *   zip_file: fs.createReadStream('path/to/file'),
+   * });
+   * ```
+   */
+  uploadZip(id: string, body: FUploadZipParams, options?: RequestOptions): APIPromise<void> {
+    return this._client.post(
+      path`/browsers/${id}/fs/upload_zip`,
+      multipartFormRequestOptions(
+        { body, ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
+        this._client,
+      ),
+    );
   }
 
   /**
@@ -290,6 +361,13 @@ export interface FDeleteFileParams {
   path: string;
 }
 
+export interface FDownloadDirZipParams {
+  /**
+   * Absolute directory path to archive and download.
+   */
+  path: string;
+}
+
 export interface FFileInfoParams {
   /**
    * Absolute path of the file or directory.
@@ -345,6 +423,30 @@ export interface FSetFilePermissionsParams {
   owner?: string;
 }
 
+export interface FUploadParams {
+  files: Array<FUploadParams.File>;
+}
+
+export namespace FUploadParams {
+  export interface File {
+    /**
+     * Absolute destination path to write the file.
+     */
+    dest_path: string;
+
+    file: Uploadable;
+  }
+}
+
+export interface FUploadZipParams {
+  /**
+   * Absolute destination directory to extract the archive to.
+   */
+  dest_path: string;
+
+  zip_file: Uploadable;
+}
+
 export interface FWriteFileParams {
   /**
    * Query param: Destination absolute file path.
@@ -366,11 +468,14 @@ export declare namespace Fs {
     type FCreateDirectoryParams as FCreateDirectoryParams,
     type FDeleteDirectoryParams as FDeleteDirectoryParams,
     type FDeleteFileParams as FDeleteFileParams,
+    type FDownloadDirZipParams as FDownloadDirZipParams,
     type FFileInfoParams as FFileInfoParams,
     type FListFilesParams as FListFilesParams,
     type FMoveParams as FMoveParams,
     type FReadFileParams as FReadFileParams,
     type FSetFilePermissionsParams as FSetFilePermissionsParams,
+    type FUploadParams as FUploadParams,
+    type FUploadZipParams as FUploadZipParams,
     type FWriteFileParams as FWriteFileParams,
   };
 

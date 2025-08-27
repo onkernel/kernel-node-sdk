@@ -2,6 +2,24 @@
 
 import { APIResource } from '../../core/resource';
 import * as BrowsersAPI from './browsers';
+import * as LogsAPI from './logs';
+import { LogStreamParams, Logs } from './logs';
+import * as ProcessAPI from './process';
+import {
+  Process,
+  ProcessExecParams,
+  ProcessExecResponse,
+  ProcessKillParams,
+  ProcessKillResponse,
+  ProcessSpawnParams,
+  ProcessSpawnResponse,
+  ProcessStatusParams,
+  ProcessStatusResponse,
+  ProcessStdinParams,
+  ProcessStdinResponse,
+  ProcessStdoutStreamParams,
+  ProcessStdoutStreamResponse,
+} from './process';
 import * as ReplaysAPI from './replays';
 import {
   ReplayDownloadParams,
@@ -16,6 +34,7 @@ import {
   FCreateDirectoryParams,
   FDeleteDirectoryParams,
   FDeleteFileParams,
+  FDownloadDirZipParams,
   FFileInfoParams,
   FFileInfoResponse,
   FListFilesParams,
@@ -23,6 +42,8 @@ import {
   FMoveParams,
   FReadFileParams,
   FSetFilePermissionsParams,
+  FUploadParams,
+  FUploadZipParams,
   FWriteFileParams,
   Fs,
 } from './fs/fs';
@@ -34,6 +55,8 @@ import { path } from '../../internal/utils/path';
 export class Browsers extends APIResource {
   replays: ReplaysAPI.Replays = new ReplaysAPI.Replays(this._client);
   fs: FsAPI.Fs = new FsAPI.Fs(this._client);
+  process: ProcessAPI.Process = new ProcessAPI.Process(this._client);
+  logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
 
   /**
    * Create a new browser session from within an action.
@@ -296,6 +319,8 @@ export interface BrowserDeleteParams {
 
 Browsers.Replays = Replays;
 Browsers.Fs = Fs;
+Browsers.Process = Process;
+Browsers.Logs = Logs;
 
 export declare namespace Browsers {
   export {
@@ -323,11 +348,32 @@ export declare namespace Browsers {
     type FCreateDirectoryParams as FCreateDirectoryParams,
     type FDeleteDirectoryParams as FDeleteDirectoryParams,
     type FDeleteFileParams as FDeleteFileParams,
+    type FDownloadDirZipParams as FDownloadDirZipParams,
     type FFileInfoParams as FFileInfoParams,
     type FListFilesParams as FListFilesParams,
     type FMoveParams as FMoveParams,
     type FReadFileParams as FReadFileParams,
     type FSetFilePermissionsParams as FSetFilePermissionsParams,
+    type FUploadParams as FUploadParams,
+    type FUploadZipParams as FUploadZipParams,
     type FWriteFileParams as FWriteFileParams,
   };
+
+  export {
+    Process as Process,
+    type ProcessExecResponse as ProcessExecResponse,
+    type ProcessKillResponse as ProcessKillResponse,
+    type ProcessSpawnResponse as ProcessSpawnResponse,
+    type ProcessStatusResponse as ProcessStatusResponse,
+    type ProcessStdinResponse as ProcessStdinResponse,
+    type ProcessStdoutStreamResponse as ProcessStdoutStreamResponse,
+    type ProcessExecParams as ProcessExecParams,
+    type ProcessKillParams as ProcessKillParams,
+    type ProcessSpawnParams as ProcessSpawnParams,
+    type ProcessStatusParams as ProcessStatusParams,
+    type ProcessStdinParams as ProcessStdinParams,
+    type ProcessStdoutStreamParams as ProcessStdoutStreamParams,
+  };
+
+  export { Logs as Logs, type LogStreamParams as LogStreamParams };
 }

@@ -97,11 +97,14 @@ Methods:
 - <code title="put /browsers/{id}/fs/create_directory">client.browsers.fs.<a href="./src/resources/browsers/fs/fs.ts">createDirectory</a>(id, { ...params }) -> void</code>
 - <code title="put /browsers/{id}/fs/delete_directory">client.browsers.fs.<a href="./src/resources/browsers/fs/fs.ts">deleteDirectory</a>(id, { ...params }) -> void</code>
 - <code title="put /browsers/{id}/fs/delete_file">client.browsers.fs.<a href="./src/resources/browsers/fs/fs.ts">deleteFile</a>(id, { ...params }) -> void</code>
+- <code title="get /browsers/{id}/fs/download_dir_zip">client.browsers.fs.<a href="./src/resources/browsers/fs/fs.ts">downloadDirZip</a>(id, { ...params }) -> Response</code>
 - <code title="get /browsers/{id}/fs/file_info">client.browsers.fs.<a href="./src/resources/browsers/fs/fs.ts">fileInfo</a>(id, { ...params }) -> FFileInfoResponse</code>
 - <code title="get /browsers/{id}/fs/list_files">client.browsers.fs.<a href="./src/resources/browsers/fs/fs.ts">listFiles</a>(id, { ...params }) -> FListFilesResponse</code>
 - <code title="put /browsers/{id}/fs/move">client.browsers.fs.<a href="./src/resources/browsers/fs/fs.ts">move</a>(id, { ...params }) -> void</code>
 - <code title="get /browsers/{id}/fs/read_file">client.browsers.fs.<a href="./src/resources/browsers/fs/fs.ts">readFile</a>(id, { ...params }) -> Response</code>
 - <code title="put /browsers/{id}/fs/set_file_permissions">client.browsers.fs.<a href="./src/resources/browsers/fs/fs.ts">setFilePermissions</a>(id, { ...params }) -> void</code>
+- <code title="post /browsers/{id}/fs/upload">client.browsers.fs.<a href="./src/resources/browsers/fs/fs.ts">upload</a>(id, { ...params }) -> void</code>
+- <code title="post /browsers/{id}/fs/upload_zip">client.browsers.fs.<a href="./src/resources/browsers/fs/fs.ts">uploadZip</a>(id, { ...params }) -> void</code>
 - <code title="put /browsers/{id}/fs/write_file">client.browsers.fs.<a href="./src/resources/browsers/fs/fs.ts">writeFile</a>(id, contents, { ...params }) -> void</code>
 
 ### Watch
@@ -116,3 +119,29 @@ Methods:
 - <code title="get /browsers/{id}/fs/watch/{watch_id}/events">client.browsers.fs.watch.<a href="./src/resources/browsers/fs/watch.ts">events</a>(watchID, { ...params }) -> WatchEventsResponse</code>
 - <code title="post /browsers/{id}/fs/watch">client.browsers.fs.watch.<a href="./src/resources/browsers/fs/watch.ts">start</a>(id, { ...params }) -> WatchStartResponse</code>
 - <code title="delete /browsers/{id}/fs/watch/{watch_id}">client.browsers.fs.watch.<a href="./src/resources/browsers/fs/watch.ts">stop</a>(watchID, { ...params }) -> void</code>
+
+## Process
+
+Types:
+
+- <code><a href="./src/resources/browsers/process.ts">ProcessExecResponse</a></code>
+- <code><a href="./src/resources/browsers/process.ts">ProcessKillResponse</a></code>
+- <code><a href="./src/resources/browsers/process.ts">ProcessSpawnResponse</a></code>
+- <code><a href="./src/resources/browsers/process.ts">ProcessStatusResponse</a></code>
+- <code><a href="./src/resources/browsers/process.ts">ProcessStdinResponse</a></code>
+- <code><a href="./src/resources/browsers/process.ts">ProcessStdoutStreamResponse</a></code>
+
+Methods:
+
+- <code title="post /browsers/{id}/process/exec">client.browsers.process.<a href="./src/resources/browsers/process.ts">exec</a>(id, { ...params }) -> ProcessExecResponse</code>
+- <code title="post /browsers/{id}/process/{process_id}/kill">client.browsers.process.<a href="./src/resources/browsers/process.ts">kill</a>(processID, { ...params }) -> ProcessKillResponse</code>
+- <code title="post /browsers/{id}/process/spawn">client.browsers.process.<a href="./src/resources/browsers/process.ts">spawn</a>(id, { ...params }) -> ProcessSpawnResponse</code>
+- <code title="get /browsers/{id}/process/{process_id}/status">client.browsers.process.<a href="./src/resources/browsers/process.ts">status</a>(processID, { ...params }) -> ProcessStatusResponse</code>
+- <code title="post /browsers/{id}/process/{process_id}/stdin">client.browsers.process.<a href="./src/resources/browsers/process.ts">stdin</a>(processID, { ...params }) -> ProcessStdinResponse</code>
+- <code title="get /browsers/{id}/process/{process_id}/stdout/stream">client.browsers.process.<a href="./src/resources/browsers/process.ts">stdoutStream</a>(processID, { ...params }) -> ProcessStdoutStreamResponse</code>
+
+## Logs
+
+Methods:
+
+- <code title="get /browsers/{id}/logs/stream">client.browsers.logs.<a href="./src/resources/browsers/logs.ts">stream</a>(id, { ...params }) -> LogEvent</code>
