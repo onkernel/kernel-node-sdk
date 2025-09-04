@@ -146,6 +146,36 @@ export interface BrowserPersistence {
   id: string;
 }
 
+/**
+ * Browser profile metadata.
+ */
+export interface Profile {
+  /**
+   * Unique identifier for the profile
+   */
+  id: string;
+
+  /**
+   * Timestamp when the profile was created
+   */
+  created_at: string;
+
+  /**
+   * Timestamp when the profile was last used
+   */
+  last_used_at?: string;
+
+  /**
+   * Optional, easier-to-reference name for the profile
+   */
+  name?: string | null;
+
+  /**
+   * Timestamp when the profile was last updated
+   */
+  updated_at?: string;
+}
+
 export interface BrowserCreateResponse {
   /**
    * Websocket URL for Chrome DevTools Protocol connections to the browser session
@@ -187,6 +217,11 @@ export interface BrowserCreateResponse {
    * Optional persistence configuration for the browser session.
    */
   persistence?: BrowserPersistence;
+
+  /**
+   * Browser profile metadata.
+   */
+  profile?: Profile;
 }
 
 export interface BrowserRetrieveResponse {
@@ -230,6 +265,11 @@ export interface BrowserRetrieveResponse {
    * Optional persistence configuration for the browser session.
    */
   persistence?: BrowserPersistence;
+
+  /**
+   * Browser profile metadata.
+   */
+  profile?: Profile;
 }
 
 export type BrowserListResponse = Array<BrowserListResponse.BrowserListResponseItem>;
@@ -276,6 +316,11 @@ export namespace BrowserListResponse {
      * Optional persistence configuration for the browser session.
      */
     persistence?: BrowsersAPI.BrowserPersistence;
+
+    /**
+     * Browser profile metadata.
+     */
+    profile?: BrowsersAPI.Profile;
   }
 }
 
@@ -297,6 +342,13 @@ export interface BrowserCreateParams {
   persistence?: BrowserPersistence;
 
   /**
+   * Profile selection for the browser session. Provide either id or name. If
+   * specified, the matching profile will be loaded into the browser session.
+   * Profiles must be created beforehand.
+   */
+  profile?: BrowserCreateParams.Profile;
+
+  /**
    * If true, launches the browser in stealth mode to reduce detection by anti-bot
    * mechanisms.
    */
@@ -308,6 +360,32 @@ export interface BrowserCreateParams {
    * and live view connections. Defaults to 60 seconds.
    */
   timeout_seconds?: number;
+}
+
+export namespace BrowserCreateParams {
+  /**
+   * Profile selection for the browser session. Provide either id or name. If
+   * specified, the matching profile will be loaded into the browser session.
+   * Profiles must be created beforehand.
+   */
+  export interface Profile {
+    /**
+     * Profile ID to load for this browser session
+     */
+    id?: string;
+
+    /**
+     * Profile name to load for this browser session (instead of id). Must be 1-255
+     * characters, using letters, numbers, dots, underscores, or hyphens.
+     */
+    name?: string;
+
+    /**
+     * If true, save changes made during the session back to the profile when the
+     * session ends.
+     */
+    save_changes?: boolean;
+  }
 }
 
 export interface BrowserDeleteParams {
@@ -325,6 +403,7 @@ Browsers.Logs = Logs;
 export declare namespace Browsers {
   export {
     type BrowserPersistence as BrowserPersistence,
+    type Profile as Profile,
     type BrowserCreateResponse as BrowserCreateResponse,
     type BrowserRetrieveResponse as BrowserRetrieveResponse,
     type BrowserListResponse as BrowserListResponse,

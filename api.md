@@ -59,6 +59,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/browsers/browsers.ts">BrowserPersistence</a></code>
+- <code><a href="./src/resources/browsers/browsers.ts">Profile</a></code>
 - <code><a href="./src/resources/browsers/browsers.ts">BrowserCreateResponse</a></code>
 - <code><a href="./src/resources/browsers/browsers.ts">BrowserRetrieveResponse</a></code>
 - <code><a href="./src/resources/browsers/browsers.ts">BrowserListResponse</a></code>
@@ -145,3 +146,17 @@ Methods:
 Methods:
 
 - <code title="get /browsers/{id}/logs/stream">client.browsers.logs.<a href="./src/resources/browsers/logs.ts">stream</a>(id, { ...params }) -> LogEvent</code>
+
+# Profiles
+
+Types:
+
+- <code><a href="./src/resources/profiles.ts">ProfileListResponse</a></code>
+
+Methods:
+
+- <code title="post /profiles">client.profiles.<a href="./src/resources/profiles.ts">create</a>({ ...params }) -> Profile</code>
+- <code title="get /profiles/{id_or_name}">client.profiles.<a href="./src/resources/profiles.ts">retrieve</a>(idOrName) -> Profile</code>
+- <code title="get /profiles">client.profiles.<a href="./src/resources/profiles.ts">list</a>() -> ProfileListResponse</code>
+- <code title="delete /profiles/{id_or_name}">client.profiles.<a href="./src/resources/profiles.ts">delete</a>(idOrName) -> void</code>
+- <code title="get /profiles/{id_or_name}/download">client.profiles.<a href="./src/resources/profiles.ts">download</a>(idOrName) -> Response</code>
