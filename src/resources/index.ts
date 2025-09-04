@@ -5,6 +5,7 @@ export { Apps, type AppListResponse, type AppListParams } from './apps';
 export {
   Browsers,
   type BrowserPersistence,
+  type Profile,
   type BrowserCreateResponse,
   type BrowserRetrieveResponse,
   type BrowserListResponse,
@@ -32,3 +33,4 @@ export {
   type InvocationCreateParams,
   type InvocationUpdateParams,
 } from './invocations';
+export { Profiles, type ProfileListResponse, type ProfileCreateParams } from './profiles';
