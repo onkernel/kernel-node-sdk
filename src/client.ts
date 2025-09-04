@@ -39,6 +39,7 @@ import {
   InvocationUpdateResponse,
   Invocations,
 } from './resources/invocations';
+import { ProfileCreateParams, ProfileListResponse, Profiles } from './resources/profiles';
 import {
   BrowserCreateParams,
   BrowserCreateResponse,
@@ -47,6 +48,7 @@ import {
   BrowserPersistence,
   BrowserRetrieveResponse,
   Browsers,
+  Profile,
 } from './resources/browsers/browsers';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
@@ -795,12 +797,14 @@ export class Kernel {
   apps: API.Apps = new API.Apps(this);
   invocations: API.Invocations = new API.Invocations(this);
   browsers: API.Browsers = new API.Browsers(this);
+  profiles: API.Profiles = new API.Profiles(this);
 }
 
 Kernel.Deployments = Deployments;
 Kernel.Apps = Apps;
 Kernel.Invocations = Invocations;
 Kernel.Browsers = Browsers;
+Kernel.Profiles = Profiles;
 
 export declare namespace Kernel {
   export type RequestOptions = Opts.RequestOptions;
@@ -833,11 +837,18 @@ export declare namespace Kernel {
   export {
     Browsers as Browsers,
     type BrowserPersistence as BrowserPersistence,
+    type Profile as Profile,
     type BrowserCreateResponse as BrowserCreateResponse,
     type BrowserRetrieveResponse as BrowserRetrieveResponse,
     type BrowserListResponse as BrowserListResponse,
     type BrowserCreateParams as BrowserCreateParams,
     type BrowserDeleteParams as BrowserDeleteParams,
+  };
+
+  export {
+    Profiles as Profiles,
+    type ProfileListResponse as ProfileListResponse,
+    type ProfileCreateParams as ProfileCreateParams,
   };
 
   export type AppAction = API.AppAction;
