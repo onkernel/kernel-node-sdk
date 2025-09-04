@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.11.0 (2025-09-04)
+
+Full Changelog: [v0.10.0...v0.11.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.10.0...v0.11.0)
+
+### Features
+
+* **api:** adding support for browser profiles ([e614d58](https://github.com/onkernel/kernel-node-sdk/commit/e614d585a515121a2bba520941ee667f60f1e3ce))
+
+
+### Chores
+
+* **internal:** update global Error reference ([2697844](https://github.com/onkernel/kernel-node-sdk/commit/26978447f89c1fb152ef98ff2cc841ec1b76ad87))
+
 ## 0.10.0 (2025-08-27)
 
 Full Changelog: [v0.9.1...v0.10.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.9.1...v0.10.0)
