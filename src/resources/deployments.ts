@@ -3,6 +3,7 @@
 import { APIResource } from '../core/resource';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
+import { OffsetPagination, type OffsetPaginationParams, PagePromise } from '../core/pagination';
 import { Stream } from '../core/streaming';
 import { type Uploadable } from '../core/uploads';
 import { buildHeaders } from '../internal/headers';
@@ -43,14 +44,22 @@ export class Deployments extends APIResource {
    *
    * @example
    * ```ts
-   * const deployments = await client.deployments.list();
+   * // Automatically fetches more pages as needed.
+   * for await (const deploymentListResponse of client.deployments.list(
+   *   { app_name: 'app_name' },
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   list(
-    query: DeploymentListParams | null | undefined = {},
+    query: DeploymentListParams,
     options?: RequestOptions,
-  ): APIPromise<DeploymentListResponse> {
-    return this._client.get('/deployments', { query, ...options });
+  ): PagePromise<DeploymentListResponsesOffsetPagination, DeploymentListResponse> {
+    return this._client.getAPIList('/deployments', OffsetPagination<DeploymentListResponse>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -76,6 +85,8 @@ export class Deployments extends APIResource {
     }) as APIPromise<Stream<DeploymentFollowResponse>>;
   }
 }
+
+export type DeploymentListResponsesOffsetPagination = OffsetPagination<DeploymentListResponse>;
 
 /**
  * An event representing the current state of a deployment.
@@ -234,53 +245,49 @@ export interface DeploymentRetrieveResponse {
   updated_at?: string | null;
 }
 
-export type DeploymentListResponse = Array<DeploymentListResponse.DeploymentListResponseItem>;
-
-export namespace DeploymentListResponse {
+/**
+ * Deployment record information.
+ */
+export interface DeploymentListResponse {
   /**
-   * Deployment record information.
+   * Unique identifier for the deployment
    */
-  export interface DeploymentListResponseItem {
-    /**
-     * Unique identifier for the deployment
-     */
-    id: string;
+  id: string;
 
-    /**
-     * Timestamp when the deployment was created
-     */
-    created_at: string;
+  /**
+   * Timestamp when the deployment was created
+   */
+  created_at: string;
 
-    /**
-     * Deployment region code
-     */
-    region: 'aws.us-east-1a';
+  /**
+   * Deployment region code
+   */
+  region: 'aws.us-east-1a';
 
-    /**
-     * Current status of the deployment
-     */
-    status: 'queued' | 'in_progress' | 'running' | 'failed' | 'stopped';
+  /**
+   * Current status of the deployment
+   */
+  status: 'queued' | 'in_progress' | 'running' | 'failed' | 'stopped';
 
-    /**
-     * Relative path to the application entrypoint
-     */
-    entrypoint_rel_path?: string;
+  /**
+   * Relative path to the application entrypoint
+   */
+  entrypoint_rel_path?: string;
 
-    /**
-     * Environment variables configured for this deployment
-     */
-    env_vars?: { [key: string]: string };
+  /**
+   * Environment variables configured for this deployment
+   */
+  env_vars?: { [key: string]: string };
 
-    /**
-     * Status reason
-     */
-    status_reason?: string;
+  /**
+   * Status reason
+   */
+  status_reason?: string;
 
-    /**
-     * Timestamp when the deployment was last updated
-     */
-    updated_at?: string | null;
-  }
+  /**
+   * Timestamp when the deployment was last updated
+   */
+  updated_at?: string | null;
 }
 
 /**
@@ -373,11 +380,11 @@ export interface DeploymentCreateParams {
   version?: string;
 }
 
-export interface DeploymentListParams {
+export interface DeploymentListParams extends OffsetPaginationParams {
   /**
    * Filter results by application name.
    */
-  app_name?: string;
+  app_name: string;
 }
 
 export interface DeploymentFollowParams {
@@ -394,6 +401,7 @@ export declare namespace Deployments {
     type DeploymentRetrieveResponse as DeploymentRetrieveResponse,
     type DeploymentListResponse as DeploymentListResponse,
     type DeploymentFollowResponse as DeploymentFollowResponse,
+    type DeploymentListResponsesOffsetPagination as DeploymentListResponsesOffsetPagination,
     type DeploymentCreateParams as DeploymentCreateParams,
     type DeploymentListParams as DeploymentListParams,
     type DeploymentFollowParams as DeploymentFollowParams,
