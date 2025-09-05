@@ -6,7 +6,7 @@ import { defaultParseResponse } from '../internal/parse';
 import { type Kernel } from '../client';
 import { APIPromise } from './api-promise';
 import { type APIResponseProps } from '../internal/parse';
-import { maybeObj } from '../internal/utils/values';
+import { maybeCoerceBoolean, maybeCoerceInteger, maybeObj } from '../internal/utils/values';
 
 export type PageRequestOptions = Pick<FinalRequestOptions, 'query' | 'headers' | 'body' | 'path' | 'method'>;
 
@@ -118,6 +118,10 @@ export interface OffsetPaginationParams {
 export class OffsetPagination<Item> extends AbstractPage<Item> {
   items: Array<Item>;
 
+  has_more: boolean | null;
+
+  next_offset: number | null;
+
   constructor(
     client: Kernel,
     response: Response,
@@ -127,14 +131,24 @@ export class OffsetPagination<Item> extends AbstractPage<Item> {
     super(client, response, body, options);
 
     this.items = body || [];
+    this.has_more = maybeCoerceBoolean(this.response.headers.get('x-has-more')) ?? null;
+    this.next_offset = maybeCoerceInteger(this.response.headers.get('x-next-offset')) ?? null;
   }
 
   getPaginatedItems(): Item[] {
     return this.items ?? [];
   }
 
+  override hasNextPage(): boolean {
+    if (this.has_more === false) {
+      return false;
+    }
+
+    return super.hasNextPage();
+  }
+
   nextPageRequestOptions(): PageRequestOptions | null {
-    const offset = (this.options.query as OffsetPaginationParams).offset ?? 0;
+    const offset = this.next_offset;
     if (!offset) {
       return null;
     }
