@@ -22,6 +22,7 @@ export {
   type DeploymentCreateParams,
   type DeploymentListParams,
   type DeploymentFollowParams,
+  type DeploymentListResponsesOffsetPagination,
 } from './deployments';
 export {
   Invocations,

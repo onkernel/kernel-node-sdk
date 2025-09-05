@@ -48,8 +48,8 @@ describe('resource deployments', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.deployments.list();
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.deployments.list({ app_name: 'app_name' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -60,11 +60,8 @@ describe('resource deployments', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.deployments.list({ app_name: 'app_name' }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Kernel.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await client.deployments.list({ app_name: 'app_name', limit: 1, offset: 0 });
   });
 
   // Prism doesn't support text/event-stream responses

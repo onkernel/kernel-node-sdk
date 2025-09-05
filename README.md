@@ -168,6 +168,37 @@ On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
 
+## Auto-pagination
+
+List methods in the Kernel API are paginated.
+You can use the `for await … of` syntax to iterate through items across all pages:
+
+```ts
+async function fetchAllDeploymentListResponses(params) {
+  const allDeploymentListResponses = [];
+  // Automatically fetches more pages as needed.
+  for await (const deploymentListResponse of client.deployments.list({ app_name: 'YOUR_APP', limit: 2 })) {
+    allDeploymentListResponses.push(deploymentListResponse);
+  }
+  return allDeploymentListResponses;
+}
+```
+
+Alternatively, you can request a single page at a time:
+
+```ts
+let page = await client.deployments.list({ app_name: 'YOUR_APP', limit: 2 });
+for (const deploymentListResponse of page.items) {
+  console.log(deploymentListResponse);
+}
+
+// Convenience methods are provided for manually paginating:
+while (page.hasNextPage()) {
+  page = await page.getNextPage();
+  // ...
+}
+```
+
 ## Advanced Usage
 
 ### Accessing raw Response data (e.g., headers)
