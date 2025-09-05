@@ -45,15 +45,13 @@ export class Deployments extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const deploymentListResponse of client.deployments.list(
-   *   { app_name: 'app_name' },
-   * )) {
+   * for await (const deploymentListResponse of client.deployments.list()) {
    *   // ...
    * }
    * ```
    */
   list(
-    query: DeploymentListParams,
+    query: DeploymentListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DeploymentListResponsesOffsetPagination, DeploymentListResponse> {
     return this._client.getAPIList('/deployments', OffsetPagination<DeploymentListResponse>, {
@@ -384,7 +382,7 @@ export interface DeploymentListParams extends OffsetPaginationParams {
   /**
    * Filter results by application name.
    */
-  app_name: string;
+  app_name?: string;
 }
 
 export interface DeploymentFollowParams {
