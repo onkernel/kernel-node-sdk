@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.11.1 (2025-09-08)
+
+Full Changelog: [v0.11.0...v0.11.1](https://github.com/onkernel/kernel-node-sdk/compare/v0.11.0...v0.11.1)
+
+### Features
+
+* **api:** add pagination to the deployments endpoint ([b8fa501](https://github.com/onkernel/kernel-node-sdk/commit/b8fa5012dd3b5944e128a5ff629aeea19159362a))
+* **api:** pagination properties added to response (has_more, next_offset) ([49c574e](https://github.com/onkernel/kernel-node-sdk/commit/49c574eeba8413d01cc4528282a59068dfc2150d))
+* **api:** update API spec with pagination headers ([d1169c0](https://github.com/onkernel/kernel-node-sdk/commit/d1169c09fb1222114db878a133ca593479d257fc))
+
+
+### Bug Fixes
+
+* coerce nullable values to undefined ([41cb0ae](https://github.com/onkernel/kernel-node-sdk/commit/41cb0aeb163e00f1e3e2fe41acd3f0c379b64976))
+
+
+### Chores
+
+* ci build action ([790397f](https://github.com/onkernel/kernel-node-sdk/commit/790397fdd2f074f49e70a1eebfa129750174bcb3))
+
 ## 0.11.0 (2025-09-04)
 
 Full Changelog: [v0.10.0...v0.11.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.10.0...v0.11.0)
