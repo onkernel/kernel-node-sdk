@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.11.2 (2025-09-24)
+
+Full Changelog: [v0.11.1...v0.11.2](https://github.com/onkernel/kernel-node-sdk/compare/v0.11.1...v0.11.2)
+
+### Features
+
+* Add stainless CI ([63436fa](https://github.com/onkernel/kernel-node-sdk/commit/63436fac84ae5bc88b8713dd5b8b58b4d4989c62))
+
+
+### Chores
+
+* do not install brew dependencies in ./scripts/bootstrap by default ([b902d04](https://github.com/onkernel/kernel-node-sdk/commit/b902d04ed09ff6001eb59ca8c2a9e9bccd629ed4))
+
 ## 0.11.1 (2025-09-08)
 
 Full Changelog: [v0.11.0...v0.11.1](https://github.com/onkernel/kernel-node-sdk/compare/v0.11.0...v0.11.1)
