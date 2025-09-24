@@ -83,8 +83,13 @@ export class Invocations extends APIResource {
    * const response = await client.invocations.follow('id');
    * ```
    */
-  follow(id: string, options?: RequestOptions): APIPromise<Stream<InvocationFollowResponse>> {
+  follow(
+    id: string,
+    query: InvocationFollowParams | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Stream<InvocationFollowResponse>> {
     return this._client.get(path`/invocations/${id}/events`, {
+      query,
       ...options,
       headers: buildHeaders([{ Accept: 'text/event-stream' }, options?.headers]),
       stream: true,
@@ -335,6 +340,13 @@ export interface InvocationUpdateParams {
   output?: string;
 }
 
+export interface InvocationFollowParams {
+  /**
+   * Show logs since the given time (RFC timestamps or durations like 5m).
+   */
+  since?: string;
+}
+
 export declare namespace Invocations {
   export {
     type InvocationStateEvent as InvocationStateEvent,
@@ -344,5 +356,6 @@ export declare namespace Invocations {
     type InvocationFollowResponse as InvocationFollowResponse,
     type InvocationCreateParams as InvocationCreateParams,
     type InvocationUpdateParams as InvocationUpdateParams,
+    type InvocationFollowParams as InvocationFollowParams,
   };
 }
