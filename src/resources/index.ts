@@ -33,6 +33,7 @@ export {
   type InvocationFollowResponse,
   type InvocationCreateParams,
   type InvocationUpdateParams,
+  type InvocationFollowParams,
 } from './invocations';
 export { Profiles, type ProfileListResponse, type ProfileCreateParams } from './profiles';
 export {

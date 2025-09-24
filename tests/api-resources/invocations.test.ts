@@ -87,4 +87,16 @@ describe('resource invocations', () => {
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
   });
+
+  // Prism doesn't support text/event-stream responses
+  test.skip('follow: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.invocations.follow(
+        'id',
+        { since: '2025-06-20T12:00:00Z' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Kernel.NotFoundError);
+  });
 });
