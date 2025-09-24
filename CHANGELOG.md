@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.11.3 (2025-09-24)
+
+Full Changelog: [v0.11.2...v0.11.3](https://github.com/onkernel/kernel-node-sdk/compare/v0.11.2...v0.11.3)
+
+### Features
+
+* Per Invocation Logs ([927cab6](https://github.com/onkernel/kernel-node-sdk/commit/927cab6e8a599d9737246220ceb54b245b3d4fc5))
+
 ## 0.11.2 (2025-09-24)
 
 Full Changelog: [v0.11.1...v0.11.2](https://github.com/onkernel/kernel-node-sdk/compare/v0.11.1...v0.11.2)
