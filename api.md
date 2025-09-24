@@ -160,3 +160,18 @@ Methods:
 - <code title="get /profiles">client.profiles.<a href="./src/resources/profiles.ts">list</a>() -> ProfileListResponse</code>
 - <code title="delete /profiles/{id_or_name}">client.profiles.<a href="./src/resources/profiles.ts">delete</a>(idOrName) -> void</code>
 - <code title="get /profiles/{id_or_name}/download">client.profiles.<a href="./src/resources/profiles.ts">download</a>(idOrName) -> Response</code>
+
+# Proxies
+
+Types:
+
+- <code><a href="./src/resources/proxies.ts">ProxyCreateResponse</a></code>
+- <code><a href="./src/resources/proxies.ts">ProxyRetrieveResponse</a></code>
+- <code><a href="./src/resources/proxies.ts">ProxyListResponse</a></code>
+
+Methods:
+
+- <code title="post /proxies">client.proxies.<a href="./src/resources/proxies.ts">create</a>({ ...params }) -> ProxyCreateResponse</code>
+- <code title="get /proxies/{id}">client.proxies.<a href="./src/resources/proxies.ts">retrieve</a>(id) -> ProxyRetrieveResponse</code>
+- <code title="get /proxies">client.proxies.<a href="./src/resources/proxies.ts">list</a>() -> ProxyListResponse</code>
+- <code title="delete /proxies/{id}">client.proxies.<a href="./src/resources/proxies.ts">delete</a>(id) -> void</code>

@@ -35,3 +35,10 @@ export {
   type InvocationUpdateParams,
 } from './invocations';
 export { Profiles, type ProfileListResponse, type ProfileCreateParams } from './profiles';
+export {
+  Proxies,
+  type ProxyCreateResponse,
+  type ProxyRetrieveResponse,
+  type ProxyListResponse,
+  type ProxyCreateParams,
+} from './proxies';
