@@ -44,6 +44,13 @@ import {
 } from './resources/invocations';
 import { ProfileCreateParams, ProfileListResponse, Profiles } from './resources/profiles';
 import {
+  Proxies,
+  ProxyCreateParams,
+  ProxyCreateResponse,
+  ProxyListResponse,
+  ProxyRetrieveResponse,
+} from './resources/proxies';
+import {
   BrowserCreateParams,
   BrowserCreateResponse,
   BrowserDeleteParams,
@@ -820,6 +827,7 @@ export class Kernel {
   invocations: API.Invocations = new API.Invocations(this);
   browsers: API.Browsers = new API.Browsers(this);
   profiles: API.Profiles = new API.Profiles(this);
+  proxies: API.Proxies = new API.Proxies(this);
 }
 
 Kernel.Deployments = Deployments;
@@ -827,6 +835,7 @@ Kernel.Apps = Apps;
 Kernel.Invocations = Invocations;
 Kernel.Browsers = Browsers;
 Kernel.Profiles = Profiles;
+Kernel.Proxies = Proxies;
 
 export declare namespace Kernel {
   export type RequestOptions = Opts.RequestOptions;
@@ -878,6 +887,14 @@ export declare namespace Kernel {
     Profiles as Profiles,
     type ProfileListResponse as ProfileListResponse,
     type ProfileCreateParams as ProfileCreateParams,
+  };
+
+  export {
+    Proxies as Proxies,
+    type ProxyCreateResponse as ProxyCreateResponse,
+    type ProxyRetrieveResponse as ProxyRetrieveResponse,
+    type ProxyListResponse as ProxyListResponse,
+    type ProxyCreateParams as ProxyCreateParams,
   };
 
   export type AppAction = API.AppAction;
