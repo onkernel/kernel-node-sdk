@@ -36,6 +36,9 @@ import {
   InvocationCreateResponse,
   InvocationFollowParams,
   InvocationFollowResponse,
+  InvocationListParams,
+  InvocationListResponse,
+  InvocationListResponsesOffsetPagination,
   InvocationRetrieveResponse,
   InvocationStateEvent,
   InvocationUpdateParams,
@@ -845,9 +848,12 @@ export declare namespace Kernel {
     type InvocationCreateResponse as InvocationCreateResponse,
     type InvocationRetrieveResponse as InvocationRetrieveResponse,
     type InvocationUpdateResponse as InvocationUpdateResponse,
+    type InvocationListResponse as InvocationListResponse,
     type InvocationFollowResponse as InvocationFollowResponse,
+    type InvocationListResponsesOffsetPagination as InvocationListResponsesOffsetPagination,
     type InvocationCreateParams as InvocationCreateParams,
     type InvocationUpdateParams as InvocationUpdateParams,
+    type InvocationListParams as InvocationListParams,
     type InvocationFollowParams as InvocationFollowParams,
   };
 

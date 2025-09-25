@@ -44,6 +44,7 @@ Types:
 - <code><a href="./src/resources/invocations.ts">InvocationCreateResponse</a></code>
 - <code><a href="./src/resources/invocations.ts">InvocationRetrieveResponse</a></code>
 - <code><a href="./src/resources/invocations.ts">InvocationUpdateResponse</a></code>
+- <code><a href="./src/resources/invocations.ts">InvocationListResponse</a></code>
 - <code><a href="./src/resources/invocations.ts">InvocationFollowResponse</a></code>
 
 Methods:
@@ -51,6 +52,7 @@ Methods:
 - <code title="post /invocations">client.invocations.<a href="./src/resources/invocations.ts">create</a>({ ...params }) -> InvocationCreateResponse</code>
 - <code title="get /invocations/{id}">client.invocations.<a href="./src/resources/invocations.ts">retrieve</a>(id) -> InvocationRetrieveResponse</code>
 - <code title="patch /invocations/{id}">client.invocations.<a href="./src/resources/invocations.ts">update</a>(id, { ...params }) -> InvocationUpdateResponse</code>
+- <code title="get /invocations">client.invocations.<a href="./src/resources/invocations.ts">list</a>({ ...params }) -> InvocationListResponsesOffsetPagination</code>
 - <code title="delete /invocations/{id}/browsers">client.invocations.<a href="./src/resources/invocations.ts">deleteBrowsers</a>(id) -> void</code>
 - <code title="get /invocations/{id}/events">client.invocations.<a href="./src/resources/invocations.ts">follow</a>(id, { ...params }) -> InvocationFollowResponse</code>
 
