@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.11.4 (2025-09-25)
+
+Full Changelog: [v0.11.3...v0.11.4](https://github.com/onkernel/kernel-node-sdk/compare/v0.11.3...v0.11.4)
+
+### Features
+
+* getInvocations endpoint ([5166b00](https://github.com/onkernel/kernel-node-sdk/commit/5166b00297fa06e003ce1314910d870ac4c7ae1f))
+
 ## 0.11.3 (2025-09-24)
 
 Full Changelog: [v0.11.2...v0.11.3](https://github.com/onkernel/kernel-node-sdk/compare/v0.11.2...v0.11.3)
