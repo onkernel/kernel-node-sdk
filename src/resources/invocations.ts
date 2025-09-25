@@ -3,6 +3,7 @@
 import { APIResource } from '../core/resource';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
+import { OffsetPagination, type OffsetPaginationParams, PagePromise } from '../core/pagination';
 import { Stream } from '../core/streaming';
 import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
@@ -59,6 +60,28 @@ export class Invocations extends APIResource {
   }
 
   /**
+   * List invocations. Optionally filter by application name, action name, status,
+   * deployment ID, or start time.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const invocationListResponse of client.invocations.list()) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: InvocationListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<InvocationListResponsesOffsetPagination, InvocationListResponse> {
+    return this._client.getAPIList('/invocations', OffsetPagination<InvocationListResponse>, {
+      query,
+      ...options,
+    });
+  }
+
+  /**
    * Delete all browser sessions created within the specified invocation.
    *
    * @example
@@ -96,6 +119,8 @@ export class Invocations extends APIResource {
     }) as APIPromise<Stream<InvocationFollowResponse>>;
   }
 }
+
+export type InvocationListResponsesOffsetPagination = OffsetPagination<InvocationListResponse>;
 
 /**
  * An event representing the current state of an invocation.
@@ -291,6 +316,55 @@ export interface InvocationUpdateResponse {
   status_reason?: string;
 }
 
+export interface InvocationListResponse {
+  /**
+   * ID of the invocation
+   */
+  id: string;
+
+  /**
+   * Name of the action invoked
+   */
+  action_name: string;
+
+  /**
+   * Name of the application
+   */
+  app_name: string;
+
+  /**
+   * RFC 3339 Nanoseconds timestamp when the invocation started
+   */
+  started_at: string;
+
+  /**
+   * Status of the invocation
+   */
+  status: 'queued' | 'running' | 'succeeded' | 'failed';
+
+  /**
+   * RFC 3339 Nanoseconds timestamp when the invocation finished (null if still
+   * running)
+   */
+  finished_at?: string | null;
+
+  /**
+   * Output produced by the action, rendered as a JSON string. This could be: string,
+   * number, boolean, array, object, or null.
+   */
+  output?: string;
+
+  /**
+   * Payload provided to the invocation. This is a string that can be parsed as JSON.
+   */
+  payload?: string;
+
+  /**
+   * Status reason
+   */
+  status_reason?: string;
+}
+
 /**
  * Union type representing any invocation event.
  */
@@ -340,6 +414,34 @@ export interface InvocationUpdateParams {
   output?: string;
 }
 
+export interface InvocationListParams extends OffsetPaginationParams {
+  /**
+   * Filter results by action name.
+   */
+  action_name?: string;
+
+  /**
+   * Filter results by application name.
+   */
+  app_name?: string;
+
+  /**
+   * Filter results by deployment ID.
+   */
+  deployment_id?: string;
+
+  /**
+   * Show invocations that have started since the given time (RFC timestamps or
+   * durations like 5m).
+   */
+  since?: string;
+
+  /**
+   * Filter results by invocation status.
+   */
+  status?: 'queued' | 'running' | 'succeeded' | 'failed';
+}
+
 export interface InvocationFollowParams {
   /**
    * Show logs since the given time (RFC timestamps or durations like 5m).
@@ -353,9 +455,12 @@ export declare namespace Invocations {
     type InvocationCreateResponse as InvocationCreateResponse,
     type InvocationRetrieveResponse as InvocationRetrieveResponse,
     type InvocationUpdateResponse as InvocationUpdateResponse,
+    type InvocationListResponse as InvocationListResponse,
     type InvocationFollowResponse as InvocationFollowResponse,
+    type InvocationListResponsesOffsetPagination as InvocationListResponsesOffsetPagination,
     type InvocationCreateParams as InvocationCreateParams,
     type InvocationUpdateParams as InvocationUpdateParams,
+    type InvocationListParams as InvocationListParams,
     type InvocationFollowParams as InvocationFollowParams,
   };
 }
