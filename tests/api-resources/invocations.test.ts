@@ -65,6 +65,37 @@ describe('resource invocations', () => {
   });
 
   // Prism tests are disabled
+  test.skip('list', async () => {
+    const responsePromise = client.invocations.list();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.invocations.list(
+        {
+          action_name: 'action_name',
+          app_name: 'app_name',
+          deployment_id: 'deployment_id',
+          limit: 1,
+          offset: 0,
+          since: '2025-06-20T12:00:00Z',
+          status: 'queued',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Kernel.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('deleteBrowsers', async () => {
     const responsePromise = client.invocations.deleteBrowsers('id');
     const rawResponse = await responsePromise.asResponse();
