@@ -41,8 +41,8 @@ export class Invocations extends APIResource {
   }
 
   /**
-   * Update an invocation's status or output. This can used to cancel an invocation
-   * by setting the status to "failed".
+   * Update an invocation's status or output. This can be used to cancel an
+   * invocation by setting the status to "failed".
    *
    * @example
    * ```ts
