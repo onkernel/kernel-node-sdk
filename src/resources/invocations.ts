@@ -167,6 +167,11 @@ export namespace InvocationStateEvent {
     status: 'queued' | 'running' | 'succeeded' | 'failed';
 
     /**
+     * Version label for the application
+     */
+    version: string;
+
+    /**
      * RFC 3339 Nanoseconds timestamp when the invocation finished (null if still
      * running)
      */
@@ -245,6 +250,11 @@ export interface InvocationRetrieveResponse {
   status: 'queued' | 'running' | 'succeeded' | 'failed';
 
   /**
+   * Version label for the application
+   */
+  version: string;
+
+  /**
    * RFC 3339 Nanoseconds timestamp when the invocation finished (null if still
    * running)
    */
@@ -294,6 +304,11 @@ export interface InvocationUpdateResponse {
   status: 'queued' | 'running' | 'succeeded' | 'failed';
 
   /**
+   * Version label for the application
+   */
+  version: string;
+
+  /**
    * RFC 3339 Nanoseconds timestamp when the invocation finished (null if still
    * running)
    */
@@ -341,6 +356,11 @@ export interface InvocationListResponse {
    * Status of the invocation
    */
   status: 'queued' | 'running' | 'succeeded' | 'failed';
+
+  /**
+   * Version label for the application
+   */
+  version: string;
 
   /**
    * RFC 3339 Nanoseconds timestamp when the invocation finished (null if still
@@ -440,6 +460,11 @@ export interface InvocationListParams extends OffsetPaginationParams {
    * Filter results by invocation status.
    */
   status?: 'queued' | 'running' | 'succeeded' | 'failed';
+
+  /**
+   * Filter results by application version.
+   */
+  version?: string;
 }
 
 export interface InvocationFollowParams {

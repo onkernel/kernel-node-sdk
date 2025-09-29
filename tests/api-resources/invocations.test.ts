@@ -89,6 +89,7 @@ describe('resource invocations', () => {
           offset: 0,
           since: '2025-06-20T12:00:00Z',
           status: 'queued',
+          version: 'version',
         },
         { path: '/_stainless_unknown_path' },
       ),
