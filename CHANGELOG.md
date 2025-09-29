@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.11.5 (2025-09-29)
+
+Full Changelog: [v0.11.4...v0.11.5](https://github.com/onkernel/kernel-node-sdk/compare/v0.11.4...v0.11.5)
+
+### Features
+
+* Fix my incorrect grammer ([535963a](https://github.com/onkernel/kernel-node-sdk/commit/535963a0ba0ab69a07af7f9903836e869d7baf8f))
+
+
+### Performance Improvements
+
+* faster formatting ([d55b4d5](https://github.com/onkernel/kernel-node-sdk/commit/d55b4d53e7c2db501dcfbc344695716e2ebee9be))
+
+
+### Chores
+
+* **internal:** codegen related update ([dde7c0a](https://github.com/onkernel/kernel-node-sdk/commit/dde7c0a13e1f20bc95f6a6ab5cea66d6907b30f6))
+* **internal:** fix incremental formatting in some cases ([cf995a4](https://github.com/onkernel/kernel-node-sdk/commit/cf995a47eadf146da7486f59c60e8c245ec64419))
+* **internal:** remove deprecated `compilerOptions.baseUrl` from tsconfig.json ([00ea517](https://github.com/onkernel/kernel-node-sdk/commit/00ea517c0e23bb0e2fc4459d212d4445ed16c1e2))
+
 ## 0.11.4 (2025-09-25)
 
 Full Changelog: [v0.11.3...v0.11.4](https://github.com/onkernel/kernel-node-sdk/compare/v0.11.3...v0.11.4)
