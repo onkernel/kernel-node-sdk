@@ -222,6 +222,11 @@ export interface BrowserCreateResponse {
    * Browser profile metadata.
    */
   profile?: Profile;
+
+  /**
+   * ID of the proxy associated with this browser session, if any.
+   */
+  proxy_id?: string;
 }
 
 export interface BrowserRetrieveResponse {
@@ -270,6 +275,11 @@ export interface BrowserRetrieveResponse {
    * Browser profile metadata.
    */
   profile?: Profile;
+
+  /**
+   * ID of the proxy associated with this browser session, if any.
+   */
+  proxy_id?: string;
 }
 
 export type BrowserListResponse = Array<BrowserListResponse.BrowserListResponseItem>;
@@ -321,6 +331,11 @@ export namespace BrowserListResponse {
      * Browser profile metadata.
      */
     profile?: BrowsersAPI.Profile;
+
+    /**
+     * ID of the proxy associated with this browser session, if any.
+     */
+    proxy_id?: string;
   }
 }
 
