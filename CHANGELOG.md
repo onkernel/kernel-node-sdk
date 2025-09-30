@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.12.0 (2025-09-30)
+
+Full Changelog: [v0.11.5...v0.12.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.11.5...v0.12.0)
+
+### Features
+
+* Add App Version to Invocation and add filtering on App Version ([b3e109c](https://github.com/onkernel/kernel-node-sdk/commit/b3e109c8117770f911440eddd463672df2be96c4))
+* Return proxy ID in browsers response ([4eaa3ae](https://github.com/onkernel/kernel-node-sdk/commit/4eaa3aea0958f94741be4d4dfbe3e58b96550cd8))
+
+
+### Chores
+
+* **internal:** ignore .eslintcache ([59d069a](https://github.com/onkernel/kernel-node-sdk/commit/59d069a398718d31eb92c2de189257698bdefd2a))
+* **internal:** version bump ([2fd4758](https://github.com/onkernel/kernel-node-sdk/commit/2fd4758c4bd417d8eb5674d1396813674fcaf173))
+
 ## 0.11.5 (2025-09-29)
 
 Full Changelog: [v0.11.4...v0.11.5](https://github.com/onkernel/kernel-node-sdk/compare/v0.11.4...v0.11.5)
