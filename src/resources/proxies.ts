@@ -62,9 +62,19 @@ export interface ProxyCreateResponse {
     | ProxyCreateResponse.CustomProxyConfig;
 
   /**
+   * Timestamp of the last health check performed on this proxy.
+   */
+  last_checked?: string;
+
+  /**
    * Readable name of the proxy.
    */
   name?: string;
+
+  /**
+   * Current health status of the proxy.
+   */
+  status?: 'available' | 'unavailable';
 }
 
 export namespace ProxyCreateResponse {
@@ -269,9 +279,19 @@ export interface ProxyRetrieveResponse {
     | ProxyRetrieveResponse.CustomProxyConfig;
 
   /**
+   * Timestamp of the last health check performed on this proxy.
+   */
+  last_checked?: string;
+
+  /**
    * Readable name of the proxy.
    */
   name?: string;
+
+  /**
+   * Current health status of the proxy.
+   */
+  status?: 'available' | 'unavailable';
 }
 
 export namespace ProxyRetrieveResponse {
@@ -479,9 +499,19 @@ export namespace ProxyListResponse {
       | ProxyListResponseItem.CustomProxyConfig;
 
     /**
+     * Timestamp of the last health check performed on this proxy.
+     */
+    last_checked?: string;
+
+    /**
      * Readable name of the proxy.
      */
     name?: string;
+
+    /**
+     * Current health status of the proxy.
+     */
+    status?: 'available' | 'unavailable';
   }
 
   export namespace ProxyListResponseItem {
