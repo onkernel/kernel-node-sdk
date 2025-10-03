@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.13.0 (2025-10-03)
+
+Full Changelog: [v0.12.0...v0.13.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.12.0...v0.13.0)
+
+### Features
+
+* Http proxy ([a178cc3](https://github.com/onkernel/kernel-node-sdk/commit/a178cc39945833b6cf9300c1828df82b726261f9))
+* Update oAPI and data model for proxy status ([26063c8](https://github.com/onkernel/kernel-node-sdk/commit/26063c82a096ac63ad9de34597c1a1849ab881f4))
+
+
+### Chores
+
+* **internal:** remove .eslintcache ([c7a7e8c](https://github.com/onkernel/kernel-node-sdk/commit/c7a7e8cad9e529906a3d351587ec57ae56e864f3))
+
 ## 0.12.0 (2025-09-30)
 
 Full Changelog: [v0.11.5...v0.12.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.11.5...v0.12.0)
