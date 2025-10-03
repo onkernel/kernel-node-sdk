@@ -26,6 +26,7 @@ describe('resource proxies', () => {
       type: 'datacenter',
       config: { country: 'US' },
       name: 'name',
+      protocol: 'http',
     });
   });
 

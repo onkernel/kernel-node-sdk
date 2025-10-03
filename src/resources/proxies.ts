@@ -72,6 +72,11 @@ export interface ProxyCreateResponse {
   name?: string;
 
   /**
+   * Protocol to use for the proxy connection.
+   */
+  protocol?: 'http' | 'https';
+
+  /**
    * Current health status of the proxy.
    */
   status?: 'available' | 'unavailable';
@@ -287,6 +292,11 @@ export interface ProxyRetrieveResponse {
    * Readable name of the proxy.
    */
   name?: string;
+
+  /**
+   * Protocol to use for the proxy connection.
+   */
+  protocol?: 'http' | 'https';
 
   /**
    * Current health status of the proxy.
@@ -509,6 +519,11 @@ export namespace ProxyListResponse {
     name?: string;
 
     /**
+     * Protocol to use for the proxy connection.
+     */
+    protocol?: 'http' | 'https';
+
+    /**
      * Current health status of the proxy.
      */
     status?: 'available' | 'unavailable';
@@ -715,6 +730,11 @@ export interface ProxyCreateParams {
    * Readable name of the proxy.
    */
   name?: string;
+
+  /**
+   * Protocol to use for the proxy connection.
+   */
+  protocol?: 'http' | 'https';
 }
 
 export namespace ProxyCreateParams {
