@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.14.0 (2025-10-07)
+
+Full Changelog: [v0.13.0...v0.14.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.13.0...v0.14.0)
+
+### Features
+
+* WIP browser extensions ([77333ab](https://github.com/onkernel/kernel-node-sdk/commit/77333abe7f7ee0c53da495adcec728b2fed7f831))
+
+
+### Chores
+
+* **internal:** use npm pack for build uploads ([aac1084](https://github.com/onkernel/kernel-node-sdk/commit/aac1084dca1bb547f314144891ed277ff82f2c89))
+* **jsdoc:** fix [@link](https://github.com/link) annotations to refer only to parts of the package‘s public interface ([fe32267](https://github.com/onkernel/kernel-node-sdk/commit/fe32267f011df4444169d45787bac50b6249eab4))
+
 ## 0.13.0 (2025-10-03)
 
 Full Changelog: [v0.12.0...v0.13.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.12.0...v0.13.0)
