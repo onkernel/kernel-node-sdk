@@ -11,6 +11,7 @@ export {
   type BrowserListResponse,
   type BrowserCreateParams,
   type BrowserDeleteParams,
+  type BrowserUploadExtensionsParams,
 } from './browsers/browsers';
 export {
   Deployments,
@@ -24,6 +25,13 @@ export {
   type DeploymentFollowParams,
   type DeploymentListResponsesOffsetPagination,
 } from './deployments';
+export {
+  Extensions,
+  type ExtensionListResponse,
+  type ExtensionUploadResponse,
+  type ExtensionDownloadFromChromeStoreParams,
+  type ExtensionUploadParams,
+} from './extensions';
 export {
   Invocations,
   type InvocationStateEvent,
