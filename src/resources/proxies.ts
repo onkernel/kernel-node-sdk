@@ -88,7 +88,7 @@ export namespace ProxyCreateResponse {
    */
   export interface DatacenterProxyConfig {
     /**
-     * ISO 3166 country code or EU for the proxy exit node.
+     * ISO 3166 country code.
      */
     country: string;
   }
@@ -98,7 +98,7 @@ export namespace ProxyCreateResponse {
    */
   export interface IspProxyConfig {
     /**
-     * ISO 3166 country code or EU for the proxy exit node.
+     * ISO 3166 country code.
      */
     country: string;
   }
@@ -119,13 +119,12 @@ export namespace ProxyCreateResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code or EU for the proxy exit node. Required if `city` is
-     * provided.
+     * ISO 3166 country code.
      */
     country?: string;
 
     /**
-     * Operating system of the residential device.
+     * @deprecated Operating system of the residential device.
      */
     os?: 'windows' | 'macos' | 'android';
 
@@ -219,8 +218,7 @@ export namespace ProxyCreateResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code or EU for the proxy exit node. Required if `city` is
-     * provided.
+     * ISO 3166 country code
      */
     country?: string;
 
@@ -310,7 +308,7 @@ export namespace ProxyRetrieveResponse {
    */
   export interface DatacenterProxyConfig {
     /**
-     * ISO 3166 country code or EU for the proxy exit node.
+     * ISO 3166 country code.
      */
     country: string;
   }
@@ -320,7 +318,7 @@ export namespace ProxyRetrieveResponse {
    */
   export interface IspProxyConfig {
     /**
-     * ISO 3166 country code or EU for the proxy exit node.
+     * ISO 3166 country code.
      */
     country: string;
   }
@@ -341,13 +339,12 @@ export namespace ProxyRetrieveResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code or EU for the proxy exit node. Required if `city` is
-     * provided.
+     * ISO 3166 country code.
      */
     country?: string;
 
     /**
-     * Operating system of the residential device.
+     * @deprecated Operating system of the residential device.
      */
     os?: 'windows' | 'macos' | 'android';
 
@@ -441,8 +438,7 @@ export namespace ProxyRetrieveResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code or EU for the proxy exit node. Required if `city` is
-     * provided.
+     * ISO 3166 country code
      */
     country?: string;
 
@@ -535,7 +531,7 @@ export namespace ProxyListResponse {
      */
     export interface DatacenterProxyConfig {
       /**
-       * ISO 3166 country code or EU for the proxy exit node.
+       * ISO 3166 country code.
        */
       country: string;
     }
@@ -545,7 +541,7 @@ export namespace ProxyListResponse {
      */
     export interface IspProxyConfig {
       /**
-       * ISO 3166 country code or EU for the proxy exit node.
+       * ISO 3166 country code.
        */
       country: string;
     }
@@ -566,13 +562,12 @@ export namespace ProxyListResponse {
       city?: string;
 
       /**
-       * ISO 3166 country code or EU for the proxy exit node. Required if `city` is
-       * provided.
+       * ISO 3166 country code.
        */
       country?: string;
 
       /**
-       * Operating system of the residential device.
+       * @deprecated Operating system of the residential device.
        */
       os?: 'windows' | 'macos' | 'android';
 
@@ -666,8 +661,7 @@ export namespace ProxyListResponse {
       city?: string;
 
       /**
-       * ISO 3166 country code or EU for the proxy exit node. Required if `city` is
-       * provided.
+       * ISO 3166 country code
        */
       country?: string;
 
@@ -743,7 +737,7 @@ export namespace ProxyCreateParams {
    */
   export interface DatacenterProxyConfig {
     /**
-     * ISO 3166 country code or EU for the proxy exit node.
+     * ISO 3166 country code.
      */
     country: string;
   }
@@ -753,7 +747,7 @@ export namespace ProxyCreateParams {
    */
   export interface IspProxyConfig {
     /**
-     * ISO 3166 country code or EU for the proxy exit node.
+     * ISO 3166 country code.
      */
     country: string;
   }
@@ -774,13 +768,12 @@ export namespace ProxyCreateParams {
     city?: string;
 
     /**
-     * ISO 3166 country code or EU for the proxy exit node. Required if `city` is
-     * provided.
+     * ISO 3166 country code.
      */
     country?: string;
 
     /**
-     * Operating system of the residential device.
+     * @deprecated Operating system of the residential device.
      */
     os?: 'windows' | 'macos' | 'android';
 
@@ -874,8 +867,7 @@ export namespace ProxyCreateParams {
     city?: string;
 
     /**
-     * ISO 3166 country code or EU for the proxy exit node. Required if `city` is
-     * provided.
+     * ISO 3166 country code
      */
     country?: string;
 
