@@ -33,6 +33,13 @@ import {
 } from './resources/deployments';
 import { KernelApp } from './core/app-framework';
 import {
+  ExtensionDownloadFromChromeStoreParams,
+  ExtensionListResponse,
+  ExtensionUploadParams,
+  ExtensionUploadResponse,
+  Extensions,
+} from './resources/extensions';
+import {
   InvocationCreateParams,
   InvocationCreateResponse,
   InvocationFollowParams,
@@ -61,6 +68,7 @@ import {
   BrowserListResponse,
   BrowserPersistence,
   BrowserRetrieveResponse,
+  BrowserUploadExtensionsParams,
   Browsers,
   Profile,
 } from './resources/browsers/browsers';
@@ -832,6 +840,7 @@ export class Kernel {
   browsers: API.Browsers = new API.Browsers(this);
   profiles: API.Profiles = new API.Profiles(this);
   proxies: API.Proxies = new API.Proxies(this);
+  extensions: API.Extensions = new API.Extensions(this);
 }
 
 Kernel.Deployments = Deployments;
@@ -840,6 +849,7 @@ Kernel.Invocations = Invocations;
 Kernel.Browsers = Browsers;
 Kernel.Profiles = Profiles;
 Kernel.Proxies = Proxies;
+Kernel.Extensions = Extensions;
 
 export declare namespace Kernel {
   export type RequestOptions = Opts.RequestOptions;
@@ -889,6 +899,7 @@ export declare namespace Kernel {
     type BrowserListResponse as BrowserListResponse,
     type BrowserCreateParams as BrowserCreateParams,
     type BrowserDeleteParams as BrowserDeleteParams,
+    type BrowserUploadExtensionsParams as BrowserUploadExtensionsParams,
   };
 
   export {
@@ -903,6 +914,14 @@ export declare namespace Kernel {
     type ProxyRetrieveResponse as ProxyRetrieveResponse,
     type ProxyListResponse as ProxyListResponse,
     type ProxyCreateParams as ProxyCreateParams,
+  };
+
+  export {
+    Extensions as Extensions,
+    type ExtensionListResponse as ExtensionListResponse,
+    type ExtensionUploadResponse as ExtensionUploadResponse,
+    type ExtensionDownloadFromChromeStoreParams as ExtensionDownloadFromChromeStoreParams,
+    type ExtensionUploadParams as ExtensionUploadParams,
   };
 
   export type AppAction = API.AppAction;
