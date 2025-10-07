@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Kernel from '@onkernel/sdk';
+import Kernel, { toFile } from '@onkernel/sdk';
 
 const client = new Kernel({
   apiKey: 'My API Key',
@@ -26,6 +26,7 @@ describe('resource browsers', () => {
     await expect(
       client.browsers.create(
         {
+          extensions: [{ id: 'id', name: 'name' }],
           headless: false,
           invocation_id: 'rr33xuugxj9h0bkf1rdt2bet',
           persistence: { id: 'my-awesome-browser-for-user-1234' },
@@ -90,5 +91,26 @@ describe('resource browsers', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('uploadExtensions: only required params', async () => {
+    const responsePromise = client.browsers.uploadExtensions('id', {
+      extensions: [{ name: 'name', zip_file: await toFile(Buffer.from('# my file contents'), 'README.md') }],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('uploadExtensions: required and optional params', async () => {
+    const response = await client.browsers.uploadExtensions('id', {
+      extensions: [{ name: 'name', zip_file: await toFile(Buffer.from('# my file contents'), 'README.md') }],
+    });
   });
 });

@@ -48,8 +48,10 @@ import {
   Fs,
 } from './fs/fs';
 import { APIPromise } from '../../core/api-promise';
+import { type Uploadable } from '../../core/uploads';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
+import { multipartFormRequestOptions } from '../../internal/uploads';
 import { path } from '../../internal/utils/path';
 
 export class Browsers extends APIResource {
@@ -133,6 +135,36 @@ export class Browsers extends APIResource {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
+  }
+
+  /**
+   * Loads one or more unpacked extensions and restarts Chromium on the browser
+   * instance.
+   *
+   * @example
+   * ```ts
+   * await client.browsers.uploadExtensions('id', {
+   *   extensions: [
+   *     {
+   *       name: 'name',
+   *       zip_file: fs.createReadStream('path/to/file'),
+   *     },
+   *   ],
+   * });
+   * ```
+   */
+  uploadExtensions(
+    id: string,
+    body: BrowserUploadExtensionsParams,
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    return this._client.post(
+      path`/browsers/${id}/extensions`,
+      multipartFormRequestOptions(
+        { body, ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
+        this._client,
+      ),
+    );
   }
 }
 
@@ -341,6 +373,11 @@ export namespace BrowserListResponse {
 
 export interface BrowserCreateParams {
   /**
+   * List of browser extensions to load into the session. Provide each by id or name.
+   */
+  extensions?: Array<BrowserCreateParams.Extension>;
+
+  /**
    * If true, launches the browser using a headless image (no VNC/GUI). Defaults to
    * false.
    */
@@ -388,6 +425,23 @@ export interface BrowserCreateParams {
 
 export namespace BrowserCreateParams {
   /**
+   * Extension selection for the browser session. Provide either id or name of an
+   * extension uploaded to Kernel.
+   */
+  export interface Extension {
+    /**
+     * Extension ID to load for this browser session
+     */
+    id?: string;
+
+    /**
+     * Extension name to load for this browser session (instead of id). Must be 1-255
+     * characters, using letters, numbers, dots, underscores, or hyphens.
+     */
+    name?: string;
+  }
+
+  /**
    * Profile selection for the browser session. Provide either id or name. If
    * specified, the matching profile will be loaded into the browser session.
    * Profiles must be created beforehand.
@@ -419,6 +473,28 @@ export interface BrowserDeleteParams {
   persistent_id: string;
 }
 
+export interface BrowserUploadExtensionsParams {
+  /**
+   * List of extensions to upload and activate
+   */
+  extensions: Array<BrowserUploadExtensionsParams.Extension>;
+}
+
+export namespace BrowserUploadExtensionsParams {
+  export interface Extension {
+    /**
+     * Folder name to place the extension under /home/kernel/extensions/<name>
+     */
+    name: string;
+
+    /**
+     * Zip archive containing an unpacked Chromium extension (must include
+     * manifest.json)
+     */
+    zip_file: Uploadable;
+  }
+}
+
 Browsers.Replays = Replays;
 Browsers.Fs = Fs;
 Browsers.Process = Process;
@@ -433,6 +509,7 @@ export declare namespace Browsers {
     type BrowserListResponse as BrowserListResponse,
     type BrowserCreateParams as BrowserCreateParams,
     type BrowserDeleteParams as BrowserDeleteParams,
+    type BrowserUploadExtensionsParams as BrowserUploadExtensionsParams,
   };
 
   export {
