@@ -9,7 +9,7 @@ export {
   type BrowserListResponse,
   type BrowserCreateParams,
   type BrowserDeleteParams,
-  type BrowserUploadExtensionsParams,
+  type BrowserLoadExtensionsParams,
 } from './browsers';
 export {
   Fs,
