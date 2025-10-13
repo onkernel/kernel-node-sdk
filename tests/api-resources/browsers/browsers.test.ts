@@ -34,6 +34,7 @@ describe('resource browsers', () => {
           proxy_id: 'proxy_id',
           stealth: true,
           timeout_seconds: 10,
+          viewport: { height: 800, width: 1280, refresh_rate: 60 },
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -94,8 +95,8 @@ describe('resource browsers', () => {
   });
 
   // Prism tests are disabled
-  test.skip('uploadExtensions: only required params', async () => {
-    const responsePromise = client.browsers.uploadExtensions('id', {
+  test.skip('loadExtensions: only required params', async () => {
+    const responsePromise = client.browsers.loadExtensions('id', {
       extensions: [{ name: 'name', zip_file: await toFile(Buffer.from('# my file contents'), 'README.md') }],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -108,8 +109,8 @@ describe('resource browsers', () => {
   });
 
   // Prism tests are disabled
-  test.skip('uploadExtensions: required and optional params', async () => {
-    const response = await client.browsers.uploadExtensions('id', {
+  test.skip('loadExtensions: required and optional params', async () => {
+    const response = await client.browsers.loadExtensions('id', {
       extensions: [{ name: 'name', zip_file: await toFile(Buffer.from('# my file contents'), 'README.md') }],
     });
   });

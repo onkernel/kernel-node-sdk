@@ -143,7 +143,7 @@ export class Browsers extends APIResource {
    *
    * @example
    * ```ts
-   * await client.browsers.uploadExtensions('id', {
+   * await client.browsers.loadExtensions('id', {
    *   extensions: [
    *     {
    *       name: 'name',
@@ -153,11 +153,7 @@ export class Browsers extends APIResource {
    * });
    * ```
    */
-  uploadExtensions(
-    id: string,
-    body: BrowserUploadExtensionsParams,
-    options?: RequestOptions,
-  ): APIPromise<void> {
+  loadExtensions(id: string, body: BrowserLoadExtensionsParams, options?: RequestOptions): APIPromise<void> {
     return this._client.post(
       path`/browsers/${id}/extensions`,
       multipartFormRequestOptions(
@@ -259,6 +255,48 @@ export interface BrowserCreateResponse {
    * ID of the proxy associated with this browser session, if any.
    */
   proxy_id?: string;
+
+  /**
+   * Initial browser window size in pixels with optional refresh rate. If omitted,
+   * image defaults apply (commonly 1024x768@60). Only specific viewport
+   * configurations are supported. The server will reject unsupported combinations.
+   * Supported resolutions are: 2560x1440@10, 1920x1080@25, 1920x1200@25,
+   * 1440x900@25, 1024x768@60 If refresh_rate is not provided, it will be
+   * automatically determined from the width and height if they match a supported
+   * configuration exactly. Note: Higher resolutions may affect the responsiveness of
+   * live view browser
+   */
+  viewport?: BrowserCreateResponse.Viewport;
+}
+
+export namespace BrowserCreateResponse {
+  /**
+   * Initial browser window size in pixels with optional refresh rate. If omitted,
+   * image defaults apply (commonly 1024x768@60). Only specific viewport
+   * configurations are supported. The server will reject unsupported combinations.
+   * Supported resolutions are: 2560x1440@10, 1920x1080@25, 1920x1200@25,
+   * 1440x900@25, 1024x768@60 If refresh_rate is not provided, it will be
+   * automatically determined from the width and height if they match a supported
+   * configuration exactly. Note: Higher resolutions may affect the responsiveness of
+   * live view browser
+   */
+  export interface Viewport {
+    /**
+     * Browser window height in pixels.
+     */
+    height: number;
+
+    /**
+     * Browser window width in pixels.
+     */
+    width: number;
+
+    /**
+     * Display refresh rate in Hz. If omitted, automatically determined from width and
+     * height.
+     */
+    refresh_rate?: number;
+  }
 }
 
 export interface BrowserRetrieveResponse {
@@ -312,6 +350,48 @@ export interface BrowserRetrieveResponse {
    * ID of the proxy associated with this browser session, if any.
    */
   proxy_id?: string;
+
+  /**
+   * Initial browser window size in pixels with optional refresh rate. If omitted,
+   * image defaults apply (commonly 1024x768@60). Only specific viewport
+   * configurations are supported. The server will reject unsupported combinations.
+   * Supported resolutions are: 2560x1440@10, 1920x1080@25, 1920x1200@25,
+   * 1440x900@25, 1024x768@60 If refresh_rate is not provided, it will be
+   * automatically determined from the width and height if they match a supported
+   * configuration exactly. Note: Higher resolutions may affect the responsiveness of
+   * live view browser
+   */
+  viewport?: BrowserRetrieveResponse.Viewport;
+}
+
+export namespace BrowserRetrieveResponse {
+  /**
+   * Initial browser window size in pixels with optional refresh rate. If omitted,
+   * image defaults apply (commonly 1024x768@60). Only specific viewport
+   * configurations are supported. The server will reject unsupported combinations.
+   * Supported resolutions are: 2560x1440@10, 1920x1080@25, 1920x1200@25,
+   * 1440x900@25, 1024x768@60 If refresh_rate is not provided, it will be
+   * automatically determined from the width and height if they match a supported
+   * configuration exactly. Note: Higher resolutions may affect the responsiveness of
+   * live view browser
+   */
+  export interface Viewport {
+    /**
+     * Browser window height in pixels.
+     */
+    height: number;
+
+    /**
+     * Browser window width in pixels.
+     */
+    width: number;
+
+    /**
+     * Display refresh rate in Hz. If omitted, automatically determined from width and
+     * height.
+     */
+    refresh_rate?: number;
+  }
 }
 
 export type BrowserListResponse = Array<BrowserListResponse.BrowserListResponseItem>;
@@ -368,6 +448,48 @@ export namespace BrowserListResponse {
      * ID of the proxy associated with this browser session, if any.
      */
     proxy_id?: string;
+
+    /**
+     * Initial browser window size in pixels with optional refresh rate. If omitted,
+     * image defaults apply (commonly 1024x768@60). Only specific viewport
+     * configurations are supported. The server will reject unsupported combinations.
+     * Supported resolutions are: 2560x1440@10, 1920x1080@25, 1920x1200@25,
+     * 1440x900@25, 1024x768@60 If refresh_rate is not provided, it will be
+     * automatically determined from the width and height if they match a supported
+     * configuration exactly. Note: Higher resolutions may affect the responsiveness of
+     * live view browser
+     */
+    viewport?: BrowserListResponseItem.Viewport;
+  }
+
+  export namespace BrowserListResponseItem {
+    /**
+     * Initial browser window size in pixels with optional refresh rate. If omitted,
+     * image defaults apply (commonly 1024x768@60). Only specific viewport
+     * configurations are supported. The server will reject unsupported combinations.
+     * Supported resolutions are: 2560x1440@10, 1920x1080@25, 1920x1200@25,
+     * 1440x900@25, 1024x768@60 If refresh_rate is not provided, it will be
+     * automatically determined from the width and height if they match a supported
+     * configuration exactly. Note: Higher resolutions may affect the responsiveness of
+     * live view browser
+     */
+    export interface Viewport {
+      /**
+       * Browser window height in pixels.
+       */
+      height: number;
+
+      /**
+       * Browser window width in pixels.
+       */
+      width: number;
+
+      /**
+       * Display refresh rate in Hz. If omitted, automatically determined from width and
+       * height.
+       */
+      refresh_rate?: number;
+    }
   }
 }
 
@@ -421,6 +543,18 @@ export interface BrowserCreateParams {
    * specified value.
    */
   timeout_seconds?: number;
+
+  /**
+   * Initial browser window size in pixels with optional refresh rate. If omitted,
+   * image defaults apply (commonly 1024x768@60). Only specific viewport
+   * configurations are supported. The server will reject unsupported combinations.
+   * Supported resolutions are: 2560x1440@10, 1920x1080@25, 1920x1200@25,
+   * 1440x900@25, 1024x768@60 If refresh_rate is not provided, it will be
+   * automatically determined from the width and height if they match a supported
+   * configuration exactly. Note: Higher resolutions may affect the responsiveness of
+   * live view browser
+   */
+  viewport?: BrowserCreateParams.Viewport;
 }
 
 export namespace BrowserCreateParams {
@@ -464,6 +598,34 @@ export namespace BrowserCreateParams {
      */
     save_changes?: boolean;
   }
+
+  /**
+   * Initial browser window size in pixels with optional refresh rate. If omitted,
+   * image defaults apply (commonly 1024x768@60). Only specific viewport
+   * configurations are supported. The server will reject unsupported combinations.
+   * Supported resolutions are: 2560x1440@10, 1920x1080@25, 1920x1200@25,
+   * 1440x900@25, 1024x768@60 If refresh_rate is not provided, it will be
+   * automatically determined from the width and height if they match a supported
+   * configuration exactly. Note: Higher resolutions may affect the responsiveness of
+   * live view browser
+   */
+  export interface Viewport {
+    /**
+     * Browser window height in pixels.
+     */
+    height: number;
+
+    /**
+     * Browser window width in pixels.
+     */
+    width: number;
+
+    /**
+     * Display refresh rate in Hz. If omitted, automatically determined from width and
+     * height.
+     */
+    refresh_rate?: number;
+  }
 }
 
 export interface BrowserDeleteParams {
@@ -473,14 +635,14 @@ export interface BrowserDeleteParams {
   persistent_id: string;
 }
 
-export interface BrowserUploadExtensionsParams {
+export interface BrowserLoadExtensionsParams {
   /**
    * List of extensions to upload and activate
    */
-  extensions: Array<BrowserUploadExtensionsParams.Extension>;
+  extensions: Array<BrowserLoadExtensionsParams.Extension>;
 }
 
-export namespace BrowserUploadExtensionsParams {
+export namespace BrowserLoadExtensionsParams {
   export interface Extension {
     /**
      * Folder name to place the extension under /home/kernel/extensions/<name>
@@ -509,7 +671,7 @@ export declare namespace Browsers {
     type BrowserListResponse as BrowserListResponse,
     type BrowserCreateParams as BrowserCreateParams,
     type BrowserDeleteParams as BrowserDeleteParams,
-    type BrowserUploadExtensionsParams as BrowserUploadExtensionsParams,
+    type BrowserLoadExtensionsParams as BrowserLoadExtensionsParams,
   };
 
   export {

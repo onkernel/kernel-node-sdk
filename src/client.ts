@@ -65,9 +65,9 @@ import {
   BrowserCreateResponse,
   BrowserDeleteParams,
   BrowserListResponse,
+  BrowserLoadExtensionsParams,
   BrowserPersistence,
   BrowserRetrieveResponse,
-  BrowserUploadExtensionsParams,
   Browsers,
   Profile,
 } from './resources/browsers/browsers';
@@ -876,7 +876,7 @@ export declare namespace Kernel {
     type BrowserListResponse as BrowserListResponse,
     type BrowserCreateParams as BrowserCreateParams,
     type BrowserDeleteParams as BrowserDeleteParams,
-    type BrowserUploadExtensionsParams as BrowserUploadExtensionsParams,
+    type BrowserLoadExtensionsParams as BrowserLoadExtensionsParams,
   };
 
   export {
