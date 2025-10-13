@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.14.1 (2025-10-13)
+
+Full Changelog: [v0.14.0...v0.14.1](https://github.com/onkernel/kernel-node-sdk/compare/v0.14.0...v0.14.1)
+
+### Features
+
+* Hide and deprecate mobile proxy type ([54dae63](https://github.com/onkernel/kernel-node-sdk/commit/54dae631f02ce14c75222677ffa171895f4cb0ca))
+* WIP: Configurable Viewport ([2a85d81](https://github.com/onkernel/kernel-node-sdk/commit/2a85d8110a918d62a528401e278758cf5eeb9b82))
+
 ## 0.14.0 (2025-10-07)
 
 Full Changelog: [v0.13.0...v0.14.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.13.0...v0.14.0)
