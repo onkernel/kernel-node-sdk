@@ -179,7 +179,6 @@ const addFormValue = async (form: FormData, key: string, value: unknown): Promis
     // Special case: env_vars should always be flattened for backward compatibility
     // with APIs that expect env_vars[KEY] format
     const shouldAlwaysFlatten = key === 'env_vars';
-    
     // If the object doesn't contain any uploadable values,
     // serialize it as JSON instead of flattening it into bracketed keys.
     // This handles fields with contentType: application/json in the OpenAPI spec.
