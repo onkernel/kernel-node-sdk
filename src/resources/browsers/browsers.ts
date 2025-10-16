@@ -242,6 +242,11 @@ export interface BrowserCreateResponse {
   browser_live_view_url?: string;
 
   /**
+   * Whether the browser session is running in kiosk mode.
+   */
+  kiosk_mode?: boolean;
+
+  /**
    * Optional persistence configuration for the browser session.
    */
   persistence?: BrowserPersistence;
@@ -335,6 +340,11 @@ export interface BrowserRetrieveResponse {
    * browsers.
    */
   browser_live_view_url?: string;
+
+  /**
+   * Whether the browser session is running in kiosk mode.
+   */
+  kiosk_mode?: boolean;
 
   /**
    * Optional persistence configuration for the browser session.
@@ -435,6 +445,11 @@ export namespace BrowserListResponse {
     browser_live_view_url?: string;
 
     /**
+     * Whether the browser session is running in kiosk mode.
+     */
+    kiosk_mode?: boolean;
+
+    /**
      * Optional persistence configuration for the browser session.
      */
     persistence?: BrowsersAPI.BrowserPersistence;
@@ -509,6 +524,12 @@ export interface BrowserCreateParams {
    * action invocation ID
    */
   invocation_id?: string;
+
+  /**
+   * If true, launches the browser in kiosk mode to hide address bar and tabs in live
+   * view.
+   */
+  kiosk_mode?: boolean;
 
   /**
    * Optional persistence configuration for the browser session.

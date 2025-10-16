@@ -29,6 +29,7 @@ describe('resource browsers', () => {
           extensions: [{ id: 'id', name: 'name' }],
           headless: false,
           invocation_id: 'rr33xuugxj9h0bkf1rdt2bet',
+          kiosk_mode: true,
           persistence: { id: 'my-awesome-browser-for-user-1234' },
           profile: { id: 'id', name: 'name', save_changes: true },
           proxy_id: 'proxy_id',
