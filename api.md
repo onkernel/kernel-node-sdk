@@ -183,13 +183,13 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/extensions.ts">ExtensionCreateResponse</a></code>
 - <code><a href="./src/resources/extensions.ts">ExtensionListResponse</a></code>
-- <code><a href="./src/resources/extensions.ts">ExtensionUploadResponse</a></code>
 
 Methods:
 
+- <code title="post /extensions">client.extensions.<a href="./src/resources/extensions.ts">create</a>({ ...params }) -> ExtensionCreateResponse</code>
+- <code title="get /extensions/{id_or_name}">client.extensions.<a href="./src/resources/extensions.ts">retrieve</a>(idOrName) -> Response</code>
 - <code title="get /extensions">client.extensions.<a href="./src/resources/extensions.ts">list</a>() -> ExtensionListResponse</code>
 - <code title="delete /extensions/{id_or_name}">client.extensions.<a href="./src/resources/extensions.ts">delete</a>(idOrName) -> void</code>
-- <code title="get /extensions/{id_or_name}">client.extensions.<a href="./src/resources/extensions.ts">download</a>(idOrName) -> Response</code>
 - <code title="get /extensions/from_chrome_store">client.extensions.<a href="./src/resources/extensions.ts">downloadFromChromeStore</a>({ ...params }) -> Response</code>
-- <code title="post /extensions">client.extensions.<a href="./src/resources/extensions.ts">upload</a>({ ...params }) -> ExtensionUploadResponse</code>

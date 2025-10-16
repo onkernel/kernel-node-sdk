@@ -10,6 +10,42 @@ import { path } from '../internal/utils/path';
 
 export class Extensions extends APIResource {
   /**
+   * Upload a zip file containing an unpacked browser extension. Optionally provide a
+   * unique name for later reference.
+   *
+   * @example
+   * ```ts
+   * const extension = await client.extensions.create({
+   *   file: fs.createReadStream('path/to/file'),
+   * });
+   * ```
+   */
+  create(body: ExtensionCreateParams, options?: RequestOptions): APIPromise<ExtensionCreateResponse> {
+    return this._client.post('/extensions', multipartFormRequestOptions({ body, ...options }, this._client));
+  }
+
+  /**
+   * Download the extension as a ZIP archive by ID or name.
+   *
+   * @example
+   * ```ts
+   * const extension = await client.extensions.retrieve(
+   *   'id_or_name',
+   * );
+   *
+   * const content = await extension.blob();
+   * console.log(content);
+   * ```
+   */
+  retrieve(idOrName: string, options?: RequestOptions): APIPromise<Response> {
+    return this._client.get(path`/extensions/${idOrName}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: 'application/octet-stream' }, options?.headers]),
+      __binaryResponse: true,
+    });
+  }
+
+  /**
    * List extensions owned by the caller's organization.
    *
    * @example
@@ -33,27 +69,6 @@ export class Extensions extends APIResource {
     return this._client.delete(path`/extensions/${idOrName}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
-
-  /**
-   * Download the extension as a ZIP archive by ID or name.
-   *
-   * @example
-   * ```ts
-   * const response = await client.extensions.download(
-   *   'id_or_name',
-   * );
-   *
-   * const content = await response.blob();
-   * console.log(content);
-   * ```
-   */
-  download(idOrName: string, options?: RequestOptions): APIPromise<Response> {
-    return this._client.get(path`/extensions/${idOrName}`, {
-      ...options,
-      headers: buildHeaders([{ Accept: 'application/octet-stream' }, options?.headers]),
-      __binaryResponse: true,
     });
   }
 
@@ -83,21 +98,37 @@ export class Extensions extends APIResource {
       __binaryResponse: true,
     });
   }
+}
+
+/**
+ * A browser extension uploaded to Kernel.
+ */
+export interface ExtensionCreateResponse {
+  /**
+   * Unique identifier for the extension
+   */
+  id: string;
 
   /**
-   * Upload a zip file containing an unpacked browser extension. Optionally provide a
-   * unique name for later reference.
-   *
-   * @example
-   * ```ts
-   * const response = await client.extensions.upload({
-   *   file: fs.createReadStream('path/to/file'),
-   * });
-   * ```
+   * Timestamp when the extension was created
    */
-  upload(body: ExtensionUploadParams, options?: RequestOptions): APIPromise<ExtensionUploadResponse> {
-    return this._client.post('/extensions', multipartFormRequestOptions({ body, ...options }, this._client));
-  }
+  created_at: string;
+
+  /**
+   * Size of the extension archive in bytes
+   */
+  size_bytes: number;
+
+  /**
+   * Timestamp when the extension was last used
+   */
+  last_used_at?: string | null;
+
+  /**
+   * Optional, easier-to-reference name for the extension. Must be unique within the
+   * organization.
+   */
+  name?: string | null;
 }
 
 export type ExtensionListResponse = Array<ExtensionListResponse.ExtensionListResponseItem>;
@@ -135,35 +166,16 @@ export namespace ExtensionListResponse {
   }
 }
 
-/**
- * A browser extension uploaded to Kernel.
- */
-export interface ExtensionUploadResponse {
+export interface ExtensionCreateParams {
   /**
-   * Unique identifier for the extension
+   * ZIP file containing the browser extension.
    */
-  id: string;
+  file: Uploadable;
 
   /**
-   * Timestamp when the extension was created
+   * Optional unique name within the organization to reference this extension.
    */
-  created_at: string;
-
-  /**
-   * Size of the extension archive in bytes
-   */
-  size_bytes: number;
-
-  /**
-   * Timestamp when the extension was last used
-   */
-  last_used_at?: string | null;
-
-  /**
-   * Optional, easier-to-reference name for the extension. Must be unique within the
-   * organization.
-   */
-  name?: string | null;
+  name?: string;
 }
 
 export interface ExtensionDownloadFromChromeStoreParams {
@@ -178,23 +190,11 @@ export interface ExtensionDownloadFromChromeStoreParams {
   os?: 'win' | 'mac' | 'linux';
 }
 
-export interface ExtensionUploadParams {
-  /**
-   * ZIP file containing the browser extension.
-   */
-  file: Uploadable;
-
-  /**
-   * Optional unique name within the organization to reference this extension.
-   */
-  name?: string;
-}
-
 export declare namespace Extensions {
   export {
+    type ExtensionCreateResponse as ExtensionCreateResponse,
     type ExtensionListResponse as ExtensionListResponse,
-    type ExtensionUploadResponse as ExtensionUploadResponse,
+    type ExtensionCreateParams as ExtensionCreateParams,
     type ExtensionDownloadFromChromeStoreParams as ExtensionDownloadFromChromeStoreParams,
-    type ExtensionUploadParams as ExtensionUploadParams,
   };
 }

@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Kernel, { toFile } from '@onkernel/sdk';
+import Kernel from '@onkernel/sdk';
 
 const client = new Kernel({
   apiKey: 'My API Key',
@@ -9,11 +9,8 @@ const client = new Kernel({
 
 describe('resource deployments', () => {
   // Prism tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.deployments.create({
-      entrypoint_rel_path: 'src/app.py',
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
-    });
+  test.skip('create', async () => {
+    const responsePromise = client.deployments.create({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,18 +18,6 @@ describe('resource deployments', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.deployments.create({
-      entrypoint_rel_path: 'src/app.py',
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
-      env_vars: { foo: 'string' },
-      force: false,
-      region: 'aws.us-east-1a',
-      version: '1.0.0',
-    });
   });
 
   // Prism tests are disabled

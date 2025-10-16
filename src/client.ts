@@ -33,10 +33,10 @@ import {
 } from './resources/deployments';
 import { KernelApp } from './core/app-framework';
 import {
+  ExtensionCreateParams,
+  ExtensionCreateResponse,
   ExtensionDownloadFromChromeStoreParams,
   ExtensionListResponse,
-  ExtensionUploadParams,
-  ExtensionUploadResponse,
   Extensions,
 } from './resources/extensions';
 import {
@@ -918,10 +918,10 @@ export declare namespace Kernel {
 
   export {
     Extensions as Extensions,
+    type ExtensionCreateResponse as ExtensionCreateResponse,
     type ExtensionListResponse as ExtensionListResponse,
-    type ExtensionUploadResponse as ExtensionUploadResponse,
+    type ExtensionCreateParams as ExtensionCreateParams,
     type ExtensionDownloadFromChromeStoreParams as ExtensionDownloadFromChromeStoreParams,
-    type ExtensionUploadParams as ExtensionUploadParams,
   };
 
   export type AppAction = API.AppAction;
