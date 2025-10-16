@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.14.2 (2025-10-16)
+
+Full Changelog: [v0.14.1...v0.14.2](https://github.com/onkernel/kernel-node-sdk/compare/v0.14.1...v0.14.2)
+
+### Features
+
+* Kiosk mode ([7b9016e](https://github.com/onkernel/kernel-node-sdk/commit/7b9016ef162c9b28569e48aea971220fbc02c7aa))
+
 ## 0.14.1 (2025-10-13)
 
 Full Changelog: [v0.14.0...v0.14.1](https://github.com/onkernel/kernel-node-sdk/compare/v0.14.0...v0.14.1)
