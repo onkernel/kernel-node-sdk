@@ -19,7 +19,10 @@ export class Deployments extends APIResource {
    * ```ts
    * const deployment = await client.deployments.create({
    *   entrypoint_rel_path: 'src/app.py',
+   *   env_vars: { FOO: 'bar' },
    *   file: fs.createReadStream('path/to/file'),
+   *   region: 'aws.us-east-1a',
+   *   version: '1.0.0',
    * });
    * ```
    */
@@ -349,18 +352,18 @@ export interface DeploymentCreateParams {
   /**
    * Relative path to the entrypoint of the application
    */
-  entrypoint_rel_path: string;
-
-  /**
-   * ZIP file containing the application source directory
-   */
-  file: Uploadable;
+  entrypoint_rel_path?: string;
 
   /**
    * Map of environment variables to set for the deployed application. Each key-value
    * pair represents an environment variable.
    */
   env_vars?: { [key: string]: string };
+
+  /**
+   * ZIP file containing the application source directory
+   */
+  file?: Uploadable;
 
   /**
    * Allow overwriting an existing app version
@@ -373,9 +376,68 @@ export interface DeploymentCreateParams {
   region?: 'aws.us-east-1a';
 
   /**
+   * Source from which to fetch application code.
+   */
+  source?: DeploymentCreateParams.Source;
+
+  /**
    * Version of the application. Can be any string.
    */
   version?: string;
+}
+
+export namespace DeploymentCreateParams {
+  /**
+   * Source from which to fetch application code.
+   */
+  export interface Source {
+    /**
+     * Relative path to the application entrypoint within the selected path.
+     */
+    entrypoint: string;
+
+    /**
+     * Git ref (branch, tag, or commit SHA) to fetch.
+     */
+    ref: string;
+
+    /**
+     * Source type identifier.
+     */
+    type: 'github';
+
+    /**
+     * Base repository URL (without blob/tree suffixes).
+     */
+    url: string;
+
+    /**
+     * Authentication for private repositories.
+     */
+    auth?: Source.Auth;
+
+    /**
+     * Path within the repo to deploy (omit to use repo root).
+     */
+    path?: string;
+  }
+
+  export namespace Source {
+    /**
+     * Authentication for private repositories.
+     */
+    export interface Auth {
+      /**
+       * GitHub PAT or installation access token
+       */
+      token: string;
+
+      /**
+       * Auth method
+       */
+      method: 'github_token';
+    }
+  }
 }
 
 export interface DeploymentListParams extends OffsetPaginationParams {
