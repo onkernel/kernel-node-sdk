@@ -27,10 +27,10 @@ export {
 } from './deployments';
 export {
   Extensions,
-  type ExtensionCreateResponse,
   type ExtensionListResponse,
-  type ExtensionCreateParams,
+  type ExtensionUploadResponse,
   type ExtensionDownloadFromChromeStoreParams,
+  type ExtensionUploadParams,
 } from './extensions';
 export {
   Invocations,

@@ -12,6 +12,16 @@ export {
   type BrowserLoadExtensionsParams,
 } from './browsers';
 export {
+  Computer,
+  type ComputerCaptureScreenshotParams,
+  type ComputerClickMouseParams,
+  type ComputerDragMouseParams,
+  type ComputerMoveMouseParams,
+  type ComputerPressKeyParams,
+  type ComputerScrollParams,
+  type ComputerTypeTextParams,
+} from './computer';
+export {
   Fs,
   type FFileInfoResponse,
   type FListFilesResponse,

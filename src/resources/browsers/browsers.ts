@@ -2,6 +2,17 @@
 
 import { APIResource } from '../../core/resource';
 import * as BrowsersAPI from './browsers';
+import * as ComputerAPI from './computer';
+import {
+  Computer,
+  ComputerCaptureScreenshotParams,
+  ComputerClickMouseParams,
+  ComputerDragMouseParams,
+  ComputerMoveMouseParams,
+  ComputerPressKeyParams,
+  ComputerScrollParams,
+  ComputerTypeTextParams,
+} from './computer';
 import * as LogsAPI from './logs';
 import { LogStreamParams, Logs } from './logs';
 import * as ProcessAPI from './process';
@@ -59,6 +70,7 @@ export class Browsers extends APIResource {
   fs: FsAPI.Fs = new FsAPI.Fs(this._client);
   process: ProcessAPI.Process = new ProcessAPI.Process(this._client);
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
+  computer: ComputerAPI.Computer = new ComputerAPI.Computer(this._client);
 
   /**
    * Create a new browser session from within an action.
@@ -682,6 +694,7 @@ Browsers.Replays = Replays;
 Browsers.Fs = Fs;
 Browsers.Process = Process;
 Browsers.Logs = Logs;
+Browsers.Computer = Computer;
 
 export declare namespace Browsers {
   export {
@@ -739,4 +752,15 @@ export declare namespace Browsers {
   };
 
   export { Logs as Logs, type LogStreamParams as LogStreamParams };
+
+  export {
+    Computer as Computer,
+    type ComputerCaptureScreenshotParams as ComputerCaptureScreenshotParams,
+    type ComputerClickMouseParams as ComputerClickMouseParams,
+    type ComputerDragMouseParams as ComputerDragMouseParams,
+    type ComputerMoveMouseParams as ComputerMoveMouseParams,
+    type ComputerPressKeyParams as ComputerPressKeyParams,
+    type ComputerScrollParams as ComputerScrollParams,
+    type ComputerTypeTextParams as ComputerTypeTextParams,
+  };
 }
