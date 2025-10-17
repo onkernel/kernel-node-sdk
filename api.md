@@ -150,6 +150,18 @@ Methods:
 
 - <code title="get /browsers/{id}/logs/stream">client.browsers.logs.<a href="./src/resources/browsers/logs.ts">stream</a>(id, { ...params }) -> LogEvent</code>
 
+## Computer
+
+Methods:
+
+- <code title="post /browsers/{id}/computer/screenshot">client.browsers.computer.<a href="./src/resources/browsers/computer.ts">captureScreenshot</a>(id, { ...params }) -> Response</code>
+- <code title="post /browsers/{id}/computer/click_mouse">client.browsers.computer.<a href="./src/resources/browsers/computer.ts">clickMouse</a>(id, { ...params }) -> void</code>
+- <code title="post /browsers/{id}/computer/drag_mouse">client.browsers.computer.<a href="./src/resources/browsers/computer.ts">dragMouse</a>(id, { ...params }) -> void</code>
+- <code title="post /browsers/{id}/computer/move_mouse">client.browsers.computer.<a href="./src/resources/browsers/computer.ts">moveMouse</a>(id, { ...params }) -> void</code>
+- <code title="post /browsers/{id}/computer/press_key">client.browsers.computer.<a href="./src/resources/browsers/computer.ts">pressKey</a>(id, { ...params }) -> void</code>
+- <code title="post /browsers/{id}/computer/scroll">client.browsers.computer.<a href="./src/resources/browsers/computer.ts">scroll</a>(id, { ...params }) -> void</code>
+- <code title="post /browsers/{id}/computer/type">client.browsers.computer.<a href="./src/resources/browsers/computer.ts">typeText</a>(id, { ...params }) -> void</code>
+
 # Profiles
 
 Types:
@@ -183,13 +195,13 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/extensions.ts">ExtensionCreateResponse</a></code>
 - <code><a href="./src/resources/extensions.ts">ExtensionListResponse</a></code>
+- <code><a href="./src/resources/extensions.ts">ExtensionUploadResponse</a></code>
 
 Methods:
 
-- <code title="post /extensions">client.extensions.<a href="./src/resources/extensions.ts">create</a>({ ...params }) -> ExtensionCreateResponse</code>
-- <code title="get /extensions/{id_or_name}">client.extensions.<a href="./src/resources/extensions.ts">retrieve</a>(idOrName) -> Response</code>
 - <code title="get /extensions">client.extensions.<a href="./src/resources/extensions.ts">list</a>() -> ExtensionListResponse</code>
 - <code title="delete /extensions/{id_or_name}">client.extensions.<a href="./src/resources/extensions.ts">delete</a>(idOrName) -> void</code>
+- <code title="get /extensions/{id_or_name}">client.extensions.<a href="./src/resources/extensions.ts">download</a>(idOrName) -> Response</code>
 - <code title="get /extensions/from_chrome_store">client.extensions.<a href="./src/resources/extensions.ts">downloadFromChromeStore</a>({ ...params }) -> Response</code>
+- <code title="post /extensions">client.extensions.<a href="./src/resources/extensions.ts">upload</a>({ ...params }) -> ExtensionUploadResponse</code>
