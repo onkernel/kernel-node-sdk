@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.15.0 (2025-10-17)
+
+Full Changelog: [v0.14.2...v0.15.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.14.2...v0.15.0)
+
+### Features
+
+* click mouse, move mouse, screenshot ([68e527c](https://github.com/onkernel/kernel-node-sdk/commit/68e527cefd5659f579119a39ecd4c170193bbed5))
+* Phani/deploy with GitHub url ([1e97151](https://github.com/onkernel/kernel-node-sdk/commit/1e971513c25cdfe84624c033ad89c5bfdc7fef20))
+
 ## 0.14.2 (2025-10-16)
 
 Full Changelog: [v0.14.1...v0.14.2](https://github.com/onkernel/kernel-node-sdk/compare/v0.14.1...v0.14.2)
