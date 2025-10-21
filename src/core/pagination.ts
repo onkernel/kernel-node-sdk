@@ -148,11 +148,7 @@ export class OffsetPagination<Item> extends AbstractPage<Item> {
   }
 
   nextPageRequestOptions(): PageRequestOptions | null {
-    const offset = this.next_offset;
-    if (!offset) {
-      return null;
-    }
-
+    const offset = this.next_offset ?? 0;
     const length = this.getPaginatedItems().length;
     const currentCount = offset + length;
 
