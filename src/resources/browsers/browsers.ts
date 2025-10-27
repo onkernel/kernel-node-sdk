@@ -15,6 +15,8 @@ import {
 } from './computer';
 import * as LogsAPI from './logs';
 import { LogStreamParams, Logs } from './logs';
+import * as PlaywrightAPI from './playwright';
+import { Playwright, PlaywrightExecuteParams, PlaywrightExecuteResponse } from './playwright';
 import * as ProcessAPI from './process';
 import {
   Process,
@@ -71,6 +73,7 @@ export class Browsers extends APIResource {
   process: ProcessAPI.Process = new ProcessAPI.Process(this._client);
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
   computer: ComputerAPI.Computer = new ComputerAPI.Computer(this._client);
+  playwright: PlaywrightAPI.Playwright = new PlaywrightAPI.Playwright(this._client);
 
   /**
    * Create a new browser session from within an action.
@@ -695,6 +698,7 @@ Browsers.Fs = Fs;
 Browsers.Process = Process;
 Browsers.Logs = Logs;
 Browsers.Computer = Computer;
+Browsers.Playwright = Playwright;
 
 export declare namespace Browsers {
   export {
@@ -762,5 +766,11 @@ export declare namespace Browsers {
     type ComputerPressKeyParams as ComputerPressKeyParams,
     type ComputerScrollParams as ComputerScrollParams,
     type ComputerTypeTextParams as ComputerTypeTextParams,
+  };
+
+  export {
+    Playwright as Playwright,
+    type PlaywrightExecuteResponse as PlaywrightExecuteResponse,
+    type PlaywrightExecuteParams as PlaywrightExecuteParams,
   };
 }

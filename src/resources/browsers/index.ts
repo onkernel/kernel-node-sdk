@@ -39,6 +39,7 @@ export {
   type FWriteFileParams,
 } from './fs/index';
 export { Logs, type LogStreamParams } from './logs';
+export { Playwright, type PlaywrightExecuteResponse, type PlaywrightExecuteParams } from './playwright';
 export {
   Process,
   type ProcessExecResponse,
