@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.16.0 (2025-10-27)
+
+Full Changelog: [v0.15.0...v0.16.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.15.0...v0.16.0)
+
+### Features
+
+* ad hoc playwright code exec AP| ([1112215](https://github.com/onkernel/kernel-node-sdk/commit/11122155f3745843cb56d19261e97d1df4eaadea))
+
+
+### Bug Fixes
+
+* **client:** incorrect offset pagination check ([63aee26](https://github.com/onkernel/kernel-node-sdk/commit/63aee268f4954577bfdf284f2e6af8adc466712d))
+
 ## 0.15.0 (2025-10-17)
 
 Full Changelog: [v0.14.2...v0.15.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.14.2...v0.15.0)
