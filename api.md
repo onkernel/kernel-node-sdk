@@ -162,6 +162,16 @@ Methods:
 - <code title="post /browsers/{id}/computer/scroll">client.browsers.computer.<a href="./src/resources/browsers/computer.ts">scroll</a>(id, { ...params }) -> void</code>
 - <code title="post /browsers/{id}/computer/type">client.browsers.computer.<a href="./src/resources/browsers/computer.ts">typeText</a>(id, { ...params }) -> void</code>
 
+## Playwright
+
+Types:
+
+- <code><a href="./src/resources/browsers/playwright.ts">PlaywrightExecuteResponse</a></code>
+
+Methods:
+
+- <code title="post /browsers/{id}/playwright/execute">client.browsers.playwright.<a href="./src/resources/browsers/playwright.ts">execute</a>(id, { ...params }) -> PlaywrightExecuteResponse</code>
+
 # Profiles
 
 Types:
