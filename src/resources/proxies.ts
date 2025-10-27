@@ -88,9 +88,9 @@ export namespace ProxyCreateResponse {
    */
   export interface DatacenterProxyConfig {
     /**
-     * ISO 3166 country code.
+     * ISO 3166 country code. Defaults to US if not provided.
      */
-    country: string;
+    country?: string;
   }
 
   /**
@@ -98,9 +98,9 @@ export namespace ProxyCreateResponse {
    */
   export interface IspProxyConfig {
     /**
-     * ISO 3166 country code.
+     * ISO 3166 country code. Defaults to US if not provided.
      */
-    country: string;
+    country?: string;
   }
 
   /**
@@ -308,9 +308,9 @@ export namespace ProxyRetrieveResponse {
    */
   export interface DatacenterProxyConfig {
     /**
-     * ISO 3166 country code.
+     * ISO 3166 country code. Defaults to US if not provided.
      */
-    country: string;
+    country?: string;
   }
 
   /**
@@ -318,9 +318,9 @@ export namespace ProxyRetrieveResponse {
    */
   export interface IspProxyConfig {
     /**
-     * ISO 3166 country code.
+     * ISO 3166 country code. Defaults to US if not provided.
      */
-    country: string;
+    country?: string;
   }
 
   /**
@@ -531,9 +531,9 @@ export namespace ProxyListResponse {
      */
     export interface DatacenterProxyConfig {
       /**
-       * ISO 3166 country code.
+       * ISO 3166 country code. Defaults to US if not provided.
        */
-      country: string;
+      country?: string;
     }
 
     /**
@@ -541,9 +541,9 @@ export namespace ProxyListResponse {
      */
     export interface IspProxyConfig {
       /**
-       * ISO 3166 country code.
+       * ISO 3166 country code. Defaults to US if not provided.
        */
-      country: string;
+      country?: string;
     }
 
     /**
@@ -737,9 +737,9 @@ export namespace ProxyCreateParams {
    */
   export interface DatacenterProxyConfig {
     /**
-     * ISO 3166 country code.
+     * ISO 3166 country code. Defaults to US if not provided.
      */
-    country: string;
+    country?: string;
   }
 
   /**
@@ -747,9 +747,9 @@ export namespace ProxyCreateParams {
    */
   export interface IspProxyConfig {
     /**
-     * ISO 3166 country code.
+     * ISO 3166 country code. Defaults to US if not provided.
      */
-    country: string;
+    country?: string;
   }
 
   /**
