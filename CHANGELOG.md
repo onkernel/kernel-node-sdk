@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.17.0 (2025-10-27)
+
+Full Changelog: [v0.16.0...v0.17.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.16.0...v0.17.0)
+
+### Features
+
+* Use ping instead of bright data for ISP proxy ([8fb8abb](https://github.com/onkernel/kernel-node-sdk/commit/8fb8abbfb9d399e19db2ec8ca7464f536c808252))
+
 ## 0.16.0 (2025-10-27)
 
 Full Changelog: [v0.15.0...v0.16.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.15.0...v0.16.0)
