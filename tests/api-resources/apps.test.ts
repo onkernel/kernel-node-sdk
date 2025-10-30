@@ -24,7 +24,10 @@ describe('resource apps', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.apps.list({ app_name: 'app_name', version: 'version' }, { path: '/_stainless_unknown_path' }),
+      client.apps.list(
+        { app_name: 'app_name', limit: 1, offset: 0, version: 'version' },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Kernel.NotFoundError);
   });
 });
