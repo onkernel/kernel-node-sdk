@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.18.0 (2025-10-30)
+
+Full Changelog: [v0.17.0...v0.18.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.17.0...v0.18.0)
+
+### Features
+
+* apps: add offset pagination + headers ([7c91210](https://github.com/onkernel/kernel-node-sdk/commit/7c912109b90c18481e45a5c6d5f367afca039d23))
+
 ## 0.17.0 (2025-10-27)
 
 Full Changelog: [v0.16.0...v0.17.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.16.0...v0.17.0)
