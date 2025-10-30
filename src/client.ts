@@ -18,7 +18,7 @@ import { AbstractPage, type OffsetPaginationParams, OffsetPaginationResponse } f
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { AppListParams, AppListResponse, Apps } from './resources/apps';
+import { AppListParams, AppListResponse, AppListResponsesOffsetPagination, Apps } from './resources/apps';
 import {
   DeploymentCreateParams,
   DeploymentCreateResponse,
@@ -873,7 +873,12 @@ export declare namespace Kernel {
     type DeploymentFollowParams as DeploymentFollowParams,
   };
 
-  export { Apps as Apps, type AppListResponse as AppListResponse, type AppListParams as AppListParams };
+  export {
+    Apps as Apps,
+    type AppListResponse as AppListResponse,
+    type AppListResponsesOffsetPagination as AppListResponsesOffsetPagination,
+    type AppListParams as AppListParams,
+  };
 
   export {
     Invocations as Invocations,

@@ -2,63 +2,64 @@
 
 import { APIResource } from '../core/resource';
 import * as Shared from './shared';
-import { APIPromise } from '../core/api-promise';
+import { OffsetPagination, type OffsetPaginationParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 
 export class Apps extends APIResource {
   /**
    * List applications. Optionally filter by app name and/or version label.
    */
-  list(query: AppListParams | null | undefined = {}, options?: RequestOptions): APIPromise<AppListResponse> {
-    return this._client.get('/apps', { query, ...options });
+  list(
+    query: AppListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<AppListResponsesOffsetPagination, AppListResponse> {
+    return this._client.getAPIList('/apps', OffsetPagination<AppListResponse>, { query, ...options });
   }
 }
 
-export type AppListResponse = Array<AppListResponse.AppListResponseItem>;
+export type AppListResponsesOffsetPagination = OffsetPagination<AppListResponse>;
 
-export namespace AppListResponse {
+/**
+ * Summary of an application version.
+ */
+export interface AppListResponse {
   /**
-   * Summary of an application version.
+   * Unique identifier for the app version
    */
-  export interface AppListResponseItem {
-    /**
-     * Unique identifier for the app version
-     */
-    id: string;
+  id: string;
 
-    /**
-     * List of actions available on the app
-     */
-    actions: Array<Shared.AppAction>;
+  /**
+   * List of actions available on the app
+   */
+  actions: Array<Shared.AppAction>;
 
-    /**
-     * Name of the application
-     */
-    app_name: string;
+  /**
+   * Name of the application
+   */
+  app_name: string;
 
-    /**
-     * Deployment ID
-     */
-    deployment: string;
+  /**
+   * Deployment ID
+   */
+  deployment: string;
 
-    /**
-     * Environment variables configured for this app version
-     */
-    env_vars: { [key: string]: string };
+  /**
+   * Environment variables configured for this app version
+   */
+  env_vars: { [key: string]: string };
 
-    /**
-     * Deployment region code
-     */
-    region: 'aws.us-east-1a';
+  /**
+   * Deployment region code
+   */
+  region: 'aws.us-east-1a';
 
-    /**
-     * Version label for the application
-     */
-    version: string;
-  }
+  /**
+   * Version label for the application
+   */
+  version: string;
 }
 
-export interface AppListParams {
+export interface AppListParams extends OffsetPaginationParams {
   /**
    * Filter results by application name.
    */
@@ -71,5 +72,9 @@ export interface AppListParams {
 }
 
 export declare namespace Apps {
-  export { type AppListResponse as AppListResponse, type AppListParams as AppListParams };
+  export {
+    type AppListResponse as AppListResponse,
+    type AppListResponsesOffsetPagination as AppListResponsesOffsetPagination,
+    type AppListParams as AppListParams,
+  };
 }

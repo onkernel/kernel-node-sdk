@@ -34,7 +34,7 @@ Types:
 
 Methods:
 
-- <code title="get /apps">client.apps.<a href="./src/resources/apps.ts">list</a>({ ...params }) -> AppListResponse</code>
+- <code title="get /apps">client.apps.<a href="./src/resources/apps.ts">list</a>({ ...params }) -> AppListResponsesOffsetPagination</code>
 
 # Invocations
 
