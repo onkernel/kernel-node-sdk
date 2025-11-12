@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.19.0 (2025-11-12)
+
+Full Changelog: [v0.18.0...v0.19.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.18.0...v0.19.0)
+
+### Features
+
+* feat hide cursor v2 ([b9b6fe9](https://github.com/onkernel/kernel-node-sdk/commit/b9b6fe94de3194fb5a1753f4cab7112b437b8a35))
+
 ## 0.18.0 (2025-10-30)
 
 Full Changelog: [v0.17.0...v0.18.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.17.0...v0.18.0)
