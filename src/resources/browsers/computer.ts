@@ -126,6 +126,25 @@ export class Computer extends APIResource {
   }
 
   /**
+   * Set cursor visibility
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.browsers.computer.setCursorVisibility('id', {
+   *     hidden: true,
+   *   });
+   * ```
+   */
+  setCursorVisibility(
+    id: string,
+    body: ComputerSetCursorVisibilityParams,
+    options?: RequestOptions,
+  ): APIPromise<ComputerSetCursorVisibilityResponse> {
+    return this._client.post(path`/browsers/${id}/computer/cursor`, { body, ...options });
+  }
+
+  /**
    * Type text on the browser instance
    *
    * @example
@@ -142,6 +161,16 @@ export class Computer extends APIResource {
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
+}
+
+/**
+ * Generic OK response.
+ */
+export interface ComputerSetCursorVisibilityResponse {
+  /**
+   * Indicates success.
+   */
+  ok: boolean;
 }
 
 export interface ComputerCaptureScreenshotParams {
@@ -303,6 +332,13 @@ export interface ComputerScrollParams {
   hold_keys?: Array<string>;
 }
 
+export interface ComputerSetCursorVisibilityParams {
+  /**
+   * Whether the cursor should be hidden or visible
+   */
+  hidden: boolean;
+}
+
 export interface ComputerTypeTextParams {
   /**
    * Text to type on the browser instance
@@ -317,12 +353,14 @@ export interface ComputerTypeTextParams {
 
 export declare namespace Computer {
   export {
+    type ComputerSetCursorVisibilityResponse as ComputerSetCursorVisibilityResponse,
     type ComputerCaptureScreenshotParams as ComputerCaptureScreenshotParams,
     type ComputerClickMouseParams as ComputerClickMouseParams,
     type ComputerDragMouseParams as ComputerDragMouseParams,
     type ComputerMoveMouseParams as ComputerMoveMouseParams,
     type ComputerPressKeyParams as ComputerPressKeyParams,
     type ComputerScrollParams as ComputerScrollParams,
+    type ComputerSetCursorVisibilityParams as ComputerSetCursorVisibilityParams,
     type ComputerTypeTextParams as ComputerTypeTextParams,
   };
 }

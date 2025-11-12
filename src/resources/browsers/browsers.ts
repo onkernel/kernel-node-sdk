@@ -11,6 +11,8 @@ import {
   ComputerMoveMouseParams,
   ComputerPressKeyParams,
   ComputerScrollParams,
+  ComputerSetCursorVisibilityParams,
+  ComputerSetCursorVisibilityResponse,
   ComputerTypeTextParams,
 } from './computer';
 import * as LogsAPI from './logs';
@@ -759,12 +761,14 @@ export declare namespace Browsers {
 
   export {
     Computer as Computer,
+    type ComputerSetCursorVisibilityResponse as ComputerSetCursorVisibilityResponse,
     type ComputerCaptureScreenshotParams as ComputerCaptureScreenshotParams,
     type ComputerClickMouseParams as ComputerClickMouseParams,
     type ComputerDragMouseParams as ComputerDragMouseParams,
     type ComputerMoveMouseParams as ComputerMoveMouseParams,
     type ComputerPressKeyParams as ComputerPressKeyParams,
     type ComputerScrollParams as ComputerScrollParams,
+    type ComputerSetCursorVisibilityParams as ComputerSetCursorVisibilityParams,
     type ComputerTypeTextParams as ComputerTypeTextParams,
   };
 
