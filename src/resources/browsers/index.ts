@@ -13,12 +13,14 @@ export {
 } from './browsers';
 export {
   Computer,
+  type ComputerSetCursorVisibilityResponse,
   type ComputerCaptureScreenshotParams,
   type ComputerClickMouseParams,
   type ComputerDragMouseParams,
   type ComputerMoveMouseParams,
   type ComputerPressKeyParams,
   type ComputerScrollParams,
+  type ComputerSetCursorVisibilityParams,
   type ComputerTypeTextParams,
 } from './computer';
 export {

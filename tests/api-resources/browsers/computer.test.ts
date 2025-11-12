@@ -137,6 +137,23 @@ describe('resource computer', () => {
   });
 
   // Prism tests are disabled
+  test.skip('setCursorVisibility: only required params', async () => {
+    const responsePromise = client.browsers.computer.setCursorVisibility('id', { hidden: true });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('setCursorVisibility: required and optional params', async () => {
+    const response = await client.browsers.computer.setCursorVisibility('id', { hidden: true });
+  });
+
+  // Prism tests are disabled
   test.skip('typeText: only required params', async () => {
     const responsePromise = client.browsers.computer.typeText('id', { text: 'text' });
     const rawResponse = await responsePromise.asResponse();

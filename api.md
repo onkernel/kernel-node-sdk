@@ -152,6 +152,10 @@ Methods:
 
 ## Computer
 
+Types:
+
+- <code><a href="./src/resources/browsers/computer.ts">ComputerSetCursorVisibilityResponse</a></code>
+
 Methods:
 
 - <code title="post /browsers/{id}/computer/screenshot">client.browsers.computer.<a href="./src/resources/browsers/computer.ts">captureScreenshot</a>(id, { ...params }) -> Response</code>
@@ -160,6 +164,7 @@ Methods:
 - <code title="post /browsers/{id}/computer/move_mouse">client.browsers.computer.<a href="./src/resources/browsers/computer.ts">moveMouse</a>(id, { ...params }) -> void</code>
 - <code title="post /browsers/{id}/computer/press_key">client.browsers.computer.<a href="./src/resources/browsers/computer.ts">pressKey</a>(id, { ...params }) -> void</code>
 - <code title="post /browsers/{id}/computer/scroll">client.browsers.computer.<a href="./src/resources/browsers/computer.ts">scroll</a>(id, { ...params }) -> void</code>
+- <code title="post /browsers/{id}/computer/cursor">client.browsers.computer.<a href="./src/resources/browsers/computer.ts">setCursorVisibility</a>(id, { ...params }) -> ComputerSetCursorVisibilityResponse</code>
 - <code title="post /browsers/{id}/computer/type">client.browsers.computer.<a href="./src/resources/browsers/computer.ts">typeText</a>(id, { ...params }) -> void</code>
 
 ## Playwright
