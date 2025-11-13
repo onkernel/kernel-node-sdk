@@ -6,7 +6,7 @@ Full Changelog: [v0.19.0...v0.19.1](https://github.com/onkernel/kernel-node-sdk/
 
 ### Features
 
-* works locally ([6321644](https://github.com/onkernel/kernel-node-sdk/commit/63216447e56cc6bc3ee706812d8afaf94071308f))
+* Add support for 1200x800 ([6321644](https://github.com/onkernel/kernel-node-sdk/commit/63216447e56cc6bc3ee706812d8afaf94071308f))
 
 ## 0.19.0 (2025-11-12)
 
