@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.19.1 (2025-11-13)
+
+Full Changelog: [v0.19.0...v0.19.1](https://github.com/onkernel/kernel-node-sdk/compare/v0.19.0...v0.19.1)
+
+### Features
+
+* works locally ([6321644](https://github.com/onkernel/kernel-node-sdk/commit/63216447e56cc6bc3ee706812d8afaf94071308f))
+
 ## 0.19.0 (2025-11-12)
 
 Full Changelog: [v0.18.0...v0.19.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.18.0...v0.19.0)
