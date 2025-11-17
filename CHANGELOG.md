@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.19.2 (2025-11-17)
+
+Full Changelog: [v0.19.1...v0.19.2](https://github.com/onkernel/kernel-node-sdk/compare/v0.19.1...v0.19.2)
+
+### Features
+
+* Feat increase max timeout to 72h ([a2496da](https://github.com/onkernel/kernel-node-sdk/commit/a2496daa6609a55c75934584cc764344db5a4098))
+
 ## 0.19.1 (2025-11-13)
 
 Full Changelog: [v0.19.0...v0.19.1](https://github.com/onkernel/kernel-node-sdk/compare/v0.19.0...v0.19.1)
