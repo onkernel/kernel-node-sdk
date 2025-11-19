@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.20.0 (2025-11-19)
+
+Full Changelog: [v0.19.2...v0.20.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.19.2...v0.20.0)
+
+### Features
+
+* allow get browser to paginate soft deleted browsers ([115aa05](https://github.com/onkernel/kernel-node-sdk/commit/115aa05556536a505610e80152dc40f03f4dfada))
+
 ## 0.19.2 (2025-11-17)
 
 Full Changelog: [v0.19.1...v0.19.2](https://github.com/onkernel/kernel-node-sdk/compare/v0.19.1...v0.19.2)
