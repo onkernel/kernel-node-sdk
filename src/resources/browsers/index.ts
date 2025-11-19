@@ -8,8 +8,10 @@ export {
   type BrowserRetrieveResponse,
   type BrowserListResponse,
   type BrowserCreateParams,
+  type BrowserListParams,
   type BrowserDeleteParams,
   type BrowserLoadExtensionsParams,
+  type BrowserListResponsesOffsetPagination,
 } from './browsers';
 export {
   Computer,
