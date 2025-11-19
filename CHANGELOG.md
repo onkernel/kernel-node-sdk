@@ -6,7 +6,7 @@ Full Changelog: [v0.19.2...v0.20.0](https://github.com/onkernel/kernel-node-sdk/
 
 ### Features
 
-* Add pagination to get browsers and allow it to include deleted browsers when `include_deleted = true` ([115aa05](https://github.com/onkernel/kernel-node-sdk/commit/115aa05556536a505610e80152dc40f03f4dfada))
+* Add pagination to list browsers method and allow it to include deleted browsers when `include_deleted = true` ([115aa05](https://github.com/onkernel/kernel-node-sdk/commit/115aa05556536a505610e80152dc40f03f4dfada))
 
 ## 0.19.2 (2025-11-17)
 
