@@ -60,6 +60,7 @@ import {
   ProxyListResponse,
   ProxyRetrieveResponse,
 } from './resources/proxies';
+import { Agents } from './resources/agents/agents';
 import {
   BrowserCreateParams,
   BrowserCreateResponse,
@@ -820,6 +821,7 @@ export class Kernel {
   profiles: API.Profiles = new API.Profiles(this);
   proxies: API.Proxies = new API.Proxies(this);
   extensions: API.Extensions = new API.Extensions(this);
+  agents: API.Agents = new API.Agents(this);
 }
 
 Kernel.Deployments = Deployments;
@@ -829,6 +831,7 @@ Kernel.Browsers = Browsers;
 Kernel.Profiles = Profiles;
 Kernel.Proxies = Proxies;
 Kernel.Extensions = Extensions;
+Kernel.Agents = Agents;
 
 export declare namespace Kernel {
   export type RequestOptions = Opts.RequestOptions;
@@ -909,6 +912,8 @@ export declare namespace Kernel {
     type ExtensionDownloadFromChromeStoreParams as ExtensionDownloadFromChromeStoreParams,
     type ExtensionUploadParams as ExtensionUploadParams,
   };
+
+  export { Agents as Agents };
 
   export type AppAction = API.AppAction;
   export type ErrorDetail = API.ErrorDetail;
