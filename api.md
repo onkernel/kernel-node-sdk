@@ -220,3 +220,32 @@ Methods:
 - <code title="get /extensions/{id_or_name}">client.extensions.<a href="./src/resources/extensions.ts">download</a>(idOrName) -> Response</code>
 - <code title="get /extensions/from_chrome_store">client.extensions.<a href="./src/resources/extensions.ts">downloadFromChromeStore</a>({ ...params }) -> Response</code>
 - <code title="post /extensions">client.extensions.<a href="./src/resources/extensions.ts">upload</a>({ ...params }) -> ExtensionUploadResponse</code>
+
+# Agents
+
+## Auth
+
+Types:
+
+- <code><a href="./src/resources/agents/auth/auth.ts">AgentAuthDiscoverResponse</a></code>
+- <code><a href="./src/resources/agents/auth/auth.ts">AgentAuthRunResponse</a></code>
+- <code><a href="./src/resources/agents/auth/auth.ts">AgentAuthStartResponse</a></code>
+- <code><a href="./src/resources/agents/auth/auth.ts">AgentAuthSubmitResponse</a></code>
+- <code><a href="./src/resources/agents/auth/auth.ts">DiscoveredField</a></code>
+
+Methods:
+
+- <code title="post /agents/auth/start">client.agents.auth.<a href="./src/resources/agents/auth/auth.ts">start</a>({ ...params }) -> AgentAuthStartResponse</code>
+
+### Runs
+
+Types:
+
+- <code><a href="./src/resources/agents/auth/runs.ts">RunExchangeResponse</a></code>
+
+Methods:
+
+- <code title="get /agents/auth/runs/{run_id}">client.agents.auth.runs.<a href="./src/resources/agents/auth/runs.ts">retrieve</a>(runID) -> AgentAuthRunResponse</code>
+- <code title="post /agents/auth/runs/{run_id}/discover">client.agents.auth.runs.<a href="./src/resources/agents/auth/runs.ts">discover</a>(runID) -> AgentAuthDiscoverResponse</code>
+- <code title="post /agents/auth/runs/{run_id}/exchange">client.agents.auth.runs.<a href="./src/resources/agents/auth/runs.ts">exchange</a>(runID, { ...params }) -> RunExchangeResponse</code>
+- <code title="post /agents/auth/runs/{run_id}/submit">client.agents.auth.runs.<a href="./src/resources/agents/auth/runs.ts">submit</a>(runID, { ...params }) -> AgentAuthSubmitResponse</code>
