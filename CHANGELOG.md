@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.21.0 (2025-12-02)
+
+Full Changelog: [v0.20.0...v0.21.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.20.0...v0.21.0)
+
+### Features
+
+* Browser pools sdk release ([0fca0c8](https://github.com/onkernel/kernel-node-sdk/commit/0fca0c8145e7a9938a9ebe20eeac19eb9d3e4e82))
+* Mason/agent auth api ([963aaf2](https://github.com/onkernel/kernel-node-sdk/commit/963aaf27f6449d4bcd39f9f3340b5d5a68ae49e8))
+
+
+### Chores
+
+* **client:** fix logger property type ([426b7b4](https://github.com/onkernel/kernel-node-sdk/commit/426b7b4d79357fcae88807aad49718c26eb02044))
+
 ## 0.20.0 (2025-11-19)
 
 Full Changelog: [v0.19.2...v0.20.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.19.2...v0.20.0)
