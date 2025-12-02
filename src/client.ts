@@ -20,6 +20,21 @@ import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import { AppListParams, AppListResponse, AppListResponsesOffsetPagination, Apps } from './resources/apps';
 import {
+  BrowserPool,
+  BrowserPoolAcquireParams,
+  BrowserPoolAcquireRequest,
+  BrowserPoolAcquireResponse,
+  BrowserPoolCreateParams,
+  BrowserPoolDeleteParams,
+  BrowserPoolListResponse,
+  BrowserPoolReleaseParams,
+  BrowserPoolReleaseRequest,
+  BrowserPoolRequest,
+  BrowserPoolUpdateParams,
+  BrowserPoolUpdateRequest,
+  BrowserPools,
+} from './resources/browser-pools';
+import {
   DeploymentCreateParams,
   DeploymentCreateResponse,
   DeploymentFollowParams,
@@ -61,7 +76,6 @@ import {
   ProxyListResponse,
   ProxyRetrieveResponse,
 } from './resources/proxies';
-import { Agents } from './resources/agents/agents';
 import {
   BrowserCreateParams,
   BrowserCreateResponse,
@@ -844,7 +858,7 @@ export class Kernel {
   profiles: API.Profiles = new API.Profiles(this);
   proxies: API.Proxies = new API.Proxies(this);
   extensions: API.Extensions = new API.Extensions(this);
-  agents: API.Agents = new API.Agents(this);
+  browserPools: API.BrowserPools = new API.BrowserPools(this);
 }
 
 Kernel.Deployments = Deployments;
@@ -854,7 +868,7 @@ Kernel.Browsers = Browsers;
 Kernel.Profiles = Profiles;
 Kernel.Proxies = Proxies;
 Kernel.Extensions = Extensions;
-Kernel.Agents = Agents;
+Kernel.BrowserPools = BrowserPools;
 
 export declare namespace Kernel {
   export type RequestOptions = Opts.RequestOptions;
@@ -936,9 +950,26 @@ export declare namespace Kernel {
     type ExtensionUploadParams as ExtensionUploadParams,
   };
 
-  export { Agents as Agents };
+  export {
+    BrowserPools as BrowserPools,
+    type BrowserPool as BrowserPool,
+    type BrowserPoolAcquireRequest as BrowserPoolAcquireRequest,
+    type BrowserPoolReleaseRequest as BrowserPoolReleaseRequest,
+    type BrowserPoolRequest as BrowserPoolRequest,
+    type BrowserPoolUpdateRequest as BrowserPoolUpdateRequest,
+    type BrowserPoolListResponse as BrowserPoolListResponse,
+    type BrowserPoolAcquireResponse as BrowserPoolAcquireResponse,
+    type BrowserPoolCreateParams as BrowserPoolCreateParams,
+    type BrowserPoolUpdateParams as BrowserPoolUpdateParams,
+    type BrowserPoolDeleteParams as BrowserPoolDeleteParams,
+    type BrowserPoolAcquireParams as BrowserPoolAcquireParams,
+    type BrowserPoolReleaseParams as BrowserPoolReleaseParams,
+  };
 
   export type AppAction = API.AppAction;
+  export type BrowserExtension = API.BrowserExtension;
+  export type BrowserProfile = API.BrowserProfile;
+  export type BrowserViewport = API.BrowserViewport;
   export type ErrorDetail = API.ErrorDetail;
   export type ErrorEvent = API.ErrorEvent;
   export type ErrorModel = API.ErrorModel;
