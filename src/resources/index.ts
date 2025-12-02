@@ -1,13 +1,27 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export * from './shared';
-export { Agents } from './agents/agents';
 export {
   Apps,
   type AppListResponse,
   type AppListParams,
   type AppListResponsesOffsetPagination,
 } from './apps';
+export {
+  BrowserPools,
+  type BrowserPool,
+  type BrowserPoolAcquireRequest,
+  type BrowserPoolReleaseRequest,
+  type BrowserPoolRequest,
+  type BrowserPoolUpdateRequest,
+  type BrowserPoolListResponse,
+  type BrowserPoolAcquireResponse,
+  type BrowserPoolCreateParams,
+  type BrowserPoolUpdateParams,
+  type BrowserPoolDeleteParams,
+  type BrowserPoolAcquireParams,
+  type BrowserPoolReleaseParams,
+} from './browser-pools';
 export {
   Browsers,
   type BrowserPersistence,
