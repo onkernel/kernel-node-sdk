@@ -31,6 +31,7 @@ describe('resource invocations', () => {
       app_name: 'my-app',
       version: '1.0.0',
       async: true,
+      async_timeout_seconds: 600,
       payload: '{"data":"example input"}',
     });
   });
