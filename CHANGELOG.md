@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.22.0 (2025-12-05)
+
+Full Changelog: [v0.21.0...v0.22.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.21.0...v0.22.0)
+
+### Features
+
+* Add `async_timeout_seconds` to PostInvocations ([b6ecd9b](https://github.com/onkernel/kernel-node-sdk/commit/b6ecd9be250a191df92238b1ac6610518a69d251))
+
+
+### Chores
+
+* **internal:** upgrade eslint ([15e301b](https://github.com/onkernel/kernel-node-sdk/commit/15e301b3db576725b69f9dea97e4f46a97404dda))
+
 ## 0.21.0 (2025-12-02)
 
 Full Changelog: [v0.20.0...v0.21.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.20.0...v0.21.0)
