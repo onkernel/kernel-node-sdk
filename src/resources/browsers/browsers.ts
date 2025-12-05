@@ -127,14 +127,10 @@ export class Browsers extends APIResource {
   }
 
   /**
-   * Delete a persistent browser session by its persistent_id.
+   * DEPRECATED: Use DELETE /browsers/{id} instead. Delete a persistent browser
+   * session by its persistent_id.
    *
-   * @example
-   * ```ts
-   * await client.browsers.delete({
-   *   persistent_id: 'persistent_id',
-   * });
-   * ```
+   * @deprecated
    */
   delete(params: BrowserDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { persistent_id } = params;
@@ -192,11 +188,12 @@ export class Browsers extends APIResource {
 export type BrowserListResponsesOffsetPagination = OffsetPagination<BrowserListResponse>;
 
 /**
- * Optional persistence configuration for the browser session.
+ * @deprecated DEPRECATED: Use timeout_seconds (up to 72 hours) and Profiles
+ * instead.
  */
 export interface BrowserPersistence {
   /**
-   * Unique identifier for the persistent browser session.
+   * DEPRECATED: Unique identifier for the persistent browser session.
    */
   id: string;
 }
@@ -279,7 +276,8 @@ export interface BrowserCreateResponse {
   kiosk_mode?: boolean;
 
   /**
-   * Optional persistence configuration for the browser session.
+   * @deprecated DEPRECATED: Use timeout_seconds (up to 72 hours) and Profiles
+   * instead.
    */
   persistence?: BrowserPersistence;
 
@@ -354,7 +352,8 @@ export interface BrowserRetrieveResponse {
   kiosk_mode?: boolean;
 
   /**
-   * Optional persistence configuration for the browser session.
+   * @deprecated DEPRECATED: Use timeout_seconds (up to 72 hours) and Profiles
+   * instead.
    */
   persistence?: BrowserPersistence;
 
@@ -429,7 +428,8 @@ export interface BrowserListResponse {
   kiosk_mode?: boolean;
 
   /**
-   * Optional persistence configuration for the browser session.
+   * @deprecated DEPRECATED: Use timeout_seconds (up to 72 hours) and Profiles
+   * instead.
    */
   persistence?: BrowserPersistence;
 
@@ -480,7 +480,8 @@ export interface BrowserCreateParams {
   kiosk_mode?: boolean;
 
   /**
-   * Optional persistence configuration for the browser session.
+   * @deprecated DEPRECATED: Use timeout_seconds (up to 72 hours) and Profiles
+   * instead.
    */
   persistence?: BrowserPersistence;
 
@@ -505,11 +506,10 @@ export interface BrowserCreateParams {
 
   /**
    * The number of seconds of inactivity before the browser session is terminated.
-   * Only applicable to non-persistent browsers. Activity includes CDP connections
-   * and live view connections. Defaults to 60 seconds. Minimum allowed is 10
-   * seconds. Maximum allowed is 259200 (72 hours). We check for inactivity every 5
-   * seconds, so the actual timeout behavior you will see is +/- 5 seconds around the
-   * specified value.
+   * Activity includes CDP connections and live view connections. Defaults to 60
+   * seconds. Minimum allowed is 10 seconds. Maximum allowed is 259200 (72 hours). We
+   * check for inactivity every 5 seconds, so the actual timeout behavior you will
+   * see is +/- 5 seconds around the specified value.
    */
   timeout_seconds?: number;
 
