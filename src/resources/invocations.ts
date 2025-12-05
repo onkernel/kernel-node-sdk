@@ -417,6 +417,12 @@ export interface InvocationCreateParams {
   async?: boolean;
 
   /**
+   * Timeout in seconds for async invocations (min 10, max 3600). Only applies when
+   * async is true.
+   */
+  async_timeout_seconds?: number;
+
+  /**
    * Input data for the action, sent as a JSON string.
    */
   payload?: string;
