@@ -246,3 +246,34 @@ Methods:
 - <code title="post /browser_pools/{id_or_name}/acquire">client.browserPools.<a href="./src/resources/browser-pools.ts">acquire</a>(idOrName, { ...params }) -> BrowserPoolAcquireResponse</code>
 - <code title="post /browser_pools/{id_or_name}/flush">client.browserPools.<a href="./src/resources/browser-pools.ts">flush</a>(idOrName) -> void</code>
 - <code title="post /browser_pools/{id_or_name}/release">client.browserPools.<a href="./src/resources/browser-pools.ts">release</a>(idOrName, { ...params }) -> void</code>
+
+# Agents
+
+## Auth
+
+Types:
+
+- <code><a href="./src/resources/agents/auth/auth.ts">AgentAuthDiscoverResponse</a></code>
+- <code><a href="./src/resources/agents/auth/auth.ts">AgentAuthInvocationResponse</a></code>
+- <code><a href="./src/resources/agents/auth/auth.ts">AgentAuthStartResponse</a></code>
+- <code><a href="./src/resources/agents/auth/auth.ts">AgentAuthSubmitResponse</a></code>
+- <code><a href="./src/resources/agents/auth/auth.ts">AuthAgent</a></code>
+- <code><a href="./src/resources/agents/auth/auth.ts">DiscoveredField</a></code>
+
+Methods:
+
+- <code title="get /agents/auth/{id}">client.agents.auth.<a href="./src/resources/agents/auth/auth.ts">retrieve</a>(id) -> AuthAgent</code>
+- <code title="post /agents/auth/start">client.agents.auth.<a href="./src/resources/agents/auth/auth.ts">start</a>({ ...params }) -> AgentAuthStartResponse</code>
+
+### Invocations
+
+Types:
+
+- <code><a href="./src/resources/agents/auth/invocations.ts">InvocationExchangeResponse</a></code>
+
+Methods:
+
+- <code title="get /agents/auth/invocations/{invocation_id}">client.agents.auth.invocations.<a href="./src/resources/agents/auth/invocations.ts">retrieve</a>(invocationID) -> AgentAuthInvocationResponse</code>
+- <code title="post /agents/auth/invocations/{invocation_id}/discover">client.agents.auth.invocations.<a href="./src/resources/agents/auth/invocations.ts">discover</a>(invocationID, { ...params }) -> AgentAuthDiscoverResponse</code>
+- <code title="post /agents/auth/invocations/{invocation_id}/exchange">client.agents.auth.invocations.<a href="./src/resources/agents/auth/invocations.ts">exchange</a>(invocationID, { ...params }) -> InvocationExchangeResponse</code>
+- <code title="post /agents/auth/invocations/{invocation_id}/submit">client.agents.auth.invocations.<a href="./src/resources/agents/auth/invocations.ts">submit</a>(invocationID, { ...params }) -> AgentAuthSubmitResponse</code>
