@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export * from './shared';
+export { Agents } from './agents/agents';
 export {
   Apps,
   type AppListResponse,
