@@ -9,6 +9,31 @@ const client = new Kernel({
 
 describe('resource auth', () => {
   // Prism tests are disabled
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.agents.auth.create({
+      profile_name: 'user-123',
+      target_domain: 'netflix.com',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('create: required and optional params', async () => {
+    const response = await client.agents.auth.create({
+      profile_name: 'user-123',
+      target_domain: 'netflix.com',
+      login_url: 'https://netflix.com/login',
+      proxy: { proxy_id: 'proxy_id' },
+    });
+  });
+
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.agents.auth.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
@@ -21,11 +46,8 @@ describe('resource auth', () => {
   });
 
   // Prism tests are disabled
-  test.skip('start: only required params', async () => {
-    const responsePromise = client.agents.auth.start({
-      profile_name: 'auth-abc123',
-      target_domain: 'doordash.com',
-    });
+  test.skip('list', async () => {
+    const responsePromise = client.agents.auth.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -36,13 +58,13 @@ describe('resource auth', () => {
   });
 
   // Prism tests are disabled
-  test.skip('start: required and optional params', async () => {
-    const response = await client.agents.auth.start({
-      profile_name: 'auth-abc123',
-      target_domain: 'doordash.com',
-      app_logo_url: 'https://example.com/logo.png',
-      login_url: 'https://doordash.com/account/login',
-      proxy: { proxy_id: 'proxy_id' },
-    });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.agents.auth.list(
+        { limit: 100, offset: 0, profile_name: 'profile_name', target_domain: 'target_domain' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Kernel.NotFoundError);
   });
 });

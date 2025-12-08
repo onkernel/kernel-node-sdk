@@ -5,11 +5,15 @@ import * as AuthAPI from './auth/auth';
 import {
   AgentAuthDiscoverResponse,
   AgentAuthInvocationResponse,
-  AgentAuthStartResponse,
   AgentAuthSubmitResponse,
   Auth,
   AuthAgent,
-  AuthStartParams,
+  AuthAgentCreateRequest,
+  AuthAgentInvocationCreateRequest,
+  AuthAgentInvocationCreateResponse,
+  AuthAgentsOffsetPagination,
+  AuthCreateParams,
+  AuthListParams,
   DiscoveredField,
 } from './auth/auth';
 
@@ -24,10 +28,14 @@ export declare namespace Agents {
     Auth as Auth,
     type AgentAuthDiscoverResponse as AgentAuthDiscoverResponse,
     type AgentAuthInvocationResponse as AgentAuthInvocationResponse,
-    type AgentAuthStartResponse as AgentAuthStartResponse,
     type AgentAuthSubmitResponse as AgentAuthSubmitResponse,
     type AuthAgent as AuthAgent,
+    type AuthAgentCreateRequest as AuthAgentCreateRequest,
+    type AuthAgentInvocationCreateRequest as AuthAgentInvocationCreateRequest,
+    type AuthAgentInvocationCreateResponse as AuthAgentInvocationCreateResponse,
     type DiscoveredField as DiscoveredField,
-    type AuthStartParams as AuthStartParams,
+    type AuthAgentsOffsetPagination as AuthAgentsOffsetPagination,
+    type AuthCreateParams as AuthCreateParams,
+    type AuthListParams as AuthListParams,
   };
 }

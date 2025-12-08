@@ -8,6 +8,26 @@ import { path } from '../../../internal/utils/path';
 
 export class Invocations extends APIResource {
   /**
+   * Creates a new authentication invocation for the specified auth agent. This
+   * starts the auth flow and returns a hosted URL for the user to complete
+   * authentication.
+   *
+   * @example
+   * ```ts
+   * const authAgentInvocationCreateResponse =
+   *   await client.agents.auth.invocations.create({
+   *     auth_agent_id: 'abc123xyz',
+   *   });
+   * ```
+   */
+  create(
+    body: InvocationCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<AuthAPI.AuthAgentInvocationCreateResponse> {
+    return this._client.post('/agents/auth/invocations', { body, ...options });
+  }
+
+  /**
    * Returns invocation details including app_name and target_domain. Uses the JWT
    * returned by the exchange endpoint, or standard API key or JWT authentication.
    *
@@ -107,6 +127,13 @@ export interface InvocationExchangeResponse {
   jwt: string;
 }
 
+export interface InvocationCreateParams {
+  /**
+   * ID of the auth agent to create an invocation for
+   */
+  auth_agent_id: string;
+}
+
 export interface InvocationDiscoverParams {
   /**
    * Optional login page URL. If provided, will override the stored login URL for
@@ -132,6 +159,7 @@ export interface InvocationSubmitParams {
 export declare namespace Invocations {
   export {
     type InvocationExchangeResponse as InvocationExchangeResponse,
+    type InvocationCreateParams as InvocationCreateParams,
     type InvocationDiscoverParams as InvocationDiscoverParams,
     type InvocationExchangeParams as InvocationExchangeParams,
     type InvocationSubmitParams as InvocationSubmitParams,

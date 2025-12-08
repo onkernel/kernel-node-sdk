@@ -255,15 +255,18 @@ Types:
 
 - <code><a href="./src/resources/agents/auth/auth.ts">AgentAuthDiscoverResponse</a></code>
 - <code><a href="./src/resources/agents/auth/auth.ts">AgentAuthInvocationResponse</a></code>
-- <code><a href="./src/resources/agents/auth/auth.ts">AgentAuthStartResponse</a></code>
 - <code><a href="./src/resources/agents/auth/auth.ts">AgentAuthSubmitResponse</a></code>
 - <code><a href="./src/resources/agents/auth/auth.ts">AuthAgent</a></code>
+- <code><a href="./src/resources/agents/auth/auth.ts">AuthAgentCreateRequest</a></code>
+- <code><a href="./src/resources/agents/auth/auth.ts">AuthAgentInvocationCreateRequest</a></code>
+- <code><a href="./src/resources/agents/auth/auth.ts">AuthAgentInvocationCreateResponse</a></code>
 - <code><a href="./src/resources/agents/auth/auth.ts">DiscoveredField</a></code>
 
 Methods:
 
+- <code title="post /agents/auth">client.agents.auth.<a href="./src/resources/agents/auth/auth.ts">create</a>({ ...params }) -> AuthAgent</code>
 - <code title="get /agents/auth/{id}">client.agents.auth.<a href="./src/resources/agents/auth/auth.ts">retrieve</a>(id) -> AuthAgent</code>
-- <code title="post /agents/auth/start">client.agents.auth.<a href="./src/resources/agents/auth/auth.ts">start</a>({ ...params }) -> AgentAuthStartResponse</code>
+- <code title="get /agents/auth">client.agents.auth.<a href="./src/resources/agents/auth/auth.ts">list</a>({ ...params }) -> AuthAgentsOffsetPagination</code>
 
 ### Invocations
 
@@ -273,6 +276,7 @@ Types:
 
 Methods:
 
+- <code title="post /agents/auth/invocations">client.agents.auth.invocations.<a href="./src/resources/agents/auth/invocations.ts">create</a>({ ...params }) -> AuthAgentInvocationCreateResponse</code>
 - <code title="get /agents/auth/invocations/{invocation_id}">client.agents.auth.invocations.<a href="./src/resources/agents/auth/invocations.ts">retrieve</a>(invocationID) -> AgentAuthInvocationResponse</code>
 - <code title="post /agents/auth/invocations/{invocation_id}/discover">client.agents.auth.invocations.<a href="./src/resources/agents/auth/invocations.ts">discover</a>(invocationID, { ...params }) -> AgentAuthDiscoverResponse</code>
 - <code title="post /agents/auth/invocations/{invocation_id}/exchange">client.agents.auth.invocations.<a href="./src/resources/agents/auth/invocations.ts">exchange</a>(invocationID, { ...params }) -> InvocationExchangeResponse</code>
