@@ -195,6 +195,11 @@ export interface AuthAgent {
    * Current authentication status of the managed profile
    */
   status: 'AUTHENTICATED' | 'NEEDS_AUTH';
+
+  /**
+   * When the last authentication check was performed
+   */
+  last_auth_check_at?: string;
 }
 
 /**
