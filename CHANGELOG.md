@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.23.0 (2025-12-11)
+
+Full Changelog: [v0.22.0...v0.23.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.22.0...v0.23.0)
+
+### Features
+
+* [wip] Browser pools polish pass ([7c8a464](https://github.com/onkernel/kernel-node-sdk/commit/7c8a4641cb87a76a3248e2d1df713df929957262))
+* enhance agent authentication API with new endpoints and request… ([0ef28fd](https://github.com/onkernel/kernel-node-sdk/commit/0ef28fddbf7c7d03b24a56d4157d1eb3966c0a7f))
+* Enhance agent authentication with optional login page URL and auth ch… ([7ea4b07](https://github.com/onkernel/kernel-node-sdk/commit/7ea4b076cc5255f76945ae370a8f686349a28a30))
+* Enhance AuthAgent model with last_auth_check_at field ([29d43d1](https://github.com/onkernel/kernel-node-sdk/commit/29d43d10a026f25cf1a1de2579c06f90ca246054))
+
+
+### Bug Fixes
+
+* **mcp:** correct code tool API endpoint ([4f60927](https://github.com/onkernel/kernel-node-sdk/commit/4f6092702503c6dafb0d310c8123bf8dccce60e1))
+* **mcp:** return correct lines on typescript errors ([8ccaae1](https://github.com/onkernel/kernel-node-sdk/commit/8ccaae1b63ee9ca371c4f32033486e6e9ba1c351))
+
+
+### Chores
+
+* **internal:** codegen related update ([3ffeaa7](https://github.com/onkernel/kernel-node-sdk/commit/3ffeaa72b3cb5c7cd5baea0ddeaf5fad60979235))
+* **internal:** codegen related update ([c9461e7](https://github.com/onkernel/kernel-node-sdk/commit/c9461e7e02592559c3592f8916bf1351d32cce9a))
+
+
+### Refactors
+
+* **browser:** remove persistence option UI ([f3fdc89](https://github.com/onkernel/kernel-node-sdk/commit/f3fdc89088feeb32983da39700e47e922f767126))
+
 ## 0.22.0 (2025-12-05)
 
 Full Changelog: [v0.21.0...v0.22.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.21.0...v0.22.0)
