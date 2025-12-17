@@ -10,6 +10,7 @@ export {
   type AuthAgentInvocationCreateRequest,
   type AuthAgentInvocationCreateResponse,
   type DiscoveredField,
+  type ReauthResponse,
   type AuthCreateParams,
   type AuthListParams,
   type AuthAgentsOffsetPagination,

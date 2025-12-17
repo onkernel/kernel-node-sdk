@@ -22,18 +22,24 @@ import { AppListParams, AppListResponse, AppListResponsesOffsetPagination, Apps 
 import {
   BrowserPool,
   BrowserPoolAcquireParams,
-  BrowserPoolAcquireRequest,
   BrowserPoolAcquireResponse,
   BrowserPoolCreateParams,
   BrowserPoolDeleteParams,
   BrowserPoolListResponse,
   BrowserPoolReleaseParams,
-  BrowserPoolReleaseRequest,
-  BrowserPoolRequest,
   BrowserPoolUpdateParams,
-  BrowserPoolUpdateRequest,
   BrowserPools,
 } from './resources/browser-pools';
+import {
+  CreateCredentialRequest,
+  Credential,
+  CredentialCreateParams,
+  CredentialListParams,
+  CredentialUpdateParams,
+  Credentials,
+  CredentialsOffsetPagination,
+  UpdateCredentialRequest,
+} from './resources/credentials';
 import {
   DeploymentCreateParams,
   DeploymentCreateResponse,
@@ -861,6 +867,7 @@ export class Kernel {
   extensions: API.Extensions = new API.Extensions(this);
   browserPools: API.BrowserPools = new API.BrowserPools(this);
   agents: API.Agents = new API.Agents(this);
+  credentials: API.Credentials = new API.Credentials(this);
 }
 
 Kernel.Deployments = Deployments;
@@ -872,6 +879,7 @@ Kernel.Proxies = Proxies;
 Kernel.Extensions = Extensions;
 Kernel.BrowserPools = BrowserPools;
 Kernel.Agents = Agents;
+Kernel.Credentials = Credentials;
 
 export declare namespace Kernel {
   export type RequestOptions = Opts.RequestOptions;
@@ -956,10 +964,6 @@ export declare namespace Kernel {
   export {
     BrowserPools as BrowserPools,
     type BrowserPool as BrowserPool,
-    type BrowserPoolAcquireRequest as BrowserPoolAcquireRequest,
-    type BrowserPoolReleaseRequest as BrowserPoolReleaseRequest,
-    type BrowserPoolRequest as BrowserPoolRequest,
-    type BrowserPoolUpdateRequest as BrowserPoolUpdateRequest,
     type BrowserPoolListResponse as BrowserPoolListResponse,
     type BrowserPoolAcquireResponse as BrowserPoolAcquireResponse,
     type BrowserPoolCreateParams as BrowserPoolCreateParams,
@@ -970,6 +974,17 @@ export declare namespace Kernel {
   };
 
   export { Agents as Agents };
+
+  export {
+    Credentials as Credentials,
+    type CreateCredentialRequest as CreateCredentialRequest,
+    type Credential as Credential,
+    type UpdateCredentialRequest as UpdateCredentialRequest,
+    type CredentialsOffsetPagination as CredentialsOffsetPagination,
+    type CredentialCreateParams as CredentialCreateParams,
+    type CredentialUpdateParams as CredentialUpdateParams,
+    type CredentialListParams as CredentialListParams,
+  };
 
   export type AppAction = API.AppAction;
   export type BrowserExtension = API.BrowserExtension;

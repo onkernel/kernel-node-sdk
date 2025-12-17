@@ -12,6 +12,7 @@ import {
 } from './invocations';
 import { APIPromise } from '../../../core/api-promise';
 import { OffsetPagination, type OffsetPaginationParams, PagePromise } from '../../../core/pagination';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -65,6 +66,42 @@ export class Auth extends APIResource {
     options?: RequestOptions,
   ): PagePromise<AuthAgentsOffsetPagination, AuthAgent> {
     return this._client.getAPIList('/agents/auth', OffsetPagination<AuthAgent>, { query, ...options });
+  }
+
+  /**
+   * Deletes an auth agent and terminates its workflow. This will:
+   *
+   * - Soft delete the auth agent record
+   * - Gracefully terminate the agent's Temporal workflow
+   * - Cancel any in-progress invocations
+   *
+   * @example
+   * ```ts
+   * await client.agents.auth.delete('id');
+   * ```
+   */
+  delete(id: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/agents/auth/${id}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Triggers automatic re-authentication for an auth agent using stored credentials.
+   * Requires the auth agent to have a linked credential, stored selectors, and
+   * login_url. Returns immediately with status indicating whether re-auth was
+   * started.
+   *
+   * @example
+   * ```ts
+   * const reauthResponse = await client.agents.auth.reauth(
+   *   'id',
+   * );
+   * ```
+   */
+  reauth(id: string, options?: RequestOptions): APIPromise<ReauthResponse> {
+    return this._client.post(path`/agents/auth/${id}/reauth`, options);
   }
 }
 
@@ -197,6 +234,27 @@ export interface AuthAgent {
   status: 'AUTHENTICATED' | 'NEEDS_AUTH';
 
   /**
+   * Whether automatic re-authentication is possible (has credential_id, selectors,
+   * and login_url)
+   */
+  can_reauth?: boolean;
+
+  /**
+   * ID of the linked credential for automatic re-authentication
+   */
+  credential_id?: string;
+
+  /**
+   * Name of the linked credential for automatic re-authentication
+   */
+  credential_name?: string;
+
+  /**
+   * Whether this auth agent has stored selectors for deterministic re-authentication
+   */
+  has_selectors?: boolean;
+
+  /**
    * When the last authentication check was performed
    */
   last_auth_check_at?: string;
@@ -215,6 +273,13 @@ export interface AuthAgentCreateRequest {
    * Target domain for authentication
    */
   target_domain: string;
+
+  /**
+   * Optional name of an existing credential to use for this auth agent. If provided,
+   * the credential will be linked to the agent and its values will be used to
+   * auto-fill the login form on invocation.
+   */
+  credential_name?: string;
 
   /**
    * Optional login page URL. If provided, will be stored on the agent and used to
@@ -248,31 +313,62 @@ export interface AuthAgentInvocationCreateRequest {
    * ID of the auth agent to create an invocation for
    */
   auth_agent_id: string;
+
+  /**
+   * If provided, saves the submitted credentials under this name upon successful
+   * login. The credential will be linked to the auth agent for automatic
+   * re-authentication.
+   */
+  save_credential_as?: string;
 }
 
 /**
- * Response from creating an auth agent invocation
+ * Response when the agent is already authenticated.
  */
-export interface AuthAgentInvocationCreateResponse {
+export type AuthAgentInvocationCreateResponse =
+  | AuthAgentInvocationCreateResponse.AuthAgentAlreadyAuthenticated
+  | AuthAgentInvocationCreateResponse.AuthAgentInvocationCreated;
+
+export namespace AuthAgentInvocationCreateResponse {
   /**
-   * When the handoff code expires
+   * Response when the agent is already authenticated.
    */
-  expires_at: string;
+  export interface AuthAgentAlreadyAuthenticated {
+    /**
+     * Indicates the agent is already authenticated and no invocation was created.
+     */
+    status: 'already_authenticated';
+  }
 
   /**
-   * One-time code for handoff
+   * Response when a new invocation was created.
    */
-  handoff_code: string;
+  export interface AuthAgentInvocationCreated {
+    /**
+     * When the handoff code expires.
+     */
+    expires_at: string;
 
-  /**
-   * URL to redirect user to
-   */
-  hosted_url: string;
+    /**
+     * One-time code for handoff.
+     */
+    handoff_code: string;
 
-  /**
-   * Unique identifier for the invocation
-   */
-  invocation_id: string;
+    /**
+     * URL to redirect user to.
+     */
+    hosted_url: string;
+
+    /**
+     * Unique identifier for the invocation.
+     */
+    invocation_id: string;
+
+    /**
+     * Indicates an invocation was created.
+     */
+    status: 'invocation_created';
+  }
 }
 
 /**
@@ -310,6 +406,26 @@ export interface DiscoveredField {
   required?: boolean;
 }
 
+/**
+ * Response from triggering re-authentication
+ */
+export interface ReauthResponse {
+  /**
+   * Result of the re-authentication attempt
+   */
+  status: 'reauth_started' | 'already_authenticated' | 'cannot_reauth';
+
+  /**
+   * ID of the re-auth invocation if one was created
+   */
+  invocation_id?: string;
+
+  /**
+   * Human-readable description of the result
+   */
+  message?: string;
+}
+
 export interface AuthCreateParams {
   /**
    * Name of the profile to use for this auth agent
@@ -320,6 +436,13 @@ export interface AuthCreateParams {
    * Target domain for authentication
    */
   target_domain: string;
+
+  /**
+   * Optional name of an existing credential to use for this auth agent. If provided,
+   * the credential will be linked to the agent and its values will be used to
+   * auto-fill the login form on invocation.
+   */
+  credential_name?: string;
 
   /**
    * Optional login page URL. If provided, will be stored on the agent and used to
@@ -369,6 +492,7 @@ export declare namespace Auth {
     type AuthAgentInvocationCreateRequest as AuthAgentInvocationCreateRequest,
     type AuthAgentInvocationCreateResponse as AuthAgentInvocationCreateResponse,
     type DiscoveredField as DiscoveredField,
+    type ReauthResponse as ReauthResponse,
     type AuthAgentsOffsetPagination as AuthAgentsOffsetPagination,
     type AuthCreateParams as AuthCreateParams,
     type AuthListParams as AuthListParams,

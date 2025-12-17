@@ -11,10 +11,6 @@ export {
 export {
   BrowserPools,
   type BrowserPool,
-  type BrowserPoolAcquireRequest,
-  type BrowserPoolReleaseRequest,
-  type BrowserPoolRequest,
-  type BrowserPoolUpdateRequest,
   type BrowserPoolListResponse,
   type BrowserPoolAcquireResponse,
   type BrowserPoolCreateParams,
@@ -36,6 +32,16 @@ export {
   type BrowserLoadExtensionsParams,
   type BrowserListResponsesOffsetPagination,
 } from './browsers/browsers';
+export {
+  Credentials,
+  type CreateCredentialRequest,
+  type Credential,
+  type UpdateCredentialRequest,
+  type CredentialCreateParams,
+  type CredentialUpdateParams,
+  type CredentialListParams,
+  type CredentialsOffsetPagination,
+} from './credentials';
 export {
   Deployments,
   type DeploymentStateEvent,
