@@ -162,7 +162,7 @@ export interface BrowserPool {
   /**
    * Configuration used to create all browsers in this pool
    */
-  browser_pool_config: BrowserPoolRequest;
+  browser_pool_config: BrowserPool.BrowserPoolConfig;
 
   /**
    * Timestamp when the browser pool was created
@@ -175,118 +175,79 @@ export interface BrowserPool {
   name?: string;
 }
 
-/**
- * Request body for acquiring a browser from the pool.
- */
-export interface BrowserPoolAcquireRequest {
+export namespace BrowserPool {
   /**
-   * Maximum number of seconds to wait for a browser to be available. Defaults to the
-   * calculated time it would take to fill the pool at the currently configured fill
-   * rate.
+   * Configuration used to create all browsers in this pool
    */
-  acquire_timeout_seconds?: number;
-}
+  export interface BrowserPoolConfig {
+    /**
+     * Number of browsers to create in the pool
+     */
+    size: number;
 
-/**
- * Request body for releasing a browser back to the pool.
- */
-export interface BrowserPoolReleaseRequest {
-  /**
-   * Browser session ID to release back to the pool
-   */
-  session_id: string;
+    /**
+     * List of browser extensions to load into the session. Provide each by id or name.
+     */
+    extensions?: Array<Shared.BrowserExtension>;
 
-  /**
-   * Whether to reuse the browser instance or destroy it and create a new one.
-   * Defaults to true.
-   */
-  reuse?: boolean;
-}
+    /**
+     * Percentage of the pool to fill per minute. Defaults to 10%.
+     */
+    fill_rate_per_minute?: number;
 
-/**
- * Parameters for creating a browser pool. All browsers in the pool will be created
- * with the same configuration.
- */
-export interface BrowserPoolRequest {
-  /**
-   * Number of browsers to create in the pool
-   */
-  size: number;
+    /**
+     * If true, launches the browser using a headless image. Defaults to false.
+     */
+    headless?: boolean;
 
-  /**
-   * List of browser extensions to load into the session. Provide each by id or name.
-   */
-  extensions?: Array<Shared.BrowserExtension>;
+    /**
+     * If true, launches the browser in kiosk mode to hide address bar and tabs in live
+     * view.
+     */
+    kiosk_mode?: boolean;
 
-  /**
-   * Percentage of the pool to fill per minute. Defaults to 10%.
-   */
-  fill_rate_per_minute?: number;
+    /**
+     * Optional name for the browser pool. Must be unique within the organization.
+     */
+    name?: string;
 
-  /**
-   * If true, launches the browser using a headless image. Defaults to false.
-   */
-  headless?: boolean;
+    /**
+     * Profile selection for the browser session. Provide either id or name. If
+     * specified, the matching profile will be loaded into the browser session.
+     * Profiles must be created beforehand.
+     */
+    profile?: Shared.BrowserProfile;
 
-  /**
-   * If true, launches the browser in kiosk mode to hide address bar and tabs in live
-   * view.
-   */
-  kiosk_mode?: boolean;
+    /**
+     * Optional proxy to associate to the browser session. Must reference a proxy
+     * belonging to the caller's org.
+     */
+    proxy_id?: string;
 
-  /**
-   * Optional name for the browser pool. Must be unique within the organization.
-   */
-  name?: string;
+    /**
+     * If true, launches the browser in stealth mode to reduce detection by anti-bot
+     * mechanisms.
+     */
+    stealth?: boolean;
 
-  /**
-   * Profile selection for the browser session. Provide either id or name. If
-   * specified, the matching profile will be loaded into the browser session.
-   * Profiles must be created beforehand.
-   */
-  profile?: Shared.BrowserProfile;
+    /**
+     * Default idle timeout in seconds for browsers acquired from this pool before they
+     * are destroyed. Defaults to 600 seconds if not specified
+     */
+    timeout_seconds?: number;
 
-  /**
-   * Optional proxy to associate to the browser session. Must reference a proxy
-   * belonging to the caller's org.
-   */
-  proxy_id?: string;
-
-  /**
-   * If true, launches the browser in stealth mode to reduce detection by anti-bot
-   * mechanisms.
-   */
-  stealth?: boolean;
-
-  /**
-   * Default idle timeout in seconds for browsers acquired from this pool before they
-   * are destroyed. Defaults to 600 seconds if not specified
-   */
-  timeout_seconds?: number;
-
-  /**
-   * Initial browser window size in pixels with optional refresh rate. If omitted,
-   * image defaults apply (1920x1080@25). Only specific viewport configurations are
-   * supported. The server will reject unsupported combinations. Supported
-   * resolutions are: 2560x1440@10, 1920x1080@25, 1920x1200@25, 1440x900@25,
-   * 1024x768@60, 1200x800@60 If refresh_rate is not provided, it will be
-   * automatically determined from the width and height if they match a supported
-   * configuration exactly. Note: Higher resolutions may affect the responsiveness of
-   * live view browser
-   */
-  viewport?: Shared.BrowserViewport;
-}
-
-/**
- * Parameters for updating a browser pool. All browsers in the pool will be created
- * with the same configuration.
- */
-export interface BrowserPoolUpdateRequest extends BrowserPoolRequest {
-  /**
-   * Whether to discard all idle browsers and rebuild the pool immediately. Defaults
-   * to false.
-   */
-  discard_all_idle?: boolean;
+    /**
+     * Initial browser window size in pixels with optional refresh rate. If omitted,
+     * image defaults apply (1920x1080@25). Only specific viewport configurations are
+     * supported. The server will reject unsupported combinations. Supported
+     * resolutions are: 2560x1440@10, 1920x1080@25, 1920x1200@25, 1440x900@25,
+     * 1024x768@60, 1200x800@60 If refresh_rate is not provided, it will be
+     * automatically determined from the width and height if they match a supported
+     * configuration exactly. Note: Higher resolutions may affect the responsiveness of
+     * live view browser
+     */
+    viewport?: Shared.BrowserViewport;
+  }
 }
 
 export type BrowserPoolListResponse = Array<BrowserPool>;
@@ -546,10 +507,6 @@ export interface BrowserPoolReleaseParams {
 export declare namespace BrowserPools {
   export {
     type BrowserPool as BrowserPool,
-    type BrowserPoolAcquireRequest as BrowserPoolAcquireRequest,
-    type BrowserPoolReleaseRequest as BrowserPoolReleaseRequest,
-    type BrowserPoolRequest as BrowserPoolRequest,
-    type BrowserPoolUpdateRequest as BrowserPoolUpdateRequest,
     type BrowserPoolListResponse as BrowserPoolListResponse,
     type BrowserPoolAcquireResponse as BrowserPoolAcquireResponse,
     type BrowserPoolCreateParams as BrowserPoolCreateParams,

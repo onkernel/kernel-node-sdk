@@ -229,10 +229,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/browser-pools.ts">BrowserPool</a></code>
-- <code><a href="./src/resources/browser-pools.ts">BrowserPoolAcquireRequest</a></code>
-- <code><a href="./src/resources/browser-pools.ts">BrowserPoolReleaseRequest</a></code>
-- <code><a href="./src/resources/browser-pools.ts">BrowserPoolRequest</a></code>
-- <code><a href="./src/resources/browser-pools.ts">BrowserPoolUpdateRequest</a></code>
 - <code><a href="./src/resources/browser-pools.ts">BrowserPoolListResponse</a></code>
 - <code><a href="./src/resources/browser-pools.ts">BrowserPoolAcquireResponse</a></code>
 

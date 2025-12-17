@@ -11,10 +11,6 @@ export {
 export {
   BrowserPools,
   type BrowserPool,
-  type BrowserPoolAcquireRequest,
-  type BrowserPoolReleaseRequest,
-  type BrowserPoolRequest,
-  type BrowserPoolUpdateRequest,
   type BrowserPoolListResponse,
   type BrowserPoolAcquireResponse,
   type BrowserPoolCreateParams,
