@@ -261,12 +261,15 @@ Types:
 - <code><a href="./src/resources/agents/auth/auth.ts">AuthAgentInvocationCreateRequest</a></code>
 - <code><a href="./src/resources/agents/auth/auth.ts">AuthAgentInvocationCreateResponse</a></code>
 - <code><a href="./src/resources/agents/auth/auth.ts">DiscoveredField</a></code>
+- <code><a href="./src/resources/agents/auth/auth.ts">ReauthResponse</a></code>
 
 Methods:
 
 - <code title="post /agents/auth">client.agents.auth.<a href="./src/resources/agents/auth/auth.ts">create</a>({ ...params }) -> AuthAgent</code>
 - <code title="get /agents/auth/{id}">client.agents.auth.<a href="./src/resources/agents/auth/auth.ts">retrieve</a>(id) -> AuthAgent</code>
 - <code title="get /agents/auth">client.agents.auth.<a href="./src/resources/agents/auth/auth.ts">list</a>({ ...params }) -> AuthAgentsOffsetPagination</code>
+- <code title="delete /agents/auth/{id}">client.agents.auth.<a href="./src/resources/agents/auth/auth.ts">delete</a>(id) -> void</code>
+- <code title="post /agents/auth/{id}/reauth">client.agents.auth.<a href="./src/resources/agents/auth/auth.ts">reauth</a>(id) -> ReauthResponse</code>
 
 ### Invocations
 
@@ -281,3 +284,19 @@ Methods:
 - <code title="post /agents/auth/invocations/{invocation_id}/discover">client.agents.auth.invocations.<a href="./src/resources/agents/auth/invocations.ts">discover</a>(invocationID, { ...params }) -> AgentAuthDiscoverResponse</code>
 - <code title="post /agents/auth/invocations/{invocation_id}/exchange">client.agents.auth.invocations.<a href="./src/resources/agents/auth/invocations.ts">exchange</a>(invocationID, { ...params }) -> InvocationExchangeResponse</code>
 - <code title="post /agents/auth/invocations/{invocation_id}/submit">client.agents.auth.invocations.<a href="./src/resources/agents/auth/invocations.ts">submit</a>(invocationID, { ...params }) -> AgentAuthSubmitResponse</code>
+
+# Credentials
+
+Types:
+
+- <code><a href="./src/resources/credentials.ts">CreateCredentialRequest</a></code>
+- <code><a href="./src/resources/credentials.ts">Credential</a></code>
+- <code><a href="./src/resources/credentials.ts">UpdateCredentialRequest</a></code>
+
+Methods:
+
+- <code title="post /credentials">client.credentials.<a href="./src/resources/credentials.ts">create</a>({ ...params }) -> Credential</code>
+- <code title="get /credentials/{id}">client.credentials.<a href="./src/resources/credentials.ts">retrieve</a>(id) -> Credential</code>
+- <code title="patch /credentials/{id}">client.credentials.<a href="./src/resources/credentials.ts">update</a>(id, { ...params }) -> Credential</code>
+- <code title="get /credentials">client.credentials.<a href="./src/resources/credentials.ts">list</a>({ ...params }) -> CredentialsOffsetPagination</code>
+- <code title="delete /credentials/{id}">client.credentials.<a href="./src/resources/credentials.ts">delete</a>(id) -> void</code>

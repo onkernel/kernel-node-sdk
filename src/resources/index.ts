@@ -37,6 +37,16 @@ export {
   type BrowserListResponsesOffsetPagination,
 } from './browsers/browsers';
 export {
+  Credentials,
+  type CreateCredentialRequest,
+  type Credential,
+  type UpdateCredentialRequest,
+  type CredentialCreateParams,
+  type CredentialUpdateParams,
+  type CredentialListParams,
+  type CredentialsOffsetPagination,
+} from './credentials';
+export {
   Deployments,
   type DeploymentStateEvent,
   type DeploymentCreateResponse,

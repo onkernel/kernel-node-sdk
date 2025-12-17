@@ -15,6 +15,7 @@ import {
   AuthCreateParams,
   AuthListParams,
   DiscoveredField,
+  ReauthResponse,
 } from './auth/auth';
 
 export class Agents extends APIResource {
@@ -34,6 +35,7 @@ export declare namespace Agents {
     type AuthAgentInvocationCreateRequest as AuthAgentInvocationCreateRequest,
     type AuthAgentInvocationCreateResponse as AuthAgentInvocationCreateResponse,
     type DiscoveredField as DiscoveredField,
+    type ReauthResponse as ReauthResponse,
     type AuthAgentsOffsetPagination as AuthAgentsOffsetPagination,
     type AuthCreateParams as AuthCreateParams,
     type AuthListParams as AuthListParams,
