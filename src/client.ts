@@ -22,16 +22,12 @@ import { AppListParams, AppListResponse, AppListResponsesOffsetPagination, Apps 
 import {
   BrowserPool,
   BrowserPoolAcquireParams,
-  BrowserPoolAcquireRequest,
   BrowserPoolAcquireResponse,
   BrowserPoolCreateParams,
   BrowserPoolDeleteParams,
   BrowserPoolListResponse,
   BrowserPoolReleaseParams,
-  BrowserPoolReleaseRequest,
-  BrowserPoolRequest,
   BrowserPoolUpdateParams,
-  BrowserPoolUpdateRequest,
   BrowserPools,
 } from './resources/browser-pools';
 import {
@@ -945,10 +941,6 @@ export declare namespace Kernel {
   export {
     BrowserPools as BrowserPools,
     type BrowserPool as BrowserPool,
-    type BrowserPoolAcquireRequest as BrowserPoolAcquireRequest,
-    type BrowserPoolReleaseRequest as BrowserPoolReleaseRequest,
-    type BrowserPoolRequest as BrowserPoolRequest,
-    type BrowserPoolUpdateRequest as BrowserPoolUpdateRequest,
     type BrowserPoolListResponse as BrowserPoolListResponse,
     type BrowserPoolAcquireResponse as BrowserPoolAcquireResponse,
     type BrowserPoolCreateParams as BrowserPoolCreateParams,
