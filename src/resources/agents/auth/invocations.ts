@@ -132,6 +132,13 @@ export interface InvocationCreateParams {
    * ID of the auth agent to create an invocation for
    */
   auth_agent_id: string;
+
+  /**
+   * If provided, saves the submitted credentials under this name upon successful
+   * login. The credential will be linked to the auth agent for automatic
+   * re-authentication.
+   */
+  save_credential_as?: string;
 }
 
 export interface InvocationDiscoverParams {

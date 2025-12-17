@@ -22,7 +22,10 @@ describe('resource invocations', () => {
 
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.agents.auth.invocations.create({ auth_agent_id: 'abc123xyz' });
+    const response = await client.agents.auth.invocations.create({
+      auth_agent_id: 'abc123xyz',
+      save_credential_as: 'my-netflix-login',
+    });
   });
 
   // Prism tests are disabled
