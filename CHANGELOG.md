@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.24.0 (2025-12-17)
+
+Full Changelog: [v0.23.0...v0.24.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.23.0...v0.24.0)
+
+### Features
+
+* Enhance AuthAgentInvocationCreateResponse to include already_authenti… ([70cd6d6](https://github.com/onkernel/kernel-node-sdk/commit/70cd6d6c44fa9f90a5bfad3e6268bd6264a9f83b))
+* Fix browser pool sdk types ([e4b773f](https://github.com/onkernel/kernel-node-sdk/commit/e4b773f9923b1bf4fcda5bd2c9832cbb291981bd))
+
 ## 0.23.0 (2025-12-11)
 
 Full Changelog: [v0.22.0...v0.23.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.22.0...v0.23.0)
