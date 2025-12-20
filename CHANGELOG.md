@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.25.0 (2025-12-20)
+
+Full Changelog: [v0.24.0...v0.25.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.24.0...v0.25.0)
+
+### Features
+
+* Enhance AuthAgentInvocation with step and last activity tracking ([8380eb6](https://github.com/onkernel/kernel-node-sdk/commit/8380eb6cef2c8229bee4e263bcd0637f9fcb1480))
+
 ## 0.24.0 (2025-12-17)
 
 Full Changelog: [v0.23.0...v0.24.0](https://github.com/onkernel/kernel-node-sdk/compare/v0.23.0...v0.24.0)
