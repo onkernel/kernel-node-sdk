@@ -28,8 +28,8 @@ export class Invocations extends APIResource {
   }
 
   /**
-   * Returns invocation details including app_name and target_domain. Uses the JWT
-   * returned by the exchange endpoint, or standard API key or JWT authentication.
+   * Returns invocation details including status, app_name, and target_domain.
+   * Supports both API key and JWT (from exchange endpoint) authentication.
    *
    * @example
    * ```ts
@@ -46,7 +46,7 @@ export class Invocations extends APIResource {
   /**
    * Inspects the target site to detect logged-in state or discover required fields.
    * Returns 200 with success: true when fields are found, or 4xx/5xx for failures.
-   * Requires the JWT returned by the exchange endpoint.
+   * Supports both API key and JWT (from exchange endpoint) authentication.
    *
    * @example
    * ```ts
@@ -87,7 +87,8 @@ export class Invocations extends APIResource {
 
   /**
    * Submits field values for the discovered login form and may return additional
-   * auth fields or success. Requires the JWT returned by the exchange endpoint.
+   * auth fields or success. Supports both API key and JWT (from exchange endpoint)
+   * authentication.
    *
    * @example
    * ```ts
