@@ -162,6 +162,11 @@ export interface AgentAuthInvocationResponse {
   status: 'IN_PROGRESS' | 'SUCCESS' | 'EXPIRED' | 'CANCELED';
 
   /**
+   * Current step in the invocation workflow
+   */
+  step: 'initialized' | 'discovering' | 'awaiting_input' | 'submitting' | 'completed' | 'expired';
+
+  /**
    * Target domain for authentication
    */
   target_domain: string;
@@ -337,7 +342,7 @@ export namespace AuthAgentInvocationCreateResponse {
     /**
      * Indicates the agent is already authenticated and no invocation was created.
      */
-    status: 'already_authenticated';
+    status: 'ALREADY_AUTHENTICATED';
   }
 
   /**
@@ -367,7 +372,7 @@ export namespace AuthAgentInvocationCreateResponse {
     /**
      * Indicates an invocation was created.
      */
-    status: 'invocation_created';
+    status: 'INVOCATION_CREATED';
   }
 }
 
@@ -413,7 +418,7 @@ export interface ReauthResponse {
   /**
    * Result of the re-authentication attempt
    */
-  status: 'reauth_started' | 'already_authenticated' | 'cannot_reauth';
+  status: 'REAUTH_STARTED' | 'ALREADY_AUTHENTICATED' | 'CANNOT_REAUTH';
 
   /**
    * ID of the re-auth invocation if one was created
