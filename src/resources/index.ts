@@ -81,5 +81,6 @@ export {
   type ProxyCreateResponse,
   type ProxyRetrieveResponse,
   type ProxyListResponse,
+  type ProxyCheckResponse,
   type ProxyCreateParams,
 } from './proxies';
