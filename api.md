@@ -201,6 +201,7 @@ Types:
 - <code><a href="./src/resources/proxies.ts">ProxyCreateResponse</a></code>
 - <code><a href="./src/resources/proxies.ts">ProxyRetrieveResponse</a></code>
 - <code><a href="./src/resources/proxies.ts">ProxyListResponse</a></code>
+- <code><a href="./src/resources/proxies.ts">ProxyCheckResponse</a></code>
 
 Methods:
 
@@ -208,6 +209,7 @@ Methods:
 - <code title="get /proxies/{id}">client.proxies.<a href="./src/resources/proxies.ts">retrieve</a>(id) -> ProxyRetrieveResponse</code>
 - <code title="get /proxies">client.proxies.<a href="./src/resources/proxies.ts">list</a>() -> ProxyListResponse</code>
 - <code title="delete /proxies/{id}">client.proxies.<a href="./src/resources/proxies.ts">delete</a>(id) -> void</code>
+- <code title="post /proxies/{id}/check">client.proxies.<a href="./src/resources/proxies.ts">check</a>(id) -> ProxyCheckResponse</code>
 
 # Extensions
 

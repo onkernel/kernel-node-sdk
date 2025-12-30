@@ -77,6 +77,7 @@ import {
 import { ProfileCreateParams, ProfileListResponse, Profiles } from './resources/profiles';
 import {
   Proxies,
+  ProxyCheckResponse,
   ProxyCreateParams,
   ProxyCreateResponse,
   ProxyListResponse,
@@ -950,6 +951,7 @@ export declare namespace Kernel {
     type ProxyCreateResponse as ProxyCreateResponse,
     type ProxyRetrieveResponse as ProxyRetrieveResponse,
     type ProxyListResponse as ProxyListResponse,
+    type ProxyCheckResponse as ProxyCheckResponse,
     type ProxyCreateParams as ProxyCreateParams,
   };
 
