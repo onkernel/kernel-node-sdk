@@ -212,6 +212,12 @@ export namespace OrgEntitlements {
      * Effective organization-wide concurrent app invocation ceiling.
      */
     max_concurrent_invocations: number;
+
+    /**
+     * Maximum non-deleted vaults allowed org-wide across all projects. Null means
+     * unlimited. The vaults feature flag still controls access.
+     */
+    max_vaults: number | null;
   }
 
   export interface Plan {

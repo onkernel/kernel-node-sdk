@@ -60,7 +60,9 @@ export class Vaults extends APIResource {
   }
 
   /**
-   * Create or retrieve a vault by immutable name
+   * Free organizations can store up to 3 non-deleted vaults across all projects.
+   * Paid plans and active trials have no vault cap. Retrieving an existing vault by
+   * name succeeds even at the limit.
    */
   upsert(body: VaultUpsertParams, options?: RequestOptions): APIPromise<Vault> {
     return this._client.post('/vaults', { body, ...options });
