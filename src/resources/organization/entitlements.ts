@@ -57,6 +57,12 @@ export namespace OrgEntitlements {
     profiles: Features.Profiles;
 
     proxy_bypass_hosts: Features.ProxyBypassHosts;
+
+    /**
+     * Whether the organization can access vaults, using the same access check as vault
+     * API routes.
+     */
+    vaults: Features.Vaults;
   }
 
   export namespace Features {
@@ -171,6 +177,17 @@ export namespace OrgEntitlements {
     }
 
     export interface ProxyBypassHosts {
+      /**
+       * Whether the organization is entitled to use this feature.
+       */
+      enabled: boolean;
+    }
+
+    /**
+     * Whether the organization can access vaults, using the same access check as vault
+     * API routes.
+     */
+    export interface Vaults {
       /**
        * Whether the organization is entitled to use this feature.
        */
