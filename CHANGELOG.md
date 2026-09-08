@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.100.0](https://github.com/kernel/kernel-node-sdk/compare/v0.99.0...v0.100.0) (2026-09-04)
+
+
+### Features
+
+* Fix vault provider errors and remove test card mode ([5f74e21](https://github.com/kernel/kernel-node-sdk/commit/5f74e2163ca7f65f987eeb368ea4d915a71b7fd5))
+
+## [0.99.0](https://github.com/kernel/kernel-node-sdk/compare/v0.98.0...v0.99.0) (2026-09-04)
+
+
+### Features
+
+* Expose OTLP destination delivery health ([c393d37](https://github.com/kernel/kernel-node-sdk/commit/c393d37d72171e841f1ebf8ce0a9720f5ae271d8))
+* Repair Vault SDK custom-code seals ([c6a1099](https://github.com/kernel/kernel-node-sdk/commit/c6a1099b453b25a67f54154fadec6f5b0586b472))
+
 ## [0.98.0](https://github.com/kernel/kernel-node-sdk/compare/v0.97.0...v0.98.0) (2026-09-02)
 
 
