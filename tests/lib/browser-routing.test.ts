@@ -1,7 +1,7 @@
 import http from 'http';
 import { AddressInfo } from 'net';
 import { Readable } from 'stream';
-import Kernel, { APIConnectionError, toFile } from '@onkernel/sdk';
+import Kernel, { AuthenticationError, toFile } from '@onkernel/sdk';
 
 import {
   BrowserRouteCache,
@@ -959,13 +959,14 @@ describe('browser routing', () => {
     });
   });
 
-  test('does not send a consumed stream to the control plane after a stale JWT', async () => {
+  test('does not retry a consumed stream through the control plane after a stale JWT', async () => {
     await withBrowserRoutingEnv(undefined, async () => {
-      const paths: string[] = [];
+      const requests: Array<{ path: string; body: Buffer }> = [];
       const server = http.createServer((request, response) => {
-        paths.push(request.url ?? '');
-        request.resume();
+        const chunks: Buffer[] = [];
+        request.on('data', (chunk) => chunks.push(Buffer.from(chunk)));
         request.on('end', () => {
+          requests.push({ path: request.url ?? '', body: Buffer.concat(chunks) });
           const direct = request.url?.startsWith('/browser/kernel/') ?? false;
           response.writeHead(direct ? 401 : 201, { 'content-type': 'text/plain' });
           response.end(direct ? 'Invalid JWT' : '');
@@ -979,7 +980,7 @@ describe('browser routing', () => {
       });
 
       try {
-        const kernel = new Kernel({ apiKey: 'k', baseURL, maxRetries: 0 });
+        const kernel = new Kernel({ apiKey: 'k', baseURL });
         kernel.browserRouteCache.set({
           sessionId: 'sess-1',
           baseURL: `${baseURL}/browser/kernel`,
@@ -990,10 +991,11 @@ describe('browser routing', () => {
           kernel.browsers.fs.writeFile('sess-1', Readable.from([Buffer.from('payload')]) as never, {
             path: '/tmp/x',
           }),
-        ).rejects.toBeInstanceOf(APIConnectionError);
+        ).rejects.toBeInstanceOf(AuthenticationError);
 
-        expect(paths).toHaveLength(1);
-        expect(paths[0]).toContain('/browser/kernel/fs/write_file');
+        expect(requests).toHaveLength(1);
+        expect(requests[0]?.path).toContain('/browser/kernel/fs/write_file');
+        expect(requests[0]?.body).toEqual(Buffer.from('payload'));
         expect(kernel.browserRouteCache.get('sess-1')).toBeUndefined();
       } finally {
         const closed = new Promise<void>((resolve) => server.close(() => resolve()));

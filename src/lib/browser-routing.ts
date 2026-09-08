@@ -280,9 +280,13 @@ async function routeRequest(
 
   const headers = new Headers(request.headers);
   headers.delete('authorization');
+  const body = requestBodyForFetch(request, init);
   const routed = await innerFetch(target.toString(), buildRoutedInit(input, request, init, headers));
   if ((routed.status === 401 || routed.status === 403) && target.searchParams.get('jwt')) {
     cache.deleteIfJwt(sessionId, target.searchParams.get('jwt') ?? '');
+    if (isStreamingBody(body)) {
+      return routed;
+    }
     await CancelReadableStream(routed.body);
     return innerFetch(input, init);
   }
@@ -321,7 +325,7 @@ function buildRoutedInit(
   if (method !== 'GET' && method !== 'HEAD') {
     if (originalInit?.duplex !== undefined) {
       routedInit.duplex = originalInit.duplex;
-    } else if (requiresHalfDuplex(body)) {
+    } else if (isStreamingBody(body)) {
       routedInit.duplex = 'half';
     }
   }
@@ -348,7 +352,7 @@ function derivesOwnContentType(body: RequestInit['body'] | undefined): boolean {
   );
 }
 
-function requiresHalfDuplex(body: RequestInit['body'] | undefined): boolean {
+function isStreamingBody(body: RequestInit['body'] | undefined): boolean {
   return (
     ((globalThis as any).ReadableStream && body instanceof (globalThis as any).ReadableStream) ||
     (typeof body === 'object' && body !== null && Symbol.asyncIterator in body)
