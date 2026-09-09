@@ -47,6 +47,8 @@ const DEFAULT_BROWSER_ROUTING_SUBRESOURCES = [
   'computer',
   'playwright',
   'process',
+  'fs',
+  'logs/stream',
 ];
 const BROWSER_ROUTE_CACHEABLE_PATH = /^\/(?:v\d+\/)?browsers(?:\/[^/]+)?\/?$/;
 const BROWSER_POOL_ACQUIRE_PATH = /^\/(?:v\d+\/)?browser_pools\/[^/]+\/acquire\/?$/;
@@ -278,9 +280,13 @@ async function routeRequest(
 
   const headers = new Headers(request.headers);
   headers.delete('authorization');
+  const body = requestBodyForFetch(request, init);
   const routed = await innerFetch(target.toString(), buildRoutedInit(input, request, init, headers));
   if ((routed.status === 401 || routed.status === 403) && target.searchParams.get('jwt')) {
     cache.deleteIfJwt(sessionId, target.searchParams.get('jwt') ?? '');
+    if (isStreamingBody(body)) {
+      return routed;
+    }
     await CancelReadableStream(routed.body);
     return innerFetch(input, init);
   }
@@ -294,6 +300,14 @@ function buildRoutedInit(
   headers: Headers,
 ): RequestInit {
   const method = request.method.toUpperCase();
+  const body = method === 'GET' || method === 'HEAD' ? undefined : requestBodyForFetch(request, originalInit);
+  if (derivesOwnContentType(body) && !new Headers(originalInit?.headers).get('content-type')) {
+    // `request` was constructed from the same body, so its content-type carries
+    // that construction's multipart boundary. The routed fetch re-encodes the
+    // body with a new boundary, so let it derive the header again.
+    headers.delete('content-type');
+  }
+
   const routedInit = {
     ...((originalInit ?? {}) as Record<string, unknown>),
     method,
@@ -305,14 +319,13 @@ function buildRoutedInit(
   delete routedInit['body'];
   delete routedInit['duplex'];
 
+  if (body !== undefined) {
+    routedInit.body = body;
+  }
   if (method !== 'GET' && method !== 'HEAD') {
-    const body = requestBodyForFetch(request, originalInit);
-    if (body !== undefined) {
-      routedInit.body = body;
-    }
     if (originalInit?.duplex !== undefined) {
       routedInit.duplex = originalInit.duplex;
-    } else if (requiresHalfDuplex(body)) {
+    } else if (isStreamingBody(body)) {
       routedInit.duplex = 'half';
     }
   }
@@ -331,7 +344,15 @@ function requestBodyForFetch(
   return request.body ?? undefined;
 }
 
-function requiresHalfDuplex(body: RequestInit['body'] | undefined): boolean {
+function derivesOwnContentType(body: RequestInit['body'] | undefined): boolean {
+  return (
+    ((globalThis as any).FormData && body instanceof (globalThis as any).FormData) ||
+    ((globalThis as any).URLSearchParams && body instanceof (globalThis as any).URLSearchParams) ||
+    ((globalThis as any).Blob && body instanceof (globalThis as any).Blob)
+  );
+}
+
+function isStreamingBody(body: RequestInit['body'] | undefined): boolean {
   return (
     ((globalThis as any).ReadableStream && body instanceof (globalThis as any).ReadableStream) ||
     (typeof body === 'object' && body !== null && Symbol.asyncIterator in body)
