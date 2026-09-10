@@ -322,7 +322,8 @@ export namespace Proxy {
         city?: string;
 
         /**
-         * ISO 3166 country code.
+         * ISO 3166 country code. If omitted, the proxy uses the global pool without
+         * country targeting.
          */
         country?: string;
 
@@ -352,7 +353,8 @@ export namespace Proxy {
         city?: string;
 
         /**
-         * ISO 3166 country code
+         * ISO 3166 country code. If omitted, the proxy uses the global pool without
+         * country targeting.
          */
         country?: string;
 

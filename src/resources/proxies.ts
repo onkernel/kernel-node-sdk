@@ -205,7 +205,8 @@ export namespace ProxyCreateResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code.
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -235,7 +236,8 @@ export namespace ProxyCreateResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -367,7 +369,8 @@ export namespace ProxyRetrieveResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code.
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -397,7 +400,8 @@ export namespace ProxyRetrieveResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -529,7 +533,8 @@ export namespace ProxyUpdateResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code.
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -559,7 +564,8 @@ export namespace ProxyUpdateResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -691,7 +697,8 @@ export namespace ProxyListResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code.
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -721,7 +728,8 @@ export namespace ProxyListResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -853,7 +861,8 @@ export namespace ProxyCheckResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code.
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -883,7 +892,8 @@ export namespace ProxyCheckResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -995,7 +1005,8 @@ export namespace ProxyCreateParams {
     city?: string;
 
     /**
-     * ISO 3166 country code.
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -1025,7 +1036,8 @@ export namespace ProxyCreateParams {
     city?: string;
 
     /**
-     * ISO 3166 country code
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
