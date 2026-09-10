@@ -4338,13 +4338,16 @@ export namespace BrowserProxyErrorEvent {
      * Proxy-layer error code: the X-Kernel-Proxy-Error response header value from a
      * branded 5xx error page served by the metro egress host-proxy. Values mirror what
      * the proxy emits: destination_blocked, provider_blacklisted,
-     * provider_unreachable, proxy_unavailable, upstream_timeout, upstream_dns_failure,
-     * upstream_connect_failed. Unknown header values are dropped.
+     * provider_unreachable, provider_rejected, origin_tls_timeout, proxy_unavailable,
+     * upstream_timeout, upstream_dns_failure, upstream_connect_failed. Unknown header
+     * values are dropped.
      */
     code:
       | 'destination_blocked'
       | 'provider_blacklisted'
       | 'provider_unreachable'
+      | 'provider_rejected'
+      | 'origin_tls_timeout'
       | 'proxy_unavailable'
       | 'upstream_timeout'
       | 'upstream_dns_failure'
