@@ -197,8 +197,8 @@ export namespace InvocationStateEvent {
     finished_at?: string | null;
 
     /**
-     * Output produced by the action, rendered as a JSON string. This could be: string,
-     * number, boolean, array, object, or null.
+     * The action result or detailed failure output. Often a JSON-encoded value, but
+     * failures may contain plain text. May contain sensitive application data.
      */
     output?: string;
 
@@ -208,7 +208,13 @@ export namespace InvocationStateEvent {
     payload?: string;
 
     /**
-     * Status reason
+     * A nonempty, customer-safe summary of the recorded failure output, always present
+     * when status is failed and omitted otherwise, including in the first failed
+     * invocation_state event. Recognized messages receive a specific summary; other
+     * failures receive a generic summary. Message matching does not establish whether
+     * the failure originated in the platform or action code. Does not include raw
+     * action output or internal error details. Available for historical invocations as
+     * well. Human-readable text, not a stable identifier for retry logic.
      */
     status_reason?: string;
   }
@@ -231,13 +237,18 @@ export interface InvocationCreateResponse {
   status: 'queued' | 'running' | 'succeeded' | 'failed';
 
   /**
-   * The return value of the action that was invoked, rendered as a JSON string. This
-   * could be: string, number, boolean, array, object, or null.
+   * The action result or detailed failure output. Often a JSON-encoded value, but
+   * failures may contain plain text. May contain sensitive application data.
    */
   output?: string;
 
   /**
-   * Status reason
+   * A nonempty, customer-safe summary of the recorded failure output, always present
+   * when status is failed and omitted otherwise. Recognized messages receive a
+   * specific summary; other failures receive a generic summary. Message matching
+   * does not establish whether the failure originated in the platform or action
+   * code. Does not include raw action output or internal error details.
+   * Human-readable text, not a stable identifier for retry logic.
    */
   status_reason?: string;
 }
@@ -280,8 +291,8 @@ export interface InvocationRetrieveResponse {
   finished_at?: string | null;
 
   /**
-   * Output produced by the action, rendered as a JSON string. This could be: string,
-   * number, boolean, array, object, or null.
+   * The action result or detailed failure output. Often a JSON-encoded value, but
+   * failures may contain plain text. May contain sensitive application data.
    */
   output?: string;
 
@@ -291,7 +302,13 @@ export interface InvocationRetrieveResponse {
   payload?: string;
 
   /**
-   * Status reason
+   * A nonempty, customer-safe summary of the recorded failure output, always present
+   * when status is failed and omitted otherwise, including in the first failed
+   * invocation_state event. Recognized messages receive a specific summary; other
+   * failures receive a generic summary. Message matching does not establish whether
+   * the failure originated in the platform or action code. Does not include raw
+   * action output or internal error details. Available for historical invocations as
+   * well. Human-readable text, not a stable identifier for retry logic.
    */
   status_reason?: string;
 }
@@ -334,8 +351,8 @@ export interface InvocationUpdateResponse {
   finished_at?: string | null;
 
   /**
-   * Output produced by the action, rendered as a JSON string. This could be: string,
-   * number, boolean, array, object, or null.
+   * The action result or detailed failure output. Often a JSON-encoded value, but
+   * failures may contain plain text. May contain sensitive application data.
    */
   output?: string;
 
@@ -345,7 +362,13 @@ export interface InvocationUpdateResponse {
   payload?: string;
 
   /**
-   * Status reason
+   * A nonempty, customer-safe summary of the recorded failure output, always present
+   * when status is failed and omitted otherwise, including in the first failed
+   * invocation_state event. Recognized messages receive a specific summary; other
+   * failures receive a generic summary. Message matching does not establish whether
+   * the failure originated in the platform or action code. Does not include raw
+   * action output or internal error details. Available for historical invocations as
+   * well. Human-readable text, not a stable identifier for retry logic.
    */
   status_reason?: string;
 }
@@ -388,8 +411,8 @@ export interface InvocationListResponse {
   finished_at?: string | null;
 
   /**
-   * Output produced by the action, rendered as a JSON string. This could be: string,
-   * number, boolean, array, object, or null.
+   * The action result or detailed failure output. Often a JSON-encoded value, but
+   * failures may contain plain text. May contain sensitive application data.
    */
   output?: string;
 
@@ -399,7 +422,13 @@ export interface InvocationListResponse {
   payload?: string;
 
   /**
-   * Status reason
+   * A nonempty, customer-safe summary of the recorded failure output, always present
+   * when status is failed and omitted otherwise, including in the first failed
+   * invocation_state event. Recognized messages receive a specific summary; other
+   * failures receive a generic summary. Message matching does not establish whether
+   * the failure originated in the platform or action code. Does not include raw
+   * action output or internal error details. Available for historical invocations as
+   * well. Human-readable text, not a stable identifier for retry logic.
    */
   status_reason?: string;
 }
