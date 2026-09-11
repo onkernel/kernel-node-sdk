@@ -433,6 +433,20 @@ Methods:
 - <code title="post /browser_pools/{id_or_name}/flush">client.browserPools.<a href="./src/resources/browser-pools.ts">flush</a>(idOrName) -> void</code>
 - <code title="post /browser_pools/{id_or_name}/release">client.browserPools.<a href="./src/resources/browser-pools.ts">release</a>(idOrName, { ...params }) -> void</code>
 
+# VaultProviderConfigs
+
+Types:
+
+- <code><a href="./src/resources/vault-provider-configs.ts">VaultProviderConfig</a></code>
+
+Methods:
+
+- <code title="post /vault-provider-configs">client.vaultProviderConfigs.<a href="./src/resources/vault-provider-configs.ts">create</a>({ ...params }) -> VaultProviderConfig</code>
+- <code title="get /vault-provider-configs/{id_or_name}">client.vaultProviderConfigs.<a href="./src/resources/vault-provider-configs.ts">retrieve</a>(idOrName) -> VaultProviderConfig</code>
+- <code title="patch /vault-provider-configs/{id_or_name}">client.vaultProviderConfigs.<a href="./src/resources/vault-provider-configs.ts">update</a>(idOrName, { ...params }) -> VaultProviderConfig</code>
+- <code title="get /vault-provider-configs">client.vaultProviderConfigs.<a href="./src/resources/vault-provider-configs.ts">list</a>({ ...params }) -> VaultProviderConfigsOffsetPagination</code>
+- <code title="delete /vault-provider-configs/{id_or_name}">client.vaultProviderConfigs.<a href="./src/resources/vault-provider-configs.ts">delete</a>(idOrName) -> void</code>
+
 # Vaults
 
 Types:

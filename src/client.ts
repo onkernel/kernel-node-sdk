@@ -137,6 +137,14 @@ import {
   ProxyUpdateResponse,
 } from './resources/proxies';
 import {
+  VaultProviderConfig,
+  VaultProviderConfigCreateParams,
+  VaultProviderConfigListParams,
+  VaultProviderConfigUpdateParams,
+  VaultProviderConfigs,
+  VaultProviderConfigsOffsetPagination,
+} from './resources/vault-provider-configs';
+import {
   AuditLogEntriesPageTokenPagination,
   AuditLogEntry,
   AuditLogExportChunkParams,
@@ -1067,6 +1075,7 @@ export class Kernel {
    * Create and manage browser pools for acquiring and releasing browsers.
    */
   browserPools: API.BrowserPools = new API.BrowserPools(this);
+  vaultProviderConfigs: API.VaultProviderConfigs = new API.VaultProviderConfigs(this);
   vaults: API.Vaults = new API.Vaults(this);
   /**
    * Create and manage credentials for authentication.
@@ -1105,6 +1114,7 @@ Kernel.Telemetry = Telemetry;
 Kernel.Proxies = Proxies;
 Kernel.Extensions = Extensions;
 Kernel.BrowserPools = BrowserPools;
+Kernel.VaultProviderConfigs = VaultProviderConfigs;
 Kernel.Vaults = Vaults;
 Kernel.Credentials = Credentials;
 Kernel.Projects = Projects;
@@ -1261,6 +1271,15 @@ export declare namespace Kernel {
     type BrowserPoolDeleteParams as BrowserPoolDeleteParams,
     type BrowserPoolAcquireParams as BrowserPoolAcquireParams,
     type BrowserPoolReleaseParams as BrowserPoolReleaseParams,
+  };
+
+  export {
+    VaultProviderConfigs as VaultProviderConfigs,
+    type VaultProviderConfig as VaultProviderConfig,
+    type VaultProviderConfigsOffsetPagination as VaultProviderConfigsOffsetPagination,
+    type VaultProviderConfigCreateParams as VaultProviderConfigCreateParams,
+    type VaultProviderConfigUpdateParams as VaultProviderConfigUpdateParams,
+    type VaultProviderConfigListParams as VaultProviderConfigListParams,
   };
 
   export {
