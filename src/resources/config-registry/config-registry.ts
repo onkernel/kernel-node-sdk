@@ -209,7 +209,10 @@ export interface LookupRequest {
 }
 
 export interface LookupResponse {
-  recommendation: Recommendation | null;
+  /**
+   * A recommendation or a structured no-recommendation result.
+   */
+  recommendation: RecommendationResult | null;
 
   target: Target;
 
