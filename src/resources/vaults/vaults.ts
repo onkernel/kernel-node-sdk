@@ -34,6 +34,11 @@ export class Vaults extends APIResource {
 
   /**
    * Get a vault
+   *
+   * @example
+   * ```ts
+   * const vault = await client.vaults.retrieve('id_or_name');
+   * ```
    */
   retrieve(idOrName: string, options?: RequestOptions): APIPromise<Vault> {
     return this._client.get(path`/vaults/${idOrName}`, options);
@@ -41,6 +46,14 @@ export class Vaults extends APIResource {
 
   /**
    * List vaults in the current project
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const vault of client.vaults.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: VaultListParams | null | undefined = {},
@@ -50,7 +63,14 @@ export class Vaults extends APIResource {
   }
 
   /**
-   * Delete a vault and invalidate its items
+   * Unresolved payment operations block deletion. Reconcile the original attempt
+   * with the provider or support first; deleting or recreating an item is not proof
+   * that a payment did not occur.
+   *
+   * @example
+   * ```ts
+   * await client.vaults.delete('id_or_name');
+   * ```
    */
   delete(idOrName: string, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/vaults/${idOrName}`, {
@@ -63,6 +83,13 @@ export class Vaults extends APIResource {
    * Free organizations can store up to 3 non-deleted vaults across all projects.
    * Paid plans and active trials have no vault cap. Retrieving an existing vault by
    * name succeeds even at the limit.
+   *
+   * @example
+   * ```ts
+   * const vault = await client.vaults.upsert({
+   *   name: 'checkout',
+   * });
+   * ```
    */
   upsert(body: VaultUpsertParams, options?: RequestOptions): APIPromise<Vault> {
     return this._client.post('/vaults', { body, ...options });

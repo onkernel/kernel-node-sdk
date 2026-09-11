@@ -14,6 +14,13 @@ export class Items extends APIResource {
    * description before using it. Expanded data is fetched from the provider and is
    * not persisted in the vault item. Requesting an unavailable expansion returns 409
    * instead of a partial item.
+   *
+   * @example
+   * ```ts
+   * const vaultItem = await client.vaults.items.retrieve('x', {
+   *   id_or_name: 'id_or_name',
+   * });
+   * ```
    */
   retrieve(key: string, params: ItemRetrieveParams, options?: RequestOptions): APIPromise<VaultItem> {
     const { id_or_name, ...query } = params;
@@ -21,7 +28,31 @@ export class Items extends APIResource {
   }
 
   /**
-   * Update a card specification before or between authorizations
+   * Requested cards accept a replacement specification. Pending issuance requests
+   * may update provider-supported fields on their existing request, subject to
+   * atomic provider approval checks; omitted optional fields remain unchanged and
+   * explicit empty lists clear them. Wallet/provider binding and unsupported fields
+   * cannot change after authorization starts. An uncertain update enters
+   * recovery_required and must not be retried. Checkout cards may be edited between
+   * authorizations.
+   *
+   * @example
+   * ```ts
+   * const vaultItem = await client.vaults.items.update('x', {
+   *   id_or_name: 'id_or_name',
+   *   spec: {
+   *     provider: 'link',
+   *     wallet: 'link-wallet',
+   *     payment_method_id: 'pm_example',
+   *     amount: 3000,
+   *     currency: 'usd',
+   *     merchant_name: 'Example Store',
+   *     merchant_url: 'https://store.example.com',
+   *     context:
+   *       'The order total changed to USD 30.00 including shipping and taxes for one notebook. Update this unapproved request rather than creating a second payment.',
+   *   },
+   * });
+   * ```
    */
   update(key: string, params: ItemUpdateParams, options?: RequestOptions): APIPromise<VaultItem> {
     const { id_or_name, ...body } = params;
@@ -30,13 +61,29 @@ export class Items extends APIResource {
 
   /**
    * List vault items without secret values
+   *
+   * @example
+   * ```ts
+   * const vaultItems = await client.vaults.items.list(
+   *   'id_or_name',
+   * );
+   * ```
    */
   list(idOrName: string, options?: RequestOptions): APIPromise<ItemListResponse> {
     return this._client.get(path`/vaults/${idOrName}/items`, options);
   }
 
   /**
-   * Delete a vault item and invalidate its secret value
+   * Unresolved payment operations block deletion, including operations on child
+   * cards of a wallet. Reconcile the original attempt with the provider or support
+   * first; deleting or recreating an item is not proof that a payment did not occur.
+   *
+   * @example
+   * ```ts
+   * await client.vaults.items.delete('x', {
+   *   id_or_name: 'id_or_name',
+   * });
+   * ```
    */
   delete(key: string, params: ItemDeleteParams, options?: RequestOptions): APIPromise<void> {
     const { id_or_name } = params;
@@ -48,6 +95,14 @@ export class Items extends APIResource {
 
   /**
    * List immutable audit events for a vault item
+   *
+   * @example
+   * ```ts
+   * const vaultItemEvents = await client.vaults.items.events(
+   *   'key',
+   *   { id_or_name: 'id_or_name' },
+   * );
+   * ```
    */
   events(key: string, params: ItemEventsParams, options?: RequestOptions): APIPromise<ItemEventsResponse> {
     const { id_or_name, ...query } = params;
@@ -57,9 +112,20 @@ export class Items extends APIResource {
   /**
    * Retrieve the item first and invoke only an operation listed in
    * `available_operations`, following its natural-language description. Operations
-   * may call an external provider and can return the item's updated state. If the
-   * provider rate limits spend-request creation, returns HTTP 429 with code
+   * may call an external provider and return updated state. Link cards advertise
+   * authorize. AgentCard cards are created with PUT and request approval when their
+   * aliases are used at checkout; they do not expose this operation. If
+   * spend-request creation is rate limited, returns HTTP 429 with code
    * `spend_request_rate_limited`; stop and back off before retrying.
+   *
+   * @example
+   * ```ts
+   * const vaultItem =
+   *   await client.vaults.items.performOperation('key', {
+   *     id_or_name: 'id_or_name',
+   *     type: 'authorize',
+   *   });
+   * ```
    */
   performOperation(
     key: string,
@@ -71,7 +137,21 @@ export class Items extends APIResource {
   }
 
   /**
-   * Create or retrieve an identical vault item by immutable key
+   * Create an item under a key unique within its vault, or retrieve the existing
+   * item when its specification matches. An identical card PUT returns the existing
+   * card in any lifecycle state without polling the provider, reauthorizing,
+   * replacing aliases, or resetting recovery. Conflicting specifications return 409.
+   * Provider-specific authorization requirements and retry behavior are described in
+   * the item's request schema.
+   *
+   * @example
+   * ```ts
+   * const vaultItem = await client.vaults.items.upsert('x', {
+   *   id_or_name: 'id_or_name',
+   *   spec: { provider: 'link' },
+   *   type: 'card',
+   * });
+   * ```
    */
   upsert(key: string, params: ItemUpsertParams, options?: RequestOptions): APIPromise<VaultItem> {
     const { id_or_name, ...body } = params;
@@ -279,7 +359,21 @@ export namespace CardVaultItemState {
   export interface LinkCardState {
     provider: 'link';
 
-    status: 'requested' | 'pending_authorization' | 'ready' | 'consumed' | 'expired' | 'declined';
+    /**
+     * recovery_required means an original provider operation has an unresolved
+     * outcome. Do not retry, delete, or replace it. Known references may be observed
+     * safely, but unknown creation without an ID and uncertain card-material retrieval
+     * require manual reconciliation with the provider or support. There is no reset or
+     * caller-asserted reconciliation operation.
+     */
+    status:
+      | 'requested'
+      | 'pending_authorization'
+      | 'ready'
+      | 'consumed'
+      | 'expired'
+      | 'declined'
+      | 'recovery_required';
 
     aliases?: ItemsAPI.VaultCardAliases;
 
@@ -303,7 +397,13 @@ export namespace CardVaultItemState {
   export interface AgentCardCardState {
     provider: 'agentcard';
 
-    status: 'requested' | 'ready' | 'pending_approval' | 'degraded';
+    /**
+     * recovery_required means the original checkout outcome is unresolved. Do not
+     * retry, delete, or replace it. Known authorization IDs may be reconciled through
+     * provider observations; otherwise contact the provider or support for manual
+     * reconciliation. It does not mean declined or expired.
+     */
+    status: 'requested' | 'ready' | 'pending_approval' | 'degraded' | 'recovery_required';
 
     aliases?: ItemsAPI.VaultCardAliases;
 
@@ -357,9 +457,12 @@ export namespace VaultItem {
     key: string;
 
     /**
-     * AgentCard wallet. Mode (sandbox vs live) is fixed by the deployment's AgentCard
-     * credential; there is no per-item test flag. user_id may only reference a user
-     * already enrolled by a wallet in this organization.
+     * AgentCard wallet. Omit provider_config to use Kernel-managed credentials, or
+     * select a customer-owned configuration. Mode (sandbox vs live) is determined by
+     * the selected credential; there is no per-item test flag. Without user_id,
+     * creation returns a hosted enrollment action and Kernel polls until the user
+     * connects. user_id may only reference a user already enrolled by a wallet in this
+     * organization under the same configuration.
      */
     spec: ItemsAPI.WalletVaultItemSpec;
 
@@ -572,9 +675,12 @@ export namespace VaultPaymentMethod {
 }
 
 /**
- * AgentCard wallet. Mode (sandbox vs live) is fixed by the deployment's AgentCard
- * credential; there is no per-item test flag. user_id may only reference a user
- * already enrolled by a wallet in this organization.
+ * AgentCard wallet. Omit provider_config to use Kernel-managed credentials, or
+ * select a customer-owned configuration. Mode (sandbox vs live) is determined by
+ * the selected credential; there is no per-item test flag. Without user_id,
+ * creation returns a hosted enrollment action and Kernel polls until the user
+ * connects. user_id may only reference a user already enrolled by a wallet in this
+ * organization under the same configuration.
  */
 export type WalletVaultItemSpec =
   | WalletVaultItemSpec.LinkWalletVaultItemSpec
@@ -589,27 +695,72 @@ export namespace WalletVaultItemSpec {
 
   export namespace LinkWalletVaultItemSpec {
     export interface Authorization {
-      client: Authorization.Client;
+      client: Authorization.KernelManagedOAuthClient | Authorization.CustomerManagedOAuthClient;
 
       method: 'oauth';
     }
 
     export namespace Authorization {
-      export interface Client {
+      export interface KernelManagedOAuthClient {
         type: 'kernel_managed';
+      }
+
+      export interface CustomerManagedOAuthClient {
+        /**
+         * Select a provider config by ID or name. Responses return the ID. Renaming a
+         * config does not change existing wallet bindings; a wallet cannot switch to a
+         * different config after creation.
+         */
+        provider_config: CustomerManagedOAuthClient.ProviderConfig;
+
+        type: 'customer_managed';
+      }
+
+      export namespace CustomerManagedOAuthClient {
+        /**
+         * Select a provider config by ID or name. Responses return the ID. Renaming a
+         * config does not change existing wallet bindings; a wallet cannot switch to a
+         * different config after creation.
+         */
+        export interface ProviderConfig {
+          id?: string;
+
+          name?: string;
+        }
       }
     }
   }
 
   /**
-   * AgentCard wallet. Mode (sandbox vs live) is fixed by the deployment's AgentCard
-   * credential; there is no per-item test flag. user_id may only reference a user
-   * already enrolled by a wallet in this organization.
+   * AgentCard wallet. Omit provider_config to use Kernel-managed credentials, or
+   * select a customer-owned configuration. Mode (sandbox vs live) is determined by
+   * the selected credential; there is no per-item test flag. Without user_id,
+   * creation returns a hosted enrollment action and Kernel polls until the user
+   * connects. user_id may only reference a user already enrolled by a wallet in this
+   * organization under the same configuration.
    */
   export interface AgentCardWalletVaultItemSpec {
     provider: 'agentcard';
 
+    /**
+     * Select an AgentCard configuration. The wallet's configuration cannot be changed
+     * after creation.
+     */
+    provider_config?: AgentCardWalletVaultItemSpec.ProviderConfig;
+
     user_id?: string;
+  }
+
+  export namespace AgentCardWalletVaultItemSpec {
+    /**
+     * Select an AgentCard configuration. The wallet's configuration cannot be changed
+     * after creation.
+     */
+    export interface ProviderConfig {
+      id?: string;
+
+      name?: string;
+    }
   }
 }
 
@@ -720,16 +871,165 @@ export declare namespace ItemUpsertParams {
     id_or_name: string;
 
     /**
-     * Body param: AgentCard wallet. Mode (sandbox vs live) is fixed by the
-     * deployment's AgentCard credential; there is no per-item test flag. user_id may
-     * only reference a user already enrolled by a wallet in this organization.
+     * Body param: AgentCard wallet. Omit provider_config to use Kernel-managed
+     * credentials, or select a customer-owned configuration. Mode (sandbox vs live) is
+     * determined by the selected credential; there is no per-item test flag. Without
+     * user_id, creation returns a hosted enrollment action and Kernel polls until the
+     * user connects. user_id may only reference a user already enrolled by a wallet in
+     * this organization under the same configuration.
      */
-    spec: WalletVaultItemSpec;
+    spec:
+      | WalletVaultItemRequest.LinkWalletVaultItemRequestSpec
+      | WalletVaultItemRequest.AgentCardWalletVaultItemSpec;
 
     /**
      * Body param
      */
     type: 'wallet';
+  }
+
+  export namespace WalletVaultItemRequest {
+    export interface LinkWalletVaultItemRequestSpec {
+      /**
+       * Kernel starts and completes the user's Link authorization flow.
+       */
+      authorization:
+        | LinkWalletVaultItemRequestSpec.KernelManagedLinkAuthorizationInput
+        | LinkWalletVaultItemRequestSpec.ImportedLinkAuthorizationInput;
+
+      provider: 'link';
+    }
+
+    export namespace LinkWalletVaultItemRequestSpec {
+      /**
+       * Kernel starts and completes the user's Link authorization flow.
+       */
+      export interface KernelManagedLinkAuthorizationInput {
+        client: KernelManagedLinkAuthorizationInput.Client;
+
+        method: 'oauth';
+      }
+
+      export namespace KernelManagedLinkAuthorizationInput {
+        export interface Client {
+          type: 'kernel_managed';
+        }
+      }
+
+      /**
+       * The customer's backend completes Link OAuth and supplies the resulting tokens.
+       * For a new wallet, Kernel verifies the access token can access Link payment
+       * methods without consuming or rotating the refresh token. Valid access creates a
+       * wallet with state.status=connected. An expired, invalid, revoked, or
+       * insufficiently scoped access token returns 400 and no wallet is created. Refresh
+       * expired tokens in your backend before importing them. A failed import does not
+       * modify existing wallets. After successful import, Kernel owns subsequent
+       * refresh-token rotation; the customer must stop refreshing this grant. Import
+       * does not verify the refresh token: if it or the configured client credentials
+       * are rejected during a later refresh, the imported wallet becomes degraded. An
+       * unknown refresh outcome also leaves it degraded; Kernel does not retry a refresh
+       * token that may already have been consumed. There is no in-place reauthorization
+       * operation for an imported wallet. If this imported wallet's credentials become
+       * unusable, obtain a fresh Link OAuth grant in your backend and create a wallet
+       * under a NEW wallet key. Use the new wallet for NEW cards and payments, not to
+       * retry an old payment whose outcome is uncertain. This does not replace the old
+       * grant, rebind existing cards, or resolve their payment outcomes. Retain the old
+       * wallet and its cards while reconciling any uncertain payments with the provider
+       * or support. Do not repeat an uncertain payment on the new wallet, and do not
+       * treat deletion as evidence that it did not execute. Deletion of the old wallet
+       * can remain blocked by unresolved child cards. Repeating a create for the same
+       * item key and non-secret spec returns the existing wallet without replacing
+       * tokens, even if they have rotated or the wallet needs reconnection. ID and name
+       * references resolving to the same config are equivalent. A different config or
+       * non-secret spec returns 409. This create operation does not replace an existing
+       * grant.
+       */
+      export interface ImportedLinkAuthorizationInput {
+        client: ImportedLinkAuthorizationInput.Client;
+
+        method: 'oauth';
+
+        /**
+         * Send the token pair from your backend. Both tokens must be from the same Link
+         * grant under the referenced client. Supply a currently valid access token. Kernel
+         * refreshes when needed after import and uses the expiry returned by Link for
+         * subsequent tokens. Tokens are never returned in wallet responses, events, or
+         * logs.
+         */
+        tokens: ImportedLinkAuthorizationInput.Tokens;
+      }
+
+      export namespace ImportedLinkAuthorizationInput {
+        export interface Client {
+          /**
+           * Select a provider config by ID or name. Responses return the ID. Renaming a
+           * config does not change existing wallet bindings; a wallet cannot switch to a
+           * different config after creation.
+           */
+          provider_config: Client.ProviderConfig;
+
+          type: 'customer_managed';
+        }
+
+        export namespace Client {
+          /**
+           * Select a provider config by ID or name. Responses return the ID. Renaming a
+           * config does not change existing wallet bindings; a wallet cannot switch to a
+           * different config after creation.
+           */
+          export interface ProviderConfig {
+            id?: string;
+
+            name?: string;
+          }
+        }
+
+        /**
+         * Send the token pair from your backend. Both tokens must be from the same Link
+         * grant under the referenced client. Supply a currently valid access token. Kernel
+         * refreshes when needed after import and uses the expiry returned by Link for
+         * subsequent tokens. Tokens are never returned in wallet responses, events, or
+         * logs.
+         */
+        export interface Tokens {
+          access_token: string;
+
+          refresh_token: string;
+        }
+      }
+    }
+
+    /**
+     * AgentCard wallet. Omit provider_config to use Kernel-managed credentials, or
+     * select a customer-owned configuration. Mode (sandbox vs live) is determined by
+     * the selected credential; there is no per-item test flag. Without user_id,
+     * creation returns a hosted enrollment action and Kernel polls until the user
+     * connects. user_id may only reference a user already enrolled by a wallet in this
+     * organization under the same configuration.
+     */
+    export interface AgentCardWalletVaultItemSpec {
+      provider: 'agentcard';
+
+      /**
+       * Select an AgentCard configuration. The wallet's configuration cannot be changed
+       * after creation.
+       */
+      provider_config?: AgentCardWalletVaultItemSpec.ProviderConfig;
+
+      user_id?: string;
+    }
+
+    export namespace AgentCardWalletVaultItemSpec {
+      /**
+       * Select an AgentCard configuration. The wallet's configuration cannot be changed
+       * after creation.
+       */
+      export interface ProviderConfig {
+        id?: string;
+
+        name?: string;
+      }
+    }
   }
 
   export interface CardVaultItemRequest {
