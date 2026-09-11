@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.102.0](https://github.com/kernel/kernel-node-sdk/compare/v0.101.0...v0.102.0) (2026-09-11)
+
+
+### Features
+
+* Allow replacing AgentCard cards after unknown creates ([848944b](https://github.com/kernel/kernel-node-sdk/commit/848944b1ce0eb21f58700d41ed82b5121201a3ee))
+* Document punctuation key sequences ([a008dfb](https://github.com/kernel/kernel-node-sdk/commit/a008dfbe12ab150df7154f28127175e4ceee3816))
+* Reapply vendor guidance recommendations ([0fdcce8](https://github.com/kernel/kernel-node-sdk/commit/0fdcce80cec36d682f295d278ae88b5e4877560b))
+* Report proxy-restricted targets from config registry lookup ([a57d992](https://github.com/kernel/kernel-node-sdk/commit/a57d992925092ebce6ba6e18fbb86844edfb67f5))
+
 ## [0.101.0](https://github.com/kernel/kernel-node-sdk/compare/v0.100.0...v0.101.0) (2026-09-11)
 
 
