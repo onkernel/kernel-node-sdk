@@ -152,6 +152,14 @@ export interface ConfigRegistryResponse {
   recommendation: RecommendationResult | null;
 
   target: Target;
+
+  /**
+   * Short advisory markdown to facilitate navigating this target. Returned even when
+   * no configuration reached the target, since knowing what prevented success is
+   * useful without a configuration. Not verified against this target. Null when
+   * nothing applicable was observed or no notes exist.
+   */
+  guidance?: string | null;
 }
 
 export interface Evidence {
@@ -204,6 +212,14 @@ export interface LookupResponse {
   recommendation: Recommendation | null;
 
   target: Target;
+
+  /**
+   * Short advisory markdown to facilitate navigating this target. Returned even when
+   * no configuration reached the target, since knowing what prevented success is
+   * useful without a configuration. Not verified against this target. Null when
+   * nothing applicable was observed or no notes exist.
+   */
+  guidance?: string | null;
 }
 
 export interface NoRecommendation {
