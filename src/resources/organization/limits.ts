@@ -9,7 +9,7 @@ import { RequestOptions } from '../../internal/request-options';
  */
 export class Limits extends APIResource {
   /**
-   * Get the organization's effective limits and managed auth usage.
+   * Get the organization's effective limits and managed auth and vault usage.
    */
   retrieve(options?: RequestOptions): APIPromise<OrgLimits> {
     return this._client.get('/org/limits', options);
@@ -40,11 +40,22 @@ export interface OrgLimits {
   max_auth_connections: number | null;
 
   /**
+   * Maximum non-deleted vaults allowed org-wide across all projects. Null means
+   * unlimited.
+   */
+  max_vaults: number | null;
+
+  /**
    * Smallest health_check_interval the organization's plan accepts on a managed auth
    * connection. Requests below this are rejected with 400. Existing connections
    * stored below the floor are grandfathered until edited.
    */
   min_health_check_interval_seconds: number;
+
+  /**
+   * Current non-deleted vault count across all projects in the organization.
+   */
+  vaults_used: number;
 
   /**
    * Default maximum concurrent browsers applied to every project that has no

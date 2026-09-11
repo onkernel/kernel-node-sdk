@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.101.0](https://github.com/kernel/kernel-node-sdk/compare/v0.100.0...v0.101.0) (2026-09-11)
+
+
+### Features
+
+* Add config analysis lifecycle guarantees ([2468a0a](https://github.com/kernel/kernel-node-sdk/commit/2468a0a74d674ccfce2f3f301a5ca904ac689372))
+* Brand origin TLS timeouts and classify provider failures ([1f63d03](https://github.com/kernel/kernel-node-sdk/commit/1f63d031eb68f79ea268200c035a07c4623004db))
+* Clarify proxy country defaults ([43f283c](https://github.com/kernel/kernel-node-sdk/commit/43f283c8aecfc74b8daa9145cc0b8fe7a65d7a47))
+* Expose vault access in organization entitlements ([0594999](https://github.com/kernel/kernel-node-sdk/commit/05949995501dcbccffed74f80e60a0447e0ef105))
+* Integrate configurable vault providers across API and checkout ([406359a](https://github.com/kernel/kernel-node-sdk/commit/406359ab2f748f848631a9595af2bb6eddd9cd51))
+* Limit free organizations to three vaults ([5c17e2d](https://github.com/kernel/kernel-node-sdk/commit/5c17e2d9b5ecfbbb5c2a959c1ce1112d543fbdb1))
+* Populate safe failure reasons on invocation responses ([e86903d](https://github.com/kernel/kernel-node-sdk/commit/e86903d4934f27a5a332e151b5170a9c654e26c5))
+* Return vendor guidance with config registry recommendations ([548c574](https://github.com/kernel/kernel-node-sdk/commit/548c574ecd913aff68b3342012f4478316faf040))
+* Revert vendor guidance recommendations ([6dbf3c0](https://github.com/kernel/kernel-node-sdk/commit/6dbf3c0943160861cc7410f4958c885cff2c4077))
+* Support international ISP proxy countries ([833e524](https://github.com/kernel/kernel-node-sdk/commit/833e5240c705ab73d9160f0cd9c6117e2fe726d3))
+
 ## [0.100.0](https://github.com/kernel/kernel-node-sdk/compare/v0.99.0...v0.100.0) (2026-09-04)
 
 

@@ -57,6 +57,12 @@ export namespace OrgEntitlements {
     profiles: Features.Profiles;
 
     proxy_bypass_hosts: Features.ProxyBypassHosts;
+
+    /**
+     * Whether the organization can access vaults, using the same access check as vault
+     * API routes.
+     */
+    vaults: Features.Vaults;
   }
 
   export namespace Features {
@@ -176,6 +182,17 @@ export namespace OrgEntitlements {
        */
       enabled: boolean;
     }
+
+    /**
+     * Whether the organization can access vaults, using the same access check as vault
+     * API routes.
+     */
+    export interface Vaults {
+      /**
+       * Whether the organization is entitled to use this feature.
+       */
+      enabled: boolean;
+    }
   }
 
   export interface Limits {
@@ -195,6 +212,12 @@ export namespace OrgEntitlements {
      * Effective organization-wide concurrent app invocation ceiling.
      */
     max_concurrent_invocations: number;
+
+    /**
+     * Maximum non-deleted vaults allowed org-wide across all projects. Null means
+     * unlimited. The vaults feature flag still controls access.
+     */
+    max_vaults: number | null;
   }
 
   export interface Plan {

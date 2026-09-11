@@ -181,6 +181,14 @@ export {
 } from './proxies';
 export { Telemetry } from './telemetry/telemetry';
 export {
+  VaultProviderConfigs,
+  type VaultProviderConfig,
+  type VaultProviderConfigCreateParams,
+  type VaultProviderConfigUpdateParams,
+  type VaultProviderConfigListParams,
+  type VaultProviderConfigsOffsetPagination,
+} from './vault-provider-configs';
+export {
   Vaults,
   type Vault,
   type VaultListParams,

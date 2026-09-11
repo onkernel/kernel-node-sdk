@@ -34,15 +34,15 @@ describe('resource items', () => {
     const responsePromise = client.vaults.items.update('x', {
       id_or_name: 'id_or_name',
       spec: {
-        amount: 1,
+        amount: 3000,
         context:
-          'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-        currency: 'bFx',
-        merchant_name: 'x',
-        merchant_url: 'https://example.com',
-        payment_method_id: 'x',
+          'The order total changed to USD 30.00 including shipping and taxes for one notebook. Update this unapproved request rather than creating a second payment.',
+        currency: 'usd',
+        merchant_name: 'Example Store',
+        merchant_url: 'https://store.example.com',
+        payment_method_id: 'pm_example',
         provider: 'link',
-        wallet: 'wallet',
+        wallet: 'link-wallet',
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -59,15 +59,15 @@ describe('resource items', () => {
     const response = await client.vaults.items.update('x', {
       id_or_name: 'id_or_name',
       spec: {
-        amount: 1,
+        amount: 3000,
         context:
-          'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-        currency: 'bFx',
-        merchant_name: 'x',
-        merchant_url: 'https://example.com',
-        payment_method_id: 'x',
+          'The order total changed to USD 30.00 including shipping and taxes for one notebook. Update this unapproved request rather than creating a second payment.',
+        currency: 'usd',
+        merchant_name: 'Example Store',
+        merchant_url: 'https://store.example.com',
+        payment_method_id: 'pm_example',
         provider: 'link',
-        wallet: 'wallet',
+        wallet: 'link-wallet',
         expires_at: 0,
         line_items: [
           {

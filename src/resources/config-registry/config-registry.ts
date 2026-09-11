@@ -85,8 +85,13 @@ export interface Analysis {
   created_at: string;
 
   /**
-   * Present for failed or canceled analyses. Messages contain safe retry guidance
-   * rather than internal workflow errors.
+   * Deadline after which a still-running analysis becomes expired.
+   */
+  expires_at: string;
+
+  /**
+   * Present for failed, canceled, or expired analyses. Messages contain safe retry
+   * guidance rather than internal workflow errors.
    */
   failure: Shared.ErrorModel | null;
 
@@ -98,7 +103,7 @@ export interface Analysis {
   /**
    * Lifecycle status of a background analysis.
    */
-  status: 'running' | 'completed' | 'failed' | 'canceled';
+  status: 'running' | 'completed' | 'failed' | 'canceled' | 'expired';
 }
 
 export interface AnalysisSummary {
@@ -295,7 +300,8 @@ export namespace Proxy {
        */
       export interface IspProxyConfig {
         /**
-         * ISO 3166 country code. Defaults to US if not provided.
+         * ISO 3166 country code. Supported countries are US, GB, FR, DE, and SG. Defaults
+         * to US if not provided.
          */
         country?: string;
       }
@@ -316,7 +322,8 @@ export namespace Proxy {
         city?: string;
 
         /**
-         * ISO 3166 country code.
+         * ISO 3166 country code. If omitted, the proxy uses the global pool without
+         * country targeting.
          */
         country?: string;
 
@@ -346,7 +353,8 @@ export namespace Proxy {
         city?: string;
 
         /**
-         * ISO 3166 country code
+         * ISO 3166 country code. If omitted, the proxy uses the global pool without
+         * country targeting.
          */
         country?: string;
 
@@ -438,7 +446,7 @@ export interface RecommendationSummary {
   /**
    * Lifecycle status of the most recently requested analysis for this exact target.
    */
-  analysis_status: 'running' | 'completed' | 'failed' | 'canceled';
+  analysis_status: 'running' | 'completed' | 'failed' | 'canceled' | 'expired';
 
   /**
    * Most recent time the selected project requested an analysis for this exact

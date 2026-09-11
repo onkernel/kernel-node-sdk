@@ -183,7 +183,8 @@ export namespace ProxyCreateResponse {
    */
   export interface IspProxyConfig {
     /**
-     * ISO 3166 country code. Defaults to US if not provided.
+     * ISO 3166 country code. Supported countries are US, GB, FR, DE, and SG. Defaults
+     * to US if not provided.
      */
     country?: string;
   }
@@ -204,7 +205,8 @@ export namespace ProxyCreateResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code.
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -234,7 +236,8 @@ export namespace ProxyCreateResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -344,7 +347,8 @@ export namespace ProxyRetrieveResponse {
    */
   export interface IspProxyConfig {
     /**
-     * ISO 3166 country code. Defaults to US if not provided.
+     * ISO 3166 country code. Supported countries are US, GB, FR, DE, and SG. Defaults
+     * to US if not provided.
      */
     country?: string;
   }
@@ -365,7 +369,8 @@ export namespace ProxyRetrieveResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code.
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -395,7 +400,8 @@ export namespace ProxyRetrieveResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -505,7 +511,8 @@ export namespace ProxyUpdateResponse {
    */
   export interface IspProxyConfig {
     /**
-     * ISO 3166 country code. Defaults to US if not provided.
+     * ISO 3166 country code. Supported countries are US, GB, FR, DE, and SG. Defaults
+     * to US if not provided.
      */
     country?: string;
   }
@@ -526,7 +533,8 @@ export namespace ProxyUpdateResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code.
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -556,7 +564,8 @@ export namespace ProxyUpdateResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -666,7 +675,8 @@ export namespace ProxyListResponse {
    */
   export interface IspProxyConfig {
     /**
-     * ISO 3166 country code. Defaults to US if not provided.
+     * ISO 3166 country code. Supported countries are US, GB, FR, DE, and SG. Defaults
+     * to US if not provided.
      */
     country?: string;
   }
@@ -687,7 +697,8 @@ export namespace ProxyListResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code.
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -717,7 +728,8 @@ export namespace ProxyListResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -827,7 +839,8 @@ export namespace ProxyCheckResponse {
    */
   export interface IspProxyConfig {
     /**
-     * ISO 3166 country code. Defaults to US if not provided.
+     * ISO 3166 country code. Supported countries are US, GB, FR, DE, and SG. Defaults
+     * to US if not provided.
      */
     country?: string;
   }
@@ -848,7 +861,8 @@ export namespace ProxyCheckResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code.
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -878,7 +892,8 @@ export namespace ProxyCheckResponse {
     city?: string;
 
     /**
-     * ISO 3166 country code
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -968,7 +983,8 @@ export namespace ProxyCreateParams {
    */
   export interface IspProxyConfig {
     /**
-     * ISO 3166 country code. Defaults to US if not provided.
+     * ISO 3166 country code. Supported countries are US, GB, FR, DE, and SG. Defaults
+     * to US if not provided.
      */
     country?: string;
   }
@@ -989,7 +1005,8 @@ export namespace ProxyCreateParams {
     city?: string;
 
     /**
-     * ISO 3166 country code.
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
@@ -1019,7 +1036,8 @@ export namespace ProxyCreateParams {
     city?: string;
 
     /**
-     * ISO 3166 country code
+     * ISO 3166 country code. If omitted, the proxy uses the global pool without
+     * country targeting.
      */
     country?: string;
 
